@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 09:32 AM
+-- Generation Time: May 15, 2023 at 10:07 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -162,6 +162,21 @@ CREATE TABLE `solo_parent_data` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `uploaded_documents`
+--
+
+CREATE TABLE `uploaded_documents` (
+  `UPLOADED_DOCUMENT_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PERSON_ID` varchar(16) NOT NULL,
+  `DOCUMENT_NAME` varchar(256) NOT NULL,
+  `DOCUMENT_TYPE` varchar(256) NOT NULL,
+  `FILE_PATH` varchar(256) NOT NULL,
+  `UPLOAD_DATE` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_authentication`
 --
 
@@ -243,6 +258,13 @@ ALTER TABLE `solo_parent_data`
   ADD KEY `FK_PERSON_SOLO_PARENT_DATA` (`PERSON_ID`);
 
 --
+-- Indexes for table `uploaded_documents`
+--
+ALTER TABLE `uploaded_documents`
+  ADD PRIMARY KEY (`UPLOADED_DOCUMENT_ID`),
+  ADD KEY `FK_PERSON_UPLOADED_DOCUMENT` (`PERSON_ID`);
+
+--
 -- Indexes for table `user_authentication`
 --
 ALTER TABLE `user_authentication`
@@ -300,6 +322,12 @@ ALTER TABLE `relatives`
 --
 ALTER TABLE `solo_parent_data`
   ADD CONSTRAINT `FK_PERSON_SOLO_PARENT_DATA` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
+
+--
+-- Constraints for table `uploaded_documents`
+--
+ALTER TABLE `uploaded_documents`
+  ADD CONSTRAINT `FK_PERSON_UPLOADED_DOCUMENT` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
