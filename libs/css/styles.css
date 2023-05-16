@@ -1,0 +1,35 @@
+.active {
+  /*background-color: #ff0000;*/
+  border-bottom: 3px solid #ffffff;
+  /*border-radius: 10px;*/
+}
+
+.navbar-nav li a {
+  color: white;
+}
+
+.btn-application {
+  border-radius: 50px;
+}
+
+footer a {
+  color: white;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .show > .nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: #ff6666;
+}
+
+#application-form-container {
+  border-style: solid;
+  border-radius: 50px;
+}
+
+#soloParentRelative .row, #srCitizenRelative .row {
+  padding: 10px;
+}
+
