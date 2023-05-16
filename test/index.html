@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm">
+        <input type="text" name="name" value="John Doe">
+        <select name="country">
+            <option value="USA">United States</option>
+            <option value="UK">United Kingdom</option>
+            <option value="Canada">Canada</option>
+        </select>
+        <input type="checkbox" name="subscribe" checked>
+        <textarea name="message">Hello world!</textarea>
+        <button type="button" id="submitButton">Submit</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#submitButton').click(function() {
+        var formData = $('#myForm').serializeArray();
+        $.ajax({
+            url: 'insert.php',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+            console.log(response); // Handle the response from PHP
+            },
+            error: function(xhr, status, error) {
+            console.log(xhr.responseText); // Handle error
+            }
+        });
+        });
+    });
+    </script>
+
+</body>
+</html>
