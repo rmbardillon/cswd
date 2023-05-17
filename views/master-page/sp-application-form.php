@@ -206,6 +206,7 @@
         </form>
     </div>
     <?php include_once('../layout/scripts.php'); ?>
+    <script src="../../libs/scripts/master-page/sp-application-form.js"></script>
 </body>
 
 </html>

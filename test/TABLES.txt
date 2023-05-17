@@ -1,0 +1,36 @@
+1. personal_information
+- educational_attainment, blood_type, religion, marital_status
+
+2. relatives
+- relationship
+
+3. contact_details
+-telephone, landline, email
+
+4. files
+- document, media
+
+5. employee_details
+-job, company, income, pension, id_reference_number, government_membership, employment_status, organization
+
+6. person
+- name, gender
+
+7. user_authentication
+- user_account, security_questions, pwdreset, administrator 
+
+8. applicant
+- transaction_type, issued_id
+
+9. pwd
+-pwd_disease, pwd_physician, pwd_application_accomplisher
+
+10. claimed_benefits
+
+11. draft
+
+12. solo_parent_data
+-solo_parent_long_text
+
+13. address
+- barangay, previous_address

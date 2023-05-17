@@ -1,7 +1,10 @@
+.required::after {
+    color: red;
+    content: "*";
+}
+
 .active {
-  /*background-color: #ff0000;*/
   border-bottom: 3px solid #ffffff;
-  /*border-radius: 10px;*/
 }
 
 .navbar-nav li a {
@@ -31,5 +34,22 @@ footer a {
 
 #soloParentRelative .row, #srCitizenRelative .row {
   padding: 10px;
+}
+
+.user-info .row {
+  margin-bottom: 10px;
+}
+
+.user-info .col-md-4 {
+  font-weight: bold;
+}
+
+.user-info .col-md-8 {
+  word-break: break-all;
+}
+
+.soloParentRelative, .srCitizenRelative {
+  border: 1px solid black;
+  padding: 15px;
 }
 

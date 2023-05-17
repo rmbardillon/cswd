@@ -1,9 +1,25 @@
 <?php include_once('../layout/header.php'); $page = "id-application"; ?>
 <body>
     <?php include_once('../layout/navbar.php'); ?>
+    <!-- Modal -->
+    <div class="modal fade" id="confirmFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">User Information</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="userInfo" class="userInfo"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="application-form-container" class="container p-5 mt-5 mb-5">
         <h1>Senior Citizen Application</h1>
-        <form action="register.php" method="post" novalidate="">
+        <form id="scForm" method="post" novalidate="">
             <h5 class="text-center"><strong>APLIKASYON SA PAGSAPI</strong></h5>
             <div class="row" id="idNumber" style="display: none;">
                 <div class="col col-lg-3 col-md-3 col-sm-3 form-inline-group"><label class="form-label IDNumber" for="IDNumber">NUMERO&nbsp;NG ID</label><input class="form-control numbers" type="text" id="IDNumber" disabled="" name="IDNumber" placeholder="######"></div>
@@ -109,17 +125,41 @@
                 <div class="col col-4"><label class="form-label" for="spouseDOB">PETSA NG KAPANGANAKAN NG ASAWA</label><input class="form-control" id="spouseDOB" type="date" name="spouseDOB"></div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" for="numberOfChildren">ILAN ANG ANAK?</label><input class="form-control w-25 numbers" type="number" id="numberOfChildren" name="numberOfChildren" required=""></div>
+                <div class="col"><label class="form-label required" for="numberOfChildren">ILAN ANG ANAK?</label><input class="form-control w-25" type="number" id="numberOfChildren" name="numberOfChildren" min="0" max="20" required=""></div>
                 <div class="col"><label class="form-label required" for="totalHousemate">ILAN ANG KASAMA SA BAHAY?</label><input class="form-control w-25" type="number" id="totalHousemate" name="totalHousemate" min="0" max="100" required=""></div>
             </div>
-            <div id="srCitizenRelative" class="srCitizenRelative">
+            <div id="srCitizenRelative" class="srCitizenRelative mt-3">
                 <div class="row" id="child">
                     <div class="col col-2 d-flex align-items-center">
-                        <h6 class="text-nowrap text-start">PANGALAN NG ANAK</h6>
+                        <h6 class="text-nowrap text-start required">PANGALAN NG ANAK</h6>
                     </div>
-                    <div class="col"><input class="form-control" type="text" id="childLastName" name="childLastName[]" placeholder="APELYIDO NG ANAK"></div>
-                    <div class="col"><input class="form-control" type="text" id="childFirstName" name="childFirstName[]" placeholder="PANGALAN NG ANAK"></div>
-                    <div class="col"><input class="form-control" type="text" id="childMiddleName" name="childMiddleName[]" placeholder="PANGGITNANG APELYIDO"></div>
+                    <div class="col">
+                        <input
+                            class="form-control childLastName name"
+                            type="text"
+                            id="childLastName"
+                            name="childLastName[]"
+                            placeholder="APELYIDO NG ANAK"
+                            />
+                    </div>
+                    <div class="col">
+                        <input
+                            class="form-control childFirstName name"
+                            type="text"
+                            id="childFirstName"
+                            name="childFirstName[]"
+                            placeholder="PANGALAN NG ANAK"
+                            />
+                    </div>
+                    <div class="col">
+                        <input
+                            class="form-control childMiddlename name"
+                            type="text"
+                            id="childMiddlename"
+                            name="childMiddlename[]"
+                            placeholder="PANGGITNANG APELYIDO"
+                            />
+                    </div>
                     <div class="col">
                         <select id="childSuffix" class="form-select" name="childSuffix[]">
                             <option disabled selected value="">Suffix</option>
@@ -140,21 +180,37 @@
                 </div>
                 <div class="row">
                     <div class="col col-2 d-flex align-items-center">
-                        <h6 class="text-start">PETSA&nbsp;NG KAPANGANAKAN</h6>
+                        <h6 class="text-start required">PETSA&nbsp;NG KAPANGANAKAN</h6>
                     </div>
-                    <div class="col col-3"><input class="form-control" id="srCitizenChildDOB" type="date" name="srCitizenChildDOB" min="1900-01-01"></div>
+                    <div class="col col-3">
+                        <input
+                            class="form-control"
+                            id="srCitizenChildDOB"
+                            type="date"
+                            name="srCitizenChildDOB[]"
+                            min="1900-01-01"
+                            />
+                    </div>
                     <div class="col col-1 d-flex align-items-center">
-                        <h6 class="text-start">TELEPONO</h6>
+                        <h6 class="text-start required">TELEPONO</h6>
                     </div>
-                    <div class="col col-3"><input class="form-control numbers telephone" type="tel" id="childTelephone" name="childTelephone[]" placeholder="09##-###-####"></div>
+                    <div class="col col-3 mx-1">
+                        <input
+                            class="form-control numbers telephone"
+                            type="tel"
+                            id="childTelephone"
+                            name="childTelephone[]"
+                            placeholder="09##-###-####"
+                            />
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col col-2 d-flex align-items-center">
-                        <h6 class="text-start">TIRAHAN NG&nbsp;ANAK</h6>
+                        <h6 class="text-start required">TIRAHAN NG&nbsp;ANAK</h6>
                     </div>
                     <div class="col">
                         <label class="form-label" for="childBarangay">BARANGAY</label>
-                        <select id="barangay" class="form-select" name="childBarangay[]">
+                        <select id="childBarangay" class="form-select" name="childBarangay[]">
                             <option disabled selected value="">Please Select</option>
                             <option value="Aplaya">Aplaya</option>
                             <option value="Balibago">Balibago</option>
@@ -176,21 +232,25 @@
                             <option value="Tagapo">Tagapo</option>
                         </select>
                     </div>
-                    <div class="col"><label class="form-label" for="childAddress">TIRAHAN</label><input class="form-control" type="text" id="childAddress" name="childAddress[]"></div>
-                </div>
-                <div class="row">
-                    <div class="col"><button class="btn btn-danger delete-button w-25" type="button" onclick="srCitizenRemoveRelative(this);">Delete</button></div>
+                    <div class="col">
+                        <label class="form-label required" for="childAddress">TIRAHAN</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="childAddress"
+                            name="childAddress[]"
+                            />
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col"><button class="btn btn-success w-25" id="seniorCitizenDuplicateButton" type="button">Add</button></div>
-            </div>
+            <div id="relativesContainer"></div>
             <div class="row mt-5">
-                <div class="col"><button class="btn btn-primary w-100" type="submit" name="srCitizenSubmit">Submit</button></div>
+                <div class="col"><button class="btn btn-primary w-100" type="submit" name="srCitizenNext" id="srCitizenNext">Next</button></div>
             </div>
         </form>
     </div>
     <?php include_once('../layout/scripts.php'); ?>
+    <script src="../../libs/scripts/master-page/sc-application-form.js"></script>
 </body>
 
 </html>

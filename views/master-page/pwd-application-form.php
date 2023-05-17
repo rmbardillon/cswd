@@ -1,20 +1,26 @@
 <?php include_once('../layout/header.php'); $page = "id-application"; ?>
 <body>
     <?php include_once('../layout/navbar.php'); ?>
-    <div id="application-form-container" class="container p-5 mt-5 mb-5">
-        <h1>PWD Application</h1>
-        <form action="register.php" method="post" novalidate="">
-            <div class="row" id="transfereeAddress" style="display: none;">
-                <div class="col">
-                    <p>Please indicate previous address</p>
-                    <div class="row">
-                        <div class="col"><select class="form-select" id="region" required=""></select><input class="form-control" type="hidden" name="region_text" id="region-text"></div>
-                        <div class="col"><select class="form-select" id="province" required=""></select><input class="form-control" type="hidden" name="province_text" id="province-text"></div>
-                        <div class="col"><select class="form-select" id="city" required=""></select><input class="form-control" type="hidden" name="city_text" id="city-text"></div>
-                        <div class="col"><select class="form-select" id="barangay-1" required=""></select><input class="form-control" type="hidden" name="barangay_text" id="barangay-text"></div>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="confirmFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">User Information</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="userInfo" class="userInfo"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-success" onclick="PWD.submitForm();">Submit Registration</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="application-form-container" class="container p-5 mt-5 mb-5">
+        <h1>PWD Application</h1>
+        <form id="pwdForm" method="post" novalidate="">
             <div class="row">
                 <div class="col"><label class="form-label required" for="surname">SURNAME</label><input class="form-control" type="text" id="surname" name="surname" required=""></div>
                 <div class="col"><label class="form-label required" for="firstName">FIRST NAME</label><input class="form-control" type="text" id="firstName" name="firstName" required=""></div>
@@ -153,7 +159,7 @@
                 </div>
                 <div class="col" id="categoryOfEmploymentDiv" style="display: none;">
                     <label class="form-label required" for="categoryOfEmployment">CATEGORY OF EMPLOYMENT</label>
-                    <select id="categoryOfEmployment" class="form-select" name="categoryOfEmployment" required>
+                    <select id="categoryOfEmployment" class="form-select" name="categoryOfEmployment">
                         <option disabled selected value="">Please Select</option>
                         <option value="Government">Government</option>
                         <option value="Private">Private</option>
@@ -161,7 +167,7 @@
                 </div>
                 <div class="col" id="natureOfEmploymentDiv" style="display: none;">
                     <label class="form-label required" for="natureOfEmployment">NATURE OF EMPLOYMENT</label>
-                    <select id="natureOfEmployment" class="form-select" name="natureOfEmployment" required>
+                    <select id="natureOfEmployment" class="form-select" name="natureOfEmployment">
                         <option disabled selected value="">Please Select</option>
                         <option value="Permanent/Regular">Permanent/Regular</option>
                         <option value="Seasonal">Seasonal</option>
@@ -170,10 +176,10 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col col-6" id="occupationDiv" style="display: none;">
+            <div class="row" id="occupationDiv" style="display: none;">
+                <div class="col col-6">
                     <label class="form-label required" for="occupation">OCCUPATION</label>
-                    <select id="occupation" class="form-select" name="occupation" required>
+                    <select id="occupation" class="form-select" name="occupation">
                         <option disabled selected value="">Please Select</option>
                         <option value="Managers">Managers</option>
                         <option value="Professionals">Professionals</option>
@@ -189,9 +195,9 @@
                     </select>
                     <input class="form-control mt-1" type="text" id="otherOccupation" placeholder="specify" name="otherOccupation" style="display: none;">
                 </div>
-                <div class="col col-6" id="incomeDiv" style="display: none;">
+                <div class="col col-6">
                     <label class="form-label required" for="income">INCOME</label>
-                    <select id="income" class="form-select" name="income" required>
+                    <select id="income" class="form-select" name="income">
                         <option disabled selected value="">Please Select</option>
                         <option value="Less than 10,000">Less than 10,000</option>
                         <option value="10,000-20,000">10,000-20,000</option>
@@ -219,7 +225,7 @@
                         <option value="PhilHealth Member-Dependent">PhilHealth Member-Dependent</option>
                         <option value="No">No</option>
                     </select>
-                    <input class="form-control numbers mt-1" type="text" id="philhealthNumber" name="philhealthNumber" required="" style="display: none;" placeholder="PhilHealth Number">
+                    <input class="form-control numbers mt-1" type="text" id="philhealthNumber" name="philhealthNumber" style="display: none;" placeholder="PhilHealth Number">
                 </div>
             </div>
             <div class="row">
@@ -291,44 +297,44 @@
                     </select>
                 </div>
             </div>
-            <div class="row" id="guardian" style="display: none;">
+            <div class="row" id="guardian">
                 <div class="col"><label class="form-label required" for="guardianRelationship">RELATIONSHIP TO GUARDIAN</label><input class="form-control" type="text" id="guardianRelationship" name="guardianRelationship" required=""></div>
                 <div class="col"><label class="form-label required" for="guardianContactNumber">GUARDIAN'S CONTACT NUMBER</label><input class="form-control numbers" type="text" id="guardianContactNumber" name="guardianContactNumber" required=""></div>
             </div>
             <div class="row">
                 <div class="col">
                     <label class="form-label">TYPE OF DISABILITY</label>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="deafHardOfHearing" name="typeOfDisability[]" value="Deaf/Hard of Hearing" required=""><label class="form-check-label" for="deafHardOfHearing">Deaf/Hard of Hearing</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="intellectualDisability" name="typeOfDisability[]" value="Intellectual Disability" required=""><label class="form-check-label" for="intellectualDisability">Intellectual Disability</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="learningDisability" name="typeOfDisability[]" value="Learning Disability" required=""><label class="form-check-label" for="learningDisability">Learning Disability</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="mentalDisability" name="typeOfDisability[]" value="Mental Disability" required=""><label class="form-check-label" for="mentalDisability">Mental Disability</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="physicalDisability" name="typeOfDisability[]" value="Physical Disability (Orthopedic)" required=""><label class="form-check-label" for="physicalDisability">Physical&nbsp;Disability (Orthopedic)<br></label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="psychosocialDisability" name="typeOfDisability[]" value="Psychosocial Disability" required=""><label class="form-check-label" for="psychosocialDisability">Psychosocial Disability</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="deafHardOfHearing" name="typeOfDisability" value="Deaf/Hard of Hearing" required=""><label class="form-check-label" for="deafHardOfHearing">Deaf/Hard of Hearing</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="intellectualDisability" name="typeOfDisability" value="Intellectual Disability" required=""><label class="form-check-label" for="intellectualDisability">Intellectual Disability</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="learningDisability" name="typeOfDisability" value="Learning Disability" required=""><label class="form-check-label" for="learningDisability">Learning Disability</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="mentalDisability" name="typeOfDisability" value="Mental Disability" required=""><label class="form-check-label" for="mentalDisability">Mental Disability</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="physicalDisability" name="typeOfDisability" value="Physical Disability (Orthopedic)" required=""><label class="form-check-label" for="physicalDisability">Physical&nbsp;Disability (Orthopedic)<br></label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="psychosocialDisability" name="typeOfDisability" value="Psychosocial Disability" required=""><label class="form-check-label" for="psychosocialDisability">Psychosocial Disability</label></div>
                 </div>
                 <div class="col">
                     <label class="form-label">&nbsp; &nbsp;</label>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" name="typeOfDisability[]" value="Speech &amp; Language Impairment" required=""><label class="form-check-label" for="formCheck-7">Speech &amp; Language Impairment</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="visualDisability" name="typeOfDisability[]" value="Visual Disability" required=""><label class="form-check-label" for="visualDisability">Visual Disability</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cancer" name="typeOfDisability[]" value="Cancer (RA11215)" required=""><label class="form-check-label" for="cancer">Cancer (RA11215)</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="rareDisease" name="typeOfDisability[]" value="Rare Disease (RA10747)" required=""><label class="form-check-label" for="rareDisease">Rare Disease (RA10747)</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7" name="typeOfDisability" value="Speech &amp; Language Impairment" required=""><label class="form-check-label" for="formCheck-7">Speech &amp; Language Impairment</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="visualDisability" name="typeOfDisability" value="Visual Disability" required=""><label class="form-check-label" for="visualDisability">Visual Disability</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="cancer" name="typeOfDisability" value="Cancer (RA11215)" required=""><label class="form-check-label" for="cancer">Cancer (RA11215)</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="rareDisease" name="typeOfDisability" value="Rare Disease (RA10747)" required=""><label class="form-check-label" for="rareDisease">Rare Disease (RA10747)</label></div>
                     <label class="form-label">MEDICAL CONDITION/DIAGNOSIS</label><input class="form-control" type="text" id="medicalCondition" name="medicalCondition" required="">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label class="form-label">CAUSE OF DISABILITY</label>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="congenital" disabled="" name="causeOfDisability[]" value="CONGENITAL/INBORN" required=""><label class="form-check-label" for="congenital"><strong>CONGENITAL/INBORN</strong></label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="autism" name="inborn[]" value="Autism" required=""><label class="form-check-label" for="autism">Autism</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="adhd" name="inborn[]" value="ADHD" required=""><label class="form-check-label" for="adhd">ADHD</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="inbornCerebralPalsy" name="inborn[]" value="Cerebral Palsy" required=""><label class="form-check-label" for="inbornCerebralPalsy">Cerebral Palsy</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="downSyndrome" name="inborn[]" value="Down Syndrome" required=""><label class="form-check-label" for="downSyndrome">Down Syndrome</label></div>
+                    <div class="form-check"><label class="form-check-label" for="congenital"><strong>CONGENITAL/INBORN</strong></label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="autism" name="inborn" value="Autism" required=""><label class="form-check-label" for="autism">Autism</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="adhd" name="inborn" value="ADHD" required=""><label class="form-check-label" for="adhd">ADHD</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="inbornCerebralPalsy" name="inborn" value="Cerebral Palsy" required=""><label class="form-check-label" for="inbornCerebralPalsy">Cerebral Palsy</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="downSyndrome" name="inborn" value="Down Syndrome" required=""><label class="form-check-label" for="downSyndrome">Down Syndrome</label></div>
                 </div>
                 <div class="col">
                     <label class="form-label">&nbsp; &nbsp; &nbsp;&nbsp;</label>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="acquired" disabled="" name="causeOfDisability[]" value="ACQUIRED" required=""><label class="form-check-label" for="acquired"><strong>ACQUIRED</strong></label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="chronicIllness" name="acquired[]" value="Chronic Illness" required=""><label class="form-check-label" for="chronicIllness">Chronic Illness</label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="acquiredCerebralPalsy" name="acquired[]" value="Cerebral Palsy" required=""><label class="form-check-label" for="acquiredCerebralPalsy">Cerebral Palsy<br></label></div>
-                    <div class="form-check"><input class="form-check-input" type="checkbox" id="injury" name="acquired[]" value="Injury" required=""><label class="form-check-label" for="injury">Injury</label></div>
+                    <div class="form-check"><label class="form-check-label" for="acquired"><strong>ACQUIRED</strong></label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="chronicIllness" name="acquired" value="Chronic Illness" required=""><label class="form-check-label" for="chronicIllness">Chronic Illness</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="acquiredCerebralPalsy" name="acquired" value="Cerebral Palsy" required=""><label class="form-check-label" for="acquiredCerebralPalsy">Cerebral Palsy<br></label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" id="injury" name="acquired" value="Injury" required=""><label class="form-check-label" for="injury">Injury</label></div>
                 </div>
                 <div class="col">
                     <label class="form-label">STATUS OF DISABILITY</label>
@@ -347,15 +353,16 @@
                         <option value="Guardian">Guardian</option>
                         <option value="Representative">Representative</option>
                     </select>
-                    <input class="form-control numbers mt-1" type="text" id="accomplisherName" name="accomplisherName" required="" placeholder="Representive Name" style="display: none;">
+                    <input class="form-control mt-1" type="text" id="accomplisherName" name="accomplisherName" placeholder="Representive Name" style="display: none;">
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col"><button class="btn btn-primary w-100" type="submit" name="pwdSubmit">Submit</button></div>
+                <div class="col"><button class="btn btn-primary w-100" type="submit" name="pwdNext" id="pwdNext">Next</button></div>
             </div>
         </form>
     </div>
     <?php include_once('../layout/scripts.php'); ?>
+    <script src="../../libs/scripts/master-page/pwd-application-form.js"></script>
 </body>
 
 </html>
