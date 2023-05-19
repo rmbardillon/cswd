@@ -130,7 +130,7 @@
             $statusOfDisabiity = $request['statusOfDisabiity'];
             $accomplishedBy = $request['accomplishedBy'];
             $accomplisherName = $request['accomplisherName'];
-            $causeOfDisability = ($inborn == null) ? "ACQUIRED" : "INBORN";
+            $causeOfDisability = ($inborn == "null") ? "ACQUIRED" : "INBORN";
     
             $sql = "INSERT INTO pwd_data(PERSON_ID, PHYSICIAN_NAME, PHYSICIAN_LICENSE_NUMBER, TYPE_OF_DISABILITY, MEDICAL_CONDITION, CAUSE_OF_DISABILITY, CONGENITAL_INBORN, ACQUIRED, STATUS_OF_DISABILITY, ACCOMPLISHED_BY, ACCOMPLISHER_NAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $this->conn->prepare($sql);

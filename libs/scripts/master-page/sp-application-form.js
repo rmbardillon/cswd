@@ -33,6 +33,14 @@ $(document).ready(function() {
             originalDiv.insertAfter($("#" + id));
         }
     });
+    $('input[name="soloParentClassification"]').click(function() {
+        if($("input[name='soloParentClassification']:checked").length > 0){
+            $("input[name='soloParentClassification']").removeAttr("required");
+        } else {
+            $("input[name='soloParentClassification']").prop('required', true);
+        }
+        
+    });
 });
 function soloParentRemoveRelative(button) {
     if ($(button).parent().parent().parent().attr('id') !== 'soloParentRelative' && $(button).parent().parent().parent().attr('id') == soloParentNewId) {
@@ -40,3 +48,84 @@ function soloParentRemoveRelative(button) {
         $(button).parent().parent().parent().remove();
     }
 }
+
+$("#spCitizenNext").click(function(event) {
+    var formData = $("#spForm").serializeArray();
+    var spForm = {};
+    console.log(formData);
+    $.each(formData, function(index, value) {
+        spForm[value.name] = value.value;
+    });
+    
+    // Check if the form is valid
+    if ($("#spForm")[0].checkValidity()) {
+        populateModal(spForm);
+        event.preventDefault();
+    } else {
+        swal.fire({
+            title: "Error!",
+            text: "Please fill out all the required fields.",
+            icon: "error",
+            confirmButtonText: "Ok"
+        });
+    }
+});
+
+
+// Function to populate the modal with user data
+function populateModal(userData) {
+    var modalContent = '';
+    // Loop through the object and create the HTML content
+    for (var key in userData) {
+        if (userData.hasOwnProperty(key)) {
+            var label = key.charAt(0).toUpperCase() + key.slice(1); // Capitalize the first letter
+            var value = userData[key];
+            // Append the label and value to the modalContent string
+            modalContent += '<div class="row"><div class="col-md-4"><strong>' + label + ':</strong></div><div class="col-md-8">' + value + '</div></div>';
+        }
+    }
+    // Set the modal content
+    $('#userInfo').html(modalContent);
+    $("#confirmFormModal").modal("show");
+}
+
+const SP = (() => {
+    const thisSP = {};
+
+    thisSP.submitForm = () => {
+        var formData = $("#spForm").serializeArray();
+        var spForm = {};
+
+        $.each(formData, function(index, value) {
+            spForm[value.name] = value.value;
+        });
+
+        $.ajax({
+            type: "POST",
+            url: SP_CONTROLLER + "?action=spRegister",
+            data: {
+                pwdForm: pwdForm,
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data == "Successfully Inserted") {
+                    swal.fire({
+                        title: "Success!",
+                        text: "You have successfully registered!",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "index.php";
+                        }
+                    });
+                }
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    };
+
+    return thisSP;
+})();

@@ -1,9 +1,26 @@
 <?php include_once('../layout/header.php'); $page = "id-application"; ?>
 <body>
     <?php include_once('../layout/navbar.php'); ?>
+    <!-- Modal -->
+    <div class="modal fade" id="confirmFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">User Information</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="userInfo" class="userInfo"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-success" onclick="SP.submitForm();">Submit Registration</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="application-form-container" class="container p-5 mt-5 mb-5">
         <h1>Solo Parent Application</h1>
-        <form action="register.php" method="post" novalidate="">
+        <form id="spForm" method="post" novalidate="">
             <h5 class="text-center">APPLICATION&nbsp;FORM FOR SOLO PARENT</h5>
             <div class="row">
                 <div class="col"><label class="form-label required" for="surname">SURNAME</label><input class="form-control" type="text" id="surname" name="surname" required=""></div>
@@ -90,8 +107,8 @@
                     <div class="col col-2 d-flex align-items-center">
                         <h6 class="text-nowrap text-start">NAME</h6>
                     </div>
-                    <div class="col"><input class="form-control" type="text" id="childLastName" name="childLastName[]" placeholder="SURNAME"></div>
-                    <div class="col"><input class="form-control" type="text" id="childFirstName" name="childFirstName[]" placeholder="FIRST NAME"></div>
+                    <div class="col"><input class="form-control" type="text" id="childLastName" name="childLastName[]" placeholder="SURNAME" required></div>
+                    <div class="col"><input class="form-control" type="text" id="childFirstName" name="childFirstName[]" placeholder="FIRST NAME" required></div>
                     <div class="col"><input class="form-control" type="text" id="childMiddleName" name="childMiddleName[]" placeholder="MIDDLE NAME"></div>
                     <div class="col">
                         <select id="childSuffix" class="form-select" name="childSuffix[]">
@@ -115,12 +132,12 @@
                     <div class="col col-2 d-flex align-items-center">
                         <h6 class="text-start">DATE&nbsp;OF BIRTH</h6>
                     </div>
-                    <div class="col col-3"><input class="form-control" id="soloParentChildDOB" type="date" name="soloParentChildDOB[]" min="1900-01-01"></div>
+                    <div class="col col-3"><input class="form-control" id="soloParentChildDOB" type="date" name="soloParentChildDOB[]" min="1900-01-01" required></div>
                     <div class="col col-2 d-flex align-items-center">
                         <h6 class="text-start">MARITAL&nbsp;STATUS</h6>
                     </div>
                     <div class="col d-flex align-items-center">
-                        <select id="maritalStatus" class="form-select" name="maritalStatus[]">
+                        <select id="maritalStatus" class="form-select" name="maritalStatus[]" required>
                             <option disabled selected value="">Please Select</option>
                             <option value="Single">Single</option>
                             <option value="Married">Married</option>
@@ -134,11 +151,11 @@
                     <div class="col col-3 d-flex align-items-center">
                         <h6 class="text-start">EDUCATIONAL&nbsp;ATTAINMENT</h6>
                     </div>
-                    <div class="col"><input class="form-control" type="text" id="childEducationalAttainment" name="childEducationalAttainment[]"></div>
+                    <div class="col"><input class="form-control" type="text" id="childEducationalAttainment" name="childEducationalAttainment[]" required></div>
                     <div class="col col-3 d-flex align-items-center">
                         <h6 class="text-start">OCCUPATION/MONTHLY&nbsp;INCOME</h6>
                     </div>
-                    <div class="col"><input class="form-control numbers" type="text" id="childIncome" name="childIncome[]"></div>
+                    <div class="col"><input class="form-control numbers" type="text" id="childIncome" name="childIncome[]" required></div>
                 </div>
                 <div class="row">
                     <div class="col col-2"><button class="btn btn-danger delete-button w-100" type="button" onclick="soloParentRemoveRelative(this);">Delete</button></div>
@@ -159,19 +176,19 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Death of Spouse" id="deathOfSpouse" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="deathOfSpouse"> Death of Spouse </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Abandonment" id="abandonment" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="abandonment"> Abandonment </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Disappearance of Parents" id="disappearanceOfParents" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="disappearanceOfParents"> Disappearance of Parents </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Imprisonment of Spouse/Detention" id="imprisonmentOfSpouse" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="imprisonmentOfSpouse"> Imprisonment of Spouse/Detention </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Physical and Mental Incapacity" id="physicalAndMentalIncapacity" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="physicalAndMentalIncapacity"> Physical and Mental Incapacity </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Annulment/Legal Separation" id="annulmentLegalSeparation" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="annulmentLegalSeparation"> Annulment/Legal Separation </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Death of Spouse" id="deathOfSpouse" name="soloParentClassification" required=""><label class="form-label form-check-label" for="deathOfSpouse"> Death of Spouse </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Abandonment" id="abandonment" name="soloParentClassification" required=""><label class="form-label form-check-label" for="abandonment"> Abandonment </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Disappearance of Parents" id="disappearanceOfParents" name="soloParentClassification" required=""><label class="form-label form-check-label" for="disappearanceOfParents"> Disappearance of Parents </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Imprisonment of Spouse/Detention" id="imprisonmentOfSpouse" name="soloParentClassification" required=""><label class="form-label form-check-label" for="imprisonmentOfSpouse"> Imprisonment of Spouse/Detention </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Physical and Mental Incapacity" id="physicalAndMentalIncapacity" name="soloParentClassification" required=""><label class="form-label form-check-label" for="physicalAndMentalIncapacity"> Physical and Mental Incapacity </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Annulment/Legal Separation" id="annulmentLegalSeparation" name="soloParentClassification" required=""><label class="form-label form-check-label" for="annulmentLegalSeparation"> Annulment/Legal Separation </label></div>
                         </div>
                         <div class="col">
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Unmarried/unwed" id="unmarriedUnwed" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="unmarriedUnwed"> Unmarried/unwed </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Foster Parent of DSWD" id="fosterParentOfDSWD" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="fosterParentOfDSWD"> Foster Parent of DSWD </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Spouse of OFW" id="spouseOfOFW" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="spouseOfOFW"> Spouse of OFW </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Pregnant Women" id="pregnantWomen" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="pregnantWomen"> Pregnant Women </label></div>
-                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Rape Case" id="rapeCase" name="soloParentClassification[]" required=""><label class="form-label form-check-label" for="rapeCase"> Rape Case </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Unmarried/unwed" id="unmarriedUnwed" name="soloParentClassification" required=""><label class="form-label form-check-label" for="unmarriedUnwed"> Unmarried/unwed </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Foster Parent of DSWD" id="fosterParentOfDSWD" name="soloParentClassification" required=""><label class="form-label form-check-label" for="fosterParentOfDSWD"> Foster Parent of DSWD </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Spouse of OFW" id="spouseOfOFW" name="soloParentClassification" required=""><label class="form-label form-check-label" for="spouseOfOFW"> Spouse of OFW </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Pregnant Women" id="pregnantWomen" name="soloParentClassification" required=""><label class="form-label form-check-label" for="pregnantWomen"> Pregnant Women </label></div>
+                            <div class="form-check"><input type="checkbox" class="form-check-input" value="Rape Case" id="rapeCase" name="soloParentClassification" required=""><label class="form-label form-check-label" for="rapeCase"> Rape Case </label></div>
                         </div>
                     </div>
                 </div>
@@ -201,7 +218,7 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col"><button class="btn btn-primary w-100" type="submit" name="srCitizenSubmit">Submit</button></div>
+                <div class="col"><button class="btn btn-primary w-100" type="submit" name="spCitizenNext" id="spCitizenNext">Next</button></div>
             </div>
         </form>
     </div>

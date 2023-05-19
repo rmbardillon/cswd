@@ -2,7 +2,7 @@
     date_default_timezone_set('Asia/Manila');
     include_once('../model/Sql.php');
 
-    class Pwd {
+    class Sc {
         private $connection;
         
         public function __construct($connection)
@@ -10,7 +10,7 @@
             $this->connection = $connection;
         }
         
-        public function pwdRegister($pwdForm)
+        public function scRegister($pwdForm)
         {
             $Sql = new Sql($this->connection);
             $uuid = $Sql->generateUUID();

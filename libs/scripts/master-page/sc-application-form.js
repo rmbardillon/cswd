@@ -208,3 +208,44 @@ function populateModal(userData) {
     $('#userInfo').html(modalContent);
     $("#confirmFormModal").modal("show");
 }
+
+const SC = (() => {
+    const thisSC = {};
+
+    thisSC.submitForm = () => {
+        var formData = $("#scForm").serializeArray();
+        var scForm = {};
+
+        $.each(formData, function(index, value) {
+            scForm[value.name] = value.value;
+        });
+
+        $.ajax({
+            type: "POST",
+            url: SC_CONTROLLER + "?action=scRegister",
+            data: {
+                pwdForm: pwdForm,
+            },
+            dataType: "json",
+            success: function(data) {
+                if(data == "Successfully Inserted") {
+                    swal.fire({
+                        title: "Success!",
+                        text: "You have successfully registered!",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location.href = "index.php";
+                        }
+                    });
+                }
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    };
+
+    return thisSC;
+})();

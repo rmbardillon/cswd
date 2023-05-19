@@ -137,7 +137,7 @@ $("#pwdNext").click(function(event) {
     });
     console.log(pwdForm);
     // Check if the form is valid
-    if (!$("#pwdForm")[0].checkValidity()) {
+    if ($("#pwdForm")[0].checkValidity()) {
         populateModal(pwdForm);
         event.preventDefault();
     } else {
