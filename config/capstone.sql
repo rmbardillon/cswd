@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 10:07 AM
+-- Generation Time: May 21, 2023 at 06:07 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -30,8 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `address` (
   `ADDRESS_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
+  `ADDRESS` varchar(128) NOT NULL,
   `BARANGAY` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
+('9973bba0f5f011ed', '6466e51c17b6d508', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
 
 -- --------------------------------------------------------
 
@@ -60,6 +68,13 @@ CREATE TABLE `contact_details` (
   `EMAIL` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `contact_details`
+--
+
+INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
+('9973cabaf5f011ed', '6466e51c17b6d508', '09760657071', '', 'romsky.bardillon@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -69,19 +84,52 @@ CREATE TABLE `contact_details` (
 CREATE TABLE `employment_details` (
   `EMPLOYMENT_DETAILS_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
-  `COMPANY` varchar(64) NOT NULL,
-  `JOB` varchar(64) NOT NULL,
-  `INCOME` varchar(64) NOT NULL,
-  `PENSION` decimal(12,2) NOT NULL,
-  `SSS_NUMBER` varchar(32) NOT NULL,
-  `GSIS_NUMBER` varchar(32) NOT NULL,
-  `PSN_NUMBER` varchar(32) NOT NULL,
+  `EMPLOYMENT_STATUS` varchar(64) DEFAULT NULL,
+  `CATEGORY_OF_EMPLOYMENT` varchar(64) DEFAULT NULL,
+  `NATURE_OF_EMPLOYMENT` varchar(64) DEFAULT NULL,
+  `COMPANY` varchar(64) DEFAULT NULL,
+  `JOB` varchar(64) DEFAULT NULL,
+  `OTHER_JOB` varchar(64) DEFAULT NULL,
+  `INCOME` varchar(64) DEFAULT NULL,
+  `PENSION` decimal(12,2) DEFAULT NULL,
+  `SSS_NUMBER` varchar(32) DEFAULT NULL,
+  `GSIS_NUMBER` varchar(32) DEFAULT NULL,
+  `PSN_NUMBER` varchar(32) DEFAULT NULL,
   `IS_PHILHEALTH_MEMBER` varchar(8) NOT NULL,
-  `PHILHEALTH_NUMBER` varchar(32) NOT NULL,
+  `PHILHEALTH_NUMBER` varchar(32) DEFAULT NULL,
   `IS_ACTIVE_VOTER` varchar(8) NOT NULL,
   `IS_4PS_MEMBER` varchar(8) NOT NULL,
-  `TOTAL_FAMILY_INCOME` decimal(12,2) NOT NULL
+  `TOTAL_FAMILY_INCOME` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employment_details`
+--
+
+INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `PENSION`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
+('9973e3a0f5f011ed', '6466e51c17b6d508', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `organization`
+--
+
+CREATE TABLE `organization` (
+  `ORGANIZATION_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PERSON_ID` varchar(16) NOT NULL,
+  `ORGANIZATION` varchar(64) NOT NULL,
+  `ORGANIZATION_CONTACT_PERSON` varchar(64) NOT NULL,
+  `ORGANIZATION_OFFICE_ADDRESS` varchar(64) NOT NULL,
+  `ORGANIZATION_CONTACT_NUMBER` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `organization`
+--
+
+INSERT INTO `organization` (`ORGANIZATION_ID`, `PERSON_ID`, `ORGANIZATION`, `ORGANIZATION_CONTACT_PERSON`, `ORGANIZATION_OFFICE_ADDRESS`, `ORGANIZATION_CONTACT_NUMBER`) VALUES
+('9973f0f0f5f011ed', '6466e51c17b6d508', '', '', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', '09760657071');
 
 -- --------------------------------------------------------
 
@@ -94,8 +142,18 @@ CREATE TABLE `person` (
   `FIRST_NAME` varchar(64) NOT NULL,
   `MIDDLE_NAME` varchar(64) NOT NULL,
   `LAST_NAME` varchar(64) NOT NULL,
-  `SUFFIX` varchar(16) NOT NULL
+  `SUFFIX` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `person`
+--
+
+INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SUFFIX`) VALUES
+('6466e51c17b6d508', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
+('6466e51c17b84838', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
+('6466e51c17b87909', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
+('6466e51c17b88290', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', NULL);
 
 -- --------------------------------------------------------
 
@@ -106,12 +164,20 @@ CREATE TABLE `person` (
 CREATE TABLE `personal_information` (
   `PERSONAL_INFORMATION_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
+  `BIRTHDAY` date NOT NULL,
   `GENDER` varchar(16) NOT NULL,
   `EDUCATIONAL_ATTAINMENT` varchar(64) NOT NULL,
   `BLOOD_TYPE` varchar(8) NOT NULL,
   `RELIGION` varchar(64) NOT NULL,
   `MARITAL_STATUS` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `personal_information`
+--
+
+INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
+('9973d5e6f5f011ed', '6466e51c17b6d508', '2001-07-30', 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single');
 
 -- --------------------------------------------------------
 
@@ -124,13 +190,22 @@ CREATE TABLE `pwd_data` (
   `PERSON_ID` varchar(16) NOT NULL,
   `PHYSICIAN_NAME` varchar(128) NOT NULL,
   `PHYSICIAN_LICENSE_NUMBER` varchar(64) NOT NULL,
-  `TYPE_OF_DISABILITY` varchar(64) NOT NULL,
-  `MEDICAL_CONDITION` varchar(64) NOT NULL,
-  `CAUSE_OF_DISABILITY` varchar(64) NOT NULL,
-  `CONGENITAL_INBORN` varchar(64) NOT NULL,
-  `ACQUIRED` varchar(64) NOT NULL,
-  `STATUS_OF_DISABILITY` varchar(64) NOT NULL
+  `TYPE_OF_DISABILITY` varchar(1024) NOT NULL,
+  `MEDICAL_CONDITION` varchar(64) DEFAULT NULL,
+  `CAUSE_OF_DISABILITY` varchar(64) DEFAULT NULL,
+  `CONGENITAL_INBORN` varchar(1024) DEFAULT NULL,
+  `ACQUIRED` varchar(1024) DEFAULT NULL,
+  `STATUS_OF_DISABILITY` varchar(64) NOT NULL,
+  `ACCOMPLISHED_BY` varchar(64) NOT NULL,
+  `ACCOMPLISHER_NAME` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pwd_data`
+--
+
+INSERT INTO `pwd_data` (`PWD_DATA_ID`, `PERSON_ID`, `PHYSICIAN_NAME`, `PHYSICIAN_LICENSE_NUMBER`, `TYPE_OF_DISABILITY`, `MEDICAL_CONDITION`, `CAUSE_OF_DISABILITY`, `CONGENITAL_INBORN`, `ACQUIRED`, `STATUS_OF_DISABILITY`, `ACCOMPLISHED_BY`, `ACCOMPLISHER_NAME`) VALUES
+('9974038ff5f011ed', '6466e51c17b6d508', 'LEBRON JAMES', 'MD8299-8854', '[\"Physical Disability (Orthopedic)\",\"Psychosocial Disability\"]', '', 'ACQUIRED', 'null', '[\"Cerebral Palsy\",\"Injury\"]', 'Temporary', 'Applicant', 'ROMEO JR BARDILLON');
 
 -- --------------------------------------------------------
 
@@ -142,8 +217,18 @@ CREATE TABLE `relatives` (
   `RELATIVE_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
   `RELATIVE_PERSON_ID` varchar(16) NOT NULL,
-  `RELATIONSHIP_TYPE` varchar(32) NOT NULL
+  `RELATIONSHIP_TYPE` varchar(32) NOT NULL,
+  `GUARDIAN_CONTACT_NUMBER` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `relatives`
+--
+
+INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `GUARDIAN_CONTACT_NUMBER`) VALUES
+('99742237f5f011ed', '6466e51c17b6d508', '6466e51c17b84838', 'Father', NULL),
+('9975fa35f5f011ed', '6466e51c17b6d508', '6466e51c17b87909', 'Mother', NULL),
+('997688f7f5f011ed', '6466e51c17b6d508', '6466e51c17b88290', 'BROTHER', '09091072865');
 
 -- --------------------------------------------------------
 
@@ -223,6 +308,13 @@ ALTER TABLE `employment_details`
   ADD KEY `FK_PERSON_EMPLOYMENT_DETAILS` (`PERSON_ID`);
 
 --
+-- Indexes for table `organization`
+--
+ALTER TABLE `organization`
+  ADD PRIMARY KEY (`ORGANIZATION_ID`),
+  ADD KEY `FK_PERSON_ORGANIZATION` (`PERSON_ID`);
+
+--
 -- Indexes for table `person`
 --
 ALTER TABLE `person`
@@ -297,6 +389,12 @@ ALTER TABLE `contact_details`
 --
 ALTER TABLE `employment_details`
   ADD CONSTRAINT `FK_PERSON_EMPLOYMENT_DETAILS` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
+
+--
+-- Constraints for table `organization`
+--
+ALTER TABLE `organization`
+  ADD CONSTRAINT `FK_PERSON_ORGANIZATION` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 
 --
 -- Constraints for table `personal_information`
