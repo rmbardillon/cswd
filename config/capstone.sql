@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2023 at 06:07 AM
+-- Generation Time: May 23, 2023 at 02:30 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,20 +39,28 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
-('9973bba0f5f011ed', '6466e51c17b6d508', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
+('70f890a2f96511ed', '646cb1a010f88275', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appplication`
+-- Table structure for table `application`
 --
 
-CREATE TABLE `appplication` (
+CREATE TABLE `application` (
   `APPLICATION_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
   `APPPLICATION_TYPE` varchar(16) NOT NULL,
-  `APPLICATION_STATUS` varchar(16) NOT NULL
+  `APPLICATION_DATE` datetime NOT NULL DEFAULT current_timestamp(),
+  `APPLICATION_STATUS` varchar(16) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `application`
+--
+
+INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPPLICATION_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
+('70f88b0cf96511ed', '646cb1a010f88275', 'PWD', '2023-05-23 20:29:20', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -73,7 +81,7 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
-('9973cabaf5f011ed', '6466e51c17b6d508', '09760657071', '', 'romsky.bardillon@gmail.com');
+('70f91d2df96511ed', '646cb1a010f88275', '09760657071', '', 'romsky.bardillon@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -107,7 +115,7 @@ CREATE TABLE `employment_details` (
 --
 
 INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `PENSION`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
-('9973e3a0f5f011ed', '6466e51c17b6d508', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL);
+('70f94380f96511ed', '646cb1a010f88275', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,7 +137,7 @@ CREATE TABLE `organization` (
 --
 
 INSERT INTO `organization` (`ORGANIZATION_ID`, `PERSON_ID`, `ORGANIZATION`, `ORGANIZATION_CONTACT_PERSON`, `ORGANIZATION_OFFICE_ADDRESS`, `ORGANIZATION_CONTACT_NUMBER`) VALUES
-('9973f0f0f5f011ed', '6466e51c17b6d508', '', '', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', '09760657071');
+('70f9545af96511ed', '646cb1a010f88275', '', '', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', '09760657071');
 
 -- --------------------------------------------------------
 
@@ -150,10 +158,10 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SUFFIX`) VALUES
-('6466e51c17b6d508', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
-('6466e51c17b84838', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
-('6466e51c17b87909', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
-('6466e51c17b88290', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', NULL);
+('646cb1a010f88275', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
+('646cb1a010f94005', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
+('646cb1a010f96088', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
+('646cb1a010f97466', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', NULL);
 
 -- --------------------------------------------------------
 
@@ -177,7 +185,7 @@ CREATE TABLE `personal_information` (
 --
 
 INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
-('9973d5e6f5f011ed', '6466e51c17b6d508', '2001-07-30', 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single');
+('70f92e67f96511ed', '646cb1a010f88275', '2001-07-30', 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single');
 
 -- --------------------------------------------------------
 
@@ -205,7 +213,7 @@ CREATE TABLE `pwd_data` (
 --
 
 INSERT INTO `pwd_data` (`PWD_DATA_ID`, `PERSON_ID`, `PHYSICIAN_NAME`, `PHYSICIAN_LICENSE_NUMBER`, `TYPE_OF_DISABILITY`, `MEDICAL_CONDITION`, `CAUSE_OF_DISABILITY`, `CONGENITAL_INBORN`, `ACQUIRED`, `STATUS_OF_DISABILITY`, `ACCOMPLISHED_BY`, `ACCOMPLISHER_NAME`) VALUES
-('9974038ff5f011ed', '6466e51c17b6d508', 'LEBRON JAMES', 'MD8299-8854', '[\"Physical Disability (Orthopedic)\",\"Psychosocial Disability\"]', '', 'ACQUIRED', 'null', '[\"Cerebral Palsy\",\"Injury\"]', 'Temporary', 'Applicant', 'ROMEO JR BARDILLON');
+('70f96520f96511ed', '646cb1a010f88275', 'ROMEO JR BARDILLON', 'MD8299-8854', '[\"Mental Disability\",\"Physical Disability (Orthopedic)\"]', '', 'ACQUIRED', 'null', '[\"Cerebral Palsy\",\"Injury\"]', 'Temporary', 'Applicant', 'ROMEO JR BARDILLON');
 
 -- --------------------------------------------------------
 
@@ -226,9 +234,9 @@ CREATE TABLE `relatives` (
 --
 
 INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `GUARDIAN_CONTACT_NUMBER`) VALUES
-('99742237f5f011ed', '6466e51c17b6d508', '6466e51c17b84838', 'Father', NULL),
-('9975fa35f5f011ed', '6466e51c17b6d508', '6466e51c17b87909', 'Mother', NULL),
-('997688f7f5f011ed', '6466e51c17b6d508', '6466e51c17b88290', 'BROTHER', '09091072865');
+('70f97127f96511ed', '646cb1a010f88275', '646cb1a010f94005', 'Father', NULL),
+('70f97c4cf96511ed', '646cb1a010f88275', '646cb1a010f96088', 'Mother', NULL),
+('70fa9a07f96511ed', '646cb1a010f88275', '646cb1a010f97466', 'BROTHER', '09091072865');
 
 -- --------------------------------------------------------
 
@@ -287,9 +295,9 @@ ALTER TABLE `address`
   ADD KEY `FK_PERSON_ADDRESS` (`PERSON_ID`);
 
 --
--- Indexes for table `appplication`
+-- Indexes for table `application`
 --
-ALTER TABLE `appplication`
+ALTER TABLE `application`
   ADD PRIMARY KEY (`APPLICATION_ID`),
   ADD KEY `FK_PERSON_APPLICATION` (`PERSON_ID`);
 
@@ -373,9 +381,9 @@ ALTER TABLE `address`
   ADD CONSTRAINT `FK_PERSON_ADDRESS` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 
 --
--- Constraints for table `appplication`
+-- Constraints for table `application`
 --
-ALTER TABLE `appplication`
+ALTER TABLE `application`
   ADD CONSTRAINT `FK_PERSON_APPLICATION` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 
 --

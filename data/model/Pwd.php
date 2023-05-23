@@ -14,6 +14,10 @@
         {
             $Sql = new Sql($this->connection);
             $uuid = $Sql->generateUUID();
+            $application = [
+                'uuid' => $uuid,
+                'applicationType' => 'PWD',
+            ];
             $person = [
                 'uuid' => $uuid,
                 'firstName' => $pwdForm['firstName'],
@@ -130,6 +134,7 @@
                 // Begin transaction
                 $this->connection->begin_transaction();
                 $Sql->insertPerson($person);
+                $Sql->insertApplication($application);
                 $Sql->insertAddress($address);
                 $Sql->insertContactDetails($contactDetails);
                 $Sql->insertPersonalInformation($personalInformation);

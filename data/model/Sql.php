@@ -20,6 +20,18 @@
             return $uuid;
         }
 
+        public function insertApplication($request)
+        {
+            $uuid = $request['uuid'];
+            $applicationType = $request['applicationType'];
+
+            $sql = "INSERT INTO application(PERSON_ID, APPPLICATION_TYPE) VALUES (?,?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ss", $uuid, $applicationType);
+            $stmt->execute();
+            $stmt->close();
+        }
+
         public function insertPerson($request)
         {
             $uuid = $request['uuid'];
