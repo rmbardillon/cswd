@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 02:30 PM
+-- Generation Time: May 24, 2023 at 10:10 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,7 +39,8 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
-('70f890a2f96511ed', '646cb1a010f88275', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
+('4edc6dddfa0911ed', '646dc48c46108954', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
+('88708d6bfa0911ed', '646dc4ecd8dfe838', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,7 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPPLICATION_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
-('70f88b0cf96511ed', '646cb1a010f88275', 'PWD', '2023-05-23 20:29:20', 'Pending');
+('4edc5747fa0911ed', '646dc48c46108954', 'PWD', '2023-05-24 16:02:20', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -71,8 +72,8 @@ INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPPLICATION_TYPE`, `
 CREATE TABLE `contact_details` (
   `CONTACT_DETAILS_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
-  `MOBILE_NUMBER` varchar(16) NOT NULL,
-  `TELEPHONE_NUMBER` varchar(16) NOT NULL,
+  `MOBILE_NUMBER` varchar(16) DEFAULT NULL,
+  `TELEPHONE_NUMBER` varchar(16) DEFAULT NULL,
   `EMAIL` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -81,7 +82,8 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
-('70f91d2df96511ed', '646cb1a010f88275', '09760657071', '', 'romsky.bardillon@gmail.com');
+('4edc7e41fa0911ed', '646dc48c46108954', '09760657071', '', 'romsky.bardillon@gmail.com'),
+('8870a926fa0911ed', '646dc4ecd8dfe838', NULL, NULL, 'mila.bardillon@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -103,10 +105,10 @@ CREATE TABLE `employment_details` (
   `SSS_NUMBER` varchar(32) DEFAULT NULL,
   `GSIS_NUMBER` varchar(32) DEFAULT NULL,
   `PSN_NUMBER` varchar(32) DEFAULT NULL,
-  `IS_PHILHEALTH_MEMBER` varchar(8) NOT NULL,
+  `IS_PHILHEALTH_MEMBER` varchar(8) DEFAULT NULL,
   `PHILHEALTH_NUMBER` varchar(32) DEFAULT NULL,
-  `IS_ACTIVE_VOTER` varchar(8) NOT NULL,
-  `IS_4PS_MEMBER` varchar(8) NOT NULL,
+  `IS_ACTIVE_VOTER` varchar(8) DEFAULT NULL,
+  `IS_4PS_MEMBER` varchar(8) DEFAULT NULL,
   `TOTAL_FAMILY_INCOME` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -115,7 +117,8 @@ CREATE TABLE `employment_details` (
 --
 
 INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `PENSION`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
-('70f94380f96511ed', '646cb1a010f88275', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL);
+('4edc9e75fa0911ed', '646dc48c46108954', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL),
+('88719860fa0911ed', '646dc4ecd8dfe838', NULL, NULL, NULL, 'NONE', 'NONE', NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10000.00');
 
 -- --------------------------------------------------------
 
@@ -137,7 +140,7 @@ CREATE TABLE `organization` (
 --
 
 INSERT INTO `organization` (`ORGANIZATION_ID`, `PERSON_ID`, `ORGANIZATION`, `ORGANIZATION_CONTACT_PERSON`, `ORGANIZATION_OFFICE_ADDRESS`, `ORGANIZATION_CONTACT_NUMBER`) VALUES
-('70f9545af96511ed', '646cb1a010f88275', '', '', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', '09760657071');
+('4edcadd8fa0911ed', '646dc48c46108954', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -148,7 +151,7 @@ INSERT INTO `organization` (`ORGANIZATION_ID`, `PERSON_ID`, `ORGANIZATION`, `ORG
 CREATE TABLE `person` (
   `PERSON_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `FIRST_NAME` varchar(64) NOT NULL,
-  `MIDDLE_NAME` varchar(64) NOT NULL,
+  `MIDDLE_NAME` varchar(64) DEFAULT NULL,
   `LAST_NAME` varchar(64) NOT NULL,
   `SUFFIX` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -158,10 +161,12 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SUFFIX`) VALUES
-('646cb1a010f88275', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
-('646cb1a010f94005', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
-('646cb1a010f96088', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
-('646cb1a010f97466', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', NULL);
+('646dc48c46108954', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
+('646dc48c4611c454', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
+('646dc48c4611e870', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
+('646dc48c46120933', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', NULL),
+('646dc4ecd8dfe838', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
+('646dc4ecdef63582', 'ROMEO JR', NULL, 'BARDILLON', NULL);
 
 -- --------------------------------------------------------
 
@@ -173,19 +178,22 @@ CREATE TABLE `personal_information` (
   `PERSONAL_INFORMATION_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
   `BIRTHDAY` date NOT NULL,
-  `GENDER` varchar(16) NOT NULL,
-  `EDUCATIONAL_ATTAINMENT` varchar(64) NOT NULL,
-  `BLOOD_TYPE` varchar(8) NOT NULL,
-  `RELIGION` varchar(64) NOT NULL,
-  `MARITAL_STATUS` varchar(32) NOT NULL
+  `BIRTH_PLACE` varchar(128) DEFAULT NULL,
+  `GENDER` varchar(16) DEFAULT NULL,
+  `EDUCATIONAL_ATTAINMENT` varchar(64) DEFAULT NULL,
+  `BLOOD_TYPE` varchar(8) DEFAULT NULL,
+  `RELIGION` varchar(64) DEFAULT NULL,
+  `MARITAL_STATUS` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `personal_information`
 --
 
-INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
-('70f92e67f96511ed', '646cb1a010f88275', '2001-07-30', 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single');
+INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `BIRTH_PLACE`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
+('4edc8d33fa0911ed', '646dc48c46108954', '2001-07-30', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single'),
+('8871306efa0911ed', '646dc4ecd8dfe838', '1965-07-20', NULL, 'Female', 'COLLEGE', NULL, NULL, NULL),
+('8872e21bfa0911ed', '646dc4ecdef63582', '2001-07-30', NULL, NULL, 'COLLEGE', NULL, NULL, 'Single');
 
 -- --------------------------------------------------------
 
@@ -213,7 +221,7 @@ CREATE TABLE `pwd_data` (
 --
 
 INSERT INTO `pwd_data` (`PWD_DATA_ID`, `PERSON_ID`, `PHYSICIAN_NAME`, `PHYSICIAN_LICENSE_NUMBER`, `TYPE_OF_DISABILITY`, `MEDICAL_CONDITION`, `CAUSE_OF_DISABILITY`, `CONGENITAL_INBORN`, `ACQUIRED`, `STATUS_OF_DISABILITY`, `ACCOMPLISHED_BY`, `ACCOMPLISHER_NAME`) VALUES
-('70f96520f96511ed', '646cb1a010f88275', 'ROMEO JR BARDILLON', 'MD8299-8854', '[\"Mental Disability\",\"Physical Disability (Orthopedic)\"]', '', 'ACQUIRED', 'null', '[\"Cerebral Palsy\",\"Injury\"]', 'Temporary', 'Applicant', 'ROMEO JR BARDILLON');
+('4edcbcb5fa0911ed', '646dc48c46108954', 'LEBRON JAMES', 'MD8299-8', '[\"Physical Disability (Orthopedic)\",\"Psychosocial Disability\",\"Cancer (RA11215)\"]', '', 'ACQUIRED', 'null', '[\"Cerebral Palsy\",\"Injury\"]', 'Temporary', 'Guardian', 'DON KENNETH BARDILLON');
 
 -- --------------------------------------------------------
 
@@ -226,17 +234,19 @@ CREATE TABLE `relatives` (
   `PERSON_ID` varchar(16) NOT NULL,
   `RELATIVE_PERSON_ID` varchar(16) NOT NULL,
   `RELATIONSHIP_TYPE` varchar(32) NOT NULL,
-  `GUARDIAN_CONTACT_NUMBER` varchar(16) DEFAULT NULL
+  `GUARDIAN_CONTACT_NUMBER` varchar(16) DEFAULT NULL,
+  `INCOME` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `relatives`
 --
 
-INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `GUARDIAN_CONTACT_NUMBER`) VALUES
-('70f97127f96511ed', '646cb1a010f88275', '646cb1a010f94005', 'Father', NULL),
-('70f97c4cf96511ed', '646cb1a010f88275', '646cb1a010f96088', 'Mother', NULL),
-('70fa9a07f96511ed', '646cb1a010f88275', '646cb1a010f97466', 'BROTHER', '09091072865');
+INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `GUARDIAN_CONTACT_NUMBER`, `INCOME`) VALUES
+('4edcd78efa0911ed', '646dc48c46108954', '646dc48c4611c454', 'Father', NULL, NULL),
+('4edd7b3efa0911ed', '646dc48c46108954', '646dc48c4611e870', 'Mother', NULL, NULL),
+('4eddf610fa0911ed', '646dc48c46108954', '646dc48c46120933', 'BROTHER', '09091072865', NULL),
+('88737fc5fa0911ed', '646dc4ecd8dfe838', '646dc4ecdef63582', 'Child', NULL, '0.00');
 
 -- --------------------------------------------------------
 
@@ -251,6 +261,13 @@ CREATE TABLE `solo_parent_data` (
   `NEEDS_PROBLEMS` varchar(512) NOT NULL,
   `FAMILY_RESOURCES` varchar(512) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `solo_parent_data`
+--
+
+INSERT INTO `solo_parent_data` (`SOLO_PARENT_DATA_ID`, `PERSON_ID`, `CLASSIFICATION_CIRCUMSTANCES`, `NEEDS_PROBLEMS`, `FAMILY_RESOURCES`) VALUES
+('8872406efa0911ed', '646dc4ecd8dfe838', '[\"Death of Spouse\",\"Imprisonment of Spouse\\/Detention\",\"Annulment\\/Legal Separation\",\"Unmarried\\/unwed\"]', 'longtext', 'longtext');
 
 -- --------------------------------------------------------
 

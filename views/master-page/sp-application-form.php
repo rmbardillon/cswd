@@ -96,6 +96,7 @@
                 <div class="col"><label class="form-label required" for="monthlyIncome">MONTHLY INCOME</label><input class="form-control numbers" type="text" id="monthlyIncome" name="monthlyIncome" required=""></div>
                 <div class="col"><label class="form-label howMuchPension required" for="totalFamilyIncome">TOTAL FAMILY INCOME</label><input class="form-control numbers" type="text" id="totalFamilyIncome" name="totalFamilyIncome" required=""></div>
                 <div class="col"><label class="form-label" for="telephone">TELEPHONE/CELLPHONE NUMBER</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####"></div>
+                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com"></div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -107,11 +108,11 @@
                     <div class="col col-2 d-flex align-items-center">
                         <h6 class="text-nowrap text-start">NAME</h6>
                     </div>
-                    <div class="col"><input class="form-control" type="text" id="childLastName" name="childLastName[]" placeholder="SURNAME" required></div>
-                    <div class="col"><input class="form-control" type="text" id="childFirstName" name="childFirstName[]" placeholder="FIRST NAME" required></div>
-                    <div class="col"><input class="form-control" type="text" id="childMiddleName" name="childMiddleName[]" placeholder="MIDDLE NAME"></div>
+                    <div class="col"><input class="form-control" type="text" id="childFirstName" name="childFirstName" placeholder="FIRST NAME" required></div>
+                    <div class="col"><input class="form-control" type="text" id="childLastName" name="childLastName" placeholder="SURNAME" required></div>
+                    <!-- <div class="col"><input class="form-control" type="text" id="childMiddleName" name="childMiddleName" placeholder="MIDDLE NAME"></div>
                     <div class="col">
-                        <select id="childSuffix" class="form-select" name="childSuffix[]">
+                        <select id="childSuffix" class="form-select" name="childSuffix">
                             <option disabled selected value="">Suffix</option>
                             <option value="">N/A</option>
                             <option value="Jr.">Jr.</option>
@@ -126,18 +127,18 @@
                             <option value="IX">IX</option>
                             <option value="X">X</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col col-2 d-flex align-items-center">
                         <h6 class="text-start">DATE&nbsp;OF BIRTH</h6>
                     </div>
-                    <div class="col col-3"><input class="form-control" id="soloParentChildDOB" type="date" name="soloParentChildDOB[]" min="1900-01-01" required></div>
+                    <div class="col col-3"><input class="form-control" id="soloParentChildDOB" type="date" name="soloParentChildDOB" min="1900-01-01" required></div>
                     <div class="col col-2 d-flex align-items-center">
                         <h6 class="text-start">MARITAL&nbsp;STATUS</h6>
                     </div>
                     <div class="col d-flex align-items-center">
-                        <select id="maritalStatus" class="form-select" name="maritalStatus[]" required>
+                        <select id="maritalStatus" class="form-select" name="maritalStatus" required>
                             <option disabled selected value="">Please Select</option>
                             <option value="Single">Single</option>
                             <option value="Married">Married</option>
@@ -151,17 +152,17 @@
                     <div class="col col-3 d-flex align-items-center">
                         <h6 class="text-start">EDUCATIONAL&nbsp;ATTAINMENT</h6>
                     </div>
-                    <div class="col"><input class="form-control" type="text" id="childEducationalAttainment" name="childEducationalAttainment[]" required></div>
+                    <div class="col"><input class="form-control" type="text" id="childEducationalAttainment" name="childEducationalAttainment" required></div>
                     <div class="col col-3 d-flex align-items-center">
                         <h6 class="text-start">OCCUPATION/MONTHLY&nbsp;INCOME</h6>
                     </div>
-                    <div class="col"><input class="form-control numbers" type="text" id="childIncome" name="childIncome[]" required></div>
+                    <div class="col"><input class="form-control numbers" type="text" id="childIncome" name="childIncome" required></div>
                 </div>
                 <div class="row">
                     <div class="col col-2"><button class="btn btn-danger delete-button w-100" type="button" onclick="soloParentRemoveRelative(this);">Delete</button></div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col col-2"><button class="btn btn-success w-100" id="soloParentDuplicateButton" type="button">Add</button></div>
                 <div class="col">
                     <h6>NOTE: INCLUDE FAMILY MEMBER AND OTHER MEMBERS OF THE HOUSEHOLD ESPECIALLY MINOR CHILDREN</h6>

@@ -32,7 +32,7 @@ footer a {
   border-radius: 50px;
 }
 
-#soloParentRelative .row, #srCitizenRelative .row {
+.soloParentRelative .row, .srCitizenRelative .row {
   padding: 10px;
 }
 

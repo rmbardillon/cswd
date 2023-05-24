@@ -102,6 +102,7 @@
                 <div class="col"><label class="form-label required" for="placeOfBirth">LUGAR NG KAPANGANAKAN</label><input class="form-control" type="text" id="placeOfBirth" name="placeOfBirth" required=""></div>
             </div>
             <div class="row">
+                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com"></div>
                 <div class="col"><label class="form-label" for="telephone">TELEPONO</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####"></div>
                 <div class="col"><label class="form-label" for="religion">RELIHIYON</label><input class="form-control" type="text" id="religion" name="religion"></div>
                 <div class="col"><label class="form-label required" id="job-1" for="job">HANAPBUHAY</label><input class="form-control" type="text" id="job-2" name="job" required=""></div>
@@ -136,47 +137,21 @@
                     </div>
                     <div class="col">
                         <input
-                            class="form-control childLastName name"
-                            type="text"
-                            id="childLastName"
-                            name="childLastName[]"
-                            placeholder="APELYIDO NG ANAK"
-                            />
-                    </div>
-                    <div class="col">
-                        <input
                             class="form-control childFirstName name"
                             type="text"
                             id="childFirstName"
-                            name="childFirstName[]"
+                            name="childFirstName"
                             placeholder="PANGALAN NG ANAK"
                             />
                     </div>
                     <div class="col">
                         <input
-                            class="form-control childMiddlename name"
+                            class="form-control childLastName name"
                             type="text"
-                            id="childMiddlename"
-                            name="childMiddlename[]"
-                            placeholder="PANGGITNANG APELYIDO"
+                            id="childLastName"
+                            name="childLastName"
+                            placeholder="APELYIDO NG ANAK"
                             />
-                    </div>
-                    <div class="col">
-                        <select id="childSuffix" class="form-select" name="childSuffix[]">
-                            <option disabled selected value="">Suffix</option>
-                            <option value="">N/A</option>
-                            <option value="Jr.">Jr.</option>
-                            <option value="Sr.">Sr.</option>
-                            <option value="II">II</option>
-                            <option value="III">III</option>
-                            <option value="IV">IV</option>
-                            <option value="V">V</option>
-                            <option value="VI">VI</option>
-                            <option value="VII">VII</option>
-                            <option value="VIII">VIII</option>
-                            <option value="IX">IX</option>
-                            <option value="X">X</option>
-                        </select>
                     </div>
                 </div>
                 <div class="row">
@@ -188,7 +163,7 @@
                             class="form-control"
                             id="srCitizenChildDOB"
                             type="date"
-                            name="srCitizenChildDOB[]"
+                            name="srCitizenChildDOB"
                             min="1900-01-01"
                             />
                     </div>
@@ -200,8 +175,9 @@
                             class="form-control numbers telephone"
                             type="tel"
                             id="childTelephone"
-                            name="childTelephone[]"
+                            name="childTelephone"
                             placeholder="09##-###-####"
+                            required=""
                             />
                     </div>
                 </div>
@@ -211,7 +187,7 @@
                     </div>
                     <div class="col">
                         <label class="form-label" for="childBarangay">BARANGAY</label>
-                        <select id="childBarangay" class="form-select" name="childBarangay[]">
+                        <select id="childBarangay" class="form-select" name="childBarangay">
                             <option disabled selected value="">Please Select</option>
                             <option value="Aplaya">Aplaya</option>
                             <option value="Balibago">Balibago</option>
@@ -239,7 +215,7 @@
                             class="form-control"
                             type="text"
                             id="childAddress"
-                            name="childAddress[]"
+                            name="childAddress"
                             />
                     </div>
                 </div>

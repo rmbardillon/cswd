@@ -50,11 +50,55 @@ function soloParentRemoveRelative(button) {
 }
 
 $("#spCitizenNext").click(function(event) {
+    var soloParentClassification = [];
+    $('[name="soloParentClassification"]:checked').each(function() {
+        soloParentClassification.push($(this).val());
+    });
+    var childFirstName = [];
+    $('[name="childFirstName"]').each(function() {
+        childFirstName.push($(this).val());
+    });
+    var childLastName = [];
+    $('[name="childLastName"]').each(function() {
+        childLastName.push($(this).val());
+    });
+    var soloParentChildDOB = [];
+    $('[name="soloParentChildDOB"]').each(function() {
+        soloParentChildDOB.push($(this).val());
+    });
+    var maritalStatus = [];
+    $('[name="maritalStatus"]').each(function() {
+        maritalStatus.push($(this).val());
+    });
+    var childEducationalAttainment = [];
+    $('[name="childEducationalAttainment"]').each(function() {
+        childEducationalAttainment.push($(this).val());
+    });
+    var childIncome = [];
+    $('[name="childIncome"]').each(function() {
+        childIncome.push($(this).val());
+    });
     var formData = $("#spForm").serializeArray();
     var spForm = {};
     console.log(formData);
     $.each(formData, function(index, value) {
-        spForm[value.name] = value.value;
+        if (value.name === 'soloParentClassification') {
+            spForm[value.name] = soloParentClassification;
+        } else if (value.name === 'childFirstName') {
+            spForm[value.name] = childFirstName;
+        } else if (value.name === 'childLastName') {
+            spForm[value.name] = childLastName;
+        } else if (value.name === 'soloParentChildDOB') {
+            spForm[value.name] = soloParentChildDOB;
+        } else if (value.name === 'maritalStatus') {
+            spForm[value.name] = maritalStatus;
+        } else if (value.name === 'childEducationalAttainment') {
+            spForm[value.name] = childEducationalAttainment;
+        } else if (value.name === 'childIncome') {
+            spForm[value.name] = childIncome;
+        } else {
+            spForm[value.name] = value.value;
+        }
     });
     
     // Check if the form is valid
@@ -93,18 +137,62 @@ const SP = (() => {
     const thisSP = {};
 
     thisSP.submitForm = () => {
-        var formData = $("#spForm").serializeArray();
-        var spForm = {};
-
-        $.each(formData, function(index, value) {
+        var soloParentClassification = [];
+    $('[name="soloParentClassification"]:checked').each(function() {
+        soloParentClassification.push($(this).val());
+    });
+    var childFirstName = [];
+    $('[name="childFirstName"]').each(function() {
+        childFirstName.push($(this).val());
+    });
+    var childLastName = [];
+    $('[name="childLastName"]').each(function() {
+        childLastName.push($(this).val());
+    });
+    var soloParentChildDOB = [];
+    $('[name="soloParentChildDOB"]').each(function() {
+        soloParentChildDOB.push($(this).val());
+    });
+    var maritalStatus = [];
+    $('[name="maritalStatus"]').each(function() {
+        maritalStatus.push($(this).val());
+    });
+    var childEducationalAttainment = [];
+    $('[name="childEducationalAttainment"]').each(function() {
+        childEducationalAttainment.push($(this).val());
+    });
+    var childIncome = [];
+    $('[name="childIncome"]').each(function() {
+        childIncome.push($(this).val());
+    });
+    var formData = $("#spForm").serializeArray();
+    var spForm = {};
+    console.log(formData);
+    $.each(formData, function(index, value) {
+        if (value.name === 'soloParentClassification') {
+            spForm[value.name] = soloParentClassification;
+        } else if (value.name === 'childFirstName') {
+            spForm[value.name] = childFirstName;
+        } else if (value.name === 'childLastName') {
+            spForm[value.name] = childLastName;
+        } else if (value.name === 'soloParentChildDOB') {
+            spForm[value.name] = soloParentChildDOB;
+        } else if (value.name === 'maritalStatus') {
+            spForm[value.name] = maritalStatus;
+        } else if (value.name === 'childEducationalAttainment') {
+            spForm[value.name] = childEducationalAttainment;
+        } else if (value.name === 'childIncome') {
+            spForm[value.name] = childIncome;
+        } else {
             spForm[value.name] = value.value;
-        });
+        }
+    });
 
         $.ajax({
             type: "POST",
             url: SP_CONTROLLER + "?action=spRegister",
             data: {
-                pwdForm: pwdForm,
+                spForm: spForm,
             },
             dataType: "json",
             success: function(data) {

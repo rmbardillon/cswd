@@ -34,11 +34,11 @@
                 'uuid' => $uuid,
                 'landline' => $pwdForm['landline'],
                 'mobileNumber' => $pwdForm['mobileNumber'],
-                'emailAddress' => $pwdForm['emailAddress'],
+                'email' => $pwdForm['emailAddress'],
             ];
             $personalInformation = [
                 'uuid' => $uuid,
-                'pwdDOB' => $pwdForm['pwdDOB'],
+                'birthday' => $pwdForm['pwdDOB'],
                 'gender' => $pwdForm['gender'],
                 'educationalAttainment' => $pwdForm['educationalAttainment'],
                 'bloodType' => $pwdForm['bloodType'],
