@@ -2,7 +2,19 @@ $(document).ready(function () {
     // Get PERSON_ID in the URL
     var url = new URL(window.location.href);
     var personId = url.searchParams.get("personId");
-    $("#personId").html(personId);
+    $.ajax({
+        url: APPOINTMENT_CONTROLLER + "?action=getPersonData",
+        method: 'POST',
+        data: {
+            personId: personId
+        },
+        dataType: 'json',
+        success: function(response) {
+            if(response.length > 0){
+                $("#personId").html(response[0]['FIRST_NAME'] + " " + response[0]['LAST_NAME'] + "<br>" + response[0]['APPLICATION_TYPE']);
+            }
+        }
+    });
     var appointmentDate = "";
     // Make an AJAX call to retrieve the slot count from your database
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -13,28 +25,15 @@ $(document).ready(function () {
             center: 'title',
             right: 'month'
         },
-        minTime: '08:00:00',
-        maxTime: '17:00:00',
-        slotDuration: '01:00:00',
         weekends: false,
-        businessHours: {
-            dow: [1, 2, 3, 4, 5],
-            start: '08:00',
-            end: '17:00'
-        },
-        selectOverlap: false,
-        allDaySlot: false, // Remove the All-Day section
-        events: [
-        // Add your events here
-        ],
         views: {
             month: {
                 visibleRange: function(currentDate) {
-                var precedingDate = currentDate.clone().subtract(1, 'day');
-                return {
-                    start: precedingDate,
-                    end: precedingDate
-                };
+                    var precedingDate = currentDate.clone().subtract(1, 'day');
+                    return {
+                        start: precedingDate,
+                        end: precedingDate
+                    };
                 }
             }
         },
@@ -60,17 +59,18 @@ $(document).ready(function () {
                 appointmentDate = formattedDate + " 13:00:00";
             });
             $.ajax({
-                url: APPOINTMENT_CONTROLLER + "?action=getMorningSlots", // Replace with your actual AJAX endpoint
+                url: APPOINTMENT_CONTROLLER + "?action=getMorningSlots",
                 method: 'POST',
                 data: { 
                     date: formattedDate
-                    // date: "2023-05-25 16:52:18"
                 },
                 dataType: 'json',
                 success: function(response) {
-                    var slotCount =10 - response; // Assuming the response contains the slot count
-                    amButton.innerText = 'AM \n' + slotCount + ' Slots';
-                    $(cell).append(amButton, pmButton);
+                    var slotCount = 10 - response;
+                    if (slotCount > 0) {
+                        amButton.innerText = 'AM \n' + slotCount + ' Slots';
+                        $(cell).append(amButton);
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.log('AJAX error:', error);
@@ -78,16 +78,18 @@ $(document).ready(function () {
             });
 
             $.ajax({
-                url: APPOINTMENT_CONTROLLER + "?action=getAfternoonSlots", // Replace with your actual AJAX endpoint
+                url: APPOINTMENT_CONTROLLER + "?action=getAfternoonSlots",
                 method: 'POST',
                 data: { 
                     date: formattedDate
                 },
                 dataType: 'json',
                 success: function(response) {
-                    var slotCount =10 - response; // Assuming the response contains the slot count
-                    pmButton.innerText = 'PM \n' + slotCount + ' Slots';
-                    $(cell).append(amButton, pmButton);
+                    var slotCount = 10 - response;
+                    if (slotCount > 0) {
+                        pmButton.innerText = 'PM \n' + slotCount + ' Slots';
+                        $(cell).append(pmButton);
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.log('AJAX error:', error);
@@ -116,7 +118,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: APPOINTMENT_CONTROLLER + "?action=bookAppointment", // Replace with your actual AJAX endpoint
+                    url: APPOINTMENT_CONTROLLER + "?action=bookAppointment", 
                     method: 'POST',
                     data: {
                         personId: personId,
@@ -130,7 +132,7 @@ $(document).ready(function () {
                                 'Your appointment has been booked.',
                                 'success'
                             ).then((result) => {
-                                location.reload();
+                                window.location.href = "index.php";
                             });
                         } else {
                             swal.fire(

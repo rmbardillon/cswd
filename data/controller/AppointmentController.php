@@ -30,5 +30,13 @@
 
         echo json_encode($result);
     }
+
+    else if($action == "getPersonData")
+    {
+        $personId = $_POST['personId'];
+        $result = $Appointment->getPersonData($personId);
+
+        echo json_encode($result);
+    }
     
 ?>

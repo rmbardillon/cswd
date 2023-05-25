@@ -14,7 +14,7 @@
                     <p id="personId"></p>
                     <p id="date"></p>
                 </div>
-                <button class="btn btn-success mt-2" id="bookAppointment">Book Appoointment</button>
+                <button class="btn btn-success mt-2" id="bookAppointment">Book Appointment</button>
             </div>
         </div>
     </div>

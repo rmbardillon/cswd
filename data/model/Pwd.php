@@ -155,7 +155,7 @@
                 $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
                 return $errorMessage;
             }
-            return "Successfully Inserted";
+            return $uuid;
         }
     }
 ?>

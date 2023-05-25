@@ -5,6 +5,7 @@
                 <li class="nav-item"><a class="nav-link <?php if($page == "index"){echo("active"); } ?>" data-bss-hover-animate="pulse" href="../master-page/index.php" style="font-size: 16px;font-weight: bold;">Home</a></li>
                 <li class="nav-item"><a class="nav-link <?php if($page == "id-application"){echo("active"); } ?>" data-bss-hover-animate="pulse" id="id-application" href="../master-page/id-application.php" style="font-size: 16px;font-weight: bold;">ID Application</a></li>
                 <li class="nav-item"><a class="nav-link <?php if($page == "renewal"){echo("active"); } ?>" data-bss-hover-animate="pulse" id="renewal" href="../master-page/renewal.php" style="font-size: 16px;font-weight: bold;">Renewal</a></li>
+                <li class="nav-item"><a class="nav-link <?php if($page == "appointment"){echo("active"); } ?>" data-bss-hover-animate="pulse" id="appointment" href="../master-page/appointment.php" style="font-size: 16px;font-weight: bold;">Appointment</a></li>
                 <li class="nav-item"><a class="nav-link <?php if($page == "contact-us"){echo("active"); } ?>" data-bss-hover-animate="pulse" href="../master-page/contact-us.php" style="font-size: 16px;font-weight: bold;">Contact Us</a></li>
             </ul>
         </div>

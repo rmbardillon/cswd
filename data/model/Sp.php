@@ -21,6 +21,10 @@
                 'lastName' => $spForm['surname'],
                 'suffix' => isset($spForm['suffix']) ? $spForm['suffix'] : null,
             ];
+            $application = [
+                'uuid' => $uuid,
+                'applicationType' => 'Solo Parent',
+            ];
             $address = [
                 'uuid' => $uuid,
                 'address' => $spForm['address'],
@@ -56,6 +60,7 @@
                 // Begin transaction
                 $this->connection->begin_transaction();
                 $Sql->insertPerson($person);
+                $Sql->insertApplication($application);
                 $Sql->insertAddress($address);
                 $Sql->insertContactDetails($contactDetails);
                 $Sql->insertPersonalInformation($personalInformation);
@@ -92,7 +97,7 @@
                 $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
                 return $errorMessage;
             }
-            return "Successfully Inserted";
+            return $uuid;
         }
     }
 ?>

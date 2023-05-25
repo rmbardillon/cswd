@@ -302,18 +302,16 @@ const SC = (() => {
             },
             dataType: "json",
             success: function(data) {
-                if(data == "Successfully Inserted") {
-                    swal.fire({
-                        title: "Success!",
-                        text: "You have successfully registered!",
-                        icon: "success",
-                        confirmButtonText: "Ok"
-                    }).then((result) => {
-                        if (result.value) {
-                            window.location.href = "index.php";
-                        }
-                    });
-                }
+                swal.fire({
+                    title: "Success!",
+                    text: "Click Ok to proceed to appointment.",
+                    icon: "success",
+                    confirmButtonText: "Ok"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "appointment.php?personId=" + data;
+                    }
+                });
             },
             error: function(data) {
                 console.log(data);

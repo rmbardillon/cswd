@@ -25,7 +25,7 @@
             $uuid = $request['uuid'];
             $applicationType = $request['applicationType'];
 
-            $sql = "INSERT INTO application(PERSON_ID, APPPLICATION_TYPE) VALUES (?,?)";
+            $sql = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE) VALUES (?,?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("ss", $uuid, $applicationType);
             $stmt->execute();

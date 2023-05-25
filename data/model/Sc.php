@@ -21,6 +21,10 @@
                 'lastName' => $scForm['surname'],
                 'suffix' => isset($scForm['suffix']) ? $scForm['suffix'] : null,
             ];
+            $application = [
+                'uuid' => $uuid,
+                'applicationType' => 'Senior Citizen',
+            ];
             $address = [
                 'uuid' => $uuid,
                 'address' => $scForm['address'],
@@ -64,39 +68,42 @@
                 // Begin transaction
                 $this->connection->begin_transaction();
                 $Sql->insertPerson($person);
+                $Sql->insertApplication($application);
                 $Sql->insertAddress($address);
                 $Sql->insertContactDetails($contactDetails);
                 $Sql->insertPersonalInformation($personalInformation);
                 $Sql->insertEmploymentDetails($employmentDetails);
                 $Sql->insertPerson($spouse);
                 $Sql->insertRelatives($spouseRelative);
-                foreach ($scForm['childFirstName'] as $key => $value) {
-                    $childUUID = $Sql->generateUUID();
-                    $child = [
-                        'uuid' => $childUUID,
-                        'firstName' => $scForm['childFirstName'][$key],
-                        'lastName' => $scForm['childLastName'][$key],
-                    ];
-                    $Sql->insertPerson($child);
-                    $contactDetails = [
-                        'uuid' => $uuid,
-                        'mobileNumber' => $scForm['childTelephone'][$key],
-                        'email' => $scForm['email'][$key],
-                    ];
-                    $Sql->insertContactDetails($contactDetails);
-                    $childAddress = [
-                        'uuid' => $childUUID,
-                        'address' => $scForm['childAddress'][$key],
-                        'barangay' => $scForm['childBarangay'][$key],
-                    ];
-                    $Sql->insertAddress($childAddress);
-                    $relative = [
-                        'uuid' => $uuid,
-                        'relativeUUID' => $childUUID,
-                        'relationship' => 'Child',
-                        'birthday' => $scForm['srCitizenChildDOB'][$key],
-                    ];
-                    $Sql->insertRelatives($relative);
+                if(isset($scForm['childFirstName'])) {
+                    foreach ($scForm['childFirstName'] as $key => $value) {
+                        $childUUID = $Sql->generateUUID();
+                        $child = [
+                            'uuid' => $childUUID,
+                            'firstName' => $scForm['childFirstName'][$key],
+                            'lastName' => $scForm['childLastName'][$key],
+                        ];
+                        $Sql->insertPerson($child);
+                        $contactDetails = [
+                            'uuid' => $uuid,
+                            'mobileNumber' => $scForm['childTelephone'][$key],
+                            'email' => $scForm['email'][$key],
+                        ];
+                        $Sql->insertContactDetails($contactDetails);
+                        $childAddress = [
+                            'uuid' => $childUUID,
+                            'address' => $scForm['childAddress'][$key],
+                            'barangay' => $scForm['childBarangay'][$key],
+                        ];
+                        $Sql->insertAddress($childAddress);
+                        $relative = [
+                            'uuid' => $uuid,
+                            'relativeUUID' => $childUUID,
+                            'relationship' => 'Child',
+                            'birthday' => $scForm['srCitizenChildDOB'][$key],
+                        ];
+                        $Sql->insertRelatives($relative);
+                    }
                 }
 
                 $this->connection->commit();
@@ -106,7 +113,7 @@
                 $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
                 return $errorMessage;
             }
-            return "Successfully Inserted";
+            return $uuid;
         }
     }
 ?>
