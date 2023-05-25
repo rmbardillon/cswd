@@ -10,122 +10,56 @@
             $this->connection = $connection;
         }
         
-        public function scRegister($pwdForm)
+        public function scRegister($scForm)
         {
             $Sql = new Sql($this->connection);
             $uuid = $Sql->generateUUID();
             $person = [
                 'uuid' => $uuid,
-                'firstName' => $pwdForm['firstName'],
-                'middleName' => $pwdForm['middlename'],
-                'lastName' => $pwdForm['surname'],
-                'suffix' => isset($pwdForm['suffix']) ? $pwdForm['suffix'] : null,
+                'firstName' => $scForm['firstName'],
+                'middleName' => $scForm['middlename'],
+                'lastName' => $scForm['surname'],
+                'suffix' => isset($scForm['suffix']) ? $scForm['suffix'] : null,
             ];
             $address = [
                 'uuid' => $uuid,
-                'address' => $pwdForm['address'],
-                'barangay' => $pwdForm['barangay'],
+                'address' => $scForm['address'],
+                'barangay' => $scForm['barangay'],
             ];
             $contactDetails = [
                 'uuid' => $uuid,
-                'landline' => $pwdForm['landline'],
-                'mobileNumber' => $pwdForm['mobileNumber'],
-                'emailAddress' => $pwdForm['emailAddress'],
+                'telephone' => $scForm['telephone'],
+                'email' => $scForm['email'],
             ];
             $personalInformation = [
                 'uuid' => $uuid,
-                'pwdDOB' => $pwdForm['pwdDOB'],
-                'gender' => $pwdForm['gender'],
-                'educationalAttainment' => $pwdForm['educationalAttainment'],
-                'bloodType' => $pwdForm['bloodType'],
-                'religion' => $pwdForm['religion'],
-                'maritalStatus' => $pwdForm['maritalStatus'],
+                'gender' => $scForm['gender'],
+                'maritalStatus' => $scForm['maritalStatus'],
+                'birthday' => $scForm['srCitizenDOB'],
+                'placeOfBirth' => $scForm['placeOfBirth'],
+                'religion' => $scForm['religion'],
             ];
             $employmentDetails = [
                 'uuid' => $uuid,
-                'employmentStatus' => $pwdForm['employmentStatus'],
-                'categoryOfEmployment' => isset($pwdForm['categoryOfEmployment']) ? $pwdForm['categoryOfEmployment'] : null,
-                'natureOfEmployment' => isset($pwdForm['natureOfEmployment']) ? $pwdForm['natureOfEmployment'] : null,
-                'occupation' => isset($pwdForm['occupation']) ? $pwdForm['occupation'] : null,
-                'otherOccupation' => $pwdForm['otherOccupation'],
-                'income' => isset($pwdForm['income']) ? $pwdForm['income'] : null,
-                'SSSNo' => $pwdForm['SSSNo'],
-                'GSISNo' => $pwdForm['GSISNo'],
-                'PSNNo' => $pwdForm['PSNNo'],
-                'isPhilhealthMember' => $pwdForm['isPhilhealthMember'],
-                'philhealthNumber' => $pwdForm['philhealthNumber'],
-                'isActiveVoter' => $pwdForm['isActiveVoter'],
-                'is4PS' => $pwdForm['is4PS'],
+                'occupation' => isset($scForm['job']) ? $scForm['job'] : null,
+                'hasPension' => isset($scForm['hasPension']) ? $scForm['hasPension'] : null,
+                'pension' => isset($scForm['whatPension']) ? $scForm['whatPension'] : null,
+                'pensionAmount' => isset($scForm['howMuchPension']) ? $scForm['howMuchPension'] : null,
             ];
-            $organization = [
+            $spouseUUID = $Sql->generateUUID();
+            $spouse = [
+                'uuid' => $spouseUUID,
+                'firstName' => $scForm['spouseFirstName'],
+                'middleName' => $scForm['spouseMiddleName'],
+                'lastName' => $scForm['spouseLastName'],
+                'suffix' => isset($scForm['spouseSuffix']) ? $scForm['spouseSuffix'] : null,
+            ];
+            $spouseRelative = [
                 'uuid' => $uuid,
-                'organization' => $pwdForm['organization'],
-                'organizationContactPerson' => $pwdForm['organizationContactPerson'],
-                'organizationOfficeAddress' => $pwdForm['organizationOfficeAddress'],
-                'organizationTelephoneNumber' => $pwdForm['organizationTelephoneNumber'],
+                'relativeUUID' => $spouseUUID,
+                'relationship' => 'Spouse',
+                'birthday' => $scForm['spouseDOB'],
             ];
-            if($pwdForm['accomplishedBy'] == "Guardian") {
-                $accomplisherName = $pwdForm['guardianFirstName'] . " " . $pwdForm['guardianSurname'];
-            } else if($pwdForm['accomplishedBy'] == "Representative") {
-                $accomplisherName = $pwdForm['accomplisherName'];
-            } else {
-                $accomplisherName = $pwdForm['firstName'] . " " . $pwdForm['surname'];
-            }
-            $pwdData = [
-                'uuid' => $uuid,
-                'physicianName' => $pwdForm['physicianName'],
-                'physicianLicence' => $pwdForm['physicianLicence'],
-                'typeOfDisability' => $pwdForm['typeOfDisability'],
-                'medicalCondition' => $pwdForm['medicalCondition'],
-                'inborn' => isset($pwdForm['inborn']) ? $pwdForm['inborn'] : null,
-                'acquired' => isset($pwdForm['acquired']) ? $pwdForm['acquired'] : null,
-                'statusOfDisabiity' => $pwdForm['statusOfDisabiity'],
-                'accomplishedBy' => $pwdForm['accomplishedBy'],
-                'accomplisherName' => $accomplisherName,
-            ];
-            $fatherUUID = $Sql->generateUUID();
-            $father = [
-                'uuid' => $fatherUUID,
-                'firstName' => $pwdForm['fatherFirstName'],
-                'middleName' => $pwdForm['fatherMiddlename'],
-                'lastName' => $pwdForm['fatherSurname'],
-                'suffix' => isset($pwdForm['fatherSuffix']) ? $pwdForm['fatherSuffix'] : null,
-            ];
-            $fatherRelative = [
-                'uuid' => $uuid,
-                'relativeUUID' => $fatherUUID,
-                'relationship' => "Father",
-                'contactNumber' => null,
-            ];
-            $motherUUID = $Sql->generateUUID();
-            $mother = [
-                'uuid' => $motherUUID,
-                'firstName' => $pwdForm['motherFirstName'],
-                'middleName' => $pwdForm['motherMiddlename'],
-                'lastName' => $pwdForm['motherSurname'],
-                'suffix' => isset($pwdForm['motherSuffix']) ? $pwdForm['motherSuffix'] : null,
-            ];
-            $motherRelative = [
-                'uuid' => $uuid,
-                'relativeUUID' => $motherUUID,
-                'relationship' => "Mother",
-                'contactNumber' => null,
-            ];
-            $guardianUUID = $Sql->generateUUID();
-            $guardian = [
-                'uuid' => $guardianUUID,
-                'firstName' => $pwdForm['guardianFirstName'],
-                'middleName' => $pwdForm['guardianMiddlename'],
-                'lastName' => $pwdForm['guardianSurname'],
-                'suffix' => isset($pwdForm['guardianSuffix']) ? $pwdForm['guardianSuffix'] : null,
-            ];
-            $guardianRelative = [
-                'uuid' => $uuid,
-                'relativeUUID' => $guardianUUID,
-                'relationship' => $pwdForm['guardianRelationship'],
-                'contactNumber' => $pwdForm['guardianContactNumber'],
-            ];
-
             try {
                 // Begin transaction
                 $this->connection->begin_transaction();
@@ -134,14 +68,36 @@
                 $Sql->insertContactDetails($contactDetails);
                 $Sql->insertPersonalInformation($personalInformation);
                 $Sql->insertEmploymentDetails($employmentDetails);
-                $Sql->insertOrganization($organization);
-                $Sql->insertPWDData($pwdData);
-                $Sql->insertPerson($father);
-                $Sql->insertRelatives($fatherRelative);
-                $Sql->insertPerson($mother);
-                $Sql->insertRelatives($motherRelative);
-                $Sql->insertPerson($guardian);
-                $Sql->insertRelatives($guardianRelative);
+                $Sql->insertPerson($spouse);
+                $Sql->insertRelatives($spouseRelative);
+                foreach ($scForm['childFirstName'] as $key => $value) {
+                    $childUUID = $Sql->generateUUID();
+                    $child = [
+                        'uuid' => $childUUID,
+                        'firstName' => $scForm['childFirstName'][$key],
+                        'lastName' => $scForm['childLastName'][$key],
+                    ];
+                    $Sql->insertPerson($child);
+                    $contactDetails = [
+                        'uuid' => $uuid,
+                        'mobileNumber' => $scForm['childTelephone'][$key],
+                        'email' => $scForm['email'][$key],
+                    ];
+                    $Sql->insertContactDetails($contactDetails);
+                    $childAddress = [
+                        'uuid' => $childUUID,
+                        'address' => $scForm['childAddress'][$key],
+                        'barangay' => $scForm['childBarangay'][$key],
+                    ];
+                    $Sql->insertAddress($childAddress);
+                    $relative = [
+                        'uuid' => $uuid,
+                        'relativeUUID' => $childUUID,
+                        'relationship' => 'Child',
+                        'birthday' => $scForm['srCitizenChildDOB'][$key],
+                    ];
+                    $Sql->insertRelatives($relative);
+                }
 
                 $this->connection->commit();
             } catch (Exception $e) {

@@ -102,8 +102,8 @@
                 <div class="col"><label class="form-label required" for="placeOfBirth">LUGAR NG KAPANGANAKAN</label><input class="form-control" type="text" id="placeOfBirth" name="placeOfBirth" required=""></div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com"></div>
-                <div class="col"><label class="form-label" for="telephone">TELEPONO</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####"></div>
+                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com" required></div>
+                <div class="col"><label class="form-label" for="telephone">TELEPONO</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####" required></div>
                 <div class="col"><label class="form-label" for="religion">RELIHIYON</label><input class="form-control" type="text" id="religion" name="religion"></div>
                 <div class="col"><label class="form-label required" id="job-1" for="job">HANAPBUHAY</label><input class="form-control" type="text" id="job-2" name="job" required=""></div>
             </div>

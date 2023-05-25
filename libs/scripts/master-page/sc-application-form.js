@@ -170,13 +170,50 @@ function srCitizenRemoveRelative(button) {
 }
 
 $("#srCitizenNext").click(function(event) {
+    var childFirstName = [];
+    $('[name="childFirstName"]').each(function() {
+        childFirstName.push($(this).val());
+    });
+    var childLastName = [];
+    $('[name="childLastName"]').each(function() {
+        childLastName.push($(this).val());
+    });
+    var srCitizenChildDOB = [];
+    $('[name="srCitizenChildDOB"]').each(function() {
+        srCitizenChildDOB.push($(this).val());
+    });
+    var childTelephone = [];
+    $('[name="childTelephone"]').each(function() {
+        childTelephone.push($(this).val());
+    });
+    var childBarangay = [];
+    $('[name="childBarangay"]').each(function() {
+        childBarangay.push($(this).val());
+    });
+    var childAddress = [];
+    $('[name="childAddress"]').each(function() {
+        childAddress.push($(this).val());
+    });
     var formData = $("#scForm").serializeArray();
     var scForm = {};
     console.log(formData);
     $.each(formData, function(index, value) {
-        scForm[value.name] = value.value;
+        if (value.name === 'childFirstName') {
+            scForm[value.name] = childFirstName;
+        } else if (value.name === 'childLastName') {
+            scForm[value.name] = childLastName;
+        } else if (value.name === 'srCitizenChildDOB') {
+            scForm[value.name] = srCitizenChildDOB;
+        } else if (value.name === 'childTelephone') {
+            scForm[value.name] = childTelephone;
+        } else if (value.name === 'childBarangay') {
+            scForm[value.name] = childBarangay;
+        } else if (value.name === 'childAddress') {
+            scForm[value.name] = childAddress;
+        } else {
+            scForm[value.name] = value.value;
+        }
     });
-    
     // Check if the form is valid
     if ($("#scForm")[0].checkValidity()) {
         populateModal(scForm);
@@ -213,18 +250,55 @@ const SC = (() => {
     const thisSC = {};
 
     thisSC.submitForm = () => {
+        var childFirstName = [];
+        $('[name="childFirstName"]').each(function() {
+            childFirstName.push($(this).val());
+        });
+        var childLastName = [];
+        $('[name="childLastName"]').each(function() {
+            childLastName.push($(this).val());
+        });
+        var srCitizenChildDOB = [];
+        $('[name="srCitizenChildDOB"]').each(function() {
+            srCitizenChildDOB.push($(this).val());
+        });
+        var childTelephone = [];
+        $('[name="childTelephone"]').each(function() {
+            childTelephone.push($(this).val());
+        });
+        var childBarangay = [];
+        $('[name="childBarangay"]').each(function() {
+            childBarangay.push($(this).val());
+        });
+        var childAddress = [];
+        $('[name="childAddress"]').each(function() {
+            childAddress.push($(this).val());
+        });
         var formData = $("#scForm").serializeArray();
         var scForm = {};
-
         $.each(formData, function(index, value) {
-            scForm[value.name] = value.value;
+            if (value.name === 'childFirstName') {
+                scForm[value.name] = childFirstName;
+            } else if (value.name === 'childLastName') {
+                scForm[value.name] = childLastName;
+            } else if (value.name === 'srCitizenChildDOB') {
+                scForm[value.name] = srCitizenChildDOB;
+            } else if (value.name === 'childTelephone') {
+                scForm[value.name] = childTelephone;
+            } else if (value.name === 'childBarangay') {
+                scForm[value.name] = childBarangay;
+            } else if (value.name === 'childAddress') {
+                scForm[value.name] = childAddress;
+            } else {
+                scForm[value.name] = value.value;
+            }
         });
 
         $.ajax({
             type: "POST",
             url: SC_CONTROLLER + "?action=scRegister",
             data: {
-                pwdForm: pwdForm,
+                scForm: scForm,
             },
             dataType: "json",
             success: function(data) {

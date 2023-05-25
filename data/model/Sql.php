@@ -103,7 +103,9 @@
             $occupation = isset($request['occupation']) ? $request['occupation'] : null;
             $otherOccupation = isset($request['otherOccupation']) ? $request['otherOccupation'] : null;
             $income = isset($request['income']) ? $request['income'] : null;
+            $hasPension = isset($request['hasPension']) ? $request['hasPension'] : null;
             $pension = isset($request['pension']) ? $request['pension'] : null;
+            $pensionAmount = isset($request['pensionAmount']) ? $request['pensionAmount'] : null;
             $SSSNo = isset($request['SSSNo']) ? $request['SSSNo'] : null;
             $GSISNo = isset($request['GSISNo']) ? $request['GSISNo'] : null;
             $PSNNo = isset($request['PSNNo']) ? $request['PSNNo'] : null;
@@ -141,12 +143,13 @@
             $uuid = $request['uuid'];
             $relativeUUID = $request['relativeUUID'];
             $relationship = $request['relationship'];
+            $birthday = isset($request['birthday']) ? $request['birthday'] : null;
             $contactNumber = isset($request['contactNumber']) ? $request['contactNumber'] : null;
             $income = isset($request['income']) ? $request['income'] : null;
     
-            $sql = "INSERT INTO relatives(PERSON_ID, RELATIVE_PERSON_ID, RELATIONSHIP_TYPE, GUARDIAN_CONTACT_NUMBER, INCOME) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO relatives(PERSON_ID, RELATIVE_PERSON_ID, RELATIONSHIP_TYPE, BIRTHDAY, GUARDIAN_CONTACT_NUMBER, INCOME) VALUES (?,?,?,?,?,?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssss", $uuid, $relativeUUID, $relationship, $contactNumber, $income);
+            $stmt->bind_param("ssssss", $uuid, $relativeUUID, $relationship, $birthday, $contactNumber, $income);
             $stmt->execute();
             $stmt->close();
         }

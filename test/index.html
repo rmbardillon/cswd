@@ -1,43 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Appointment System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.print.min.css" media="print">
 </head>
 <body>
-    <form id="myForm">
-        <input type="text" name="name" value="John Doe">
-        <select name="country">
-            <option value="USA">United States</option>
-            <option value="UK">United Kingdom</option>
-            <option value="Canada">Canada</option>
-        </select>
-        <input type="checkbox" name="subscribe" checked>
-        <textarea name="message">Hello world!</textarea>
-        <button type="button" id="submitButton">Submit</button>
-    </form>
+  <div class="container-fluid p-5">
+    <div class="row">
+        <div class="col">
+            <div id="calendar"></div>
+        </div>
+        <div class="col col-3">
+            <p>Details</p>
+            <b id="date"></b>
+        </div>
+    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/gcal.min.js"></script>
+  <script>
     $(document).ready(function() {
-        $('#submitButton').click(function() {
-        var formData = $('#myForm').serializeArray();
-        $.ajax({
-            url: 'insert.php',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                console.log(response); // Handle the response from PHP
-            },
-            error: function(xhr, status, error) {
-                console.log(xhr.responseText); // Handle error
-            }
-        });
-        });
-    });
-    </script>
+  $('#calendar').fullCalendar({
+    defaultView: 'month',
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    weekends: false,
+    events: [
+      // Add your events here
+    ],
+    dayRender: function(date, cell) {
+      // Create the AM button element
+      var amButton = document.createElement('button');
+      amButton.innerText = 'AM';
+      amButton.classList.add('btn', 'btn-primary', 'mr-1');
+      amButton.addEventListener('click', function() {
+        $("#date").html(date.format())
+        // Handle AM button click event
+        alert('AM button clicked for date: '+ date.format());
+      });
 
+      // Create the PM button element
+      var pmButton = document.createElement('button');
+      pmButton.innerText = 'PM';
+      pmButton.classList.add('btn', 'btn-primary');
+      pmButton.addEventListener('click', function() {
+        // Handle PM button click event
+        alert('PM button clicked for date: '+ date.format());
+      });
+
+      // Append the buttons to the day cell
+      $(cell).append(amButton, pmButton);
+    }
+  });
+});
+
+  </script>
 </body>
 </html>

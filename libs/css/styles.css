@@ -53,3 +53,8 @@ footer a {
   padding: 15px;
 }
 
+.btn-calendar {
+    font-size: 13px !important;
+    width: 150px;
+    height: 40px !important;
+}

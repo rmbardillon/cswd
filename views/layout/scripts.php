@@ -45,3 +45,6 @@
 <script src="../../libs/plugins/bootstrap/bs-init.js"></script>
 <script src="../../libs/scripts/master-page/function.js"></script>
 <script src="../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/gcal.min.js"></script>

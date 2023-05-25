@@ -154,7 +154,7 @@
                     </div>
                     <div class="col"><input class="form-control" type="text" id="childEducationalAttainment" name="childEducationalAttainment" required></div>
                     <div class="col col-3 d-flex align-items-center">
-                        <h6 class="text-start">OCCUPATION/MONTHLY&nbsp;INCOME</h6>
+                        <h6 class="text-start">MONTHLY INCOME</h6>
                     </div>
                     <div class="col"><input class="form-control numbers" type="text" id="childIncome" name="childIncome" required></div>
                 </div>

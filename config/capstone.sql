@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2023 at 10:10 AM
+-- Generation Time: May 25, 2023 at 09:42 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,8 +39,9 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
-('4edc6dddfa0911ed', '646dc48c46108954', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
-('88708d6bfa0911ed', '646dc4ecd8dfe838', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
+('565cb1cefa9b11ed', '646eb98b629e9609', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
+('565d80e7fa9b11ed', '646eb98b66362601', 'OAK ST. RP SUBD. BRGY TAGAPO', 'Tagapo'),
+('565e7fc6fa9b11ed', '646eb98b672e5640', 'OAK ST. RP SUBD. BRGY TAGAPO', 'Tagapo');
 
 -- --------------------------------------------------------
 
@@ -56,12 +57,17 @@ CREATE TABLE `application` (
   `APPLICATION_STATUS` varchar(16) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `application`
+-- Table structure for table `appointment`
 --
 
-INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPPLICATION_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
-('4edc5747fa0911ed', '646dc48c46108954', 'PWD', '2023-05-24 16:02:20', 'Pending');
+CREATE TABLE `appointment` (
+  `APPOINTMENT_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PERSON_ID` varchar(16) NOT NULL,
+  `DATE` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -82,8 +88,9 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
-('4edc7e41fa0911ed', '646dc48c46108954', '09760657071', '', 'romsky.bardillon@gmail.com'),
-('8870a926fa0911ed', '646dc4ecd8dfe838', NULL, NULL, 'mila.bardillon@gmail.com');
+('565cc064fa9b11ed', '646eb98b629e9609', NULL, NULL, 'asuncionmontealegre@gmail.com'),
+('565d734bfa9b11ed', '646eb98b629e9609', '09550171148', NULL, 'a'),
+('565e06f7fa9b11ed', '646eb98b629e9609', '09760657071', NULL, 's');
 
 -- --------------------------------------------------------
 
@@ -101,7 +108,9 @@ CREATE TABLE `employment_details` (
   `JOB` varchar(64) DEFAULT NULL,
   `OTHER_JOB` varchar(64) DEFAULT NULL,
   `INCOME` varchar(64) DEFAULT NULL,
+  `HAS_PENSION` varchar(8) DEFAULT NULL,
   `PENSION` decimal(12,2) DEFAULT NULL,
+  `PENSION_AMOUNT` decimal(12,2) DEFAULT NULL,
   `SSS_NUMBER` varchar(32) DEFAULT NULL,
   `GSIS_NUMBER` varchar(32) DEFAULT NULL,
   `PSN_NUMBER` varchar(32) DEFAULT NULL,
@@ -116,9 +125,8 @@ CREATE TABLE `employment_details` (
 -- Dumping data for table `employment_details`
 --
 
-INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `PENSION`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
-('4edc9e75fa0911ed', '646dc48c46108954', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL),
-('88719860fa0911ed', '646dc4ecd8dfe838', NULL, NULL, NULL, 'NONE', 'NONE', NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10000.00');
+INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `HAS_PENSION`, `PENSION`, `PENSION_AMOUNT`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
+('565cdbb2fa9b11ed', '646eb98b629e9609', NULL, NULL, NULL, NULL, 'NONE', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -134,13 +142,6 @@ CREATE TABLE `organization` (
   `ORGANIZATION_OFFICE_ADDRESS` varchar(64) NOT NULL,
   `ORGANIZATION_CONTACT_NUMBER` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `organization`
---
-
-INSERT INTO `organization` (`ORGANIZATION_ID`, `PERSON_ID`, `ORGANIZATION`, `ORGANIZATION_CONTACT_PERSON`, `ORGANIZATION_OFFICE_ADDRESS`, `ORGANIZATION_CONTACT_NUMBER`) VALUES
-('4edcadd8fa0911ed', '646dc48c46108954', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -161,12 +162,10 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SUFFIX`) VALUES
-('646dc48c46108954', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
-('646dc48c4611c454', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
-('646dc48c4611e870', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
-('646dc48c46120933', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', NULL),
-('646dc4ecd8dfe838', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
-('646dc4ecdef63582', 'ROMEO JR', NULL, 'BARDILLON', NULL);
+('646eb98b629e9609', 'ASUNCION', 'SABANDAL', 'MONTEALEGRE', NULL),
+('646eb98b629fb902', 'VERGILIO', 'SAPODIQUIA', 'MONTEALEGRE', ''),
+('646eb98b66362601', 'MONTEALEGRE', NULL, 'MILAROSA', NULL),
+('646eb98b672e5640', 'PENARANDA', NULL, 'LANI', NULL);
 
 -- --------------------------------------------------------
 
@@ -191,9 +190,7 @@ CREATE TABLE `personal_information` (
 --
 
 INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `BIRTH_PLACE`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
-('4edc8d33fa0911ed', '646dc48c46108954', '2001-07-30', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single'),
-('8871306efa0911ed', '646dc4ecd8dfe838', '1965-07-20', NULL, 'Female', 'COLLEGE', NULL, NULL, NULL),
-('8872e21bfa0911ed', '646dc4ecdef63582', '2001-07-30', NULL, NULL, 'COLLEGE', NULL, NULL, 'Single');
+('565ccf68fa9b11ed', '646eb98b629e9609', '1942-01-12', NULL, 'Female', NULL, NULL, 'CATHOLIC', 'Widowed');
 
 -- --------------------------------------------------------
 
@@ -216,13 +213,6 @@ CREATE TABLE `pwd_data` (
   `ACCOMPLISHER_NAME` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `pwd_data`
---
-
-INSERT INTO `pwd_data` (`PWD_DATA_ID`, `PERSON_ID`, `PHYSICIAN_NAME`, `PHYSICIAN_LICENSE_NUMBER`, `TYPE_OF_DISABILITY`, `MEDICAL_CONDITION`, `CAUSE_OF_DISABILITY`, `CONGENITAL_INBORN`, `ACQUIRED`, `STATUS_OF_DISABILITY`, `ACCOMPLISHED_BY`, `ACCOMPLISHER_NAME`) VALUES
-('4edcbcb5fa0911ed', '646dc48c46108954', 'LEBRON JAMES', 'MD8299-8', '[\"Physical Disability (Orthopedic)\",\"Psychosocial Disability\",\"Cancer (RA11215)\"]', '', 'ACQUIRED', 'null', '[\"Cerebral Palsy\",\"Injury\"]', 'Temporary', 'Guardian', 'DON KENNETH BARDILLON');
-
 -- --------------------------------------------------------
 
 --
@@ -234,6 +224,7 @@ CREATE TABLE `relatives` (
   `PERSON_ID` varchar(16) NOT NULL,
   `RELATIVE_PERSON_ID` varchar(16) NOT NULL,
   `RELATIONSHIP_TYPE` varchar(32) NOT NULL,
+  `BIRTHDAY` date DEFAULT NULL,
   `GUARDIAN_CONTACT_NUMBER` varchar(16) DEFAULT NULL,
   `INCOME` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -242,11 +233,10 @@ CREATE TABLE `relatives` (
 -- Dumping data for table `relatives`
 --
 
-INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `GUARDIAN_CONTACT_NUMBER`, `INCOME`) VALUES
-('4edcd78efa0911ed', '646dc48c46108954', '646dc48c4611c454', 'Father', NULL, NULL),
-('4edd7b3efa0911ed', '646dc48c46108954', '646dc48c4611e870', 'Mother', NULL, NULL),
-('4eddf610fa0911ed', '646dc48c46108954', '646dc48c46120933', 'BROTHER', '09091072865', NULL),
-('88737fc5fa0911ed', '646dc4ecd8dfe838', '646dc4ecdef63582', 'Child', NULL, '0.00');
+INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `BIRTHDAY`, `GUARDIAN_CONTACT_NUMBER`, `INCOME`) VALUES
+('565cef19fa9b11ed', '646eb98b629e9609', '646eb98b629fb902', 'Spouse', '1942-08-07', NULL, NULL),
+('565df12efa9b11ed', '646eb98b629e9609', '646eb98b66362601', 'Child', '1965-07-20', NULL, NULL),
+('565e8ffffa9b11ed', '646eb98b629e9609', '646eb98b672e5640', 'Child', '2008-04-30', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -261,13 +251,6 @@ CREATE TABLE `solo_parent_data` (
   `NEEDS_PROBLEMS` varchar(512) NOT NULL,
   `FAMILY_RESOURCES` varchar(512) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `solo_parent_data`
---
-
-INSERT INTO `solo_parent_data` (`SOLO_PARENT_DATA_ID`, `PERSON_ID`, `CLASSIFICATION_CIRCUMSTANCES`, `NEEDS_PROBLEMS`, `FAMILY_RESOURCES`) VALUES
-('8872406efa0911ed', '646dc4ecd8dfe838', '[\"Death of Spouse\",\"Imprisonment of Spouse\\/Detention\",\"Annulment\\/Legal Separation\",\"Unmarried\\/unwed\"]', 'longtext', 'longtext');
 
 -- --------------------------------------------------------
 
@@ -317,6 +300,12 @@ ALTER TABLE `address`
 ALTER TABLE `application`
   ADD PRIMARY KEY (`APPLICATION_ID`),
   ADD KEY `FK_PERSON_APPLICATION` (`PERSON_ID`);
+
+--
+-- Indexes for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD PRIMARY KEY (`APPOINTMENT_ID`);
 
 --
 -- Indexes for table `contact_details`
