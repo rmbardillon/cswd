@@ -64,7 +64,43 @@
             $formattedDate = $dateTime->format('l, F d, Y');
             $formattedTime = $dateTime->format('A');
             $appointmentId = $Sql->generateUUID();
-            $message = "Your appointment (ID: " . $appointmentId . ") has been set on " . $formattedDate . " at " . $formattedTime . ". Please be on time.";
+            // $message = "Your appointment (ID: " . $appointmentId . ") has been set on " . $formattedDate . " at " . $formattedTime . ". Please be on time.";
+            $message = "<html>
+                        <head>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    font-size: 14px;
+                                    line-height: 1.6;
+                                }
+                                
+                                h1 {
+                                    color: #333;
+                                    font-size: 18px;
+                                }
+                                
+                                .appointment-details {
+                                    margin-bottom: 20px;
+                                }
+                                
+                                .appointment-id {
+                                    font-weight: bold;
+                                }
+                                
+                                .appointment-date {
+                                    font-style: italic;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <h1>Your Appointment Details</h1>
+                            <div class=\"appointment-details\">
+                                <p><span class=\"appointment-id\">Appointment ID:</span> " . $appointmentId . "</p>
+                                <p><span class=\"appointment-date\">Date and Time:</span> " . $formattedDate . " at " . $formattedTime . "</p>
+                            </div>
+                            <p>Please be on time for your appointment.</p>
+                        </body>
+                        </html>";
 
             $sql = "INSERT INTO appointment(APPOINTMENT_ID, PERSON_ID, DATE) VALUES (?,?,?)";
             $stmt = $this->connection->prepare($sql);
