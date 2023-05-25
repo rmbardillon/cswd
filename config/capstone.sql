@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 09:42 AM
+-- Generation Time: May 25, 2023 at 03:13 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,9 +39,7 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
-('565cb1cefa9b11ed', '646eb98b629e9609', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
-('565d80e7fa9b11ed', '646eb98b66362601', 'OAK ST. RP SUBD. BRGY TAGAPO', 'Tagapo'),
-('565e7fc6fa9b11ed', '646eb98b672e5640', 'OAK ST. RP SUBD. BRGY TAGAPO', 'Tagapo');
+('36138dfcfaf711ed', '646f53b277b1b120', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
 
 -- --------------------------------------------------------
 
@@ -52,10 +50,17 @@ INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
 CREATE TABLE `application` (
   `APPLICATION_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
-  `APPPLICATION_TYPE` varchar(16) NOT NULL,
+  `APPLICATION_TYPE` varchar(16) NOT NULL,
   `APPLICATION_DATE` datetime NOT NULL DEFAULT current_timestamp(),
   `APPLICATION_STATUS` varchar(16) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `application`
+--
+
+INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
+('36138803faf711ed', '646f53b277b1b120', 'Senior Citizen', '2023-05-25 20:25:22', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -68,6 +73,22 @@ CREATE TABLE `appointment` (
   `PERSON_ID` varchar(16) NOT NULL,
   `DATE` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`APPOINTMENT_ID`, `PERSON_ID`, `DATE`) VALUES
+('3f638967faf711ed', '646f53b277b1b120', '2023-05-30 08:00:00'),
+('4ed9d82cfafa11ed', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('52c5b481fafa11ed', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('646f5d68628d4052', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('646f5d710b560620', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('646f5d86b699e011', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('646f5e49d88fb733', '646f53b277b1b120', '2023-05-26 13:00:00'),
+('646f5ec9a09f9364', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('6dda7a16fafa11ed', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('fd1a12a4fafa11ed', '646f53b277b1b120', '2023-05-26 13:00:00');
 
 -- --------------------------------------------------------
 
@@ -88,9 +109,7 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
-('565cc064fa9b11ed', '646eb98b629e9609', NULL, NULL, 'asuncionmontealegre@gmail.com'),
-('565d734bfa9b11ed', '646eb98b629e9609', '09550171148', NULL, 'a'),
-('565e06f7fa9b11ed', '646eb98b629e9609', '09760657071', NULL, 's');
+('36139320faf711ed', '646f53b277b1b120', NULL, NULL, 'romsky.bardillon@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -126,7 +145,7 @@ CREATE TABLE `employment_details` (
 --
 
 INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `HAS_PENSION`, `PENSION`, `PENSION_AMOUNT`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
-('565cdbb2fa9b11ed', '646eb98b629e9609', NULL, NULL, NULL, NULL, 'NONE', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('36139e09faf711ed', '646f53b277b1b120', NULL, NULL, NULL, NULL, 'WALA', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -162,10 +181,8 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SUFFIX`) VALUES
-('646eb98b629e9609', 'ASUNCION', 'SABANDAL', 'MONTEALEGRE', NULL),
-('646eb98b629fb902', 'VERGILIO', 'SAPODIQUIA', 'MONTEALEGRE', ''),
-('646eb98b66362601', 'MONTEALEGRE', NULL, 'MILAROSA', NULL),
-('646eb98b672e5640', 'PENARANDA', NULL, 'LANI', NULL);
+('646f53b277b1b120', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
+('646f53b277b26042', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -190,7 +207,7 @@ CREATE TABLE `personal_information` (
 --
 
 INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `BIRTH_PLACE`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
-('565ccf68fa9b11ed', '646eb98b629e9609', '1942-01-12', NULL, 'Female', NULL, NULL, 'CATHOLIC', 'Widowed');
+('361397fefaf711ed', '646f53b277b1b120', '1942-07-30', NULL, 'Male', NULL, NULL, 'CATHOLIC', 'Married');
 
 -- --------------------------------------------------------
 
@@ -234,9 +251,7 @@ CREATE TABLE `relatives` (
 --
 
 INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `BIRTHDAY`, `GUARDIAN_CONTACT_NUMBER`, `INCOME`) VALUES
-('565cef19fa9b11ed', '646eb98b629e9609', '646eb98b629fb902', 'Spouse', '1942-08-07', NULL, NULL),
-('565df12efa9b11ed', '646eb98b629e9609', '646eb98b66362601', 'Child', '1965-07-20', NULL, NULL),
-('565e8ffffa9b11ed', '646eb98b629e9609', '646eb98b672e5640', 'Child', '2008-04-30', NULL, NULL);
+('3613a9a4faf711ed', '646f53b277b1b120', '646f53b277b26042', 'Spouse', '0000-00-00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -305,7 +320,8 @@ ALTER TABLE `application`
 -- Indexes for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`APPOINTMENT_ID`);
+  ADD PRIMARY KEY (`APPOINTMENT_ID`),
+  ADD KEY `FK_PERSON_APPOINTMENT` (`PERSON_ID`);
 
 --
 -- Indexes for table `contact_details`
@@ -391,6 +407,12 @@ ALTER TABLE `address`
 --
 ALTER TABLE `application`
   ADD CONSTRAINT `FK_PERSON_APPLICATION` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
+
+--
+-- Constraints for table `appointment`
+--
+ALTER TABLE `appointment`
+  ADD CONSTRAINT `FK_PERSON_APPOINTMENT` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 
 --
 -- Constraints for table `contact_details`
