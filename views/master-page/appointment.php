@@ -1,6 +1,6 @@
 <?php include_once('../layout/header.php'); $page = "appointment"; ?>
 <body>
-    <?php include_once('../layout/navbar.php'); ?>
+    <?php include_once('../layout/navbar.php'); ?>    
     <div class="container">
         <h1>Set Appointment</h1>
         <div class="row">
@@ -10,7 +10,11 @@
             </div>
             <div class="col col-3">
                 <b>Appointment Schedule:</b>
-                <p class="border p-2 w-100" id="date"></p>
+                <div class="border p-2 w-100">
+                    <p id="personId"></p>
+                    <p id="date"></p>
+                </div>
+                <button class="btn btn-success mt-2" id="bookAppointment">Book Appoointment</button>
             </div>
         </div>
     </div>
