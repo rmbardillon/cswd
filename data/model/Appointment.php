@@ -64,49 +64,63 @@
             $formattedDate = $dateTime->format('l, F d, Y');
             $formattedTime = $dateTime->format('A');
             $appointmentId = $Sql->generateUUID();
-            // $message = "Your appointment (ID: " . $appointmentId . ") has been set on " . $formattedDate . " at " . $formattedTime . ". Please be on time.";
+            // Include the QR code library
+            require_once '../../libs/plugins/phpqrcode/qrlib.php';
+
+            // Set the path for storing the generated QR code image
+            $qrCodePath = '../../libs/images/qr_codes/';
+
+            // Generate the QR code image
+            $qrCodeFile = $qrCodePath . 'appointment_' . $appointmentId . '.png';
+            QRcode::png($appointmentId, $qrCodeFile, QR_ECLEVEL_Q, 10);
+            // Email message
             $message = "<html>
-                        <head>
-                            <style>
-                                body {
-                                    font-family: Arial, sans-serif;
-                                    font-size: 14px;
-                                    line-height: 1.6;
-                                }
-                                
-                                h1 {
-                                    color: #333;
-                                    font-size: 18px;
-                                }
-                                
-                                .appointment-details {
-                                    margin-bottom: 20px;
-                                }
-                                
-                                .appointment-id {
-                                    font-weight: bold;
-                                }
-                                
-                                .appointment-date {
-                                    font-style: italic;
-                                }
-                            </style>
-                        </head>
-                        <body>
-                            <h1>Your Appointment Details</h1>
-                            <div class=\"appointment-details\">
-                                <p><span class=\"appointment-id\">Appointment ID:</span> " . $appointmentId . "</p>
-                                <p><span class=\"appointment-date\">Date and Time:</span> " . $formattedDate . " at " . $formattedTime . "</p>
-                            </div>
-                            <p>Please be on time for your appointment.</p>
-                        </body>
-                        </html>";
+                <head>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            font-size: 14px;
+                            line-height: 1.6;
+                        }
+                        
+                        h1 {
+                            color: #333;
+                            font-size: 18px;
+                        }
+                        
+                        .appointment-details {
+                            margin-bottom: 20px;
+                        }
+                        
+                        .appointment-id {
+                            font-weight: bold;
+                        }
+                        
+                        .appointment-date {
+                            font-style: italic;
+                        }
+                        
+                        .qr-code {
+                            margin-top: 20px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Your Appointment Details</h1>
+                    <div class=\"appointment-details\">
+                        <p><span class=\"appointment-id\">Appointment ID:</span> " . $appointmentId . "</p>
+                        <p><span class=\"appointment-date\">Date and Time:</span> " . $formattedDate . " at " . $formattedTime . "</p>
+                        <p>Please be on time for your appointment.</p>
+                        <p>You received this email because you booked an appointment with CSWDO Office. Please present the QR Code attached to this email.</p>
+                    </div>
+                </body>
+            </html>";
 
             $sql = "INSERT INTO appointment(APPOINTMENT_ID, PERSON_ID, DATE) VALUES (?,?,?)";
             $stmt = $this->connection->prepare($sql);
             $stmt->bind_param("sss", $appointmentId, $personId, $date);
             if($stmt->execute()) {
-                $Functions->email("CSWDO Santa Rosa", "Appointment", "populationmanagementsystem@gmail.com", $receiverName, $receiverEmail, $message);
+                $Functions->email("CSWDO Santa Rosa", "Appointment", "populationmanagementsystem@gmail.com", $receiverName, $receiverEmail, $message, $qrCodeFile);
                 return true;
             } else {
                 return false;

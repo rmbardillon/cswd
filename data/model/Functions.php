@@ -9,7 +9,7 @@
             $this->connection = $connection;
         }
 
-        public function email($senderName, $subject, $senderEmail, $receiverName, $receiverEmail, $message) {
+        public function email($senderName, $subject, $senderEmail, $receiverName, $receiverEmail, $message, $attachment = null) {
             require '../../libs/plugins/phpmailer/src/Exception.php';
             require '../../libs/plugins/phpmailer/src/PHPMailer.php';
             require '../../libs/plugins/phpmailer/src/SMTP.php';
@@ -29,6 +29,9 @@
             $mail->isHTML(true);
             $mail->Subject = $subject;
             $mail->Body = $message;
+            if($attachment != null) {
+                $mail->addAttachment($attachment);
+            }
             $mail->AltBody = "This is the plain text version of email content";
             if (!$mail->send()) {
                 echo "Email failed";

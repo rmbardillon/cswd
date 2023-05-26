@@ -16,7 +16,33 @@ $(document).ready(function () {
         }
     });
     var appointmentDate = "";
-    // Make an AJAX call to retrieve the slot count from your database
+    var holidays = {};
+    const apiKey = "34f6f251f1fbfaa0d4f33c5645e2b8450d60dc53";
+    const country = "PH";
+    const year = 2023;
+
+    const apiurl = `https://calendarific.com/api/v2/holidays?api_key=${apiKey}&country=${country}&year=${year}`;
+
+    $.ajax({
+        url: apiurl,
+        method: "GET",
+        dataType: "json",
+        success: function(data) {
+            const fetchedHolidays = data.response.holidays;
+            
+            if (fetchedHolidays.length > 0) {
+                fetchedHolidays.forEach(function(holiday) {
+                    const formattedDate = holiday.date.iso;
+                    const holidayName = holiday.name;
+                    holidays[formattedDate] = holidayName;
+                });
+            }
+        },
+        error: function(error) {
+            console.log("An error occurred while fetching the holidays:", error);
+        }
+    });
+
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     $('#calendar').fullCalendar({
         defaultView: 'month',
@@ -41,6 +67,16 @@ $(document).ready(function () {
             var formattedDate = date.format('YYYY-MM-DD');
             // Check if the date is in the past
             if (date.isSameOrBefore(moment(), 'day')) {
+                return;
+            }
+
+            // Check if the date is a holiday
+            if (formattedDate in holidays) {
+                var holidayName = holidays[formattedDate];
+                var holidayButton = document.createElement('button');
+                holidayButton.classList.add('btn-calendar', 'btn', 'btn-danger', 'm-2');
+                holidayButton.innerText = holidayName;
+                $(cell).append(holidayButton);
                 return;
             }
             // Create the AM button element
