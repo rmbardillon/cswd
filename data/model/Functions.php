@@ -38,5 +38,33 @@
                 exit();
             }
         }
+
+        public function contactUs($name, $email, $message)
+        {
+            require '../../libs/plugins/phpmailer/src/Exception.php';
+            require '../../libs/plugins/phpmailer/src/PHPMailer.php';
+            require '../../libs/plugins/phpmailer/src/SMTP.php';
+
+            $mail = new PHPMailer(true);
+
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = "populationmanagementsystem@gmail.com";
+            $mail->Password = "ntllidrufjiuujll";
+            $mail->Port = "587"; // SMTP port (usually 587 for Gmail)
+            $mail->SMTPSecure = 'tls'; // Enable TLS encryption
+            $mail->From = $email;
+            $mail->FromName = $name;
+            $mail->addAddress('populationmanagementsystem@gmail.com', 'CSWDO Santa Rosa');
+            $mail->Subject = 'Contact Form Submission';
+            $mail->Body = 'Name: ' . $name . '<br>From Email: ' . $email . '<br>Message: ' . $message;
+            $mail->isHTML(true);
+            if ($mail->send()) {
+                echo 'Email sent successfully.';
+            } else {
+                echo 'Failed to send email. Error: ' . $mail->ErrorInfo;
+            }
+        }
     }
 ?>

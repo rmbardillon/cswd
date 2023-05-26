@@ -23,7 +23,7 @@
         </div>
         <hr>
         <div class="d-flex justify-content-between align-items-center pt-3">
-            <p class="mb-0">Copyright © 2023 CSWD</p>
+            <p class="mb-0">Copyright © 2023 CSWD CITY OF SANTA ROSA</p>
             <ul class="list-inline mb-0" style="font-size: 25px;">
                 <li class="list-inline-item"><a href="https://www.facebook.com/cswdo.santarosa.1" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook">
                             <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
@@ -39,12 +39,12 @@
     </div>
 </footer>
 <script src="../../config/sysname.js"></script>
+<script src="../../libs/scripts/vars.js"></script>
 <script src="../../libs/plugins/jquery/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../libs/scripts/vars.js"></script>
-<script src="../../libs/plugins/bootstrap/bs-init.js"></script>
-<script src="../../libs/scripts/master-page/function.js"></script>
-<script src="../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/gcal.min.js"></script>
+<script src="../../libs/plugins/bootstrap/bs-init.js"></script>
+<script src="../../libs/scripts/master-page/function.js"></script>
+<script src="../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
