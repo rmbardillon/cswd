@@ -135,10 +135,10 @@ $(document).ready(function () {
     });
 
     $("#bookAppointment").click(function() {
-        if(appointmentDate == "") {
+        if(appointmentDate == "" || personId == null) {
             swal.fire(
                 'Error!',
-                'Please select a date.',
+                'Please select a date and your identification number.',
                 'error'
             );
             return;
