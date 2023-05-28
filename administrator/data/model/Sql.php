@@ -20,6 +20,24 @@
             return $uuid;
         }
 
+        public function insertAdministrator($request)
+        {
+            $firstName = $request['firstName'];
+            $lastname = $request['lastname'];
+            $email = $request['email'];
+            $barangay = $request['barangay'];
+            $role = $request['role'];
+            $password = password_hash($request['password'], PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO user_authentication(FIRST_NAME, LAST_NAME, EMAIL, BARANGAY, ROLE, PASSWORD) VALUES (?,?,?,?,?,?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ssssss", $firstName, $lastname, $email, $barangay, $role, $password);
+            $stmt->execute();
+            $stmt->close();
+
+            return "Success";
+        }
+
         public function insertApplication($request)
         {
             $uuid = $request['uuid'];

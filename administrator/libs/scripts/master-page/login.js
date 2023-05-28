@@ -14,15 +14,20 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "/api/login",
+            url: LOGIN_CONTROLLER + "?action=login",
             type: "POST",
             data: {
                 username: username,
                 password: password
             },
+            dataType: "json",
             success: function (response) {
-                if (response.status == 200) {
-                    window.location.href = "/dashboard";
+                if (response['status'] == "success") {
+                    if(response['data']['ROLE'] == "Super Administrator") {
+                        window.location.href = "administrator.php";
+                    } else {
+                        console.log(response['data']['ROLE'] + " is not allowed to login");
+                    }
                 } else {
                     swal.fire({
                         title: "Error",

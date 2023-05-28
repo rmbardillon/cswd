@@ -38,13 +38,13 @@
         </div>
     </div>
 </footer>
-<script src="../../config/sysname.js"></script>
+<script src="../../../config/sysname.js"></script>
 <script src="../../libs/scripts/vars.js"></script>
-<script src="../../libs/plugins/jquery/jquery-3.6.1.min.js"></script>
+<script src="../../../libs/plugins/jquery/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/gcal.min.js"></script>
-<script src="../../libs/plugins/bootstrap/bs-init.js"></script>
-<script src="../../libs/scripts/master-page/function.js"></script>
-<script src="../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
+<script src="../../../libs/plugins/bootstrap/bs-init.js"></script>
+<script src="../../../libs/scripts/master-page/function.js"></script>
+<script src="../../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>

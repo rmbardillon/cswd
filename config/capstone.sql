@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 03:13 PM
+-- Generation Time: May 28, 2023 at 02:52 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -87,6 +87,7 @@ INSERT INTO `appointment` (`APPOINTMENT_ID`, `PERSON_ID`, `DATE`) VALUES
 ('646f5d86b699e011', '646f53b277b1b120', '2023-05-26 08:00:00'),
 ('646f5e49d88fb733', '646f53b277b1b120', '2023-05-26 13:00:00'),
 ('646f5ec9a09f9364', '646f53b277b1b120', '2023-05-26 08:00:00'),
+('6471dea768219906', '646f53b277b1b120', '2023-05-30 08:00:00'),
 ('6dda7a16fafa11ed', '646f53b277b1b120', '2023-05-26 08:00:00'),
 ('fd1a12a4fafa11ed', '646f53b277b1b120', '2023-05-26 13:00:00');
 
@@ -290,13 +291,27 @@ CREATE TABLE `uploaded_documents` (
 
 CREATE TABLE `user_authentication` (
   `USER_AUTHENTICATION_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
-  `USERNAME` varchar(32) NOT NULL,
+  `FIRST_NAME` varchar(64) NOT NULL,
+  `LAST_NAME` varchar(64) NOT NULL,
+  `BARANGAY` varchar(64) NOT NULL,
+  `EMAIL` varchar(64) NOT NULL,
   `PASSWORD` varchar(64) NOT NULL,
-  `ROLE` int(8) NOT NULL,
+  `ROLE` varchar(32) NOT NULL,
   `IS_LOCKED` int(8) NOT NULL DEFAULT 0,
   `ACCOUNT_STATUS` int(8) NOT NULL DEFAULT 1,
-  `LOGIN_ATTEMPTS` int(8) NOT NULL DEFAULT 0
+  `LOGIN_ATTEMPTS` int(8) NOT NULL DEFAULT 0,
+  `DATE` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_authentication`
+--
+
+INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
+('38c4aefefd5211ed', 'ROMEO JR', 'BARDILLON', 'Sinalhan', 'dotof72475@favilu.com', '$2y$10$fFcsfBNmyNqGjfT1zfkq/OBPG63l4A.CnkTzZW9EEeRpe3svZENjS', 'Super Administrator', 0, 1, 0, '2023-05-28'),
+('99180f79fd5111ed', 'ROMEO JR', 'BARDILLON', 'Tagapo', 'romsky.bardillon@gmail.com', '$2y$10$L7VJJVeYiAY7EvuzKotThu6TMiKsWZGagB/mRO/TKuahJRbnEdvwa', 'Main Administrator', 0, 1, 0, '2023-05-28'),
+('c101fedafd5111ed', 'ROMEO JR', 'BARDILLON', 'Caingin', 'romsky.bardillon@gmail.com', '$2y$10$VEFieB9I.fn421tGGEzsU.xaknGOy5.l1o2K11Ne7Vl.rH/tVwnma', 'Super Administrator', 0, 1, 0, '2023-05-28'),
+('f1fd20dafd4f11ed', 'ROMEO JR', 'BARDILLON', 'Tagapo', 'romsky.bardillon@gmail.com', '$2y$10$Qsrkyc.4rsY7FWLTcj2CV.IYddmz1ay86YY2tkwctmzOK7pNt5Tpa', 'Main Administrator', 0, 1, 0, '2023-05-28');
 
 --
 -- Indexes for dumped tables

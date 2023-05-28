@@ -10,9 +10,9 @@
         }
 
         public function email($senderName, $subject, $senderEmail, $receiverName, $receiverEmail, $message, $attachment = null) {
-            require '../../libs/plugins/phpmailer/src/Exception.php';
-            require '../../libs/plugins/phpmailer/src/PHPMailer.php';
-            require '../../libs/plugins/phpmailer/src/SMTP.php';
+            require '../../../libs/plugins/phpmailer/src/Exception.php';
+            require '../../../libs/plugins/phpmailer/src/PHPMailer.php';
+            require '../../../libs/plugins/phpmailer/src/SMTP.php';
 
             $mail = new PHPMailer(true);
             // $mail->SMTPDebug = 3;
