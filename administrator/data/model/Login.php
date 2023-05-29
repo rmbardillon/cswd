@@ -40,6 +40,8 @@
                     'message' => 'Login successful.',
                     'data' => $row
                 ];
+
+                $_SESSION['user'] = $row;
             }
 
             return $result;

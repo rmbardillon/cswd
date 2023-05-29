@@ -23,12 +23,12 @@
                                 <th class="col-1">#</th>
                                 <th class="col-4">Name</th>
                                 <th class="col-2">Barangay</th>
-                                <th class="col-2">Email</th>
-                                <th class="col-2">Status</th>
-                                <th class="col-1 no-sort">Actions</th>
+                                <th class="col-1">Email</th>
+                                <th class="col-1">Status</th>
+                                <th class="col-3 no-sort">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_users">
+                        <tbody id="tbody_administrators">
                         </tbody>
                     </table>
                 </div>

@@ -48,3 +48,5 @@
 <script src="../../../libs/plugins/bootstrap/bs-init.js"></script>
 <script src="../../../libs/scripts/master-page/function.js"></script>
 <script src="../../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
+<script src="../../../libs/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../../libs/plugins/datatables/dataTables.bootstrap5.min.js"></script>

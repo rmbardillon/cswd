@@ -207,5 +207,19 @@
             $stmt->close();
         }
 
+        public function resetPassword($request)
+        {
+            $user_id = $request['user_id'];
+            $password = password_hash($request['password'], PASSWORD_DEFAULT);
+
+            $sql = "UPDATE user_authentication SET PASSWORD = ? WHERE USER_AUTHENTICATION_ID = ?;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('ss', $password, $user_id);
+            $result = $stmt->execute();
+            $stmt->close();
+
+            return "Success";
+        }
+
     }
 ?>

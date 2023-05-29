@@ -1,9 +1,28 @@
 $(document).ready(function () {
-    
+    Admin.loadTableData();
 });
 
 const Admin = (() => {
     const thisAdmin = {};
+    var USER_ID = "";
+
+    thisAdmin.loadTableData = () => {
+        $.ajax({
+            url: ADMINISTRATOR_CONTROLLER + "?action=getAdmins",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                $('.table').DataTable().destroy();
+                $('#tbody_administrators').html(data);
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
+            }
+        });
+    };
 
     thisAdmin.saveAdmin = () => {
         var firstName = $("#firstName").val();
@@ -56,6 +75,51 @@ const Admin = (() => {
                 }
             });
         }
+    };
+
+    thisAdmin.clickResetPassword = (id) => {
+        USER_ID = id;
+        swal.fire({
+            title: "Are you sure you want to reset the password for this user?",
+            text: "This action cannot be undone.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, reset it!",
+            cancelButtonText: "No, cancel it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                thisAdmin.resetPassword();
+            }
+        });
+    };
+
+    thisAdmin.resetPassword = () => {
+        $.ajax({
+            url: ADMINISTRATOR_CONTROLLER + "?action=resetPassword",
+            type: "POST",
+            data: {
+                USER_ID: USER_ID,
+                password: generatePassword()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data == "Success") {
+                    swal.fire({
+                        title: "Success!",
+                        text: "Password has been reset.",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    });
+                } else {
+                    swal.fire({
+                        title: "Error!",
+                        text: data,
+                        icon: "error",
+                        confirmButtonText: "Ok"
+                    });
+                }
+            }
+        });
     };
 
     thisAdmin.resetFields = () => {

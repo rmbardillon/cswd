@@ -26,7 +26,7 @@ $(document).ready(function () {
                     if(response['data']['ROLE'] == "Super Administrator") {
                         window.location.href = "administrator.php";
                     } else {
-                        console.log(response['data']['ROLE'] + " is not allowed to login");
+                        window.location.href = "administrator.php";
                     }
                 } else {
                     swal.fire({

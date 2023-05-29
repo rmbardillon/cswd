@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.print.min.css" media="print">
+    <link rel="stylesheet" href="../../../libs/plugins/bootstrap/bootstrap-icons.css" />
     <link rel="stylesheet" href="../../libs/css/styles.css">
     <link rel="stylesheet" href="../../../libs/css/styles.css">
 </head>

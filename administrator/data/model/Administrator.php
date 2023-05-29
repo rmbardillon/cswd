@@ -11,6 +11,34 @@
             $this->connection = $connection;
         }
 
+        public function getAdmins()
+        {
+            $sql = "SELECT * FROM user_authentication WHERE ROLE <> 'Super Administrator';";
+            $result = $this->connection->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $admins = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $admins;
+        }
+
+        public function getAdminById($user_id)
+        {
+            $sql = "SELECT * FROM user_authentication WHERE ROLE <> 'Super Administrator' AND USER_AUTHENTICATION_ID = '$user_id';";
+            $result = $this->connection->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $admins = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $admins;
+        }
+
         public function saveAdmin($request)
         {
             $Sql = new Sql($this->connection);
@@ -94,6 +122,10 @@
                                 
                                 <p>Click the button below to visit our website:</p>
                                 <a class="cta-button" href="https://example.com">Visit CSWDO Website</a>
+
+                                <p>If you need any assistance, please contact our support team.</p>
+        
+                                <p>Thank you,<br>CSWDO Team</p>
                             </div>
                         </body>
                         </html>';
@@ -115,6 +147,120 @@
             return $result;
         }
 
+        public function resetPassword($request)
+        {
+            $user_id = $request['user_id'];
+            $password = $request['password'];
+            $userData = $this->getAdminById($user_id);
+            $request = [
+                'user_id' => $user_id,
+                'password' => $password
+            ];
+
+            $Functions = new Functions($this->connection);
+            $Sql = new Sql($this->connection);
+
+            $senderName = "CSWDO Santa Rosa";
+            $subject = "Reset Password";
+            $senderEmail = "populationmanagementsystem@gmail.com";
+            $receiverName = $userData[0]['FIRST_NAME'] . " " . $userData[0]['LAST_NAME'];
+            $receiverEmail = $userData[0]['EMAIL'];
+            $message = '
+                        <html>
+                        <head>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    background-color: #f5f5f5;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                
+                                .container {
+                                    max-width: 600px;
+                                    margin: 20px auto;
+                                    background-color: #fff;
+                                    padding: 20px;
+                                    border-radius: 5px;
+                                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                }
+                                
+                                h2 {
+                                    color: #333;
+                                    margin-bottom: 20px;
+                                }
+                                
+                                p {
+                                    color: #777;
+                                    line-height: 1.5;
+                                    margin-bottom: 10px;
+                                }
+                                
+                                .credentials {
+                                    background-color: #f9f9f9;
+                                    padding: 10px;
+                                    border-radius: 5px;
+                                    margin-bottom: 20px;
+                                }
+                                
+                                .credentials p {
+                                    margin-bottom: 5px;
+                                }
+                                
+                                .cta-button {
+                                    display: inline-block;
+                                    padding: 10px 20px;
+                                    background-color: #007bff;
+                                    color: #fff;
+                                    text-decoration: none;
+                                    border-radius: 5px;
+                                }
+                                
+                                .cta-button:hover {
+                                    background-color: #0056b3;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="container">
+                                <h2>Password Reset</h2>
+                                <p>Dear ' . $receiverName . ',</p>
+                                <p>We received a request to reset your password. Please follow the instructions below to reset your password:</p>
+                                
+                                <div class="credentials">
+                                    <p><strong>To log in to your account, please use the following credentials:</strong></p>
+                                    <p><strong>Username:</strong> ' . $receiverEmail . '</p>
+                                    <p><strong>New Password:</strong> ' . $password . '</p>
+                                </div>
+                                
+                                <p>If you did not request a password reset, please ignore this email.</p>
+                                
+                                <p>Click the button below to visit our website:</p>
+                                <a class="cta-button" href="https://example.com">Visit CSWDO Website</a>
+
+                                <p>If you need any assistance, please contact our support team.</p>
+        
+                                <p>Thank you,<br>CSWDO Team</p>
+                            </div>
+                        </body>
+                        </html>';
+
+            try {
+                // Begin transaction
+                $this->connection->begin_transaction();
+                $result = $Sql->resetPassword($request);
+                $Functions->email($senderName, $subject, $senderEmail, $receiverName, $receiverEmail, $message);
+
+                $this->connection->commit();
+            } catch (Exception $e) {
+                // Rollback the transaction in case of any errors
+                $this->connection->rollback();
+                $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+                return $errorMessage;
+            }
+
+            return $result;
+        }
 
     }
 ?>
