@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 02:52 PM
+-- Generation Time: May 29, 2023 at 09:56 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -34,13 +34,6 @@ CREATE TABLE `address` (
   `BARANGAY` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `address`
---
-
-INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
-('36138dfcfaf711ed', '646f53b277b1b120', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
-
 -- --------------------------------------------------------
 
 --
@@ -55,13 +48,6 @@ CREATE TABLE `application` (
   `APPLICATION_STATUS` varchar(16) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `application`
---
-
-INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
-('36138803faf711ed', '646f53b277b1b120', 'Senior Citizen', '2023-05-25 20:25:22', 'Pending');
-
 -- --------------------------------------------------------
 
 --
@@ -73,23 +59,6 @@ CREATE TABLE `appointment` (
   `PERSON_ID` varchar(16) NOT NULL,
   `DATE` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `appointment`
---
-
-INSERT INTO `appointment` (`APPOINTMENT_ID`, `PERSON_ID`, `DATE`) VALUES
-('3f638967faf711ed', '646f53b277b1b120', '2023-05-30 08:00:00'),
-('4ed9d82cfafa11ed', '646f53b277b1b120', '2023-05-26 08:00:00'),
-('52c5b481fafa11ed', '646f53b277b1b120', '2023-05-26 08:00:00'),
-('646f5d68628d4052', '646f53b277b1b120', '2023-05-26 08:00:00'),
-('646f5d710b560620', '646f53b277b1b120', '2023-05-26 08:00:00'),
-('646f5d86b699e011', '646f53b277b1b120', '2023-05-26 08:00:00'),
-('646f5e49d88fb733', '646f53b277b1b120', '2023-05-26 13:00:00'),
-('646f5ec9a09f9364', '646f53b277b1b120', '2023-05-26 08:00:00'),
-('6471dea768219906', '646f53b277b1b120', '2023-05-30 08:00:00'),
-('6dda7a16fafa11ed', '646f53b277b1b120', '2023-05-26 08:00:00'),
-('fd1a12a4fafa11ed', '646f53b277b1b120', '2023-05-26 13:00:00');
 
 -- --------------------------------------------------------
 
@@ -104,13 +73,6 @@ CREATE TABLE `contact_details` (
   `TELEPHONE_NUMBER` varchar(16) DEFAULT NULL,
   `EMAIL` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `contact_details`
---
-
-INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
-('36139320faf711ed', '646f53b277b1b120', NULL, NULL, 'romsky.bardillon@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -141,13 +103,6 @@ CREATE TABLE `employment_details` (
   `TOTAL_FAMILY_INCOME` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `employment_details`
---
-
-INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `HAS_PENSION`, `PENSION`, `PENSION_AMOUNT`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
-('36139e09faf711ed', '646f53b277b1b120', NULL, NULL, NULL, NULL, 'WALA', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -177,14 +132,6 @@ CREATE TABLE `person` (
   `SUFFIX` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `person`
---
-
-INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SUFFIX`) VALUES
-('646f53b277b1b120', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
-('646f53b277b26042', '', '', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -202,13 +149,6 @@ CREATE TABLE `personal_information` (
   `RELIGION` varchar(64) DEFAULT NULL,
   `MARITAL_STATUS` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `personal_information`
---
-
-INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `BIRTH_PLACE`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
-('361397fefaf711ed', '646f53b277b1b120', '1942-07-30', NULL, 'Male', NULL, NULL, 'CATHOLIC', 'Married');
 
 -- --------------------------------------------------------
 
@@ -246,13 +186,6 @@ CREATE TABLE `relatives` (
   `GUARDIAN_CONTACT_NUMBER` varchar(16) DEFAULT NULL,
   `INCOME` decimal(12,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `relatives`
---
-
-INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `BIRTHDAY`, `GUARDIAN_CONTACT_NUMBER`, `INCOME`) VALUES
-('3613a9a4faf711ed', '646f53b277b1b120', '646f53b277b26042', 'Spouse', '0000-00-00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -308,10 +241,8 @@ CREATE TABLE `user_authentication` (
 --
 
 INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
-('38c4aefefd5211ed', 'ROMEO JR', 'BARDILLON', 'Sinalhan', 'dotof72475@favilu.com', '$2y$10$fFcsfBNmyNqGjfT1zfkq/OBPG63l4A.CnkTzZW9EEeRpe3svZENjS', 'Super Administrator', 0, 1, 0, '2023-05-28'),
-('99180f79fd5111ed', 'ROMEO JR', 'BARDILLON', 'Tagapo', 'romsky.bardillon@gmail.com', '$2y$10$L7VJJVeYiAY7EvuzKotThu6TMiKsWZGagB/mRO/TKuahJRbnEdvwa', 'Main Administrator', 0, 1, 0, '2023-05-28'),
-('c101fedafd5111ed', 'ROMEO JR', 'BARDILLON', 'Caingin', 'romsky.bardillon@gmail.com', '$2y$10$VEFieB9I.fn421tGGEzsU.xaknGOy5.l1o2K11Ne7Vl.rH/tVwnma', 'Super Administrator', 0, 1, 0, '2023-05-28'),
-('f1fd20dafd4f11ed', 'ROMEO JR', 'BARDILLON', 'Tagapo', 'romsky.bardillon@gmail.com', '$2y$10$Qsrkyc.4rsY7FWLTcj2CV.IYddmz1ay86YY2tkwctmzOK7pNt5Tpa', 'Main Administrator', 0, 1, 0, '2023-05-28');
+('9d72fa39fdcb11ed', 'KOBE', 'BRYANT', 'Tagapo', 'pixexat421@mevori.com', '$2y$10$adFC5BBwiJUno65sFVLdDOPv2gcgXuTt9JBgVIqSrfqIwfM6y.wRq', 'Super Administrator', 0, 1, 0, '2023-05-29'),
+('cd2fc291fdc711ed', 'ROMEO JR', 'BARDILLON', 'Tagapo', 'romsky.bardillon@gmail.com', '$2y$10$wngksAndZmecfHcDDj7VneBQ.2GpC6IUBwSaBEJkFkeISQ0eusGh6', 'Main Administrator', 0, 1, 0, '2023-05-29');
 
 --
 -- Indexes for dumped tables
