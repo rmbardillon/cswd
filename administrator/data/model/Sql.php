@@ -207,16 +207,65 @@
             $stmt->close();
         }
 
+        public function getAdminById($user_id)
+        {
+            $sql = "SELECT * FROM user_authentication WHERE ROLE <> 'Super Administrator' AND USER_AUTHENTICATION_ID = '$user_id';";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $admins = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $admins;
+        }
+
         public function resetPassword($request)
         {
             $user_id = $request['user_id'];
             $password = password_hash($request['password'], PASSWORD_DEFAULT);
+            $userData = $this->getAdminById($user_id);
 
             $sql = "UPDATE user_authentication SET PASSWORD = ? WHERE USER_AUTHENTICATION_ID = ?;";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param('ss', $password, $user_id);
             $result = $stmt->execute();
             $stmt->close();
+            $this->resetAccount($userData[0]['EMAIL']);
+            return "Success";
+        }
+
+        public function updateLoginAttempts($email)
+        {
+            $sql = "UPDATE user_authentication SET LOGIN_ATTEMPTS = LOGIN_ATTEMPTS + 1 WHERE EMAIL = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+        }
+
+        public function lockAccount($email)
+        {
+            $sql = "UPDATE user_authentication SET ACCOUNT_STATUS = 0 WHERE EMAIL = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+        }
+
+        public function resetAccount($email)
+        {
+            $sql = "UPDATE user_authentication SET ACCOUNT_STATUS = 1, LOGIN_ATTEMPTS = 0 WHERE EMAIL = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+        }
+
+        public function deleteAdmin($user_id)
+        {
+            $sql = "DELETE FROM user_authentication WHERE USER_AUTHENTICATION_ID = ?;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $user_id);
+            $stmt->execute();
 
             return "Success";
         }

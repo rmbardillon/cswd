@@ -262,5 +262,12 @@
             return $result;
         }
 
+        public function deleteAdmin($user_id)
+        {
+            $Sql = new Sql($this->connection);
+            $result = $Sql->deleteAdmin($user_id);
+            return $result;
+        }
+
     }
 ?>

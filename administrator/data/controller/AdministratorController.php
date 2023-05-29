@@ -64,6 +64,15 @@
         echo json_encode($result);
     }
 
+    else if($action == "deleteAdmin")
+    {
+        $user_id = $_POST['USER_ID'];
+
+        $result = $Administrator->deleteAdmin($user_id);
+
+        echo json_encode($result);
+    }
+
     else if($action == "resetPassword")
     {
         $user_id = $_POST['USER_ID'];

@@ -109,6 +109,10 @@ const Admin = (() => {
                         text: "Password has been reset.",
                         icon: "success",
                         confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Admin.loadTableData();
+                        }
                     });
                 } else {
                     swal.fire({
@@ -122,6 +126,54 @@ const Admin = (() => {
         });
     };
 
+    thisAdmin.clickDelete = (id) => {
+        USER_ID = id;
+        swal.fire({
+            title: "Are you sure you want to delete this user?",
+            text: "This action cannot be undone.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                thisAdmin.deleteAdmin();
+            }
+        });
+    };
+
+    thisAdmin.deleteAdmin = () => {
+        $.ajax({
+            url: ADMINISTRATOR_CONTROLLER + "?action=deleteAdmin",
+            type: "POST",
+            data: {
+                USER_ID: USER_ID
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data == "Success") {
+                    swal.fire({
+                        title: "Success!",
+                        text: "User has been deleted.",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "administrator.php";
+                        }
+                    });
+                } else {
+                    swal.fire({
+                        title: "Error!",
+                        text: data,
+                        icon: "error",
+                        confirmButtonText: "Ok"
+                    });
+                }
+            }
+        });
+    };
+    
     thisAdmin.resetFields = () => {
         console.log("resetFields");
     };
