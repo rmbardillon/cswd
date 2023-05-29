@@ -19,5 +19,15 @@
 
         echo json_encode($result);
     }
+
+    else if($action == "logout")
+    {
+        session_destroy();
+        $result = [
+            'status' => 'success',
+            'message' => 'Logout successful.'
+        ];
+        echo json_encode($result);
+    }
     
 ?>

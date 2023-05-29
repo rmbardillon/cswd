@@ -16,7 +16,7 @@
             $username = $request['username'];
             $password = $request['password'];
 
-            $sql = "SELECT * FROM user_authentication WHERE EMAIL = ?";
+            $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME FROM user_authentication WHERE EMAIL = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->bind_param('s', $username);
             $stmt->execute();

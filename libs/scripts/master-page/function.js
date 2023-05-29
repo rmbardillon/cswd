@@ -1,5 +1,7 @@
 $(document).ready(function() {
-   $("#applicationTypeModal").modal("show"); 
+    $("#id-application").click(function() {
+        $("#applicationTypeModal").modal("show"); 
+    });
 });
 
 // Forms Validation

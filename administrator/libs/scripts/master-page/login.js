@@ -26,7 +26,7 @@ $(document).ready(function () {
                     if(response['data']['ROLE'] == "Super Administrator") {
                         window.location.href = "administrator.php";
                     } else {
-                        window.location.href = "administrator.php";
+                        window.location.href = "dashboard.php";
                     }
                 } else {
                     swal.fire({
