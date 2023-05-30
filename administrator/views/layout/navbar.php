@@ -23,6 +23,11 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link <?php if($page == 'dashboard') echo('active'); ?>" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'id-application') echo('active'); ?>" id="id-application"><i class="fas fa-user-plus"></i><span>New Application</span></a></li>
+                    <li class="nav-item"><a class="nav-link <?php if($page == 'application') echo('active'); ?>" id="application" href="application.php"><i class="fas fa-user-plus"></i><span>Applications</span></a></li>
+                    <li class="nav-item"><a class="nav-link <?php if($page == 'renewal') echo('active'); ?>" id="renewal" href="renewal.php"><i class="fas fa-user-plus"></i><span>Renewal</span></a></li>
+                    <li class="nav-item"><a class="nav-link <?php if($page == 'events') echo('active'); ?>" id="events" href="events.php"><i class="fas fa-calendar"></i><span>Events</span></a></li>
+                    <li class="nav-item"><a class="nav-link <?php if($page == 'print-id') echo('active'); ?>" id="print-id" href="print-id.php"><i class="fas fa-download"></i><span>Print Id</span></a></li>
+                    <li class="nav-item"><a class="nav-link <?php if($page == 'generate-report') echo('active'); ?>" id="generate-report" href="generate-report.php"><i class="fas fa-folder"></i><span>Generate Report</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>

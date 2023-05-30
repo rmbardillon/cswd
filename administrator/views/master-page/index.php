@@ -1,7 +1,10 @@
 <?php 
     session_start();
     if(isset($_SESSION['user'])) {
-        header("Location: dashboard.php"); 
+        if($_SESSION['user']['ROLE'] == "Super Administrator")
+            header("Location: administrator.php"); 
+        else
+            header("Location: dashboard.php"); 
     }
 ?>
 <!DOCTYPE html>

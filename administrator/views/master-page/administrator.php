@@ -8,6 +8,7 @@
             <div class="collapse navbar-collapse" id="navcol-2">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link <?php if($page == "admin"){echo("active"); } ?>" data-bss-hover-animate="pulse" href="administrator.php" style="font-size: 16px;font-weight: bold;">Administrator</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="Logout();" style="font-size: 16px;font-weight: bold;">Logout</a></li>
                 </ul>
             </div>
         </div>

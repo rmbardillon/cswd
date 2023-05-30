@@ -270,5 +270,61 @@
             return "Success";
         }
 
+        public function getSeniorCitizenCount()
+        {
+            $sql = "SELECT COUNT(*) AS COUNT FROM application WHERE APPLICATION_TYPE = 'Senior Citizen';";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $seniorCitizenCount = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $seniorCitizenCount;
+        }
+
+        public function getSoloParentCount()
+        {
+            $sql = "SELECT COUNT(*) AS COUNT FROM application WHERE APPLICATION_TYPE = 'Solo Parent';";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $soloParentCount = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $soloParentCount;
+        }
+
+        public function getPWDCount()
+        {
+            $sql = "SELECT COUNT(*) AS COUNT FROM application WHERE APPLICATION_TYPE = 'PWD';";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $pwdCount = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $pwdCount;
+        }
+
+        public function getTotalCount()
+        {
+            $sql = "SELECT COUNT(*), APPLICATION_TYPE FROM application GROUP BY APPLICATION_TYPE;";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $totalCount = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $totalCount;
+        }
+
     }
 ?>
