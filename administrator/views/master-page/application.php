@@ -26,4 +26,4 @@
         </table>
     </div>
 <?php include_once("../layout/scripts.php") ?>
-<script src="../../libs/scripts/master-page/dashboard.js"></script>
+<script src="../../libs/scripts/master-page/application.js"></script>
