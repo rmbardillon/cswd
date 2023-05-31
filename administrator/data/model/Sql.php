@@ -326,5 +326,23 @@
             return $totalCount;
         }
 
+        public function getBirthdayCelebrants()
+        {
+            $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
+                    JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                    JOIN application ON person.PERSON_ID = application.PERSON_ID
+                    JOIN address ON person.PERSON_ID = address.PERSON_ID
+                    WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE()) AND DAY(personal_information.BIRTHDAY) <= DAY(CURRENT_DATE());";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $totalCount = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $totalCount;
+        }
+
     }
 ?>
