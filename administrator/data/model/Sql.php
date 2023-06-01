@@ -338,10 +338,37 @@
             if ($result === false) {
                 return false;
             }
-            $totalCount = $result->fetch_all(MYSQLI_ASSOC);
-            $result->free();
+            $result = $result->fetch_all(MYSQLI_ASSOC);
 
-            return $totalCount;
+            return $result;
+        }
+
+        public function getApplicants($type, $barangay, $status)
+        {
+            if($barangay != "All") {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        WHERE APPLICATION_TYPE = '$type' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status';";
+            }
+            else if($barangay == "All") {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        WHERE APPLICATION_TYPE = '$type' AND APPLICATION_STATUS = '$status';";
+            }
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
         }
 
     }

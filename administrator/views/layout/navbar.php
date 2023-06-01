@@ -23,7 +23,16 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link <?php if($page == 'dashboard') echo('active'); ?>" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'id-application') echo('active'); ?>" id="id-application"><i class="fas fa-user-plus"></i><span>New Application</span></a></li>
-                    <li class="nav-item"><a class="nav-link <?php if($page == 'application') echo('active'); ?>" id="application" href="application.php"><i class="fas fa-user-plus"></i><span>Applications</span></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle <?php if($page == 'application') echo('active'); ?>" href="#" id="applicationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-plus"></i><span>Applications</span>
+                        </a>
+                        <ul class="dropdown-menu bg-transparent" aria-labelledby="applicationDropdown">
+                            <li><a class="dropdown-item" href="pending-application.php">Pending</a></li>
+                            <li><a class="dropdown-item" href="approved-application.php">Approved</a></li>
+                            <li><a class="dropdown-item" href="rejected-application.php">Rejected</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'renewal') echo('active'); ?>" id="renewal" href="renewal.php"><i class="fas fa-user-plus"></i><span>Renewal</span></a></li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'events') echo('active'); ?>" id="events" href="events.php"><i class="fas fa-calendar"></i><span>Events</span></a></li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'print-id') echo('active'); ?>" id="print-id" href="print-id.php"><i class="fas fa-download"></i><span>Print Id</span></a></li>
@@ -57,3 +66,5 @@
                         </ul>
                     </div>
                 </nav>
+                <input type="hidden" id="adminType" value="<?php echo($_SESSION['user']['ROLE']) ?>">
+                <input type="hidden" id="adminBarangay" value="<?php echo($_SESSION['user']['BARANGAY']) ?>">
