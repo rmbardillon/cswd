@@ -33,7 +33,16 @@
                             <li><a class="dropdown-item" href="rejected-application.php">Rejected</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link <?php if($page == 'renewal') echo('active'); ?>" id="renewal" href="renewal.php"><i class="fas fa-user-plus"></i><span>Renewal</span></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle <?php if($page == 'renewal') echo('active'); ?>" href="#" id="renewalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-plus"></i><span>Renewal</span>
+                        </a>
+                        <ul class="dropdown-menu bg-transparent" aria-labelledby="renewalDropdown">
+                            <li><a class="dropdown-item" href="pending-renewal.php">Pending</a></li>
+                            <li><a class="dropdown-item" href="approved-renewal.php">Approved</a></li>
+                            <li><a class="dropdown-item" href="rejected-renewal.php">Rejected</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'events') echo('active'); ?>" id="events" href="events.php"><i class="fas fa-calendar"></i><span>Events</span></a></li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'print-id') echo('active'); ?>" id="print-id" href="print-id.php"><i class="fas fa-download"></i><span>Print Id</span></a></li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'generate-report') echo('active'); ?>" id="generate-report" href="generate-report.php"><i class="fas fa-folder"></i><span>Generate Report</span></a></li>
