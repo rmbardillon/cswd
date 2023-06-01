@@ -10,7 +10,8 @@ fake = Faker()
 
 def generate_pwd_fake_data(number):
     for i in range(number):
-        application_type = "PWD"
+        applicant_type = "PWD"
+        application_type = "New Application"
         ID = uuid.uuid4()
         ID = ID.hex
         first_name = fake.first_name()
@@ -68,7 +69,7 @@ def generate_pwd_fake_data(number):
 #         Create a SQL Query base on the data above
         insertPerson = "INSERT INTO person (PERSON_ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, SUFFIX) VALUES ('{}', '{}', '{}', '{}', '{}');".format(ID, first_name, "", last_name, "")
         insertAddress = "INSERT INTO address (PERSON_ID, ADDRESS, BARANGAY) VALUES ('{}', '{}', '{}');".format(ID, address, barangay)
-        insertApplicationType = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE) VALUES ('{}', '{}');".format(ID, application_type)
+        insertApplicationType = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE, APPLICANT_TYPE, APPLICATION_STATUS) VALUES ('{}', '{}', '{}');".format(ID, "Renewal", applicant_type, "Pending")
         insertContactDetails = "INSERT INTO contact_details (PERSON_ID, MOBILE_NUMBER, TELEPHONE_NUMBER, EMAIL) VALUES ('{}', '{}', '{}', '{}');".format(ID, mobile, "", email)
         insertPersonalInformation = "INSERT INTO personal_information(PERSON_ID, BIRTHDAY, BIRTH_PLACE, GENDER, " \
                                     "EDUCATIONAL_ATTAINMENT, BLOOD_TYPE, RELIGION, MARITAL_STATUS) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}');".format(ID, date_of_birth, "", gender, educational_attainment, blood_type, religion, civil_status)
@@ -112,7 +113,8 @@ def generate_pwd_fake_data(number):
 
 def generate_solo_parent_fake_data(number):
     for i in range(number):
-        application_type = "Solo Parent"
+        applicant_type = "Solo Parent"
+        application_type = "New Application"
         ID = uuid.uuid4()
         ID = ID.hex
         first_name = fake.first_name()
@@ -156,7 +158,7 @@ def generate_solo_parent_fake_data(number):
 #        Create a SQL Query base on the data above
         insertPerson = "INSERT INTO person (PERSON_ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, SUFFIX) VALUES ('{}', '{}', '{}', '{}', '{}');".format(ID, first_name, "", last_name, "")
         insertAddress = "INSERT INTO address (PERSON_ID, ADDRESS, BARANGAY) VALUES ('{}', '{}', '{}');".format(ID, address, barangay)
-        insertApplicationType = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE) VALUES ('{}', '{}');".format(ID, application_type)
+        insertApplicationType = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE, APPLICANT_TYPE, APPLICATION_STATUS) VALUES ('{}', '{}', '{}');".format(ID, "Renewal", applicant_type, "Pending")
         insertContactDetails = "INSERT INTO contact_details (PERSON_ID, MOBILE_NUMBER, TELEPHONE_NUMBER, EMAIL) VALUES ('{}', '{}', '{}', '{}');".format(ID, mobile, "", email)
         insertPersonalInformation = "INSERT INTO personal_information(PERSON_ID, BIRTHDAY, BIRTH_PLACE, GENDER, " \
                                     "EDUCATIONAL_ATTAINMENT, BLOOD_TYPE, RELIGION, MARITAL_STATUS) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}');".format(ID, date_of_birth, place_of_birth, gender, educational_attainment, "", "", "")
@@ -186,7 +188,8 @@ def generate_solo_parent_fake_data(number):
 
 def generate_senior_citizen_fake_data(number):
     for i in range(number):
-        application_type = "Senior Citizen"
+        applicant_type = "Senior Citizen"
+        application_type = "New Application"
         ID = uuid.uuid4()
         ID = ID.hex
         first_name = fake.first_name()
@@ -200,7 +203,7 @@ def generate_senior_citizen_fake_data(number):
         mobile = fake.phone_number()
         email = fake.email()
         current_date = date.today()
-        start_date = current_date - timedelta(days=60 * 365)
+        start_date = current_date - timedelta(days=63 * 365)
 
         # Generate a random date of birth 60 years ago
         random_days = random.randint(0, 364)
@@ -220,7 +223,7 @@ def generate_senior_citizen_fake_data(number):
 #        Create a SQL Query base on the data above
         insertPerson = "INSERT INTO person (PERSON_ID, FIRST_NAME, MIDDLE_NAME, LAST_NAME, SUFFIX) VALUES ('{}', '{}', '{}', '{}', '{}');".format(ID, first_name, "", last_name, "")
         insertAddress = "INSERT INTO address (PERSON_ID, ADDRESS, BARANGAY) VALUES ('{}', '{}', '{}');".format(ID, address, barangay)
-        insertApplicationType = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE) VALUES ('{}', '{}');".format(ID, application_type)
+        insertApplicationType = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE, APPLICANT_TYPE, APPLICATION_STATUS) VALUES ('{}', '{}', '{}');".format(ID, "Renewal", applicant_type, "Pending")
         insertContactDetails = "INSERT INTO contact_details (PERSON_ID, MOBILE_NUMBER, TELEPHONE_NUMBER, EMAIL) VALUES ('{}', '{}', '{}', '{}');".format(ID, mobile, "", email)
         insertPersonalInformation = "INSERT INTO personal_information(PERSON_ID, BIRTHDAY, BIRTH_PLACE, GENDER, " \
                                     "EDUCATIONAL_ATTAINMENT, BLOOD_TYPE, RELIGION, MARITAL_STATUS) VALUES ('{}','{}','{}','{}','{}','{}','{}','{}');".format(ID, date_of_birth, place_of_birth, gender, "", "", religion, civil_status)
@@ -238,6 +241,6 @@ def generate_senior_citizen_fake_data(number):
         print(insertEmploymentDetails)
 
 
-# generate_pwd_fake_data(30)
-# generate_solo_parent_fake_data(30)
-generate_senior_citizen_fake_data(30)
+generate_pwd_fake_data(10)
+generate_solo_parent_fake_data(10)
+generate_senior_citizen_fake_data(10)

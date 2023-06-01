@@ -15,7 +15,7 @@ $.ajax({
   url: DASHBOARD_CONTROLLER + "?action=getTotalCount",
   dataType: "json",
   success: function (data) {
-    const labels = data.map((item) => item.APPLICATION_TYPE);
+    const labels = data.map((item) => item.APPLICANT_TYPE);
     const datasetData = data.map((item) => item["COUNT(*)"]);
     let barChart = new Chart(totalCountChart, {
       type: "bar",

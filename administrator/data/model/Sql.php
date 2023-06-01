@@ -42,10 +42,11 @@
         {
             $uuid = $request['uuid'];
             $applicationType = $request['applicationType'];
+            $applicantType = $request['applicantType'];
 
-            $sql = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE) VALUES (?,?)";
+            $sql = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE, APPLICANT_TYPE) VALUES (?,?,?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ss", $uuid, $applicationType);
+            $stmt->bind_param("sss", $uuid, $applicationType, $applicantType);
             $stmt->execute();
             $stmt->close();
         }
@@ -314,7 +315,7 @@
 
         public function getTotalCount()
         {
-            $sql = "SELECT COUNT(*), APPLICATION_TYPE FROM application GROUP BY APPLICATION_TYPE;";
+            $sql = "SELECT COUNT(*), APPLICANT_TYPE FROM application GROUP BY APPLICANT_TYPE;";
             $result = $this->conn->query($sql);
 
             if ($result === false) {
@@ -343,7 +344,7 @@
             return $result;
         }
 
-        public function getApplicants($type, $barangay, $status)
+        public function getApplicants($applicationType, $applicantType, $barangay, $status)
         {
             if($barangay != "All") {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
@@ -351,7 +352,7 @@
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICATION_TYPE = '$type' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status';";
+                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status';";
             }
             else if($barangay == "All") {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
@@ -359,7 +360,7 @@
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICATION_TYPE = '$type' AND APPLICATION_STATUS = '$status';";
+                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status';";
             }
             $result = $this->conn->query($sql);
 

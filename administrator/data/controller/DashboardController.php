@@ -49,7 +49,7 @@
             $tableRow .= "<td>" . $data['FULL_NAME'] . "</td>";
             $tableRow .= "<td>" . $data['BARANGAY'] . "</td>";
             $tableRow .= "<td>" . $data['FORMATTED_DATE'] . "</td>";
-            $tableRow .= "<td>" . $data['APPLICATION_TYPE'] . "</td>";
+            $tableRow .= "<td>" . $data['APPLICANT_TYPE'] . "</td>";
             $tableRow .= "</tr>";
             $counter++;
         }
