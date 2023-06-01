@@ -54,4 +54,4 @@
         </div>
     </div>
 <?php include_once("../layout/scripts.php") ?>
-<script src="../../libs/scripts/master-page/application.js"></script>
+<script src="../../libs/scripts/master-page/renewal.js"></script>
