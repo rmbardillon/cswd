@@ -67,6 +67,10 @@ const Dashboard = (() => {
             url: DASHBOARD_CONTROLLER + "?action=getBirthdayCelebrants",
             dataType: "json",
             success: function (data) {
+                if(data["data"].length == 0){
+                    $("#title").text("No Birthday Celebrants");
+                    return;
+                }
                 $("#title").text("Birthday Celebrants from the month of "+ data["data"][0]["MONTH"]);
                 $(".table").DataTable().destroy();
                 $("#tbody_birthday_celebrants").html(data["tableRow"]);

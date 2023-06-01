@@ -332,7 +332,7 @@
                     JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                     JOIN application ON person.PERSON_ID = application.PERSON_ID
                     JOIN address ON person.PERSON_ID = address.PERSON_ID
-                    WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE()) AND DAY(personal_information.BIRTHDAY) <= DAY(CURRENT_DATE());";
+                    WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE());";
             $result = $this->conn->query($sql);
 
             if ($result === false) {
