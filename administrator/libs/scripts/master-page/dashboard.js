@@ -74,7 +74,7 @@ const Dashboard = (() => {
             },
             success: function (data) {
                 if(data["data"].length == 0){
-                    $("#title").text("No Birthday Celebrants");
+                    $("#title").text("No Birthday Celebrants this month");
                     return;
                 }
                 $("#title").text("Birthday Celebrants from the month of "+ data["data"][0]["MONTH"]);
