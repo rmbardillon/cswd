@@ -221,6 +221,20 @@
             return $admins;
         }
 
+        public function getAdminByEmail($email)
+        {
+            $sql = "SELECT * FROM user_authentication WHERE EMAIL = '$email';";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $admins = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $admins;
+        }
+
         public function resetPassword($request)
         {
             $user_id = $request['user_id'];

@@ -21,6 +21,24 @@
 </head>
 
 <body>
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Forgot Password?</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                    <input type="text" class="form-control" id="email" placeholder="Input Email Address">
+                    <button class="btn btn-primary w-100 mt-3" id="btn-forgot-password">Send Reset Email.</button>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="admin-wrapper">
         <div class="row" style="height: 100%;">
             <div class="col col-8" id="gallery">
@@ -42,7 +60,7 @@
                             <span class="input-group-text toggle-password"><i class="fas fa-eye"></i></span>
                         </div>
                         <button class="btn btn-primary w-100 mb-2" type="button" id="login">Log In</button>
-                        <a class="text-danger" href="forgot-password.php"><i class="fas fa-key"></i><b>&nbsp;Forgot Password</b></a>
+                        <a class="text-danger" id="forgot-password"><i class="fas fa-key"></i><b>&nbsp;Forgot Password</b></a>
                     </form>
                 </div>
             </div>
@@ -52,6 +70,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../../libs/scripts/vars.js"></script>
     <script src="../../libs/scripts/master-page/login.js"></script>
+    <script src="../../../libs/scripts/master-page/function.js"></script>
     <script src="../../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
     <script>
         $(document).ready(function() {

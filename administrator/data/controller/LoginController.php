@@ -29,5 +29,20 @@
         ];
         echo json_encode($result);
     }
+
+    else if($action == "forgotPassword")
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $request = [
+            'email' => $email,
+            'password' => $password
+        ];
+
+        $result = $Login->forgotPassword($request);
+
+        echo json_encode($result);
+    }
     
 ?>

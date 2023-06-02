@@ -47,4 +47,58 @@ $(document).ready(function () {
             }
         });
     });
+
+    $("#forgot-password").click(function() {
+        $("#modal").modal("show");
+    });
+
+    $("#btn-forgot-password").click(function() {
+        var email = $("#email").val();
+
+        if (email == "") {
+            swal.fire({
+                title: "Error",
+                text: "Please enter email",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+
+        $.ajax({
+          url: LOGIN_CONTROLLER + "?action=forgotPassword",
+          type: "POST",
+          data: {
+            email: email,
+            password: generatePassword(),
+          },
+          dataType: "json",
+          success: function (response) {
+            if (response["message"] == "Success") {
+              swal.fire({
+                title: "Success",
+                text: response.message,
+                icon: "success",
+                confirmButtonText: "OK",
+              });
+              $("#modal").modal("hide");
+            } else {
+              swal.fire({
+                title: "Error",
+                text: response.message,
+                icon: "error",
+                confirmButtonText: "OK",
+              });
+            }
+          },
+          error: function (xhr, status, error) {
+            swal.fire({
+              title: "Error",
+              text: error,
+              icon: "error",
+              confirmButtonText: "OK",
+            });
+          },
+        });
+    });
 });

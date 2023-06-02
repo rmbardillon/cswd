@@ -1,18 +1,22 @@
 <?php 
     date_default_timezone_set('Asia/Manila');
     include_once('../model/Sql.php');
+    include_once('../model/Administrator.php');
 
     class Login {
         private $connection;
+        private $Sql;
+        private $Administrator;
         
         public function __construct($connection)
         {
             $this->connection = $connection;
+            $this->Sql = new Sql($this->connection);
+            $this->Administrator = new Administrator($this->connection);
         }
 
         public function login($request)
         {
-            $Sql = new Sql($this->connection);
             $username = $request['username'];
             $password = $request['password'];
 
@@ -56,15 +60,40 @@
                     'message' => 'Login successful.',
                     'data' => $row
                 ];
-                $Sql->resetAccount($username);
+                $this->Sql->resetAccount($username);
                 $_SESSION['user'] = $row;
             }
 
             return $result;
         }
 
-         
+        public function forgotPassword($request)
+        {
+            $email = $request['email'];
+            $password = $request['password'];
 
+            $userData = $this->Sql->getAdminByEmail($email);
+            if(!$userData) {
+                $result = [
+                    'status' => 'error',
+                    'message' => 'Email does not exist.'
+                ];
+                return $result;
+            } else {
+                $request = [
+                    'user_id' => $userData[0]['USER_AUTHENTICATION_ID'],
+                    'password' => $password
+                ];
+                $this->Administrator->resetPassword($request);
+
+                $result = [
+                    'status' => 'success',
+                    'message' => 'Success'
+                ];
+
+                return $result;
+            }
+        }
 
     }
 ?>
