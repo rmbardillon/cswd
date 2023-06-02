@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $("#fromDate, #toDate").change(function () {
+        $("#selectMonth").val("");
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
         if (fromDate != "" && toDate != "") {
@@ -17,8 +18,6 @@ $(document).ready(function () {
                     $("#toDate").val("");
                 }
                 });
-            } else {
-            console.log("fromDate < toDate");
             }
         }
     });
