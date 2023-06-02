@@ -36,8 +36,17 @@
                 </select>
             </div>
         </div>
+        <div class="row">
+            <label for="selectReport" class="form-label">Select Report</label>
+            <select class="form-select" id="selectReport">
+                <option value="" selected disabled>Please Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
         <div class="row mt-3">
-            <button class="btn btn-success w-100" id="btnGenerateReport">Generate Report</button>
+            <button type="button" class="btn btn-success w-100" onclick="Report.generateReport();">Generate Report</button>
         </div>
     </div>
 <?php include_once("../layout/scripts.php") ?>
