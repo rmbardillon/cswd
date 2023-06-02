@@ -1,5 +1,14 @@
 $(document).ready(function () {
     Admin.loadTableData();
+
+    $("#role").change(function () {
+        if ($(this).val() == "Super Administrator" || $(this).val() == "Main Administrator") {
+          $("#barangay").prop("disabled", true);
+          $("#barangay").val("");
+        } else {
+            $("#barangay").prop("disabled", false);
+        }
+    });
 });
 
 const Admin = (() => {
@@ -28,10 +37,15 @@ const Admin = (() => {
         var firstName = $("#firstName").val();
         var lastname = $("#lastname").val();
         var email = $("#email").val();
-        var barangay = $("#barangay").val();
         var role = $("#role").val();
 
-        if (firstName == "" || lastname == "" || email == "" || barangay == "" || role == "") {
+        if(role == "Super Administrator" || role == "Main Administrator") {
+            var barangay = "All";
+        } else {
+            var barangay = $("#barangay").val();
+        }
+
+        if (firstName == "" || lastname == "" || email == "" || barangay == null || role == null) {
             swal.fire({
                 title: "Error!",
                 text: "Please fill up all fields.",
@@ -52,26 +66,32 @@ const Admin = (() => {
                     role: role
                 },
                 dataType: "json",
+                beforeSend: function () {
+                    $.blockUI({ message: '<div class="loader"></div>' }); // Display loading animation
+                },
                 success: function (data) {
-                    if (data == "Success") {
-                        swal.fire({
-                            title: "Success!",
-                            text: "New admin has been added.",
-                            icon: "success",
-                            confirmButtonText: "Ok"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "administrator.php";
-                            }
-                        });
-                    } else {
-                        swal.fire({
-                            title: "Error!",
-                            text: data,
-                            icon: "error",
-                            confirmButtonText: "Ok"
-                        });
-                    }
+                  $.unblockUI(); // Remove loading animation
+                  if (data == "Success") {
+                    swal
+                      .fire({
+                        title: "Success!",
+                        text: "New admin has been added.",
+                        icon: "success",
+                        confirmButtonText: "Ok",
+                      })
+                      .then((result) => {
+                        if (result.isConfirmed) {
+                          window.location.href = "administrator.php";
+                        }
+                      });
+                  } else {
+                    swal.fire({
+                      title: "Error!",
+                      text: data,
+                      icon: "error",
+                      confirmButtonText: "Ok",
+                    });
+                  }
                 }
             });
         }

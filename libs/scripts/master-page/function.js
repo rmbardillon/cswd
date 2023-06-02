@@ -15,9 +15,10 @@ forms.forEach(function(form) {
     });
 });
 
-$(document).on('keyup change', 'input[type="text"]', function() {
+$(document).on("keyup change", 'input[type="text"]:not(#password)', function () {
     $(this).val($(this).val().toUpperCase());
 });
+
 
 $(document).on('keypress', '.numbers', function(e) {
     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {

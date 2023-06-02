@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2023 at 02:04 AM
+-- Generation Time: Jun 02, 2023 at 07:12 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -1503,8 +1503,8 @@ CREATE TABLE `user_authentication` (
 --
 
 INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
-('b3e579f7002511ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$kqNJv6QJJTKMwP34yLBn7u7C8DTaxfDRUCG8GcvCY.eLAZTe6C1D2', 'Super Administrator', 0, 1, 0, '2023-06-01'),
-('d8ff181e002511ee', 'FIRST NAME', 'LAST NAME', 'All', 'yegiy78063@rockdian.com', '$2y$10$CsGNk79JkFd5QsanzDqrKemCuslJt8Hqp2Mh9GTwT9U5rCny2eav2', 'Main Administrator', 0, 1, 0, '2023-06-01');
+('13604876010211ee', 'ROMEO', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', 0, 1, 0, '2023-06-02'),
+('d80455a8010311ee', 'JOHN', 'DOE', 'Balibago', 'yegiy78063@rockdian.com', '$2y$10$3YzeeJTWZFMOC/CCRQXYHe5k/nNblbl.lzQ38QLCyXDOHX1YKReSi', 'PWD Administrator', 0, 1, 0, '2023-06-02');
 
 --
 -- Indexes for dumped tables

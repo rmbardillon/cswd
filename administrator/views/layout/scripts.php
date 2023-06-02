@@ -21,6 +21,8 @@
 <script src="../../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
 <script src="../../../libs/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../../libs/plugins/datatables/dataTables.bootstrap5.min.js"></script>
+<!-- Add these script tags in the head or body section of your HTML file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
 <script>
     const Logout = () => {
         swal.fire({

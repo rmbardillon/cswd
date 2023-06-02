@@ -51,6 +51,17 @@
                         <input type="email" class="form-control" id="email" required>
                     </div>
                     <div class="col-md-12">
+                        <label for="role" class="form-label required">Role</label>
+                        <select id="role" class="form-select" required>
+                            <option value="" disabled selected>Choose...</option>
+                            <option value="Super Administrator">Super Administrator</option>
+                            <option value="Main Administrator">Main Administrator</option>
+                            <option value="PWD Administrator">PWD Administrator</option>
+                            <option value="Solo Parent Administrator">Solo Parent Administrator</option>
+                            <option value="Senior Citizen Administrator">Senior Citizen Administrator</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
                         <label for="barangay" class="form-label required">Barangay</label>
                         <select id="barangay" class="form-select" name="barangay" required>
                             <option disabled selected value="">Please Select</option>
@@ -72,17 +83,6 @@
                             <option value="Santo Domingo">Santo Domingo</option>
                             <option value="Sinalhan">Sinalhan</option>
                             <option value="Tagapo">Tagapo</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <label for="role" class="form-label required">Role</label>
-                        <select id="role" class="form-select" required>
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="Super Administrator">Super Administrator</option>
-                            <option value="Main Administrator">Main Administrator</option>
-                            <option value="PWD Administrator">PWD Administrator</option>
-                            <option value="Solo Parent Administrator">Solo Parent Administrator</option>
-                            <option value="Senior Citizen Administrator">Senior Citizen Administrator</option>
                         </select>
                     </div>
                     <div class="col-12">

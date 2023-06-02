@@ -48,10 +48,10 @@
                     'message' => 'Invalid username or password.'
                 ];
                 if($row['LOGIN_ATTEMPTS'] == 3) {
-                    $Sql->lockAccount($username);
+                    $this->Sql->lockAccount($username);
                     $result['message'] = 'Account is locked. Please contact the administrator.';
                 } else {
-                    $Sql->updateLoginAttempts($username);
+                    $this->Sql->updateLoginAttempts($username);
                     $result['message'] = 'Invalid username or password. You have ' . (3 - $row['LOGIN_ATTEMPTS']) . ' attempts left.';
                 }
             } else {

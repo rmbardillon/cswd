@@ -30,7 +30,7 @@
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="modal-body" class="modal-body">
-                    <input type="text" class="form-control" id="email" placeholder="Input Email Address">
+                    <input type="email" class="form-control" id="email" placeholder="Input Email Address">
                     <button class="btn btn-primary w-100 mt-3" id="btn-forgot-password">Send Reset Email.</button>
                 </div>
                 <div class="modal-footer">
@@ -52,7 +52,7 @@
                     <form>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-user-alt fa-user"></i></span>
-                            <input class="form-control" type="text" placeholder="Username" id="username" name="username" required maxlength="64">
+                            <input class="form-control" type="email" placeholder="Username" id="username" name="username" required maxlength="64">
                         </div>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
