@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2023 at 12:44 PM
+-- Generation Time: Jun 02, 2023 at 02:04 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -1499,6 +1499,14 @@ CREATE TABLE `user_authentication` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `user_authentication`
+--
+
+INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
+('b3e579f7002511ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$kqNJv6QJJTKMwP34yLBn7u7C8DTaxfDRUCG8GcvCY.eLAZTe6C1D2', 'Super Administrator', 0, 1, 0, '2023-06-01'),
+('d8ff181e002511ee', 'FIRST NAME', 'LAST NAME', 'All', 'yegiy78063@rockdian.com', '$2y$10$CsGNk79JkFd5QsanzDqrKemCuslJt8Hqp2Mh9GTwT9U5rCny2eav2', 'Main Administrator', 0, 1, 0, '2023-06-01');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -1650,18 +1658,6 @@ ALTER TABLE `pwd_data`
 ALTER TABLE `relatives`
   ADD CONSTRAINT `FK_PERSON_RELATIVE_ID` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`),
   ADD CONSTRAINT `FK_RELATIVE_PERSON_ID` FOREIGN KEY (`RELATIVE_PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
-
---
--- Constraints for table `solo_parent_data`
---
-ALTER TABLE `solo_parent_data`
-  ADD CONSTRAINT `FK_PERSON_SOLO_PARENT_DATA` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
-
---
--- Constraints for table `uploaded_documents`
---
-ALTER TABLE `uploaded_documents`
-  ADD CONSTRAINT `FK_PERSON_UPLOADED_DOCUMENT` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
