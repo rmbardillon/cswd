@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    Dashboard.loadBirthdayCelebrantsTable();
+    var adminType = $("#adminType").val();
+    var adminBarangay = $("#adminBarangay").val();
+
+    Dashboard.loadBirthdayCelebrantsTable(adminBarangay);
 });
 
 let totalCountChart = document.getElementById("totalCountChart").getContext("2d");
@@ -61,11 +64,14 @@ $.ajax({
 const Dashboard = (() => {
     const thisDashboard = {};
 
-    thisDashboard.loadBirthdayCelebrantsTable = () => {
+    thisDashboard.loadBirthdayCelebrantsTable = (adminBarangay) => {
         $.ajax({
             type: "POST",
             url: DASHBOARD_CONTROLLER + "?action=getBirthdayCelebrants",
             dataType: "json",
+            data: {
+                barangay: adminBarangay
+            },
             success: function (data) {
                 if(data["data"].length == 0){
                     $("#title").text("No Birthday Celebrants");

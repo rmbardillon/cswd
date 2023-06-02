@@ -37,7 +37,8 @@
     
     else if($action == "getBirthdayCelebrants")
     {
-        $result = $Sql->getBirthdayCelebrants();
+        $barangay = $_POST['barangay'];
+        $result = $Sql->getBirthdayCelebrants($barangay);
 
         $tableRow = "";
         $counter = 1;

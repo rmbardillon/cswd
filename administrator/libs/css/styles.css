@@ -45,23 +45,109 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
+/* Loading */
+.container-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    background-color: hsl(200deg,100%,4%);
+}
 
-.loader {
-        border: 16px solid #f3f3f3; /* Light gray border */
-        border-top: 16px solid #3498db; /* Blue border */
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        animation: spin 2s linear infinite; /* Add spinner animation */
-        margin: 0 auto;
-    }
+.square {
+    width: 30px;
+    height: 30px;
+    rotate: 45deg;
+    border: solid goldenrod 2px;
+    animation: jitter 1.5s ease-in-out infinite;
+    background-color: hsl(200deg,100%,4%);
+}
 
-/* Define the spinner animation */
-@keyframes spin {
+.circle {
+    width: 60px;
+    height: 60px;
+    border: dashed goldenrod 2px;
+    border-radius: 50%;
+    animation: smooth 10s linear infinite;
+}
+
+.centered {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+}
+
+.diamond {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: 0 -50%;
+}
+
+.diamond.small {
+    width: 30px;
+    height: 30px;
+    stroke-dasharray: 100;
+    stroke-width: 2px;
+    animation: disappear-small 3s ease-in-out infinite;
+}
+
+.diamond.large {
+    width: 60px;
+    height: 60px;
+    stroke-dasharray: 200;
+    stroke-width: 0.25px;
+    animation: disappear-large 3s ease-in-out infinite;
+}
+
+.path {
+    stroke: goldenrod;
+    fill: none;
+}
+
+.rotated {
+    transform-origin: left;
+    rotate: 180deg;
+}
+
+@keyframes jitter {
     0% {
-        transform: rotate(0deg);
+        rotate: 45deg;
+    }
+    33% {
+        rotate: 135deg;
     }
     100% {
-        transform: rotate(360deg);
+        rotate: 135deg;
+    }
+    }
+
+    @keyframes smooth {
+    from {
+        rotate: 0deg;
+    }
+    to {
+        rotate: 360deg;
+    }
+}
+
+@keyframes disappear-small {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    100% {
+        stroke-dashoffset: -100;
+    }
+}
+
+@keyframes disappear-large {
+    0% {
+        stroke-dashoffset: 200;
+    }
+    100% {
+        stroke-dashoffset: -200;
     }
 }

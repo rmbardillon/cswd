@@ -341,13 +341,21 @@
             return $totalCount;
         }
 
-        public function getBirthdayCelebrants()
+        public function getBirthdayCelebrants($barangay)
         {
-            $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
-                    JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
-                    JOIN application ON person.PERSON_ID = application.PERSON_ID
-                    JOIN address ON person.PERSON_ID = address.PERSON_ID
-                    WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE());";
+            if($barangay != "All"){
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
+                JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                JOIN application ON person.PERSON_ID = application.PERSON_ID
+                JOIN address ON person.PERSON_ID = address.PERSON_ID
+                WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE()) AND BARANGAY = '$barangay';";
+            } else {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
+                JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                JOIN application ON person.PERSON_ID = application.PERSON_ID
+                JOIN address ON person.PERSON_ID = address.PERSON_ID
+                WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE());";
+            }
             $result = $this->conn->query($sql);
 
             if ($result === false) {
