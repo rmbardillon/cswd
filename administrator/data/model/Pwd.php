@@ -16,7 +16,8 @@
             $uuid = $Sql->generateUUID();
             $application = [
                 'uuid' => $uuid,
-                'applicationType' => 'PWD',
+                'applicantype' => 'PWD',
+                'applicationType' => 'New Application',
             ];
             $person = [
                 'uuid' => $uuid,

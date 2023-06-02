@@ -48,7 +48,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "PWD",
+          applicationType: "New Application",
+          applicantType: "PWD",
           status: "Pending",
           barangay: adminBarangay,
         },
@@ -72,7 +73,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "PWD",
+          applicationType: "New Application",
+          applicantType: "PWD",
           status: "Approved",
           barangay: adminBarangay,
         },
@@ -96,9 +98,10 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "PWD",
-          status: "Rejected",
-          barangay: adminBarangay,
+            applicationType: "New Application",
+            applicantType: "PWD",
+            status: "Rejected",
+            barangay: adminBarangay,
         },
         success: function (data) {
           $(".table").DataTable().destroy();
@@ -121,7 +124,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "Solo Parent",
+          applicationType: "New Application",
+          applicantType: "Solo Parent",
           status: "Pending",
           barangay: adminBarangay,
         },
@@ -145,7 +149,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "Solo Parent",
+          applicationType: "New Application",
+          applicantType: "Solo Parent",
           status: "Approved",
           barangay: adminBarangay,
         },
@@ -169,7 +174,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "Solo Parent",
+          applicationType: "New Application",
+          applicantType: "Solo Parent",
           status: "Rejected",
           barangay: adminBarangay,
         },
@@ -194,7 +200,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "Senior Citizen",
+          applicationType: "New Application",
+          applicantType: "Senior Citizen",
           status: "Pending",
           barangay: adminBarangay,
         },
@@ -218,7 +225,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "Senior Citizen",
+          applicationType: "New Application",
+          applicantType: "Senior Citizen",
           status: "Approved",
           barangay: adminBarangay,
         },
@@ -242,7 +250,8 @@ const Application = (() => {
         type: "POST",
         dataType: "json",
         data: {
-          type: "Senior Citizen",
+          applicationType: "New Application",
+          applicantType: "Senior Citizen",
           status: "Rejected",
           barangay: adminBarangay,
         },

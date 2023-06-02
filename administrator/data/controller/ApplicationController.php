@@ -7,10 +7,11 @@
     
     if ($action == "getApplications")
     {
-        $status = $_POST['status'];
-        $type = $_POST['type'];
+        $applicationType = $_POST['applicationType'];
+        $applicantType = $_POST['applicantType'];
         $barangay = $_POST['barangay'];
-        $result = $Sql->getApplicants($type, $barangay, $status);
+        $status = $_POST['status'];
+        $result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status);
 
         if($status == "Pending")
             $text = "text-warning";
