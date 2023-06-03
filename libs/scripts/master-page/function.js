@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#id-application").click(function() {
+    $(".id-application").click(function() {
         $("#applicationTypeModal").modal("show"); 
     });
 });
