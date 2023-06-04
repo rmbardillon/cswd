@@ -9,6 +9,15 @@
     <div class="container">
         <h1>Generate Report</h1>
         <div class="row">
+            <label for="selectReport" class="form-label">Select Report</label>
+            <select class="form-select" id="selectReport">
+                <option value="" selected disabled>Please Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="row" id="dateRow" style="display: none;">
             <div class="col">
                 <label for="fromDate" class="form-label">From</label>
                 <input type="date" class="form-control" id="fromDate">
@@ -35,15 +44,6 @@
                     <option value="12">Decemeber</option>
                 </select>
             </div>
-        </div>
-        <div class="row">
-            <label for="selectReport" class="form-label">Select Report</label>
-            <select class="form-select" id="selectReport">
-                <option value="" selected disabled>Please Select</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
         </div>
         <div class="row mt-3">
             <button type="button" class="btn btn-success w-100" onclick="Report.generateReport();">Generate Report</button>

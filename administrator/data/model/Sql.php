@@ -287,7 +287,11 @@
 
         public function getSeniorCitizenCount()
         {
-            $sql = "SELECT COUNT(*) AS COUNT FROM application WHERE APPLICATION_TYPE = 'Senior Citizen';";
+            $sql = "SELECT COUNT(*) AS COUNT, BARANGAY
+                    FROM application
+                    JOIN address ON application.PERSON_ID = address.PERSON_ID
+                    WHERE APPLICANT_TYPE = 'Senior Citizen'
+                    GROUP BY BARANGAY;";
             $result = $this->conn->query($sql);
 
             if ($result === false) {
@@ -301,7 +305,11 @@
 
         public function getSoloParentCount()
         {
-            $sql = "SELECT COUNT(*) AS COUNT FROM application WHERE APPLICATION_TYPE = 'Solo Parent';";
+            $sql = "SELECT COUNT(*) AS COUNT, BARANGAY
+                    FROM application
+                    JOIN address ON application.PERSON_ID = address.PERSON_ID
+                    WHERE APPLICANT_TYPE = 'Solo Parent'
+                    GROUP BY BARANGAY;";
             $result = $this->conn->query($sql);
 
             if ($result === false) {
@@ -315,7 +323,11 @@
 
         public function getPWDCount()
         {
-            $sql = "SELECT COUNT(*) AS COUNT FROM application WHERE APPLICATION_TYPE = 'PWD';";
+            $sql = "SELECT COUNT(*) AS COUNT, BARANGAY
+                    FROM application
+                    JOIN address ON application.PERSON_ID = address.PERSON_ID
+                    WHERE APPLICANT_TYPE = 'PWD'
+                    GROUP BY BARANGAY;";
             $result = $this->conn->query($sql);
 
             if ($result === false) {
@@ -330,6 +342,26 @@
         public function getTotalCount()
         {
             $sql = "SELECT COUNT(*), APPLICANT_TYPE FROM application GROUP BY APPLICANT_TYPE;";
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $totalCount = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+
+            return $totalCount;
+        }
+
+        public function getTotalCitizenCount($request)
+        {
+            $barangay = $request['barangay'];
+            $administratorType = $request['administratorType'];
+            $sql = "SELECT COUNT(*), APPLICANT_TYPE, DATE_FORMAT(APPLICATION_DATE, '%M') AS APPLICATION_MONTH
+                    FROM application
+                    JOIN address ON application.PERSON_ID = address.PERSON_ID
+                    WHERE BARANGAY = '$barangay' AND APPLICANT_TYPE = '$administratorType'
+                    GROUP BY APPLICATION_DATE;";
             $result = $this->conn->query($sql);
 
             if ($result === false) {

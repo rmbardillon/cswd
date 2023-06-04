@@ -41,5 +41,13 @@
 
             return $result;
         }
+
+        public function getTotalCitizenCount($request)
+        {
+            $Sql = new Sql($this->connection);
+            $result = $Sql->getTotalCitizenCount($request);
+
+            return $result;
+        }
     }
 ?>

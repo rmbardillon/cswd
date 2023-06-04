@@ -6,12 +6,25 @@
     }
 ?>
 <?php include_once("../layout/navbar.php") ?>
-    <div class="container-fluid p-2">
+    <div class="container p-2">
         <h1>Dashboard</h1>
         <div class="row">
             <div class="col">
                 <canvas id="totalCountChart"></canvas>
             </div>
+            <div class="col">
+                <canvas id="pwdCountChart"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <canvas id="scCountChart"></canvas>
+            </div>
+            <div class="col">
+                <canvas id="spCountChart"></canvas>
+            </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <h4 id="title">Birthday Celebrants this Month of January</h4>
                 <table class="table table-bordered">

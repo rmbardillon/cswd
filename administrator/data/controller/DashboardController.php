@@ -34,6 +34,22 @@
 
         echo json_encode($result);
     }
+
+    else if($action == "getTotalCitizenCount")
+    {
+        $barangay = $_POST['barangay'];
+        $administratorType = $_POST['administratorType'];
+
+        $request = [
+            'barangay' => $barangay,
+            'administratorType' => $administratorType
+        ];
+
+        $result = $Dashboard->getTotalCitizenCount($request);
+
+        echo json_encode($result);
+
+    }
     
     else if($action == "getBirthdayCelebrants")
     {
