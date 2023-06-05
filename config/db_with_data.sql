@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2023 at 07:12 AM
+-- Generation Time: Jun 05, 2023 at 07:03 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -1504,7 +1504,7 @@ CREATE TABLE `user_authentication` (
 
 INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
 ('13604876010211ee', 'ROMEO', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', 0, 1, 0, '2023-06-02'),
-('d80455a8010311ee', 'JOHN', 'DOE', 'Balibago', 'yegiy78063@rockdian.com', '$2y$10$3YzeeJTWZFMOC/CCRQXYHe5k/nNblbl.lzQ38QLCyXDOHX1YKReSi', 'PWD Administrator', 0, 1, 0, '2023-06-02');
+('d80455a8010311ee', 'JOHN', 'DOE', 'All', 'yegiy78063@rockdian.com', '$2y$10$3YzeeJTWZFMOC/CCRQXYHe5k/nNblbl.lzQ38QLCyXDOHX1YKReSi', 'Main Administrator', 0, 1, 0, '2023-06-02');
 
 --
 -- Indexes for dumped tables
@@ -1651,13 +1651,6 @@ ALTER TABLE `personal_information`
 --
 ALTER TABLE `pwd_data`
   ADD CONSTRAINT `FK_PERSON_PWD_DATA` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
-
---
--- Constraints for table `relatives`
---
-ALTER TABLE `relatives`
-  ADD CONSTRAINT `FK_PERSON_RELATIVE_ID` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`),
-  ADD CONSTRAINT `FK_RELATIVE_PERSON_ID` FOREIGN KEY (`RELATIVE_PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
