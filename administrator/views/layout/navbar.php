@@ -22,7 +22,7 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link <?php if($page == 'dashboard') echo('active'); ?>" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link <?php if($page == 'id-application') echo('active'); ?>" id="id-application"><i class="fas fa-user-plus"></i><span>New Application</span></a></li>
+                    <li class="nav-item"><a class="nav-link <?php if($page == 'id-application') echo('active'); ?> id-application" id="id-application"><i class="fas fa-user-plus"></i><span>New Application</span></a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle <?php if($page == 'application') echo('active'); ?>" href="#" id="applicationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-plus"></i><span>Applications</span>
