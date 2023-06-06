@@ -46,6 +46,15 @@
                 </select>
             </div>
         </div>
+        <div class="row mt-3" id="applicantTypeRow" style="display: none;">
+            <label for="selectApplicantType" class="form-label">Select Applicant Type</label>
+            <select class="form-select" id="selectApplicantType">
+                <option value="" selected disabled>Please Select</option>
+                <option value="PWD">PWD Citizens</option>
+                <option value="Solo Parent">Solo Parent Citizens</option>
+                <option value="Senior Citizen">Senior Citizen Citizens</option>
+            </select>
+        </div>
         <div class="row mt-3" id="barangayRow" >
             <label class="form-label required" for="barangay">Barangay</label>
             <select id="barangay" class="form-select" name="barangay" required>

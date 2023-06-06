@@ -1,8 +1,8 @@
 $(document).ready(function () {
     $("#selectReport").change(function () {
         if ($(this).val() == "4") {
-            console.log("4");
           $("#dateRow").show();
+          $("#applicantTypeRow").show();
         }
     });
 
@@ -65,6 +65,7 @@ const Report = (() => {
         var toDate = $("#toDate").val();
         var selectReport = $("#selectReport").val();
         var barangay = $("#barangay").val();
+        var selectApplicantType = $("#selectApplicantType").val();
 
         if (selectReport == null || barangay == null) {
             swal.fire({
@@ -85,17 +86,28 @@ const Report = (() => {
               icon: "error",
               confirmButtonText: "Ok",
             });
+            return false;
+          }
+        }
 
+        // Ajax Request
+        if(selectReport == "1") {
+            var applicantType = "PWD";
+        } else if(selectReport == "2") {
+            var applicantType = "Solo Parent";
+        } else if(selectReport == "3") {
+            var applicantType = "Senior Citizen";
+        } else if(selectReport == "4") {
             $.ajax({
-              url: REPORT_CONTROLLER + "?action=getBirthdayCelebrants",
+              url: REPORT_CONTROLLER + "?action=getCitizens",
               type: "POST",
               data: {
                 barangay: barangay,
-                applicantType: applicantType,
+                applicantType: selectApplicantType,
               },
               success: function (data) {
                 console.log(data);
-                if (!data) {
+                if (data == "[]") {
                   swal.fire({
                     title: "Error!",
                     text: "No data found",
@@ -104,10 +116,10 @@ const Report = (() => {
                   });
                 } else {
                   window.open(
-                    "../reports/pwd-citizen-list.php?barangay=" +
+                    "../reports/citizen-birthday-list.php?barangay=" +
                       barangay +
                       "&applicantType=" +
-                      applicantType,
+                      selectApplicantType,
                     "_blank"
                   );
                 }
@@ -123,20 +135,10 @@ const Report = (() => {
             });
 
             return false;
-          }
         }
 
-        // Ajax Request
-        if(selectReport == "1") {
-            var applicantType = "PWD";
-        } else if(selectReport == "2") {
-            var applicantType = "Solo Parent";
-        } else if(selectReport == "3") {
-            var applicantType = "Senior Citizen";
-        } 
-
         $.ajax({
-          url: REPORT_CONTROLLER + "?action=getPWDCitizens",
+          url: REPORT_CONTROLLER + "?action=getCitizens",
           type: "POST",
           data: {
             barangay: barangay,

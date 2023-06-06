@@ -398,6 +398,31 @@
             return $result;
         }
 
+        public function getBirthdayCelebrantsByMonth($month, $barangay, $applicantType)
+        {
+            if($barangay != "All"){
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
+                JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                JOIN application ON person.PERSON_ID = application.PERSON_ID
+                JOIN address ON person.PERSON_ID = address.PERSON_ID
+                WHERE MONTH(personal_information.BIRTHDAY) = MONTH($month) AND BARANGAY = '$barangay';";
+            } else {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
+                JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                JOIN application ON person.PERSON_ID = application.PERSON_ID
+                JOIN address ON person.PERSON_ID = address.PERSON_ID
+                WHERE MONTH(personal_information.BIRTHDAY) = MONTH($month);";
+            }
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
         public function getApplicants($applicationType, $applicantType, $barangay, $status)
         {
             if($barangay != "All") {
