@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    $("#selectReport").change(function () {
+        if ($(this).val() == "4") {
+            console.log("4");
+          $("#dateRow").show();
+        }
+    });
+
     $("#fromDate, #toDate").change(function () {
         $("#selectMonth").val("");
         var fromDate = $("#fromDate").val();
@@ -57,8 +64,9 @@ const Report = (() => {
         var fromDate = $("#fromDate").val();
         var toDate = $("#toDate").val();
         var selectReport = $("#selectReport").val();
+        var barangay = $("#barangay").val();
 
-        if (fromDate == "" || toDate == "" || selectReport == null) {
+        if (selectReport == null || barangay == null) {
             swal.fire({
                 title: "Error!",
                 text: "Please fill up all fields.",
@@ -69,7 +77,99 @@ const Report = (() => {
             return false;
         }
 
+        if (selectReport == "4") {
+          if (fromDate == "" || toDate == "") {
+            swal.fire({
+              title: "Error!",
+              text: "Please fill up all fields.",
+              icon: "error",
+              confirmButtonText: "Ok",
+            });
+
+            $.ajax({
+              url: REPORT_CONTROLLER + "?action=getBirthdayCelebrants",
+              type: "POST",
+              data: {
+                barangay: barangay,
+                applicantType: applicantType,
+              },
+              success: function (data) {
+                console.log(data);
+                if (!data) {
+                  swal.fire({
+                    title: "Error!",
+                    text: "No data found",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                  });
+                } else {
+                  window.open(
+                    "../reports/pwd-citizen-list.php?barangay=" +
+                      barangay +
+                      "&applicantType=" +
+                      applicantType,
+                    "_blank"
+                  );
+                }
+              },
+              error: function () {
+                swal.fire({
+                  title: "Error!",
+                  text: "Something went wrong",
+                  icon: "error",
+                  confirmButtonText: "OK",
+                });
+              },
+            });
+
+            return false;
+          }
+        }
+
         // Ajax Request
+        if(selectReport == "1") {
+            var applicantType = "PWD";
+        } else if(selectReport == "2") {
+            var applicantType = "Solo Parent";
+        } else if(selectReport == "3") {
+            var applicantType = "Senior Citizen";
+        } 
+
+        $.ajax({
+          url: REPORT_CONTROLLER + "?action=getPWDCitizens",
+          type: "POST",
+          data: {
+            barangay: barangay,
+            applicantType: applicantType,
+          },
+          success: function (data) {
+            console.log(data);
+            if (data == "[]") {
+              swal.fire({
+                title: "Error!",
+                text: "No data found",
+                icon: "error",
+                confirmButtonText: "OK",
+              });
+            } else {
+              window.open(
+                "../reports/citizen-list.php?barangay=" +
+                  barangay +
+                  "&applicantType=" +
+                  applicantType,
+                "_blank"
+              );
+            }
+          },
+          error: function () {
+            swal.fire({
+              title: "Error!",
+              text: "Something went wrong",
+              icon: "error",
+              confirmButtonText: "OK",
+            });
+          },
+        });
         
     };
 

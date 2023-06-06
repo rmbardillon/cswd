@@ -12,12 +12,13 @@
             <label for="selectReport" class="form-label">Select Report</label>
             <select class="form-select" id="selectReport">
                 <option value="" selected disabled>Please Select</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="1">List of PWD Citizens</option>
+                <option value="2">List of Solo Parent Citizens</option>
+                <option value="3">List of Senior Citizen Citizens</option>
+                <option value="4">List of Birthday Celebrant</option>
             </select>
         </div>
-        <div class="row" id="dateRow" style="display: none;">
+        <div class="row mt-3" id="dateRow" style="display: none;">
             <div class="col">
                 <label for="fromDate" class="form-label">From</label>
                 <input type="date" class="form-control" id="fromDate">
@@ -44,6 +45,31 @@
                     <option value="12">Decemeber</option>
                 </select>
             </div>
+        </div>
+        <div class="row mt-3" id="barangayRow" >
+            <label class="form-label required" for="barangay">Barangay</label>
+            <select id="barangay" class="form-select" name="barangay" required>
+                <option disabled selected value="">Please Select</option>
+                <option value="All">All</option>
+                <option value="Aplaya">Aplaya</option>
+                <option value="Balibago">Balibago</option>
+                <option value="Caingin">Caingin</option>
+                <option value="Dila">Dila</option>
+                <option value="Dita">Dita</option>
+                <option value="Don Jose">Don Jose</option>
+                <option value="Ibaba">Ibaba</option>
+                <option value="Kalnuran">Kanluran</option>
+                <option value="Labas">Labas</option>
+                <option value="Macabling">Macabling</option>
+                <option value="Malitlit">Malitlit</option>
+                <option value="Malusak">Malusak</option>
+                <option value="Market Area">Market Area</option>
+                <option value="Pook">Pook</option>
+                <option value="Pulong Santa Cruz">Pulong Santa Cruz</option>
+                <option value="Santo Domingo">Santo Domingo</option>
+                <option value="Sinalhan">Sinalhan</option>
+                <option value="Tagapo">Tagapo</option>
+            </select>
         </div>
         <div class="row mt-3">
             <button type="button" class="btn btn-success w-100" onclick="Report.generateReport();">Generate Report</button>

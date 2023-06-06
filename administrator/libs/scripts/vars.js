@@ -6,4 +6,5 @@ const ADMINISTRATOR_CONTROLLER = HOST2 + '/' + PATH_TO_CONTROLLER2 + '/Administr
 const LOGIN_CONTROLLER = HOST2 + '/' + PATH_TO_CONTROLLER2 + '/LoginController.php';
 const DASHBOARD_CONTROLLER = HOST2 + "/" + PATH_TO_CONTROLLER2 + "/DashboardController.php";
 const APPLICATION_CONTROLLER = HOST2 + "/" + PATH_TO_CONTROLLER2 + "/ApplicationController.php";
+const REPORT_CONTROLLER = HOST2 + "/" + PATH_TO_CONTROLLER2 + "/ReportController.php";
 
