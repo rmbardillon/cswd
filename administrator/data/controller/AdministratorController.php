@@ -87,5 +87,22 @@
 
         echo json_encode($result);
     }
+
+    else if($action == "checkAdministrator")
+    {
+        $role = $_POST['role'];
+        $barangay = $_POST['barangay'];
+        $email = $_POST['email'];
+
+        $request = [
+            'role' => $role,
+            'barangay' => $barangay,
+            'email' => $email
+        ];
+
+        $result = $Administrator->checkAdministrator($request);
+
+        echo json_encode($result);
+    }
     
 ?>

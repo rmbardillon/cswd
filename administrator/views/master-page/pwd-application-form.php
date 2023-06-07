@@ -73,7 +73,7 @@
         <div class="row">
             <div class="col col-4"><label class="form-label" for="landline">LANDLINE</label><input class="form-control numbers telephone" type="text" id="landline" name="landline"></div>
             <div class="col col-4"><label class="form-label required numbers" for="mobileNumber">MOBILE NUMBER</label><input class="form-control numbers telephone" type="text" id="mobileNumber" name="mobileNumber" required=""></div>
-            <div class="col col-4"><label class="form-label required" for="emailAddress">EMAIL ADDRESS</label><input class="form-control" type="email" id="emailAddress" name="emailAddress" required=""></div>
+            <div class="col col-4"><label class="form-label required" for="emailAddress">EMAIL ADDRESS</label><input class="form-control email" type="email" id="emailAddress" name="emailAddress" required=""></div>
         </div>
         <div class="row">
             <div class="col col-3"><label class="form-label required" for="pwdDOB">DATE OF BIRTH</label><input class="form-control" id="pwdDOB" type="date" name="pwdDOB" required="" min="1900-01-01"></div>

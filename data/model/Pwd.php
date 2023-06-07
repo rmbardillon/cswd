@@ -16,7 +16,8 @@
             $uuid = $Sql->generateUUID();
             $application = [
                 'uuid' => $uuid,
-                'applicationType' => 'PWD',
+                'applicantType' => 'PWD',
+                'applicationType' => 'New Application',
             ];
             $person = [
                 'uuid' => $uuid,
@@ -156,6 +157,17 @@
                 return $errorMessage;
             }
             return $uuid;
+        }
+
+        public function checkEmail($email)
+        {
+            $sql = "SELECT * FROM contact_details WHERE EMAIL = ?;";
+            $statement = $this->connection->prepare($sql);
+            $statement->bind_param("s", $email);
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result->num_rows > 0;
         }
     }
 ?>

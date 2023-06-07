@@ -101,26 +101,26 @@ if($pdf->GetY() > 258.00125)
 // First column
 $pdf->SetXY(10, $pdf->GetY());
 $pdf->Cell(70, 5, 'PREPARED BY:', 0, 1);
-$pdf->Cell(50, 5, strtoupper("Romeo Jr Bardillon"), 0, 1, 'C');
+$pdf->Cell(50, 5, strtoupper($_SESSION['user']['FULL_NAME']), 0, 1, 'C');
 $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
 $pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
 $pdf->Cell(8, 5, 'DATE:', 0, 0);
 // Set Font
 $pdf->SetFont('Arial','U',7);
-$pdf->Cell(62, 5, date("Y/m/d"), 0, 1);
+$pdf->Cell(62, 5, date("F j, Y"), 0, 1);
 $pdf->Ln(5);
 
 // Set font
 $pdf->SetFont('Arial','B',7);
 
 $pdf->Cell(70, 5, 'RECEIVED BY:', 0, 1);
-$pdf->Cell(50, 5, strtoupper("Clarence Urmatam"), 0, 1, 'C');
+$pdf->Cell(50, 5, "", 0, 1, 'C');
 $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
 $pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
 $pdf->Cell(8, 5, 'DATE:', 0, 0);
 // Set Font
 $pdf->SetFont('Arial','U',7);
-$pdf->Cell(62, 5, date("Y/m/d"), 0, 1);
+$pdf->Cell(62, 5, "", 0, 1);
 $pdf->Ln(5);
 
 $pdf->Output();

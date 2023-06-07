@@ -23,7 +23,8 @@
             ];
             $application = [
                 'uuid' => $uuid,
-                'applicationType' => 'Senior Citizen',
+                'applicantType' => 'Senior Citizen',
+                'applicationType' => 'New Application',
             ];
             $address = [
                 'uuid' => $uuid,

@@ -12,5 +12,13 @@
 
         echo json_encode($result);
     }
+
+    if($action == "checkEmail")
+    {
+        $email = $_POST['email'];
+        $result = $Pwd->checkEmail($email);
+
+        echo json_encode($result);
+    }
     
 ?>

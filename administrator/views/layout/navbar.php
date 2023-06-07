@@ -6,9 +6,29 @@
                     <h4 class="modal-title">Application Type</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3"><a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="pwd-application-form.php">PWD ID Application</a></div>
-                    <div class="mb-3"><a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="sc-application-form.php">Senior Citizen ID&nbsp;Application</a></div>
-                    <div class="mb-3"><a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="sp-application-form.php">Solo Parent ID&nbsp;Application</a></div>
+                <?php if ($_SESSION['user']['ROLE'] === 'Main Administrator') { ?>
+                    <div class="mb-3">
+                    <a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="pwd-application-form.php">PWD ID Application</a>
+                    </div>
+                    <div class="mb-3">
+                    <a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="sc-application-form.php">Senior Citizen ID Application</a>
+                    </div>
+                    <div class="mb-3">
+                    <a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="sp-application-form.php">Solo Parent ID Application</a>
+                    </div>
+                <?php } elseif ($_SESSION['user']['ROLE'] === 'PWD Administrator') { ?>
+                    <div class="mb-3">
+                    <a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="pwd-application-form.php">PWD ID Application</a>
+                    </div>
+                <?php } elseif ($_SESSION['user']['ROLE'] === 'Senior Citizen Administrator') { ?>
+                    <div class="mb-3">
+                    <a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="sc-application-form.php">Senior Citizen ID Application</a>
+                    </div>
+                <?php } elseif ($_SESSION['user']['ROLE'] === 'Solo Parent Administrator') { ?>
+                    <div class="mb-3">
+                    <a class="btn btn-secondary btn-lg btn-application w-100" role="button" href="sp-application-form.php">Solo Parent ID Application</a>
+                    </div>
+                <?php } ?>
                 </div>
                 <div class="modal-footer"><button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button></div>
             </div>

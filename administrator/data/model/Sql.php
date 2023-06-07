@@ -361,7 +361,8 @@
                     FROM application
                     JOIN address ON application.PERSON_ID = address.PERSON_ID
                     WHERE BARANGAY = '$barangay' AND APPLICANT_TYPE = '$administratorType'
-                    GROUP BY APPLICATION_DATE;";
+                    GROUP BY APPLICATION_MONTH
+                    ORDER BY APPLICATION_MONTH DESC;";
             $result = $this->conn->query($sql);
 
             if ($result === false) {
@@ -380,13 +381,15 @@
                 JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                 JOIN application ON person.PERSON_ID = application.PERSON_ID
                 JOIN address ON person.PERSON_ID = address.PERSON_ID
-                WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE()) AND BARANGAY = '$barangay';";
+                WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE()) AND BARANGAY = '$barangay'
+                ORDER BY FORMATTED_DATE, FULL_NAME;";
             } else {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
                 JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                 JOIN application ON person.PERSON_ID = application.PERSON_ID
                 JOIN address ON person.PERSON_ID = address.PERSON_ID
-                WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE());";
+                WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURRENT_DATE())
+                ORDER BY FORMATTED_DATE, FULL_NAME;";
             }
             $result = $this->conn->query($sql);
 
@@ -398,20 +401,45 @@
             return $result;
         }
 
-        public function getBirthdayCelebrantsByMonth($month, $barangay, $applicantType)
+        public function getCitizenPerBirthday($request)
         {
+            $barangay = $request['barangay'];
+            $applicantType = $request['applicantType'];
+            $fromDate = $request['fromDate'];
+            $toDate = $request['toDate'];
             if($barangay != "All"){
-                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
-                JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
-                JOIN application ON person.PERSON_ID = application.PERSON_ID
-                JOIN address ON person.PERSON_ID = address.PERSON_ID
-                WHERE MONTH(personal_information.BIRTHDAY) = MONTH($month) AND BARANGAY = '$barangay';";
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        WHERE application.APPLICANT_TYPE = '$applicantType'
+                        AND address.BARANGAY = '$barangay'
+                        AND (
+                            MONTH(personal_information.BIRTHDAY) > MONTH('$fromDate') OR
+                            (MONTH(personal_information.BIRTHDAY) = MONTH('$fromDate') AND DAY(personal_information.BIRTHDAY) >= DAY('$fromDate'))
+                        )
+                        AND (
+                            MONTH(personal_information.BIRTHDAY) < MONTH('$toDate') OR
+                            (MONTH(personal_information.BIRTHDAY) = MONTH('$toDate') AND DAY(personal_information.BIRTHDAY) <= DAY('$toDate'))
+                        )
+                        ORDER BY FORMATTED_DATE;";
             } else {
-                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH FROM person
-                JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
-                JOIN application ON person.PERSON_ID = application.PERSON_ID
-                JOIN address ON person.PERSON_ID = address.PERSON_ID
-                WHERE MONTH(personal_information.BIRTHDAY) = MONTH($month);";
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        WHERE application.APPLICANT_TYPE = '$applicantType'
+                        AND (
+                            MONTH(personal_information.BIRTHDAY) > MONTH('$fromDate') OR
+                            (MONTH(personal_information.BIRTHDAY) = MONTH('$fromDate') AND DAY(personal_information.BIRTHDAY) >= DAY('$fromDate'))
+                        )
+                        AND (
+                            MONTH(personal_information.BIRTHDAY) < MONTH('$toDate') OR
+                            (MONTH(personal_information.BIRTHDAY) = MONTH('$toDate') AND DAY(personal_information.BIRTHDAY) <= DAY('$toDate'))
+                        )
+                        ORDER BY FORMATTED_DATE;";
             }
             $result = $this->conn->query($sql);
 
@@ -432,7 +460,7 @@
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
                         WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
-                        ORDER BY FULL_NAME;";
+                        ORDER BY BARANGAY, FULL_NAME;";
             }
             else if($barangay == "All") {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
@@ -441,7 +469,7 @@
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
                         WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
-                        ORDER BY FULL_NAME;";
+                        ORDER BY BARANGAY, FULL_NAME;";
             }
             $result = $this->conn->query($sql);
 

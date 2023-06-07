@@ -23,7 +23,8 @@
             ];
             $application = [
                 'uuid' => $uuid,
-                'applicationType' => 'Solo Parent',
+                'applicantType' => 'Solo Parent',
+                'applicationType' => 'New Application',
             ];
             $address = [
                 'uuid' => $uuid,

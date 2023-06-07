@@ -50,68 +50,103 @@ const Admin = (() => {
             }
         });
     };
-
     thisAdmin.saveAdmin = () => {
         var firstName = $("#firstName").val();
         var lastname = $("#lastname").val();
         var email = $("#email").val();
         var role = $("#role").val();
 
-        if(role == "Super Administrator" || role == "Main Administrator") {
+        if (role == "Super Administrator" || role == "Main Administrator") {
             var barangay = "All";
         } else {
             var barangay = $("#barangay").val();
         }
 
-        if (firstName == "" || lastname == "" || email == "" || barangay == null || role == null) {
+        var adminExists = false; // Flag to track administrator check result
+
+        $.ajax({
+            type: "POST",
+            url: ADMINISTRATOR_CONTROLLER + "?action=checkAdministrator",
+            data: {
+            role: role,
+            barangay: barangay,
+            email: email,
+            },
+            dataType: "json",
+            success: function (data) {
+            if (data) {
+                swal.fire({
+                title: "Error!",
+                text: "There is already an administrator for this barangay.",
+                icon: "error",
+                confirmButtonText: "Ok",
+                });
+
+                adminExists = true; // Set flag to indicate administrator check failed
+            } else {
+                // Proceed with saving the admin if check passes
+                saveAdmin();
+            }
+            },
+        });
+
+        function saveAdmin() {
+            if (
+            firstName == "" ||
+            lastname == "" ||
+            email == "" ||
+            barangay == null ||
+            role == null
+            ) {
             swal.fire({
                 title: "Error!",
                 text: "Please fill up all fields.",
                 icon: "error",
-                confirmButtonText: "Ok"
+                confirmButtonText: "Ok",
             });
-        } else {
+            } else {
             console.log("saveAdmin");
             $.ajax({
                 url: ADMINISTRATOR_CONTROLLER + "?action=saveAdmin",
                 type: "POST",
                 data: {
-                    firstName: firstName,
-                    lastname: lastname,
-                    email: email,
-                    barangay: barangay,
-                    password: generatePassword(),
-                    role: role
+                firstName: firstName,
+                lastname: lastname,
+                email: email,
+                barangay: barangay,
+                password: generatePassword(),
+                role: role,
                 },
                 dataType: "json",
                 beforeSend: function () {
-                    $.blockUI({ message: loading }); // Display loading animation
+                $.blockUI({ message: loading }); // Display loading animation
                 },
                 success: function (data) {
-                  $.unblockUI(); // Remove loading animation
-                  if (data == "Success") {
+                $.unblockUI(); // Remove loading animation
+                if (data == "Success") {
                     swal
-                      .fire({
+                    .fire({
                         title: "Success!",
                         text: "New admin has been added.",
                         icon: "success",
                         confirmButtonText: "Ok",
-                      })
-                      .then((result) => {
+                    })
+                    .then((result) => {
                         if (result.isConfirmed) {
-                          window.location.href = "administrator.php";
+                        window.location.href = "administrator.php";
                         }
-                      });
-                  } else {
-                    swal.fire({
-                      title: "Error!",
-                      text: data,
-                      icon: "error",
-                      confirmButtonText: "Ok",
                     });
-                  }
+                } else {
+                    swal.fire({
+                    title: "Error!",
+                    text: data,
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                    });
                 }
+                },
             });
+            }
         }
     };
 

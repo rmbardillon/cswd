@@ -24,10 +24,11 @@
         {
             $uuid = $request['uuid'];
             $applicationType = $request['applicationType'];
+            $applicantType = $request['applicantType'];
 
-            $sql = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE) VALUES (?,?)";
+            $sql = "INSERT INTO application(PERSON_ID, APPLICATION_TYPE, APPLICANT_TYPE) VALUES (?,?,?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ss", $uuid, $applicationType);
+            $stmt->bind_param("sss", $uuid, $applicationType, $applicantType);
             $stmt->execute();
             $stmt->close();
         }

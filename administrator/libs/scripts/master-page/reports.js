@@ -3,6 +3,9 @@ $(document).ready(function () {
         if ($(this).val() == "4") {
           $("#dateRow").show();
           $("#applicantTypeRow").show();
+        } else {
+            $("#dateRow").hide();
+            $("#applicantTypeRow").hide();
         }
     });
 
@@ -99,11 +102,13 @@ const Report = (() => {
             var applicantType = "Senior Citizen";
         } else if(selectReport == "4") {
             $.ajax({
-              url: REPORT_CONTROLLER + "?action=getCitizens",
+              url: REPORT_CONTROLLER + "?action=getCitizenPerBirthday",
               type: "POST",
               data: {
                 barangay: barangay,
                 applicantType: selectApplicantType,
+                fromDate: fromDate,
+                toDate: toDate,
               },
               success: function (data) {
                 console.log(data);
@@ -119,7 +124,11 @@ const Report = (() => {
                     "../reports/citizen-birthday-list.php?barangay=" +
                       barangay +
                       "&applicantType=" +
-                      selectApplicantType,
+                      selectApplicantType +
+                        "&fromDate=" +
+                        fromDate +
+                        "&toDate=" +
+                        toDate,
                     "_blank"
                   );
                 }

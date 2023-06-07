@@ -269,5 +269,21 @@
             return $result;
         }
 
+        public function checkAdministrator($request)
+        {
+            $role = $this->connection->real_escape_string($request['role']);
+            $barangay = $this->connection->real_escape_string($request['barangay']);
+            $email = $request['email'];
+
+            $sql = "SELECT * FROM user_authentication WHERE ROLE = ? AND BARANGAY = ? OR EMAIL = ?;";
+            $statement = $this->connection->prepare($sql);
+            $statement->bind_param("sss", $role, $barangay, $email);
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result->num_rows > 0;
+        }
+
+
     }
 ?>

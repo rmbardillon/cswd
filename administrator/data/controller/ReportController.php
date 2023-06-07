@@ -23,5 +23,24 @@
 
         echo json_encode($result);
     }
+
+    else if($action == "getCitizenPerBirthday")
+    {
+        $barangay = $_POST['barangay'];
+        $applicantType = $_POST['applicantType'];
+        $fromDate = $_POST['fromDate'];
+        $toDate = $_POST['toDate'];
+
+        $request = [
+            'barangay' => $barangay,
+            'applicantType' => $applicantType,
+            'fromDate' => $fromDate,
+            'toDate' => $toDate
+        ];
+
+        $result = $Sql->getCitizenPerBirthday($request);
+
+        echo json_encode($result);
+    }
     
 ?>

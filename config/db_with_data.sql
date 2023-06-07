@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2023 at 07:03 AM
+-- Generation Time: Jun 07, 2023 at 03:14 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -129,6 +129,7 @@ INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
 ('5fb58972006611ee', '45f0cf54ab9c47bb', '89504 Timothy Roads Apt. 536\r\nCastrostad, HI 52653', 'Don Jose'),
 ('5fb6d15f006611ee', 'ccfc4e0090d3431e', '32588 Miller Station\r\nLake Marciaburgh, CA 87077', 'Pulong Santa Cruz'),
 ('5fb822cb006611ee', '67b3d2067a0246b8', '0528 Carlos Spring\r\nLake Edwardburgh, PA 34060', 'Aplaya'),
+('6d1f25a0052511ee', '6480682fbd157833', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
 ('89f1eeb1006811ee', '98b5fac0cfe84641', '032 Shaw Orchard Apt. 681\r\nNew Toni, HI 76942', 'Santo Domingo'),
 ('89f46a4d006811ee', 'd7a07901293a4ceb', '3831 Paul Mountain\r\nNew Laurenborough, HI 65623', 'Pulong Santa Cruz'),
 ('89f6f795006811ee', '2ac3cf59c1524105', 'USS Moore\r\nFPO AE 65961', 'Tagapo'),
@@ -274,6 +275,7 @@ INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `A
 ('5fb5bef4006611ee', '45f0cf54ab9c47bb', 'New Application', 'Senior Citizen', '2023-06-01 18:23:40', 'Pending'),
 ('5fb70725006611ee', 'ccfc4e0090d3431e', 'New Application', 'Senior Citizen', '2023-06-01 18:23:40', 'Pending'),
 ('5fb85874006611ee', '67b3d2067a0246b8', 'New Application', 'Senior Citizen', '2023-06-01 18:23:40', 'Pending'),
+('6d1f203f052511ee', '6480682fbd157833', 'New Application', 'Solo Parent', '2023-06-07 19:21:19', 'Pending'),
 ('c61f756a006811ee', '1bb8e254edb34ca4', 'Renewal', 'PWD', '2023-06-01 18:40:51', 'Approved'),
 ('c6235921006811ee', '62e4cc0a5fcd4d43', 'Renewal', 'PWD', '2023-06-01 18:40:51', 'Rejected'),
 ('c627bda4006811ee', '2918690352a84d76', 'Renewal', 'PWD', '2023-06-01 18:40:51', 'Pending'),
@@ -315,6 +317,21 @@ CREATE TABLE `appointment` (
   `APPOINTMENT_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PERSON_ID` varchar(16) NOT NULL,
   `DATE` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `citizen_identification_card`
+--
+
+CREATE TABLE `citizen_identification_card` (
+  `CITIZEN_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PERSON_ID` varchar(16) NOT NULL,
+  `DATE_ISSUED` date NOT NULL,
+  `EXPIRATION_DATE` date NOT NULL,
+  `ID_NUMBER` varchar(32) NOT NULL,
+  `STATUS` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -426,6 +443,7 @@ INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER
 ('5fb5f647006611ee', '45f0cf54ab9c47bb', '001-591-698-1356', '', 'edwardjohnson@example.net'),
 ('5fb73dcb006611ee', 'ccfc4e0090d3431e', '6142233196', '', 'smithkevin@example.org'),
 ('5fb8903c006611ee', '67b3d2067a0246b8', '(403)973-8821', '', 'susan57@example.com'),
+('6d1f29e7052511ee', '6480682fbd157833', NULL, NULL, 'mila.bardillon@gmail.com'),
 ('89f22f68006811ee', '98b5fac0cfe84641', '(829)867-9726', '', 'woodbrian@example.org'),
 ('89f4a22c006811ee', 'd7a07901293a4ceb', '643.309.1227', '', 'scott51@example.org'),
 ('89f72ee2006811ee', '2ac3cf59c1524105', '(549)142-0710', '', 'christensenphilip@example.com'),
@@ -585,6 +603,7 @@ INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYM
 ('5fb6660d006611ee', '45f0cf54ab9c47bb', '', '', '', '', 'Armed Forces Occupations', '', '', NULL, '0.00', NULL, '', '', '', '', '', '', '', '0.00'),
 ('5fb7acc8006611ee', 'ccfc4e0090d3431e', '', '', '', '', 'Professionals', '', '', NULL, '0.00', NULL, '', '', '', '', '', '', '', '0.00'),
 ('5fb8fdd6006611ee', '67b3d2067a0246b8', '', '', '', '', 'Service & Sales Workers', '', '', NULL, '0.00', NULL, '', '', '', '', '', '', '', '0.00'),
+('6d1f3386052511ee', '6480682fbd157833', NULL, NULL, NULL, 'NONE', 'NONE', NULL, '100000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.00'),
 ('89f29950006811ee', '98b5fac0cfe84641', 'Student', 'Private', 'Permanent/Regular', '', 'Armed Forces Occupations', '', 'More than 100,000', NULL, '0.00', NULL, '', '', '', 'No', '', 'No', 'No', '0.00'),
 ('89f50b84006811ee', 'd7a07901293a4ceb', 'Self-Employed', 'Private', 'Casual', '', 'Elementary Occupations', '', 'More than 100,000', NULL, '0.00', NULL, '', '', '', 'No', '', 'No', 'Yes', '0.00'),
 ('89f7a9b8006811ee', '2ac3cf59c1524105', 'Employed', 'Government', 'Casual', '', 'Plant & Machine Operators & Assemblers', '', 'More than 100,000', NULL, '0.00', NULL, '', '', '', 'No', '', 'No', 'Yes', '0.00'),
@@ -776,6 +795,8 @@ INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SU
 ('62e4cc0a5fcd4d43', 'Austin', '', 'Wiley', ''),
 ('641f103ba4fb4f27', 'Andrew', '', 'Garrett', ''),
 ('647f171adfdb4e16', 'Elizabeth', '', 'Kemp', ''),
+('6480682fbd157833', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
+('6480682fbd6b8484', 'ROMEO JR', NULL, 'BARDILLON', NULL),
 ('6722e3f26bd941a5', 'Don', '', 'Jones', ''),
 ('67b3d2067a0246b8', 'Jacqueline', '', 'Powell', ''),
 ('6a35db10b244431f', 'Russell', '', 'Chaney', ''),
@@ -1094,6 +1115,8 @@ INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIR
 ('5fb62eea006611ee', '45f0cf54ab9c47bb', '1960-06-17', 'Andrewsville', 'Female', '', '', 'Buddhist', 'Married'),
 ('5fb776f6006611ee', 'ccfc4e0090d3431e', '1960-10-30', 'Port Justinborough', 'Male', '', '', 'Muslim', 'Separated'),
 ('5fb8c949006611ee', '67b3d2067a0246b8', '1961-03-09', 'North Carlosshire', 'Male', '', '', 'Other', 'Widowed'),
+('6d1f2e6d052511ee', '6480682fbd157833', '1965-07-20', NULL, 'Female', 'COLLEGE', NULL, NULL, NULL),
+('6d1f57b2052511ee', '6480682fbd6b8484', '2001-07-30', NULL, NULL, 'COLLEGE', NULL, NULL, 'Single'),
 ('89f263bd006811ee', '98b5fac0cfe84641', '1907-10-20', '', 'Male', 'Post Graduate', 'O-', 'Iglesia ni Cristo', 'Divorced'),
 ('89f4d60e006811ee', 'd7a07901293a4ceb', '1960-01-22', '', 'Female', 'Elementary Education', 'A+', 'Muslim', 'Married'),
 ('89f76306006811ee', '2ac3cf59c1524105', '1936-09-01', '', 'Male', 'Post Graduate', 'AB+', 'Seventh Day Adventist', 'Divorced'),
@@ -1351,6 +1374,7 @@ INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELA
 ('5f8da712006611ee', 'c7738c8cca224bfc', '742e1b2a1e0646f0', 'Son/Daugther', '0000-00-00', '', '50000.00'),
 ('5f8fbe32006611ee', '5d288d6675da4e78', '959d980db1d84fa5', 'Son/Daugther', '0000-00-00', '', '50000.00'),
 ('5f91eda3006611ee', '554e1418802741f8', '288019cb40234083', 'Son/Daugther', '0000-00-00', '', '10000.00'),
+('6d1f5e52052511ee', '6480682fbd157833', '6480682fbd6b8484', 'Child', NULL, NULL, '0.00'),
 ('89f33779006811ee', '98b5fac0cfe84641', '8d9b189ded80465a', 'Father', '0000-00-00', '', '0.00'),
 ('89f3a088006811ee', '98b5fac0cfe84641', 'ed78bb44e0c649fb', 'Mother', '0000-00-00', '', '0.00'),
 ('89f3fe03006811ee', '98b5fac0cfe84641', '4797a3ff60f04865', 'Brother', '0000-00-00', '(564)143-2174x14', '0.00'),
@@ -1452,6 +1476,7 @@ INSERT INTO `solo_parent_data` (`SOLO_PARENT_DATA_ID`, `PERSON_ID`, `CLASSIFICAT
 ('5f8d37d4006611ee', 'c7738c8cca224bfc', 'Imprisonment of Spouse/Detention', '', ''),
 ('5f8f50d0006611ee', '5d288d6675da4e78', 'Death of Spouse', '', ''),
 ('5f917f33006611ee', '554e1418802741f8', 'Abandonment', '', ''),
+('6d1f4260052511ee', '6480682fbd157833', '[\"Death of Spouse\"]', 'n', 'n'),
 ('c640480d006811ee', '72fbc8f393c54a52', 'Foster Parent of DSWD', '', ''),
 ('c64284ae006811ee', 'e3e1fefab57b4d2b', 'Abandonment', '', ''),
 ('c644a8a7006811ee', 'cf1e695189164cb0', 'Rape Case', '', ''),
@@ -1503,7 +1528,7 @@ CREATE TABLE `user_authentication` (
 --
 
 INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
-('13604876010211ee', 'ROMEO', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', 0, 1, 0, '2023-06-02'),
+('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', 0, 1, 0, '2023-06-07'),
 ('d80455a8010311ee', 'JOHN', 'DOE', 'All', 'yegiy78063@rockdian.com', '$2y$10$3YzeeJTWZFMOC/CCRQXYHe5k/nNblbl.lzQ38QLCyXDOHX1YKReSi', 'Main Administrator', 0, 1, 0, '2023-06-02');
 
 --

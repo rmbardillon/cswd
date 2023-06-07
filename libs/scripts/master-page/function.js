@@ -43,14 +43,40 @@ function getDataFromAPI() {
 
 // Generate random password for new user
 function generatePassword() {
-    var length = 8,
-        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+?><:{}[]";
-    retVal = "";
-    for (var i = 0, n = charset.length; i < length; ++i) {
-        retVal += charset.charAt(Math.floor(Math.random() * n));
+    var length = 8;
+    var charset =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$&*";
+
+    var password = "";
+
+    // Add one capital letter
+    password += getRandomCharacter("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+
+    // Add one number
+    password += getRandomCharacter("0123456789");
+
+    // Add one lowercase letter
+    password += getRandomCharacter("abcdefghijklmnopqrstuvwxyz");
+
+    // Add one symbol
+    password += getRandomCharacter("!@#$&*");
+
+    var remainingLength = length - 4; // Subtract the length of required characters
+
+    // Add remaining characters randomly
+    for (var i = 0; i < remainingLength; i++) {
+        password += getRandomCharacter(charset);
     }
-    return retVal;
+
+    return password;
 }
+
+// Function to get a random character from a given charset
+function getRandomCharacter(charset) {
+    var randomIndex = Math.floor(Math.random() * charset.length);
+    return charset.charAt(randomIndex);
+}
+
 
 $(document).ready(function () {
     $("#sendEmail").click(function(e) {
@@ -87,4 +113,33 @@ $(document).ready(function () {
         })
         console.log(name, email, message);
     });
+});
+
+$(".email").change(function () {
+  $.ajax({
+    type: "POST",
+    url: PWD_CONTROLLER + "?action=checkEmail",
+    data: {
+      email: $(this).val(),
+    },
+    dataType: "json",
+    success: function (data) {
+      if (data) {
+        swal
+          .fire({
+            title: "Error!",
+            text: "Email already exists.",
+            icon: "error",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              $(".email").val("");
+              $(".email").focus();
+            }
+          });
+      }
+    },
+  });
 });
