@@ -481,5 +481,61 @@
             return $result;
         }
 
+        public function getApplicantData($personId)
+        {
+            $sql = "SELECT *, person.PERSON_ID
+                    FROM person
+                    LEFT JOIN address ON person.PERSON_ID = address.PERSON_ID
+                    LEFT JOIN application ON person.PERSON_ID = application.PERSON_ID
+                    LEFT JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                    LEFT JOIN employment_details ON person.PERSON_ID = employment_details.PERSON_ID
+                    LEFT JOIN organization ON person.PERSON_ID = organization.PERSON_ID
+                    LEFT JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                    LEFT JOIN pwd_data ON person.PERSON_ID = pwd_data.PERSON_ID
+                    LEFT JOIN solo_parent_data ON person.PERSON_ID = solo_parent_data.PERSON_ID
+                    LEFT JOIN uploaded_documents ON person.PERSON_ID = uploaded_documents.PERSON_ID
+                    WHERE person.PERSON_ID = ?;";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $personId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if ($result === false) {
+                return false;
+            }
+
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            $relativeData = $this->getApplicantRelativeData($personId);
+            $result['relativeData'] = $relativeData;
+
+            return $result;
+        }
+
+        public function getApplicantRelativeData($personId)
+        {
+            $sql = "SELECT relative.FIRST_NAME AS RELATIVE_FIRST_NAME, relative.MIDDLE_NAME AS RELATIVE_MIDDLE_NAME, relative.LAST_NAME AS RELATIVE_LAST_NAME, relative.SUFFIX as RELATIVE_SUFFIX, RELATIONSHIP_TYPE, BIRTHDAY AS GUARDIAN_BIRTHDAY, GUARDIAN_CONTACT_NUMBER, INCOME AS GUARDIAN_INCOME
+            FROM person
+            LEFT JOIN relatives ON person.PERSON_ID = relatives.PERSON_ID
+            LEFT JOIN person AS relative ON relatives.RELATIVE_PERSON_ID = relative.PERSON_ID
+            WHERE person.PERSON_ID = ?;";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $personId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+
+            if ($result === false) {
+                return false;
+            }
+
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
     }
 ?>

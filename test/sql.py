@@ -35,7 +35,7 @@ def generate_pwd_fake_data(number):
          'College', 'Post Graduate'])
         active_voter = fake.random_element(['Yes', 'No'])
         four_ps_member = fake.random_element(['Yes', 'No'])
-        employment_status = fake.random_element(['Employed', 'Unemployed', 'Self-Employed', 'Student'])
+        employment_status = fake.random_element(['Employed', 'Unemployed', 'Self-employed', 'Student'])
         category_of_employment = fake.random_element(['Private', 'Government'])
         nature_of_employment = fake.random_element(['Seasonal', 'Casual', 'Emergency', 'Permanent/Regular'])
         occupation = fake.random_element(['Managers', 'Professionals', 'Technician & Associate Professionals',
