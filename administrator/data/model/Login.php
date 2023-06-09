@@ -2,17 +2,20 @@
     date_default_timezone_set('Asia/Manila');
     include_once('../model/Sql.php');
     include_once('../model/Administrator.php');
+    include_once('../model/Functions.php');
 
     class Login {
         private $connection;
         private $Sql;
         private $Administrator;
+        private $Functions;
         
         public function __construct($connection)
         {
             $this->connection = $connection;
             $this->Sql = new Sql($this->connection);
             $this->Administrator = new Administrator($this->connection);
+            $this->Functions = new Functions($this->connection);
         }
 
         public function login($request)
@@ -55,6 +58,7 @@
                     $result['message'] = 'Invalid username or password. You have ' . (3 - $row['LOGIN_ATTEMPTS']) . ' attempts left.';
                 }
             } else {
+                $this->Functions->checkSeniorCitizensFromPWDandSoloParent();
                 $result = [
                     'status' => 'success',
                     'message' => 'Login successful.',

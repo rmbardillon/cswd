@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 08:17 AM
+-- Generation Time: Jun 09, 2023 at 04:09 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,6 +39,7 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
+('0536985206c411ee', '64831fc28f823730', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
 ('38c72228068d11ee', '6482c3d2b9f33570', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
 ('41f437ec068c11ee', '6482c234a0cc4387', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
 ('5eec5366006611ee', '20bc358515e34ad8', '993 Gutierrez Courts Apt. 493\r\nShawmouth, HI 25165', 'Aplaya'),
@@ -190,6 +191,7 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `APPLICANT_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
+('0536916e06c411ee', '64831fc28f823730', 'New Application', 'Senior Citizen', '2023-06-09 20:49:06', 'Pending'),
 ('38c705b0068d11ee', '6482c3d2b9f33570', 'New Application', 'PWD', '2023-06-09 14:16:50', 'Pending'),
 ('41f42837068c11ee', '6482c234a0cc4387', 'New Application', 'PWD', '2023-06-09 14:09:56', 'Pending'),
 ('5eeca582006611ee', '20bc358515e34ad8', 'New Application', 'PWD', '2023-06-01 18:23:38', 'Approved'),
@@ -329,6 +331,13 @@ CREATE TABLE `appointment` (
   `DATE` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`APPOINTMENT_ID`, `PERSON_ID`, `DATE`) VALUES
+('64831ff34012e436', '64831fc28f823730', '2023-06-12 08:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -363,7 +372,8 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
-('38c734f1068d11ee', '6482c3d2b9f33570', '09760657071', '', 'romeojrbardillon@gmail.com'),
+('05369d2e06c411ee', '64831fc28f823730', '09091072865', NULL, 'asuncionmontealegre@gmail.com'),
+('38c734f1068d11ee', '6482c3d2b9f33570', '09760657071', '', 'romsky.bardillon@gmail.com'),
 ('41f44950068c11ee', '6482c234a0cc4387', '09760657071', '', 'romeojrbardillon@gmail.com'),
 ('5eecf1bb006611ee', '20bc358515e34ad8', '185.811.6031', '', 'terrencejones@example.com'),
 ('5ef16671006611ee', 'cfb2deb2c0c44757', '052-353-2155x206', '', 'dsmith@example.com'),
@@ -371,7 +381,7 @@ INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER
 ('5efa0609006611ee', '83b76089577e46da', '250-524-1888x414', '', 'santossarah@example.com'),
 ('5efdb21b006611ee', 'f073360b698949d3', '347-664-5180x082', '', 'joyce42@example.com'),
 ('5f013eca006611ee', 'cfd642f8c16943fc', '028.188.9601', '', 'aaron35@example.com'),
-('5f04c7ec006611ee', 'c2e675e2db6c418f', '+1-146-057-9856x', '', 'hcameron@example.net'),
+('5f04c7ec006611ee', 'c2e675e2db6c418f', '+1-146-057-9856x', '', 'fawowa3909@peogi.com'),
 ('5f08220c006611ee', 'b09e16842b714b4f', '768-908-0522x777', '', 'lowerystephen@example.org'),
 ('5f0b725a006611ee', 'c9dccbc653a140e8', '(084)571-1153', '', 'lgonzalez@example.com'),
 ('5f0e51d7006611ee', '19c9f82da56a4746', '(484)659-6046x48', '', 'davidvillarreal@example.com'),
@@ -528,6 +538,7 @@ CREATE TABLE `employment_details` (
 --
 
 INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `HAS_PENSION`, `PENSION`, `PENSION_AMOUNT`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
+('0536a71b06c411ee', '64831fc28f823730', NULL, NULL, NULL, NULL, 'NONE', NULL, NULL, 'Meron', 'SSS', '5000.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('38c761b1068d11ee', '6482c3d2b9f33570', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL),
 ('41f46961068c11ee', '6482c234a0cc4387', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL),
 ('5eed8a77006611ee', '20bc358515e34ad8', 'Employed', 'Private', 'Permanent/Regular', '', 'Armed Forces Occupations', '', '41,000-100,000', NULL, '0.00', NULL, '', '', '', 'No', '', 'Yes', 'Yes', '0.00'),
@@ -839,6 +850,8 @@ INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SU
 ('6482c3d2b9f56134', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
 ('6482c3d2b9f5a434', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
 ('6482c3d2b9f5d599', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', NULL),
+('64831fc28f823730', 'ASUNCION', 'SABANDAL', 'MONTEALEGRE', NULL),
+('64831fc28f83a762', '', '', '', ''),
 ('6722e3f26bd941a5', 'Don', '', 'Jones', ''),
 ('67b3d2067a0246b8', 'Jacqueline', '', 'Powell', ''),
 ('6a35db10b244431f', 'Russell', '', 'Chaney', ''),
@@ -1037,15 +1050,16 @@ CREATE TABLE `personal_information` (
 --
 
 INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `BIRTH_PLACE`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
-('38c74723068d11ee', '6482c3d2b9f33570', '2001-07-30', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single'),
-('41f45843068c11ee', '6482c234a0cc4387', '2001-07-30', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single'),
+('0536a1f106c411ee', '64831fc28f823730', '1942-01-12', 'PANDACAN MANILA', 'Female', NULL, NULL, 'CATHOLIC', 'Widowed'),
+('38c74723068d11ee', '6482c3d2b9f33570', '1963-06-30', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single'),
+('41f45843068c11ee', '6482c234a0cc4387', '1963-06-15', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single'),
 ('5eed3e64006611ee', '20bc358515e34ad8', '1978-06-22', '', 'Female', 'Vocational', 'AB-', 'Other', 'Divorced'),
 ('5ef20989006611ee', 'cfb2deb2c0c44757', '1965-05-10', '', 'Male', 'Junior High School', 'A+', 'Born Again', 'Married'),
 ('5ef6a92a006611ee', '960b8990fdd140df', '1941-03-06', '', 'Female', 'Senior High School', 'O-', 'Jehovahs Witness', 'Separated'),
 ('5efaa9ec006611ee', '83b76089577e46da', '1988-11-24', '', 'Female', 'Elementary Education', 'A+', 'Muslim', 'Separated'),
 ('5efe0bf8006611ee', 'f073360b698949d3', '1994-08-07', '', 'Female', 'Kindergarten', 'A+', 'Born Again', 'Married'),
 ('5f01860c006611ee', 'cfd642f8c16943fc', '1960-12-09', '', 'Female', 'Vocational', 'B-', 'Atheist', 'Separated'),
-('5f051139006611ee', 'c2e675e2db6c418f', '1942-05-31', '', 'Female', 'Senior High School', 'B-', 'Born Again', 'Widowed'),
+('5f051139006611ee', 'c2e675e2db6c418f', '1963-06-30', '', 'Female', 'Senior High School', 'B-', 'Born Again', 'Widowed'),
 ('5f086b38006611ee', 'b09e16842b714b4f', '1918-01-11', '', 'Male', 'Vocational', 'O-', 'Other', 'Divorced'),
 ('5f0bac76006611ee', 'c9dccbc653a140e8', '1933-07-09', '', 'Female', 'None', 'O+', 'Protestant', 'Separated'),
 ('5f0e8d88006611ee', '19c9f82da56a4746', '1927-03-26', '', 'Female', 'Post Graduate', 'A-', 'Seventh Day Adventist', 'Widowed'),
@@ -1306,6 +1320,7 @@ CREATE TABLE `relatives` (
 --
 
 INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `BIRTHDAY`, `GUARDIAN_CONTACT_NUMBER`, `INCOME`) VALUES
+('0536cb7206c411ee', '64831fc28f823730', '64831fc28f83a762', 'Spouse', '0000-00-00', NULL, NULL),
 ('38c80fb3068d11ee', '6482c3d2b9f33570', '6482c3d2b9f56134', 'Father', NULL, NULL, NULL),
 ('38c82f87068d11ee', '6482c3d2b9f33570', '6482c3d2b9f5a434', 'Mother', NULL, NULL, NULL),
 ('38c84a3e068d11ee', '6482c3d2b9f33570', '6482c3d2b9f5d599', 'BROTHER', NULL, '09091072865', NULL),
@@ -1491,6 +1506,29 @@ INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sent_emails`
+--
+
+CREATE TABLE `sent_emails` (
+  `SENT_EMAIL_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PERSON_ID` varchar(16) NOT NULL,
+  `MONTH` int(11) NOT NULL,
+  `YEAR` int(11) NOT NULL,
+  `SENT_AT` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sent_emails`
+--
+
+INSERT INTO `sent_emails` (`SENT_EMAIL_ID`, `PERSON_ID`, `MONTH`, `YEAR`, `SENT_AT`) VALUES
+('240efc1906cf11ee', 'c2e675e2db6c418f', 6, 2023, '2023-06-09 14:08:42'),
+('7d9d71f306ce11ee', '6482c3d2b9f33570', 6, 2023, '2023-06-09 14:04:03'),
+('8100845806ce11ee', '6482c234a0cc4387', 6, 2023, '2023-06-09 14:04:09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `solo_parent_data`
 --
 
@@ -1670,6 +1708,13 @@ ALTER TABLE `relatives`
   ADD KEY `FK_PERSON_RELATIVE_ID` (`PERSON_ID`);
 
 --
+-- Indexes for table `sent_emails`
+--
+ALTER TABLE `sent_emails`
+  ADD PRIMARY KEY (`SENT_EMAIL_ID`),
+  ADD KEY `FK_PERSON_SENT_EMAIL` (`PERSON_ID`);
+
+--
 -- Indexes for table `solo_parent_data`
 --
 ALTER TABLE `solo_parent_data`
@@ -1740,6 +1785,12 @@ ALTER TABLE `personal_information`
 --
 ALTER TABLE `pwd_data`
   ADD CONSTRAINT `FK_PERSON_PWD_DATA` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
+
+--
+-- Constraints for table `sent_emails`
+--
+ALTER TABLE `sent_emails`
+  ADD CONSTRAINT `FK_PERSON_SENT_EMAIL` FOREIGN KEY (`PERSON_ID`) REFERENCES `person` (`PERSON_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

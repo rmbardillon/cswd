@@ -539,5 +539,26 @@
             return $result;
         }
 
+        public function generateSeniorCitizensFromPWDandSoloParent()
+        {
+            $sql = "SELECT *, person.PERSON_ID AS PERSON_ID
+                    FROM person
+                    LEFT JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                    JOIN application ON person.PERSON_ID = application.PERSON_ID
+                    LEFT JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                    WHERE MONTH(personal_information.BIRTHDAY) = MONTH(CURDATE())
+                    AND YEAR(personal_information.BIRTHDAY) = YEAR(CURDATE()) - 60;";
+            
+            $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
     }
 ?>

@@ -299,7 +299,7 @@
             </div>
             <div class="row" id="guardian">
                 <div class="col"><label class="form-label required" for="guardianRelationship">RELATIONSHIP TO GUARDIAN</label><input class="form-control" type="text" id="guardianRelationship" name="guardianRelationship" required=""></div>
-                <div class="col"><label class="form-label required" for="guardianContactNumber">GUARDIAN'S CONTACT NUMBER</label><input class="form-control numbers" type="text" id="guardianContactNumber" name="guardianContactNumber" required=""></div>
+                <div class="col"><label class="form-label required" for="guardianContactNumber">GUARDIAN'S CONTACT NUMBER</label><input class="form-control numbers telephone" type="text" id="guardianContactNumber" name="guardianContactNumber" required=""></div>
             </div>
             <div class="row">
                 <div class="col">
