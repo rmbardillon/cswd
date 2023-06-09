@@ -33,7 +33,7 @@
             ];
             $contactDetails = [
                 'uuid' => $uuid,
-                'telephone' => $scForm['telephone'],
+                'mobileNumber' => $scForm['telephone'],
                 'email' => $scForm['email'],
             ];
             $personalInformation = [
@@ -85,12 +85,6 @@
                             'lastName' => $scForm['childLastName'][$key],
                         ];
                         $Sql->insertPerson($child);
-                        $contactDetails = [
-                            'uuid' => $uuid,
-                            'mobileNumber' => $scForm['childTelephone'][$key],
-                            'email' => $scForm['email'][$key],
-                        ];
-                        $Sql->insertContactDetails($contactDetails);
                         $childAddress = [
                             'uuid' => $childUUID,
                             'address' => $scForm['childAddress'][$key],
@@ -102,6 +96,7 @@
                             'relativeUUID' => $childUUID,
                             'relationship' => 'Child',
                             'birthday' => $scForm['srCitizenChildDOB'][$key],
+                            'contactNumber' => $scForm['childTelephone'][$key],
                         ];
                         $Sql->insertRelatives($relative);
                     }

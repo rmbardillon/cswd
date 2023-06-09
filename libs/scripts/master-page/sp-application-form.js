@@ -241,7 +241,7 @@ $(document).ready(function () {
         $("#pwdDOB").val(data[0]["BIRTHDAY"]);
         $("#gender").val(data[0]["GENDER"]);
         $("#religion").val(data[0]["RELIGION"]);
-        $("#maritalStatus").val(data[0]["MARITAL"]);
+        $("#maritalStatus").val(data[0]["MARITAL_STATUS"]);
         $("#bloodType").val(data[0]["BLOOD_TYPE"]);
         $("#educationalAttainment").val(data[0]["EDUCATIONAL_ATTAINMENT"]);
         $("#isActiveVoter").val(data[0]["IS_ACTIVE_VOTER"]);

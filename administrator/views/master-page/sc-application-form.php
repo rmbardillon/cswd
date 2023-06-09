@@ -94,7 +94,7 @@
                     <option value="Divorced">Divorced</option>
                 </select>
             </div>
-            <div class="col"><label class="form-label" for="age">EDAD</label><input class="form-control" type="text" id="age" disabled="" name="age"></div>
+            <div class="col"><label class="form-label" for="age">EDAD</label><input class="form-control" type="text" id="age" readonly="" name="age"></div>
         </div>
         <div class="row">
             <div class="col col-4"><label class="form-label required" for="srCitizenDOB">PETSA NG KAPANGANAKAN</label><input class="form-control" id="srCitizenDOB" type="date" name="srCitizenDOB" required="" min="1900-01-01"></div>
@@ -104,7 +104,7 @@
             <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com" required></div>
             <div class="col"><label class="form-label" for="telephone">TELEPONO</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####" required></div>
             <div class="col"><label class="form-label" for="religion">RELIHIYON</label><input class="form-control" type="text" id="religion" name="religion"></div>
-            <div class="col"><label class="form-label required" id="job-1" for="job">HANAPBUHAY</label><input class="form-control" type="text" id="job-2" name="job" required=""></div>
+            <div class="col"><label class="form-label required" id="job-1" for="job">HANAPBUHAY</label><input class="form-control" type="text" id="job" name="job" required=""></div>
         </div>
         <div class="row">
             <div class="col">

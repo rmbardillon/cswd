@@ -79,7 +79,7 @@
         {
             $uuid = $request['uuid'];
             $birthday = isset($request['birthday']) ? $request['birthday'] : null;
-            $birthPlace = isset($request['birthPlace']) ? $request['birthPlace'] : null;
+            $birthPlace = isset($request['placeOfBirth']) ? $request['placeOfBirth'] : null;
             $gender = isset($request['gender']) ? $request['gender'] : null;
             $educationalAttainment = isset($request['educationalAttainment']) ? $request['educationalAttainment'] : null;
             $bloodType = isset($request['bloodType']) ? $request['bloodType'] : null;
@@ -117,9 +117,9 @@
             $totalFamilyIncome = isset($request['totalFamilyIncome']) ? $request['totalFamilyIncome'] : null;
 
 
-            $sql = "INSERT INTO employment_details(PERSON_ID, EMPLOYMENT_STATUS, CATEGORY_OF_EMPLOYMENT, NATURE_OF_EMPLOYMENT, COMPANY, JOB, OTHER_JOB, INCOME, PENSION, SSS_NUMBER, GSIS_NUMBER, PSN_NUMBER, IS_PHILHEALTH_MEMBER, PHILHEALTH_NUMBER, IS_ACTIVE_VOTER, IS_4PS_MEMBER, TOTAL_FAMILY_INCOME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO employment_details(PERSON_ID, EMPLOYMENT_STATUS, CATEGORY_OF_EMPLOYMENT, NATURE_OF_EMPLOYMENT, COMPANY, JOB, OTHER_JOB, INCOME, HAS_PENSION, PENSION, PENSION_AMOUNT, SSS_NUMBER, GSIS_NUMBER, PSN_NUMBER, IS_PHILHEALTH_MEMBER, PHILHEALTH_NUMBER, IS_ACTIVE_VOTER, IS_4PS_MEMBER, TOTAL_FAMILY_INCOME) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssssssssssssssss", $uuid, $employmentStatus, $categoryOfEmployment, $natureOfEmployment, $company, $occupation, $otherOccupation, $income, $pension, $SSSNo, $GSISNo, $PSNNo, $isPhilhealthMember, $philhealthNumber, $isActiveVoter, $is4PS, $totalFamilyIncome);
+            $stmt->bind_param("sssssssssssssssssss", $uuid, $employmentStatus, $categoryOfEmployment, $natureOfEmployment, $company, $occupation, $otherOccupation, $income, $hasPension, $pension, $pensionAmount, $SSSNo, $GSISNo, $PSNNo, $isPhilhealthMember, $philhealthNumber, $isActiveVoter, $is4PS, $totalFamilyIncome);
             $stmt->execute();
             $stmt->close();
         }

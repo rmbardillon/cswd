@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 03:14 PM
+-- Generation Time: Jun 09, 2023 at 03:48 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -496,7 +496,7 @@ CREATE TABLE `employment_details` (
   `OTHER_JOB` varchar(64) DEFAULT NULL,
   `INCOME` varchar(64) DEFAULT NULL,
   `HAS_PENSION` varchar(8) DEFAULT NULL,
-  `PENSION` decimal(12,2) DEFAULT NULL,
+  `PENSION` varchar(64) DEFAULT NULL,
   `PENSION_AMOUNT` decimal(12,2) DEFAULT NULL,
   `SSS_NUMBER` varchar(32) DEFAULT NULL,
   `GSIS_NUMBER` varchar(32) DEFAULT NULL,
