@@ -516,10 +516,11 @@
 
         public function getApplicantRelativeData($personId)
         {
-            $sql = "SELECT relative.FIRST_NAME AS RELATIVE_FIRST_NAME, relative.MIDDLE_NAME AS RELATIVE_MIDDLE_NAME, relative.LAST_NAME AS RELATIVE_LAST_NAME, relative.SUFFIX as RELATIVE_SUFFIX, RELATIONSHIP_TYPE, BIRTHDAY AS GUARDIAN_BIRTHDAY, GUARDIAN_CONTACT_NUMBER, INCOME AS GUARDIAN_INCOME, address.BARANGAY, address.ADDRESS
+            $sql = "SELECT relative.FIRST_NAME AS RELATIVE_FIRST_NAME, relative.MIDDLE_NAME AS RELATIVE_MIDDLE_NAME, relative.LAST_NAME AS RELATIVE_LAST_NAME, relative.SUFFIX as RELATIVE_SUFFIX, RELATIONSHIP_TYPE, relatives.BIRTHDAY AS GUARDIAN_BIRTHDAY, GUARDIAN_CONTACT_NUMBER, INCOME AS GUARDIAN_INCOME, address.BARANGAY, address.ADDRESS, personal_information.EDUCATIONAL_ATTAINMENT, personal_information.MARITAL_STATUS
             FROM person
             LEFT JOIN relatives ON person.PERSON_ID = relatives.PERSON_ID
             LEFT JOIN address ON relatives.RELATIVE_PERSON_ID = address.PERSON_ID
+            LEFT JOIN personal_information ON relatives.RELATIVE_PERSON_ID = personal_information.PERSON_ID
             LEFT JOIN person AS relative ON relatives.RELATIVE_PERSON_ID = relative.PERSON_ID
             WHERE person.PERSON_ID = ?;";
 

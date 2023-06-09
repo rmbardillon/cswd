@@ -160,10 +160,16 @@
             $uuid = $request['uuid'];
             $physicianName = $request['physicianName'];
             $physicianLicence = $request['physicianLicence'];
-            $typeOfDisability = json_encode($request['typeOfDisability']);
+            $typeOfDisability = str_replace(['[', ']', '"'], '', implode(',',$request['typeOfDisability']));
             $medicalCondition = $request['medicalCondition'];
-            $inborn = json_encode($request['inborn']);
-            $acquired = json_encode($request['acquired']);
+            $inborn = '';
+            if (!is_null($request['inborn'])) {
+                $inborn = str_replace(['[', ']', '"'], '', implode(',', $request['inborn']));
+            }
+            $acquired = '';
+            if (!is_null($request['acquired'])) {
+                $acquired = str_replace(['[', ']', '"'], '', implode(',', $request['acquired']));
+            }
             $statusOfDisabiity = $request['statusOfDisabiity'];
             $accomplishedBy = $request['accomplishedBy'];
             $accomplisherName = $request['accomplisherName'];
@@ -179,7 +185,7 @@
         public function insertSoloParentData($request)
         {
             $uuid = $request['uuid'];
-            $soloParentClassification = json_encode($request['soloParentClassification']);
+            $soloParentClassification = str_replace(['[', ']', '"'], '', implode(',',$request['soloParentClassification']));
             $soloParentNeeds = $request['soloParentNeeds'];
             $soloParentFamilyResources = $request['soloParentFamilyResources'];
     

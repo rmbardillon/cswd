@@ -77,7 +77,6 @@
                     $Sql->insertPerson($child);
                     $childPersonalInformation = [
                         'uuid' => $childUUID,
-                        'birthday' => $spForm['soloParentChildDOB'][$key],
                         'maritalStatus' => $spForm['maritalStatus'][$key],
                         'educationalAttainment' => $spForm['childEducationalAttainment'][$key],
                     ];
@@ -87,6 +86,7 @@
                         'relativeUUID' => $childUUID,
                         'relationship' => 'Child',
                         'income' => $spForm['childIncome'][$key],
+                        'birthday' => $spForm['soloParentChildDOB'][$key],
                     ];
                     $Sql->insertRelatives($relative);
                 }

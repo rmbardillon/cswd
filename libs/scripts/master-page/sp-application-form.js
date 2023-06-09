@@ -54,6 +54,7 @@ $("#spCitizenNext").click(function(event) {
     $('[name="soloParentClassification"]:checked').each(function() {
         soloParentClassification.push($(this).val());
     });
+    console.log(soloParentClassification);
     var childFirstName = [];
     $('[name="childFirstName"]').each(function() {
         childFirstName.push($(this).val());
@@ -138,55 +139,56 @@ const SP = (() => {
 
     thisSP.submitForm = () => {
         var soloParentClassification = [];
-    $('[name="soloParentClassification"]:checked').each(function() {
-        soloParentClassification.push($(this).val());
-    });
-    var childFirstName = [];
-    $('[name="childFirstName"]').each(function() {
-        childFirstName.push($(this).val());
-    });
-    var childLastName = [];
-    $('[name="childLastName"]').each(function() {
-        childLastName.push($(this).val());
-    });
-    var soloParentChildDOB = [];
-    $('[name="soloParentChildDOB"]').each(function() {
-        soloParentChildDOB.push($(this).val());
-    });
-    var maritalStatus = [];
-    $('[name="maritalStatus"]').each(function() {
-        maritalStatus.push($(this).val());
-    });
-    var childEducationalAttainment = [];
-    $('[name="childEducationalAttainment"]').each(function() {
-        childEducationalAttainment.push($(this).val());
-    });
-    var childIncome = [];
-    $('[name="childIncome"]').each(function() {
-        childIncome.push($(this).val());
-    });
-    var formData = $("#spForm").serializeArray();
-    var spForm = {};
-    console.log(formData);
-    $.each(formData, function(index, value) {
-        if (value.name === 'soloParentClassification') {
-            spForm[value.name] = soloParentClassification;
-        } else if (value.name === 'childFirstName') {
-            spForm[value.name] = childFirstName;
-        } else if (value.name === 'childLastName') {
-            spForm[value.name] = childLastName;
-        } else if (value.name === 'soloParentChildDOB') {
-            spForm[value.name] = soloParentChildDOB;
-        } else if (value.name === 'maritalStatus') {
-            spForm[value.name] = maritalStatus;
-        } else if (value.name === 'childEducationalAttainment') {
-            spForm[value.name] = childEducationalAttainment;
-        } else if (value.name === 'childIncome') {
-            spForm[value.name] = childIncome;
-        } else {
-            spForm[value.name] = value.value;
-        }
-    });
+        $('[name="soloParentClassification"]:checked').each(function() {
+            soloParentClassification.push($(this).val());
+        });
+        console.log(soloParentClassification);
+        var childFirstName = [];
+        $('[name="childFirstName"]').each(function() {
+            childFirstName.push($(this).val());
+        });
+        var childLastName = [];
+        $('[name="childLastName"]').each(function() {
+            childLastName.push($(this).val());
+        });
+        var soloParentChildDOB = [];
+        $('[name="soloParentChildDOB"]').each(function() {
+            soloParentChildDOB.push($(this).val());
+        });
+        var maritalStatus = [];
+        $('[name="maritalStatus"]').each(function() {
+            maritalStatus.push($(this).val());
+        });
+        var childEducationalAttainment = [];
+        $('[name="childEducationalAttainment"]').each(function() {
+            childEducationalAttainment.push($(this).val());
+        });
+        var childIncome = [];
+        $('[name="childIncome"]').each(function() {
+            childIncome.push($(this).val());
+        });
+        var formData = $("#spForm").serializeArray();
+        var spForm = {};
+        console.log(formData);
+        $.each(formData, function(index, value) {
+            if (value.name === 'soloParentClassification') {
+                spForm[value.name] = soloParentClassification;
+            } else if (value.name === 'childFirstName') {
+                spForm[value.name] = childFirstName;
+            } else if (value.name === 'childLastName') {
+                spForm[value.name] = childLastName;
+            } else if (value.name === 'soloParentChildDOB') {
+                spForm[value.name] = soloParentChildDOB;
+            } else if (value.name === 'maritalStatus') {
+                spForm[value.name] = maritalStatus;
+            } else if (value.name === 'childEducationalAttainment') {
+                spForm[value.name] = childEducationalAttainment;
+            } else if (value.name === 'childIncome') {
+                spForm[value.name] = childIncome;
+            } else {
+                spForm[value.name] = value.value;
+            }
+        });
 
         $.ajax({
             type: "POST",
@@ -220,88 +222,93 @@ $(document).ready(function () {
     // Check for url parameter
     const urlParams = new URLSearchParams(window.location.search);
     const personId = urlParams.get("personId");
-    
-    $.ajax({
-        type: "POST",
-        url: APPLICATION_CONTROLLER + "?action=getApplicantData",
-        data: {
-        personId: personId,
-        },
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-            $("#firstName").val(data[0]["FIRST_NAME"]);
-            $("#surname").val(data[0]["LAST_NAME"]);
-            $("#middlename").val(data[0]["MIDDLE_NAME"]);
-            $("#suffix").val(data[0]["SUFFIX"]);
-            $("#soloParentDOB").val(data[0]["BIRTHDAY"]);
-            $("#placeOfBirth").val(data[0]["BIRTH_PLACE"]);
-            $("#gender").val(data[0]["GENDER"]);
-            $("#address").val(data[0]["ADDRESS"]);
-            $("#barangay").val(data[0]["BARANGAY"]);
-            $("#educationalAttainment").val(data[0]["EDUCATIONAL_ATTAINMENT"]);
-            var age =
-              new Date().getFullYear() -
-              new Date(data[0]["BIRTHDAY"]).getFullYear();
-            $("#age").val(age);
-            $("#job").val(data[0]["JOB"]);
-            console.log(data[0]["JOB"]);
-            $("#company").val(data[0]["COMPANY"]);
-            $("#telephone").val(data[0]["MOBILE_NUMBER"]);
-            $("#email").val(data[0]["EMAIL"]);
-            $("#monthlyIncome").val(data[0]["INCOME"]);
-            $("#totalFamilyIncome").val(data[0]["TOTAL_FAMILY_INCOME"]);
-            $("#soloParentDOB").trigger("change");
+    if(personId != null) {
+        $.ajax({
+            type: "POST",
+            url: APPLICATION_CONTROLLER + "?action=getApplicantData",
+            data: {
+            personId: personId,
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                $("#firstName").val(data[0]["FIRST_NAME"]);
+                $("#surname").val(data[0]["LAST_NAME"]);
+                $("#middlename").val(data[0]["MIDDLE_NAME"]);
+                $("#suffix").val(data[0]["SUFFIX"]);
+                $("#soloParentDOB").val(data[0]["BIRTHDAY"]);
+                $("#placeOfBirth").val(data[0]["BIRTH_PLACE"]);
+                $("#gender").val(data[0]["GENDER"]);
+                $("#address").val(data[0]["ADDRESS"]);
+                $("#barangay").val(data[0]["BARANGAY"]);
+                $("#educationalAttainment").val(data[0]["EDUCATIONAL_ATTAINMENT"]);
+                var age =
+                new Date().getFullYear() -
+                new Date(data[0]["BIRTHDAY"]).getFullYear();
+                $("#age").val(age);
+                $("#job").val(data[0]["JOB"]);
+                $("#company").val(data[0]["COMPANY"]);
+                $("#telephone").val(data[0]["MOBILE_NUMBER"]);
+                $("#email").val(data[0]["EMAIL"]);
+                $("#monthlyIncome").val(data[0]["INCOME"]);
+                $("#totalFamilyIncome").val(data[0]["TOTAL_FAMILY_INCOME"]);
+                $("#soloParentDOB").trigger("change");
+                $("#soloParentNeeds").val(data[0]["NEEDS_PROBLEMS"]);
+                $("#soloParentFamilyResources").val(data[0]["FAMILY_RESOURCES"]);
 
-            $("#spouseLastName").val(
-              data.relativeData[0]["RELATIVE_LAST_NAME"]
-            );
-            $("#spouseFirstName").val(
-              data.relativeData[0]["RELATIVE_FIRST_NAME"]
-            );
-            $("#spouseMiddleName").val(
-              data.relativeData[0]["RELATIVE_MIDDLE_NAME"]
-            );
-            $("#spouseDOB").val(data.relativeData[0]["GUARDIAN_BIRTHDAY"]);
+                var CLASSIFICATION_CIRCUMSTANCES = data[0]["CLASSIFICATION_CIRCUMSTANCES"];
 
-            var relatives = data.relativeData;
-            // Get the length of data.relativeData
-            var relativeDataLength = relatives.length;
-            $("#totalHousemate").val(relativeDataLength - 1);
-            $("#numberOfChildren").val(relativeDataLength - 1);
-            $("#numberOfChildren").trigger("change");
+                $('input[type="checkbox"][name="soloParentClassification"]').each(
+                    function () {
+                        var checkboxValue = $(this).val();
+                        if (CLASSIFICATION_CIRCUMSTANCES.includes(checkboxValue)) {
+                        $(this).prop("checked", true);
+                        }
+                    }
+                );
 
-            var firstNameInput = $("[name='childFirstName']");
-            var lastNameInput = $("[name='childLastName']");
-            var DOBInput = $("[name='srCitizenChildDOB']");
-            var telephoneInput = $("[name='childTelephone']");
-            var barangayInput = $("[name='childBarangay']");
-            var addressInput = $("[name='childAddress']");
+                var relatives = data.relativeData;
+                // Get the length of data.relativeData
+                var relativeDataLength = relatives.length;
 
-            for (var i = 0; i < relativeDataLength - 1; i++) {
-              firstNameInput[i].value = relatives[i + 1]["RELATIVE_FIRST_NAME"];
-              lastNameInput[i].value = relatives[i + 1]["RELATIVE_LAST_NAME"];
-              DOBInput[i].value = relatives[i + 1]["GUARDIAN_BIRTHDAY"];
-              telephoneInput[i].value =
-                relatives[i + 1]["GUARDIAN_CONTACT_NUMBER"];
-              barangayInput[i].value = relatives[i + 1]["BARANGAY"];
-              addressInput[i].value = relatives[i + 1]["ADDRESS"];
-            }
-            // Make all textbox, select, checkbox, and radio buttons readonly except for the next button
-            // Make all textboxes readonly
-            $("input").prop("readonly", true);
+                for (var i = 0; i < relativeDataLength - 1; i++) {
+                    $("#soloParentDuplicateButton").click();
+                }
 
-            // Make all selects readonly
-            $("select").prop("disabled", true);
+                var firstNameInput = $("[name='childFirstName']");
+                var lastNameInput = $("[name='childLastName']");
+                var DOBInput = $("[name='soloParentChildDOB']");
+                var maritalStatusInput = $("[name='maritalStatus']");
+                var educationalAttainmentInput = $(
+                "[name='childEducationalAttainment']"
+                );
+                var incomeInput = $("[name='childIncome']");
 
-            // Make all checkboxes and radio buttons disabled
-            $("input[type='checkbox'], input[type='radio']").prop(
-              "disabled",
-              true
-            );
-        },
-        error: function (e) {
-        console.log("ERROR: ", e);
-        },
-    });
+                for (var i = 0; i < relativeDataLength; i++) {
+                    firstNameInput[i].value = relatives[i]["RELATIVE_FIRST_NAME"];
+                    lastNameInput[i].value = relatives[i]["RELATIVE_LAST_NAME"];
+                    DOBInput[i].value = relatives[i]["GUARDIAN_BIRTHDAY"];
+                    maritalStatusInput[i].value = relatives[i]["MARITAL_STATUS"];
+                    educationalAttainmentInput[i].value =
+                        relatives[i]["EDUCATIONAL_ATTAINMENT"];
+                    incomeInput[i].value = relatives[i]["GUARDIAN_INCOME"];
+                }
+                // Make all textbox, select, checkbox, and radio buttons readonly except for the next button
+                // Make all textboxes readonly
+                $("input").prop("readonly", true);
+
+                // Make all selects readonly
+                $("select").prop("disabled", true);
+
+                // Make all checkboxes and radio buttons disabled
+                $("input[type='checkbox'], input[type='radio'], textarea").prop(
+                "disabled",
+                true
+                );
+            },
+            error: function (e) {
+            console.log("ERROR: ", e);
+            },
+        });
+    }
 });
