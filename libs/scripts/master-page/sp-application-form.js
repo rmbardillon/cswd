@@ -229,118 +229,76 @@ $(document).ready(function () {
         },
         dataType: "json",
         success: function (data) {
-        $("#firstName").val(data[0]["FIRST_NAME"]);
-        $("#surname").val(data[0]["LAST_NAME"]);
-        $("#middlename").val(data[0]["MIDDLE_NAME"]);
-        $("#suffix").val(data[0]["SUFFIX"]);
-        $("#address").val(data[0]["ADDRESS"]);
-        $("#barangay").val(data[0]["BARANGAY"]);
-        $("#mobileNumber").val(data[0]["MOBILE_NUMBER"]);
-        $("#landline").val(data[0]["TELEPHONE_NUMBER"]);
-        $("#emailAddress").val(data[0]["EMAIL"]);
-        $("#pwdDOB").val(data[0]["BIRTHDAY"]);
-        $("#gender").val(data[0]["GENDER"]);
-        $("#religion").val(data[0]["RELIGION"]);
-        $("#maritalStatus").val(data[0]["MARITAL_STATUS"]);
-        $("#bloodType").val(data[0]["BLOOD_TYPE"]);
-        $("#educationalAttainment").val(data[0]["EDUCATIONAL_ATTAINMENT"]);
-        $("#isActiveVoter").val(data[0]["IS_ACTIVE_VOTER"]);
-        $("#is4PS").val(data[0]["IS_4PS_MEMBER"]);
-        $("#employmentStatus").val(data[0]["EMPLOYMENT_STATUS"]);
-        $("#categoryOfEmployment").val(data[0]["CATEGORY_OF_EMPLOYMENT"]);
-        $("#natureOfEmployment").val(data[0]["NATURE_OF_EMPLOYMENT"]);
-        $("#occupation").val(data[0]["JOB"]);
-        $("#otherOccupation").val(data[0]["OTHER_JOB"]);
-        $("#income").val(data[0]["INCOME"]);
-        $("#organization").val(data[0]["ORGANIZATION"]);
-        $("#organizationContactPerson").val(
-            data[0]["ORGANIZATION_CONTACT_PERSON"]
-        );
-        $("#organizationOfficeAddress").val(
-            data[0]["ORGANIZATION_OFFICE_ADDRESS"]
-        );
-        $("#organizationTelephoneNumber").val(
-            data[0]["ORGANIZATION_CONTACT_NUMBER"]
-        );
-        $("#SSSNo").val(data[0]["SSS_NUMBER"]);
-        $("#GSISNo").val(data[0]["GSIS_NUMBER"]);
-        $("#PSNNo").val(data[0]["PSN_NUMBER"]);
-        $("#isPhilhealthMember").val(data[0]["IS_PHILHEALTH_MEMBER"]);
-        $("#philhealthNumber").val(data[0]["PHILHEALTH_NUMBER"]);
-        $("#fatherSurname").val(data.relativeData[0]["RELATIVE_LAST_NAME"]);
-        $("#fatherFirstName").val(data.relativeData[0]["RELATIVE_FIRST_NAME"]);
-        $("#fatherMiddlename").val(data.relativeData[0]["RELATIVE_MIDDLE_NAME"]);
-        $("#fatherSuffix").val(data.relativeData[0]["RELATIVE_SUFFIX"]);
-        $("#motherSurname").val(data.relativeData[1]["RELATIVE_LAST_NAME"]);
-        $("#motherFirstName").val(data.relativeData[1]["RELATIVE_FIRST_NAME"]);
-        $("#motherMiddlename").val(data.relativeData[1]["RELATIVE_MIDDLE_NAME"]);
-        $("#motherSuffix").val(data.relativeData[1]["RELATIVE_SUFFIX"]);
-        $("#guardianSurname").val(data.relativeData[2]["RELATIVE_LAST_NAME"]);
-        $("#guardianFirstName").val(data.relativeData[2]["RELATIVE_FIRST_NAME"]);
-        $("#guardianMiddlename").val(
-            data.relativeData[2]["RELATIVE_MIDDLE_NAME"]
-        );
-        $("#guardianSuffix").val(data.relativeData[2]["RELATIVE_SUFFIX"]);
-        $("#guardianRelationship").val(data.relativeData[2]["RELATIONSHIP_TYPE"]);
-        $("#guardianContactNumber").val(
-            data.relativeData[2]["GUARDIAN_CONTACT_NUMBER"]
-        );
-        $("#physicianName").val(data[0]["PHYSICIAN_NAME"]);
-        $("#physicianLicence").val(data[0]["PHYSICIAN_LICENSE_NUMBER"]);
-        $("#accomplishedBy").val(data[0]["ACCOMPLISHED_BY"]);
-        $("#accomplisherName").val(data[0]["ACCOMPLISHER_NAME"]);
+            console.log(data);
+            $("#firstName").val(data[0]["FIRST_NAME"]);
+            $("#surname").val(data[0]["LAST_NAME"]);
+            $("#middlename").val(data[0]["MIDDLE_NAME"]);
+            $("#suffix").val(data[0]["SUFFIX"]);
+            $("#soloParentDOB").val(data[0]["BIRTHDAY"]);
+            $("#placeOfBirth").val(data[0]["BIRTH_PLACE"]);
+            $("#gender").val(data[0]["GENDER"]);
+            $("#address").val(data[0]["ADDRESS"]);
+            $("#barangay").val(data[0]["BARANGAY"]);
+            $("#educationalAttainment").val(data[0]["EDUCATIONAL_ATTAINMENT"]);
+            var age =
+              new Date().getFullYear() -
+              new Date(data[0]["BIRTHDAY"]).getFullYear();
+            $("#age").val(age);
+            $("#job").val(data[0]["JOB"]);
+            console.log(data[0]["JOB"]);
+            $("#company").val(data[0]["COMPANY"]);
+            $("#telephone").val(data[0]["MOBILE_NUMBER"]);
+            $("#email").val(data[0]["EMAIL"]);
+            $("#monthlyIncome").val(data[0]["INCOME"]);
+            $("#totalFamilyIncome").val(data[0]["TOTAL_FAMILY_INCOME"]);
+            $("#soloParentDOB").trigger("change");
 
-        $("#medicalCondition").val(data[0]["MEDICAL_CONDITION"]);
+            $("#spouseLastName").val(
+              data.relativeData[0]["RELATIVE_LAST_NAME"]
+            );
+            $("#spouseFirstName").val(
+              data.relativeData[0]["RELATIVE_FIRST_NAME"]
+            );
+            $("#spouseMiddleName").val(
+              data.relativeData[0]["RELATIVE_MIDDLE_NAME"]
+            );
+            $("#spouseDOB").val(data.relativeData[0]["GUARDIAN_BIRTHDAY"]);
 
-        $('input[type="radio"]').each(function () {
-            if ($(this).val() === data[0]["STATUS_OF_DISABILITY"]) {
-            $(this).prop("checked", true);
+            var relatives = data.relativeData;
+            // Get the length of data.relativeData
+            var relativeDataLength = relatives.length;
+            $("#totalHousemate").val(relativeDataLength - 1);
+            $("#numberOfChildren").val(relativeDataLength - 1);
+            $("#numberOfChildren").trigger("change");
+
+            var firstNameInput = $("[name='childFirstName']");
+            var lastNameInput = $("[name='childLastName']");
+            var DOBInput = $("[name='srCitizenChildDOB']");
+            var telephoneInput = $("[name='childTelephone']");
+            var barangayInput = $("[name='childBarangay']");
+            var addressInput = $("[name='childAddress']");
+
+            for (var i = 0; i < relativeDataLength - 1; i++) {
+              firstNameInput[i].value = relatives[i + 1]["RELATIVE_FIRST_NAME"];
+              lastNameInput[i].value = relatives[i + 1]["RELATIVE_LAST_NAME"];
+              DOBInput[i].value = relatives[i + 1]["GUARDIAN_BIRTHDAY"];
+              telephoneInput[i].value =
+                relatives[i + 1]["GUARDIAN_CONTACT_NUMBER"];
+              barangayInput[i].value = relatives[i + 1]["BARANGAY"];
+              addressInput[i].value = relatives[i + 1]["ADDRESS"];
             }
-        });
+            // Make all textbox, select, checkbox, and radio buttons readonly except for the next button
+            // Make all textboxes readonly
+            $("input").prop("readonly", true);
 
-        var TYPE_OF_DISABILITY = data[0]["TYPE_OF_DISABILITY"].split(", ");
+            // Make all selects readonly
+            $("select").prop("disabled", true);
 
-        $('input[type="checkbox"][name="typeOfDisability"]').each(function () {
-            var checkboxValue = $(this).val();
-            if (TYPE_OF_DISABILITY.includes(checkboxValue)) {
-            $(this).prop("checked", true);
-            }
-        });
-
-        var CONGENITAL_INBORN = data[0]["CONGENITAL_INBORN"].split(", ");
-
-        $('input[type="checkbox"][name="inborn"]').each(function () {
-            var checkboxValue = $(this).val();
-            if (CONGENITAL_INBORN.includes(checkboxValue)) {
-            $(this).prop("checked", true);
-            }
-        });
-
-        var ACQUIRED = data[0]["ACQUIRED"].split(", ");
-
-        $('input[type="checkbox"][name="acquired"]').each(function () {
-            var checkboxValue = $(this).val();
-            if (ACQUIRED.includes(checkboxValue)) {
-            $(this).prop("checked", true);
-            }
-        });
-
-        $("#employmentStatus").trigger("change");
-        $("#accomplishedBy").trigger("change");
-        $("#occupation").trigger("change");
-        $("#isPhilhealthMember").trigger("change");
-
-        // Make all textbox, select, checkbox, and radio buttons readonly except for the next button
-        // Make all textboxes readonly
-        $("input").prop("readonly", true);
-
-        // Make all selects readonly
-        $("select").prop("disabled", true);
-
-        // Make all checkboxes and radio buttons disabled
-        $("input[type='checkbox'], input[type='radio']").prop("disabled", true);
-
-        console.log(data);
+            // Make all checkboxes and radio buttons disabled
+            $("input[type='checkbox'], input[type='radio']").prop(
+              "disabled",
+              true
+            );
         },
         error: function (e) {
         console.log("ERROR: ", e);

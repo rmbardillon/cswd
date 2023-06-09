@@ -89,7 +89,7 @@
                 <div class="col"><label class="form-label required" for="educationalAttainment">HIGHEST EDUCATIONAL ATTAINMENT</label><input class="form-control" type="text" id="educationalAttainment" name="educationalAttainment" required=""></div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" id="job-1" for="job">OCCUPATION</label><input class="form-control" type="text" id="job-2" name="job" required=""></div>
+                <div class="col"><label class="form-label required" id="job-1" for="job">OCCUPATION</label><input class="form-control" type="text" id="job" name="job" required=""></div>
                 <div class="col"><label class="form-label required" for="company">COMPANY/AGENCY</label><input class="form-control" type="text" id="company" name="company" required=""></div>
             </div>
             <div class="row">
