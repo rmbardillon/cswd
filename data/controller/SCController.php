@@ -1,14 +1,131 @@
 <?php
     include_once('../../config/database.php');
     include_once('../model/Sc.php');
+    include_once('../model/Functions.php');
+    include_once('../model/Sql.php');
 
     $action = $_GET['action'];
     $Sc = new Sc($conn);
+    $Functions = new Functions($conn);
+    $Sql = new Sql($conn);
     
     if($action == "scRegister")
     {
         $scForm = $_POST['scForm'];
         $result = $Sc->scRegister($scForm);
+
+        echo json_encode($result);
+    }
+
+    else if ($action == "approveApplicationFileUpload") {
+        $personId = $_POST['personId'];
+
+        $barangayCertificate = $_FILES['barangayCertificate']['tmp_name'];
+        $barangayCertificateExtension = pathinfo($_FILES['barangayCertificate']['name'], PATHINFO_EXTENSION);
+        $validID = $_FILES['validID']['tmp_name'];
+        $validIDExtension = pathinfo($_FILES['validID']['name'], PATHINFO_EXTENSION);
+        $photo = $_FILES['photo']['tmp_name'];
+        $photoExtension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+
+        $directory = "../../libs/uploaded_files/encrypted_files/"; // Directory to save the uploaded files
+
+        // Create a folder for each person based on their ID
+        $personDirectory = $directory . $personId . '/';
+        if (!is_dir($personDirectory)) {
+            mkdir($personDirectory, 0755, true);
+        }
+        // Generate an encryption key (use a strong and secure method to generate or obtain the key)
+        $encryptionKey = $Functions->generateEncryptionKey();
+        // Encrypt and move the uploaded files to the target directory
+        $Functions->encryptAndMoveFile($barangayCertificate, $personDirectory . 'barangayCertificate', $encryptionKey);
+        $Functions->encryptAndMoveFile($validID, $personDirectory . 'validID', $encryptionKey);
+        $Functions->encryptAndMoveFile($photo, $personDirectory . 'photo', $encryptionKey);
+
+        $barangayCertificateRequest = [
+            'personId' => $personId,
+            'documentName' => 'barangayCertificate',
+            'documentType' => $barangayCertificateExtension,
+            'filePath' => $personDirectory . 'barangayCertificate',
+            'encryptionKey' => $encryptionKey
+        ];
+
+        $validIDRequest = [
+            'personId' => $personId,
+            'documentName' => 'validID',
+            'documentType' => $validIDExtension,
+            'filePath' => $personDirectory . 'validID',
+            'encryptionKey' => $encryptionKey
+        ];
+
+        $photoRequest = [
+            'personId' => $personId,
+            'documentName' => 'photo',
+            'documentType' => $photoExtension,
+            'filePath' => $personDirectory . 'photo',
+            'encryptionKey' => $encryptionKey
+        ];
+        try {
+            // Begin transaction
+            $conn->begin_transaction();
+            $Sql->insertUploadedDocuments($barangayCertificateRequest);
+            $Sql->insertUploadedDocuments($validIDRequest);
+            $Sql->insertUploadedDocuments($photoRequest);
+            $Sql->updateApplicationStatus($personId, "Approved");
+            $conn->commit();
+        } catch (Exception $e) {
+            // Rollback the transaction in case of any errors
+            $this->connection->rollback();
+            $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+            echo $errorMessage;
+        }
+
+        echo json_encode("File upload successful");
+    }
+    
+    else if ($action == "decryptAndOpenFile")
+    {
+        $personId = $_POST['personId'];
+        $documentName = $_POST['documentName'];
+        $decryptionKey = $_POST['decryptionKey'];
+        $documentType = $_POST['documentType'];
+
+        $directory = "../../libs/uploaded_files/encrypted_files/" . $personId ; // Directory where the encrypted files are stored
+
+        $decryptedFilesDirectory = "../../libs/uploaded_files/decrypted_files/" . $personId; // Directory where the decrypted files will be stored
+
+        if (!is_dir($decryptedFilesDirectory)) {
+            mkdir($decryptedFilesDirectory, 0755, true);
+        }
+        // Decrypt and open the files
+        $Path = $directory . '/'. $documentName;
+        $decryptedFile = $Functions->decryptAndOpenFile($Path, $decryptionKey);
+        file_put_contents($decryptedFilesDirectory . '/'.$documentName.'.'.$documentType, $decryptedFile);
+
+        $result = [
+            'personId' => $personId,
+            'decryptionKey' => $decryptionKey,
+            'documentType' => $documentType,
+            'filePath' => $decryptedFilesDirectory . '/'.$documentName.'.'.$documentType
+        ];
+
+        echo json_encode($result);
+    }
+
+    else if($action == "rejectApplication")
+    {
+        $personId = $_POST['personId'];
+
+        $Sql->updateApplicationStatus($personId, "Rejected");
+
+        echo json_encode("Application rejected");
+    }
+
+    else if($action == "getDocumentData")
+    {
+        $personId = $_POST['personId'];
+        $documentName = $_POST['documentName'];
+
+        $result = $Sql->getDocumentData($personId, $documentName);
 
         echo json_encode($result);
     }

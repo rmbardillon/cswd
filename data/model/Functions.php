@@ -66,5 +66,64 @@
                 echo 'Failed to send email. Error: ' . $mail->ErrorInfo;
             }
         }
+
+        public function generateEncryptionKey($length = 32) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_';
+            $charactersLength = strlen($characters);
+            $key = '';
+
+            for ($i = 0; $i < $length; $i++) {
+                $key .= $characters[rand(0, $charactersLength - 1)];
+            }
+
+            return $key;
+        }
+
+        public function encryptAndMoveFile($sourcePath, $destinationPath, $encryptionKey)
+        {
+            // Read the contents of the file
+            $fileContents = file_get_contents($sourcePath);
+
+            // Encrypt the file contents
+            $encryptedContents = $this->encryptData($fileContents, $encryptionKey);
+
+            // Write the encrypted contents to the destination file
+            file_put_contents($destinationPath, $encryptedContents);
+        }
+
+        public function encryptData($data, $key)
+        {
+            // You can use any encryption algorithm that suits your requirements
+            // Here's an example using OpenSSL AES-256 encryption in CBC mode
+            $ivSize = openssl_cipher_iv_length('AES-256-CBC');
+            $iv = openssl_random_pseudo_bytes($ivSize);
+
+            $encryptedData = openssl_encrypt($data, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+
+            // Prepend the IV to the encrypted data
+            $encryptedDataWithIV = $iv . $encryptedData;
+
+            return $encryptedDataWithIV;
+        }
+
+        public function decryptAndOpenFile($filePath, $encryptionKey)
+        {
+            // Read the encrypted file contents
+            $encryptedContents = file_get_contents($filePath);
+
+            // Extract the IV from the encrypted contents
+            $ivSize = openssl_cipher_iv_length('AES-256-CBC');
+            $iv = substr($encryptedContents, 0, $ivSize);
+
+            // Remove the IV from the encrypted contents
+            $encryptedData = substr($encryptedContents, $ivSize);
+
+            // Decrypt the file contents
+            $decryptedData = openssl_decrypt($encryptedData, 'AES-256-CBC', $encryptionKey, OPENSSL_RAW_DATA, $iv);
+
+            return $decryptedData;
+        }
+
+
     }
 ?>

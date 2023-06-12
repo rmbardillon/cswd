@@ -314,6 +314,128 @@ const SC = (() => {
         });
     };
 
+    thisSC.approve = (id) => {
+      personId = id;
+      $("#uploadFilesModal").modal("show");
+    };
+
+    thisSC.approveApplication = () => {
+      var form = $("#uploadForm")[0];
+      var formData = new FormData(form);
+
+      // Add personId to the formData
+      formData.append("personId", personId);
+
+      $.ajax({
+        type: "POST",
+        url: SC_CONTROLLER + "?action=approveApplicationFileUpload",
+        data: formData,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        success: function (response) {
+          if (response == "File upload successful") {
+            swal
+              .fire({
+                title: "Success!",
+                text: "Application approved.",
+                icon: "success",
+                confirmButtonText: "Ok",
+              })
+              .then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = "approved-application.php";
+                }
+              });
+          }
+        },
+        error: function (xhr, status, error) {
+          console.log(xhr.responseText);
+        },
+      });
+    };
+
+    thisSC.reject = (id) => {
+      personId = id;
+      swal
+        .fire({
+          title: "Are you sure?",
+          text: "You are about to reject this application.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, reject it!",
+          cancelButtonText: "No, cancel!",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              type: "POST",
+              url: SC_CONTROLLER + "?action=rejectApplication",
+              data: {
+                personId: personId,
+              },
+              dataType: "json",
+              success: function (response) {
+                if (response == "Application rejected") {
+                  swal
+                    .fire({
+                      title: "Success!",
+                      text: "Application rejected.",
+                      icon: "success",
+                      confirmButtonText: "Ok",
+                    })
+                    .then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href = "rejected-application.php";
+                      }
+                    });
+                }
+              },
+              error: function (e) {
+                console.log("ERROR: ", e);
+              },
+            });
+          }
+        });
+    };
+
+    thisSC.viewDocument = (personId, documentName) => {
+      if (documentName == "Medical Certificate") {
+        documentName = "medicalCertificate";
+      } else if (documentName == "Barangay Certificate") {
+        documentName = "barangayCertificate";
+      } else if (documentName == "Valid ID") {
+        documentName = "validID";
+      } else if (documentName == "Photo") {
+        documentName = "photo";
+      }
+      $.ajax({
+        type: "POST",
+        url: SC_CONTROLLER + "?action=getDocumentData",
+        data: {
+          personId: personId,
+          documentName: documentName,
+        },
+        dataType: "json",
+        success: function (response) {
+          $.ajax({
+            type: "POST",
+            url: SC_CONTROLLER + "?action=decryptAndOpenFile",
+            data: {
+              personId: personId,
+              documentName: documentName,
+              decryptionKey: response[0]["ENCRYPTION_KEY"],
+              documentType: response[0]["DOCUMENT_TYPE"],
+            },
+            dataType: "json",
+            success: function (response) {
+              window.open("../" + response["filePath"]);
+            },
+          });
+        },
+      });
+    };
+
     return thisSC;
 })();
 
@@ -321,6 +443,7 @@ $(document).ready(function () {
     // Check for url parameter
     const urlParams = new URLSearchParams(window.location.search);
     const personId = urlParams.get("personId");
+    const status = urlParams.get("status");
     if(personId != null) {
         $.ajax({
             type: "POST",
@@ -400,6 +523,23 @@ $(document).ready(function () {
                     "disabled",
                     true
                 );
+
+                $("#srCitizenNext").hide();
+                if (status == "Pending") {
+                  var buttons = `<button class="btn btn-success w-100 mb-3" type="button" name="approve" onclick="SC.approve('${data[0]["PERSON_ID"]}');">Approve</button>
+                    <button class="btn btn-danger w-100" type="button" name="reject" onclick="SC.reject('${data[0]["PERSON_ID"]}');">Reject</button>`;
+                } else if (status == "Approved") {
+                  var buttons = `<div = class="row mb-2">
+                                    <div class="col">
+                                    <button class="btn btn-secondary w-100" type="button" name="viewBarangayCertificate" id="viewBarangayCertificate" onclick="SC.viewDocument('${data[0]["PERSON_ID"]}', 'Barangay Certificate');">View Barangay Certificate</button></div>
+                                    </div><div = class="row mb-2">
+                                    <div class="col-md-6">
+                                    <button class="btn btn-secondary w-100" type="button" name="viewValidId" id="viewValidId" onclick="SC.viewDocument('${data[0]["PERSON_ID"]}', 'Valid ID');">View Valid ID</button></div>
+                                    <div class="col-md-6">
+                                    <button class="btn btn-secondary w-100" type="button" name="viewPicture" id="viewPicture" onclick="SC.viewDocument('${data[0]["PERSON_ID"]}', 'Photo');">View Picture</button></div>
+                                    </div>`;
+                }
+                $("#button-div").append(buttons);
             },
             error: function (e) {
             console.log("ERROR: ", e);

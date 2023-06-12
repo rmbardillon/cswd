@@ -1,12 +1,10 @@
 <?php
-// Retrieve form data
-$name = $_POST['name'];
-$country = $_POST['country'];
-$subscribe = isset($_POST['subscribe']) ? $_POST['subscribe'] : 0;
-$message = $_POST['message'];
+$targetDir = "uploads/"; // Directory to save the uploaded file
+$targetFile = $targetDir . basename($_FILES["file"]["name"]); // Path of the uploaded file
 
-echo("Name: $name \n");
-echo("Country: $country \n");
-echo("Subscribe: $subscribe \n");
-echo("Message: $message \n");
+if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
+  echo "File uploaded successfully.";
+} else {
+  echo "File upload failed.";
+}
 ?>

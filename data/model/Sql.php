@@ -196,5 +196,46 @@
             $stmt->close();
         }
 
+        public function insertUploadedDocuments($request)
+        {
+            $personId = $request['personId'];
+            $documentName = $request['documentName'];
+            $documentType = $request['documentType'];
+            $filePath = $request['filePath'];
+            $encryptionKey = $request['encryptionKey'];
+            $sql = "INSERT INTO uploaded_documents(PERSON_ID, DOCUMENT_NAME, DOCUMENT_TYPE, FILE_PATH, ENCRYPTION_KEY) VALUES (?,?,?,?,?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssss", $personId, $documentName, $documentType, $filePath, $encryptionKey);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        public function updateApplicationStatus($personId, $status)
+        {
+            $sql = "UPDATE application SET APPLICATION_STATUS = ? WHERE PERSON_ID = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ss", $status, $personId);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        public function getDocumentData($personId, $documentName)
+        {
+            $sql = "SELECT * FROM uploaded_documents WHERE PERSON_ID = ? AND DOCUMENT_NAME = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ss", $personId, $documentName);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result === false) {
+                return false;
+            }
+
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            return $data;
+        }
+
     }
 ?>

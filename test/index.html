@@ -9,13 +9,14 @@
 <body>
   <div class="container-fluid p-5">
     <div class="row">
-        <div class="col">
-            <div id="calendar"></div>
-        </div>
-        <div class="col col-3">
-            <p>Details</p>
-            <b id="date"></b>
-        </div>
+        <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput">
+        <input type="submit" value="Upload File">
+        </form>
+
+        <div id="progress"></div>
+        <div id="message"></div>
+
     </div>
   </div>
 
@@ -26,42 +27,40 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/gcal.min.js"></script>
   <script>
     $(document).ready(function() {
-  $('#calendar').fullCalendar({
-    defaultView: 'month',
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'month,agendaWeek,agendaDay'
-    },
-    weekends: false,
-    events: [
-      // Add your events here
-    ],
-    dayRender: function(date, cell) {
-      // Create the AM button element
-      var amButton = document.createElement('button');
-      amButton.innerText = 'AM';
-      amButton.classList.add('btn', 'btn-primary', 'mr-1');
-      amButton.addEventListener('click', function() {
-        $("#date").html(date.format())
-        // Handle AM button click event
-        alert('AM button clicked for date: '+ date.format());
-      });
+        $('#uploadForm').submit(function(e) {
+            e.preventDefault(); // Prevent the default form submit
 
-      // Create the PM button element
-      var pmButton = document.createElement('button');
-      pmButton.innerText = 'PM';
-      pmButton.classList.add('btn', 'btn-primary');
-      pmButton.addEventListener('click', function() {
-        // Handle PM button click event
-        alert('PM button clicked for date: '+ date.format());
-      });
+            // Get the form data and create a FormData object
+            var formData = new FormData(this);
 
-      // Append the buttons to the day cell
-      $(cell).append(amButton, pmButton);
-    }
-  });
-});
+            $.ajax({
+                url: 'insert.php', // PHP script to handle the file upload
+                type: 'POST',
+                data: formData,
+                processData: false, // Prevent jQuery from automatically converting the data to a query string
+                contentType: false, // Set the content type to false, letting the browser handle it automatically
+                xhr: function() {
+                    // Create an XMLHttpRequest object with progress event listener
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = (evt.loaded / evt.total) * 100;
+                        $('#progress').text(percentComplete.toFixed(2) + '%');
+                    }
+                    }, false);
+                    return xhr;
+                },
+                success: function(response) {
+                    // Display the response message
+                    $('#message').text(response);
+                },
+                error: function() {
+                    $('#message').text('File upload failed.');
+                }
+            });
+        });
+    });
+
 
   </script>
 </body>

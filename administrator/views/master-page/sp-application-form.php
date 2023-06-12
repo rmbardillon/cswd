@@ -17,6 +17,43 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="uploadFilesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"> Documents Upload</h5>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col">
+                            <label for="barangayCertificate" class="form-label required">Barangay Certificate</label>
+                            <input class="form-control mb-2" type="file" name="barangayCertificate" id="barangayCertificate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="validID" class="form-label required">Valid ID</label>
+                            <input class="form-control mb-2" type="file" name="validID" id="validID">
+                        </div>
+                        <div class="col">
+                            <label for="photo" class="form-label required">1x1 or 2x2 Picture</label>
+                            <input class="form-control mb-2" type="file" name="photo" id="photo">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="text-danger">Please upload pdf files only.</p>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-success" onclick="SP.approveApplication();">Approve Application</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="application-form-container" class="container p-5 mt-5 mb-5">
     <h1>Solo Parent Application</h1>
     <form id="spForm" method="post" novalidate="">
@@ -218,7 +255,7 @@
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col"><button class="btn btn-primary w-100" type="submit" name="spCitizenNext" id="spCitizenNext">Next</button></div>
+            <div class="col" id="button-div"><button class="btn btn-primary w-100" type="submit" name="spCitizenNext" id="spCitizenNext">Next</button></div>
         </div>
     </form>
 </div>
