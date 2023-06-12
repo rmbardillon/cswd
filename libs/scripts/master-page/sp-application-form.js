@@ -331,6 +331,22 @@ const SP = (() => {
             dataType: "json",
             success: function (response) {
               window.open("../" + response["filePath"]);
+
+              // Delete the file from local storage
+              $.ajax({
+                type: "POST",
+                url: PWD_CONTROLLER + "?action=deleteFile",
+                data: {
+                  filePath: response["filePath"],
+                },
+                dataType: "json",
+                success: function (response) {
+                  console.log("File deleted successfully");
+                },
+                error: function (xhr, status, error) {
+                  console.error("Error deleting the file:", error);
+                },
+              });
             },
           });
         },

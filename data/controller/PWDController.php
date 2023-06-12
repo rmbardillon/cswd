@@ -132,6 +132,25 @@
         echo json_encode($result);
     }
 
+    else if($action == "deleteFile")
+    {
+        $filePath = $_POST['filePath'];
+
+        if (unlink($filePath)) {
+            $result = [
+                'success' => true,
+                'message' => 'File deleted successfully',
+            ];
+        } else {
+            $result = [
+                'success' => false,
+                'message' => 'Error deleting the file',
+            ];
+        }
+
+        echo json_encode($result);
+    }
+
     else if($action == "rejectApplication")
     {
         $personId = $_POST['personId'];
