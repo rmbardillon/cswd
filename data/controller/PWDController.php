@@ -84,6 +84,12 @@
             'filePath' => $personDirectory . 'photo',
             'encryptionKey' => $encryptionKey
         ];
+
+        $citizenIDRequest = [
+            'personId' => $personId,
+            'idNumber' => "043428023-" . $Functions->generatePWDID()[0],
+            'status' => "Pending"
+        ];
         try {
             // Begin transaction
             $conn->begin_transaction();
@@ -92,6 +98,7 @@
             $Sql->insertUploadedDocuments($validIDRequest);
             $Sql->insertUploadedDocuments($photoRequest);
             $Sql->updateApplicationStatus($personId, "Approved");
+            $Sql->insertCitizenIdentificationCard($citizenIDRequest);
             $conn->commit();
         } catch (Exception $e) {
             // Rollback the transaction in case of any errors

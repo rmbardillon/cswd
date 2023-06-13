@@ -210,6 +210,18 @@
             $stmt->close();
         }
 
+        public function insertCitizenIdentificationCard($request)
+        {
+            $personId = $request['personId'];
+            $idNumber = $request['idNumber'];
+            $status = $request['status'];
+            $sql = "INSERT INTO citizen_identification_card(PERSON_ID, ID_NUMBER, STATUS) VALUES (?,?,?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sss", $personId, $idNumber, $status);
+            $stmt->execute();
+            $stmt->close();
+        }
+
         public function updateApplicationStatus($personId, $status)
         {
             $sql = "UPDATE application SET APPLICATION_STATUS = ? WHERE PERSON_ID = ?";

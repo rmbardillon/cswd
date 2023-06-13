@@ -124,6 +124,39 @@
             return $decryptedData;
         }
 
+        public function generateSrID() {
+            $numbers = array();
+            while (count($numbers) < 6) {
+                $random = mt_rand(1, 999999);
+                if (!in_array($random, $numbers)) {
+                    $numbers[] = $random;
+                }
+            }
+            return $numbers;
+        }
+
+        public function generateSoloParentID() {
+            $numbers = array();
+            while (count($numbers) < 5) {
+                $random = mt_rand(1, 99999);
+                if (!in_array($random, $numbers)) {
+                    $numbers[] = $random;
+                }
+            }
+            return $numbers;
+        }
+
+        public function generatePWDID() {
+            $numbers = array();
+            while (count($numbers) < 4) {
+                $random = mt_rand(1, 9999);
+                if (!in_array($random, $numbers)) {
+                    $numbers[] = $random;
+                }
+            }
+            return $numbers;
+        }
+
 
     }
 ?>

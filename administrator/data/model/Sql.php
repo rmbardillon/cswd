@@ -511,7 +511,7 @@
 
         public function getApplicantData($personId)
         {
-            $sql = "SELECT *, person.PERSON_ID
+            $sql = "SELECT *, person.PERSON_ID, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_BIRTHDAY
                     FROM person
                     LEFT JOIN address ON person.PERSON_ID = address.PERSON_ID
                     LEFT JOIN application ON person.PERSON_ID = application.PERSON_ID

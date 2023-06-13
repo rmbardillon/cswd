@@ -66,7 +66,7 @@
             $tableRow .= "<td>" . $counter. "</td>";
             $tableRow .= "<td>" . $data['FULL_NAME'] . "</td>";
             $tableRow .= "<td>" . $data['BARANGAY'] . "</td>";
-            $tableRow .= '<td><button type="button" id="print" onclick="PrintID.clickPrint(`'. $data['PERSON_ID'] .'`)" class="btn btn-success btn-sm"><i class="bi bi-eye"></i> Print </button></td>';
+            $tableRow .= '<td><button type="button" id="print" onclick="PrintID.clickPrint(`'. $data['PERSON_ID'] .'`, `'.$data['APPLICANT_TYPE'].'`)" class="btn btn-success btn-sm"><i class="bi bi-eye"></i> Print </button></td>';
             $tableRow .= "</tr>";
             $counter++;
         }

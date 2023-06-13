@@ -64,12 +64,19 @@
             'filePath' => $personDirectory . 'photo',
             'encryptionKey' => $encryptionKey
         ];
+
+        $citizenIDRequest = [
+            'personId' => $personId,
+            'idNumber' => date("Y") . "-"  . $Functions->generateSoloParentID()[0],
+            'status' => "Pending"
+        ];
         try {
             // Begin transaction
             $conn->begin_transaction();
             $Sql->insertUploadedDocuments($barangayCertificateRequest);
             $Sql->insertUploadedDocuments($validIDRequest);
             $Sql->insertUploadedDocuments($photoRequest);
+            $Sql->insertCitizenIdentificationCard($citizenIDRequest);
             $Sql->updateApplicationStatus($personId, "Approved");
             $conn->commit();
         } catch (Exception $e) {
