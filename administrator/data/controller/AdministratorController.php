@@ -104,5 +104,33 @@
 
         echo json_encode($result);
     }
+
+    else if($action == 'checkOldPassword')
+    {
+        $username = $_POST['username'];
+        $oldPassword = $_POST['oldPassword'];
+
+        $request = [
+            'username' => $username,
+            'oldPassword' => $oldPassword
+        ];
+
+        $result = $Administrator->checkOldPassword($request);
+        echo json_encode($result);
+    }
+
+    else if($action == 'changePassword') 
+    {
+        $user_id = $_POST['user_id'];
+        $password = $_POST['password'];
+
+        $request = [
+            'user_id' => $user_id,
+            'password' => $password
+        ];
+
+        $result = $Administrator->update_password($request);
+        echo json_encode($result);
+    }
     
 ?>
