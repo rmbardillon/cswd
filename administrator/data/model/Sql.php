@@ -588,27 +588,84 @@
             return $result;
         }
 
-        public function getEventParticipants($applicationType, $applicantType, $barangay, $status)
+        public function getEventDetails($id)
+        {
+            $sql = "SELECT * FROM events WHERE EVENT_ID = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result === false) {
+                return false;
+            }
+
+            $events = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $events;
+        }
+
+        public function getEventParticipants($applicantType, $barangay, $status)
         {
             if($barangay != "All") {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
                         FROM person
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
-                        ORDER BY BARANGAY, FULL_NAME;";
+                        WHERE APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
+                        ORDER BY APPLICANT_TYPE, BARANGAY, FULL_NAME;";
+            }
+            else if($barangay == "All"  && $applicantType == "All") {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        WHERE APPLICATION_STATUS = '$status'
+                        ORDER BY APPLICANT_TYPE, BARANGAY, FULL_NAME;";
+                
             }
             else if($barangay == "All") {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
                         FROM person
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
-                        ORDER BY BARANGAY, FULL_NAME;";
-            }
+                        WHERE APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
+                        ORDER BY APPLICANT_TYPE, BARANGAY, FULL_NAME;";
+            } 
             $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getApplicantPrintId($applicationType)
+        {
+            $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
+                    FROM person
+                    JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                    JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                    JOIN application ON person.PERSON_ID = application.PERSON_ID
+                    JOIN address ON person.PERSON_ID = address.PERSON_ID
+                    LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
+                    WHERE APPLICANT_TYPE = ? 
+                    AND APPLICATION_STATUS = 'Approved'
+                    AND citizen_identification_card.PERSON_ID IS NULL
+                    ORDER BY BARANGAY, FULL_NAME;";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $applicationType);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             if ($result === false) {
                 return false;

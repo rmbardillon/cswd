@@ -88,9 +88,9 @@
                                         <img class="border rounded-circle img-profile" src="../../../libs/images/default-profile-picture.png" width="40">
                                     </a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                        <a class="dropdown-item text-dark" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>Profile</a>
-                                        <a class="dropdown-item text-dark" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>Settings</a>
-                                        <a class="dropdown-item text-dark" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>Activity log</a>
+                                        <a class="dropdown-item text-dark" href="../master-page/profile.php"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>Profile</a>
+                                        <a class="dropdown-item text-dark" href="../master-page/change-password.php"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>Change Password</a>
+                                        <!-- <a class="dropdown-item text-dark" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>Activity log</a> -->
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item text-dark" onclick="Logout();"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>Logout</a>
                                     </div>

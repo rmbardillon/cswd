@@ -70,21 +70,94 @@ const Events = (() => {
         eventId = id;
 
         $.ajax({
+            type: "POST",
+            url: EVENT_CONTROLLER + "?action=getEventDetails",
+            data: {
+                id: id
+            },
+            dataType: "json",
+            success: function (data) {
+                $.ajax({
+                  type: "POST",
+                  url: EVENT_CONTROLLER + "?action=viewEventParticipants",
+                  data: {
+                    id: id,
+                    barangay: data[0]['EVENT_BARANGAY'],
+                    event_for: data[0]['EVENT_FOR'],
+                    status: "Approved"
+                  },
+                  dataType: "json",
+                  success: function (data) {
+                    $("#eventParticipantsModal").modal("show");
+                    $(".table").DataTable().destroy();
+                    $("#eventsParticipantsTbody").html(data);
+                    $(".table").DataTable({
+                      columnDefs: [
+                        {
+                          targets: "no-sort",
+                          orderable: false,
+                        },
+                      ],
+                    });
+                  },
+                  error: function (e) {
+                    console.log(e);
+                  },
+                });
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+
+    thisEvents.sendEmail = () => {
+        $("#eventParticipantsModal").modal("hide");
+        $.ajax({
           type: "POST",
-          url: EVENT_CONTROLLER + "?action=viewEventParticipants",
+          url: EVENT_CONTROLLER + "?action=getEventDetails",
           data: {
-            id: id,
+            id: eventId,
           },
           dataType: "json",
           success: function (data) {
-            $("#viewEventModal").modal("show");
-            $("#viewEventModal .modal-body").html(data);
+            $.ajax({
+              type: "POST",
+              url: EVENT_CONTROLLER + "?action=sendEmailToParticipants",
+              data: {
+                id: eventId,
+                barangay: data[0]["EVENT_BARANGAY"],
+                event_for: data[0]["EVENT_FOR"],
+                event_date: data[0]["EVENT_DATE"],
+                status: "Approved",
+              },
+              dataType: "json",
+              beforeSend: function () {
+                $.blockUI({ message: loading }); // Display loading animation
+              },
+              success: function (data) {
+                $.unblockUI(); // Remove loading animation
+                swal
+                  .fire({
+                    title: "Success!",
+                    text: "Email has been sent!",
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                  })
+                  .then(() => {
+                    window.location.reload();
+                  });
+              },
+              error: function (e) {
+                console.log(e);
+              },
+            });
           },
           error: function (e) {
             console.log(e);
           },
         });
-    }
+    };
     return thisEvents;
 
 })();

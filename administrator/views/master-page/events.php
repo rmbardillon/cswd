@@ -8,6 +8,36 @@
 <?php include_once("../layout/navbar.php") ?>
     <div class="container">
         <h1>Events</h1>
+        <div class="modal fade" id="eventParticipantsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Event Participants</h5>
+                        <button type="button" class="btn btn-success" onclick="Events.sendEmail();">Send Email</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-1">No.</th>
+                                        <th class="col-3">Citizen Type</th>
+                                        <th class="col-5">Full Name</th>
+                                        <th class="col-3">Barangay</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody id="eventsParticipantsTbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

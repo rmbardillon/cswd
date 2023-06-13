@@ -50,5 +50,28 @@
 
         echo json_encode($result);
     }
+
+    else if ($action == "loadPrintTable")
+    {
+        $applicationType = $_POST['applicationType'];
+        
+        $result = $Sql->getApplicantPrintId($applicationType);
+
+        $tableRow = "";
+        $counter = 1;
+
+        foreach($result as $data)
+        {
+            $tableRow .= "<tr>";
+            $tableRow .= "<td>" . $counter. "</td>";
+            $tableRow .= "<td>" . $data['FULL_NAME'] . "</td>";
+            $tableRow .= "<td>" . $data['BARANGAY'] . "</td>";
+            $tableRow .= '<td><button type="button" id="print" onclick="PrintID.clickPrint(`'. $data['PERSON_ID'] .'`)" class="btn btn-success btn-sm"><i class="bi bi-eye"></i> Print </button></td>';
+            $tableRow .= "</tr>";
+            $counter++;
+        }
+
+        echo json_encode($tableRow);
+    }
     
 ?>

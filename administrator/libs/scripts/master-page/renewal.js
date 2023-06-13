@@ -282,5 +282,46 @@ const Application = (() => {
     });
   };
 
+  thisApplication.clickView = (personId, status) => {
+    $.ajax({
+      type: "POST",
+      url: APPLICATION_CONTROLLER + "?action=getApplicantData",
+      data: {
+        personId: personId,
+      },
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        if (data[0]["APPLICANT_TYPE"] == "PWD") {
+          window.open(
+            "pwd-application-form.php?personId=" +
+              personId +
+              "&status=" +
+              status,
+            "_blank"
+          );
+        } else if (data[0]["APPLICANT_TYPE"] == "Solo Parent") {
+          window.open(
+            "sp-application-form.php?personId=" +
+              personId +
+              "&status=" +
+              status,
+            "_blank"
+          );
+        } else if (data[0]["APPLICANT_TYPE"] == "Senior Citizen") {
+          window.open(
+            "sc-application-form.php?personId=" +
+              personId +
+              "&status=" +
+              status,
+            "_blank"
+          );
+        }
+      },
+      error: function (e) {
+        console.log("ERROR: ", e);
+      },
+    });
+  };
   return thisApplication;
 })();
