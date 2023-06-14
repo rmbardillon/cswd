@@ -64,7 +64,8 @@ $pdf->AddPage();
 // Set font
 $pdf->SetFont('Arial','B',12);
 // Row 1
-$pdf->Cell(0,6,$applicantType.' list from '.$barangay,0,1,'C');
+$pdf->Cell(0,6,$applicantType.' Birthday Celebrants from '.$barangay,0,1,'C');
+$pdf->Cell(0,6,date("F j, Y", strtotime($fromDate)).' to '.date("F j, Y", strtotime($toDate)),0,1,'C');
 
 // Line break
 $pdf->Ln(1);

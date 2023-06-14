@@ -442,6 +442,7 @@
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         WHERE application.APPLICANT_TYPE = '$applicantType'
+                        AND application.APPLICATION_STATUS = 'Approved'
                         AND address.BARANGAY = '$barangay'
                         AND (
                             MONTH(personal_information.BIRTHDAY) > MONTH('$fromDate') OR
@@ -459,6 +460,7 @@
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         WHERE application.APPLICANT_TYPE = '$applicantType'
+                        AND application.APPLICATION_STATUS = 'Approved'
                         AND (
                             MONTH(personal_information.BIRTHDAY) > MONTH('$fromDate') OR
                             (MONTH(personal_information.BIRTHDAY) = MONTH('$fromDate') AND DAY(personal_information.BIRTHDAY) >= DAY('$fromDate'))
