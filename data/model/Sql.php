@@ -249,5 +249,28 @@
             return $data;
         }
 
+        public function checkIdNumber($idNumber)
+        {
+            $sql = "SELECT *
+                    FROM citizen_identification_card
+                    JOIN person ON citizen_identification_card.PERSON_ID = person.PERSON_ID
+                    WHERE citizen_identification_card.ID_NUMBER = ?";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $idNumber);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows === 0) {
+                return false; // No rows found
+            }
+
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            return $data; // Rows found
+        }
+
+
     }
 ?>
