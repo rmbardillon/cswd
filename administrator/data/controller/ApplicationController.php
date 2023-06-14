@@ -73,5 +73,20 @@
 
         echo json_encode($tableRow);
     }
+
+    else if($action == "insertPrintedId")
+    {
+        $personId = $_POST['personId'];
+        $applicantType = $_POST['applicantType'];
+
+        $request = [
+            'personId' => $personId,
+            'applicantType' => $applicantType
+        ];
+
+        $result = $Sql->updateCitizenID($request);
+
+        echo json_encode($result);
+    }
     
 ?>

@@ -676,5 +676,30 @@
             return $result;
         }
 
+        public function updateCitizenID($request)
+        {
+            $personId = $request['personId'];
+            $applicantType = $request['applicantType'];
+
+            if($applicantType == "PWD") {
+                $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE(), EXPIRATION_DATE = DATE_ADD(CURDATE(), INTERVAL 5 YEAR) WHERE PERSON_ID = ?";
+            } else if ($applicantType == "Solo Parent") {
+                $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE(), EXPIRATION_DATE = DATE_ADD(CURDATE(), INTERVAL 1 YEAR) WHERE PERSON_ID = ?";
+            } else if ($applicantType == "Senior Citizen") {
+                $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE() WHERE PERSON_ID = ?";
+            }
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $personId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result === false) {
+                return false;
+            }
+
+            return $result;
+        }
+
     }
 ?>
