@@ -521,6 +521,7 @@
                     LEFT JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                     LEFT JOIN pwd_data ON person.PERSON_ID = pwd_data.PERSON_ID
                     LEFT JOIN solo_parent_data ON person.PERSON_ID = solo_parent_data.PERSON_ID
+                    LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
                     LEFT JOIN uploaded_documents ON person.PERSON_ID = uploaded_documents.PERSON_ID
                     WHERE person.PERSON_ID = ?;";
             
@@ -659,7 +660,7 @@
                     LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
                     WHERE APPLICANT_TYPE = ? 
                     AND APPLICATION_STATUS = 'Approved'
-                    AND citizen_identification_card.PERSON_ID IS NULL
+                    AND citizen_identification_card.DATE_ISSUED IS NULL
                     ORDER BY BARANGAY, FULL_NAME;";
 
             $stmt = $this->conn->prepare($sql);

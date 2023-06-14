@@ -33,7 +33,7 @@
             ];
             $contactDetails = [
                 'uuid' => $uuid,
-                'telephone' => $spForm['telephone'],
+                'mobileNumber' => $spForm['telephone'],
                 'email' => $spForm['email'],
             ];
             $personalInformation = [

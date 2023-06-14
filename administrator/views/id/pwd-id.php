@@ -55,28 +55,28 @@
             <div id="information">
                 <div class="row">
                     <div class="col border">
-                        <p style="font-size: 10px;">TYPE OF DISABILITY<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                        <p style="font-size: 10px;">TYPE OF DISABILITY<strong style="margin-left: 10px;font-size: 10px;" id="typeOfDisability"></strong></p>
                     </div>
                 </div>
                 <div class="row" style="font-size: 15px;">
                     <div class="col col-8 border" style="font-size: 15px;">
-                        <p style="font-size: 10px;">DATE OF BIRTH<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                        <p style="font-size: 10px;">DATE OF BIRTH<strong style="margin-left: 10px;font-size: 10px;" id="birthday"></strong></p>
                     </div>
                     <div class="col col-4 border" style="font-size: 15px;">
-                        <p style="font-size: 10px;">GENDER<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                        <p style="font-size: 10px;">GENDER<strong style="margin-left: 10px;font-size: 10px;" id="gender"></strong></p>
                     </div>
                 </div>
                 <div class="row" style="font-size: 15px;">
                     <div class="col border" style="font-size: 15px;">
-                        <p style="font-size: 7px;">HOME ADDRESS<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                        <p style="font-size: 7px;">HOME ADDRESS<strong style="margin-left: 10px;font-size: 10px;" id="address"></strong></p>
                     </div>
                 </div>
                 <div class="row" style="font-size: 15px;">
                     <div class="col col-7 border" style="font-size: 15px;">
-                        <p style="font-size: 10px;">DATE ISSUED<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                        <p style="font-size: 10px;">DATE ISSUED<strong style="margin-left: 10px;font-size: 10px;" id="dateIssued"></strong></p>
                     </div>
                     <div class="col border" style="font-size: 15px;">
-                        <p style="font-size: 10px;">BLOOD TYPE<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                        <p style="font-size: 10px;">BLOOD TYPE<strong style="margin-left: 10px;font-size: 10px;" id="bloodType"></strong></p>
                     </div>
                 </div>
             </div>
@@ -87,10 +87,10 @@
             </div>
             <div class="row" style="font-size: 15px;margin-top: -10px;">
                 <div class="col col-4" style="font-size: 15px;padding-top: 9px;">
-                    <p style="font-size: 10px;">NAME</p>
+                    <p style="font-size: 10px;" >NAME</p>
                 </div>
                 <div class="col border-bottom" style="font-size: 15px;margin-left: -40px;">
-                    <p style="font-size: 15px;padding-left: 0px;"><strong style="font-size: 10px;"></strong></p>
+                    <p style="font-size: 15px;padding-left: 0px;"><strong style="font-size: 10px;"id="relativeName"></strong></p>
                 </div>
             </div>
             <div class="row" style="font-size: 15px;margin-top: -10px;">
@@ -106,7 +106,7 @@
                     <p style="font-size: 10px;">CONTACT NO.</p>
                 </div>
                 <div class="col border-bottom" style="font-size: 15px;margin-left: -40px;">
-                    <p style="font-size: 15px;"><strong style="font-size: 10px;">CP# 09123456789</strong></p>
+                    <p style="font-size: 15px;"><strong style="font-size: 10px;" id="relativeContactNumber">CP# 09123456789</strong></p>
                 </div>
             </div>
             <div class="row">
@@ -124,7 +124,6 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" id="print_button">Print</button>
+    <button class="btn btn-primary mt-2" id="print_button">Print</button>
     <?php include_once("../layout/scripts.php") ?>
-    <script src="assets/js/function.js"></script>
     <script src="../../libs/scripts/master-page/print-id.js"></script>

@@ -23,10 +23,10 @@
                 <div class="col col-2" id="pdao-icon"><img id="pdao" src="assets/img/cswdlogo.png" width="50px" height="50px" style="padding-right: 3px;"></div>
             </div>
             <div class="row" style="margin-bottom: -27px;padding-top: 0px;margin-top: -18px;">
-                <div class="col text-center" style="margin-top: 6px;padding-left: 176px;"><strong style="font-size: 7px;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></strong>
+                <div class="col text-center" style="margin-top: 6px;padding-left: 176px;"><strong style="font-size: 7px;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; <span id="citizenIDNumber">1234</span> &nbsp; &nbsp; &nbsp; &nbsp;</span></strong>
                     <p style="font-size: 6px;margin-top: -3px;">ID NUMBER</p>
                 </div>
-                <div class="col text-center" style="margin-top: 6px;"><strong style="font-size: 7px;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</span></strong>
+                <div class="col text-center" style="margin-top: 6px;"><strong style="font-size: 7px;"><span style="text-decoration: underline;">&nbsp; &nbsp; &nbsp; <span id="dateIssued">1234</span>&nbsp; &nbsp; &nbsp;</span></strong>
                     <p style="font-size: 6px;margin-top: -3px;">DATE ISSUED</p>
                 </div>
             </div>
@@ -36,25 +36,25 @@
                     <div id="information">
                         <div class="row">
                             <div class="col">
-                                <p style="font-size: 10px;">Name:<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                                <p style="font-size: 10px;">Name:<strong style="margin-left: 10px;font-size: 10px;" id="citizenName"></strong></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p style="font-size: 10px;">Address:<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                                <p style="font-size: 10px;">Address:<strong style="margin-left: 10px;font-size: 10px;" id="address"></strong></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p style="font-size: 10px;">Date Of Birth:<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                                <p style="font-size: 10px;">Date Of Birth:<strong style="margin-left: 10px;font-size: 10px;" id="birthday"></strong></p>
                             </div>
                             <div class="col col-3" style="padding-left: 0px;margin-right: 18px;">
-                                <p style="font-size: 10px;">Gender:<strong style="font-size: 10px;margin-left: 1px;"></strong></p>
+                                <p style="font-size: 10px;">Gender:<strong style="font-size: 10px;margin-left: 1px;" id="gender"></strong></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p style="font-size: 10px;">Contact No.:<strong style="margin-left: 10px;font-size: 10px;">09091072855</strong></p>
+                                <p style="font-size: 10px;">Contact No.:<strong style="margin-left: 10px;font-size: 10px;" id="contactNumber">09091072855</strong></p>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <p style="font-size: 8px;color: var(--bs-green);">RELATIONSHIP</p>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="spRelative">
                     <div class="col col-6">
                         <p style="font-size: 12px;"></p>
                     </div>
@@ -116,10 +116,6 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" id="print_button">Print</button>
-    <script src="../../../libs/plugins/jquery/jquery-3.6.1.min.js"></script>
-    <script src="assets/js/function.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    <button class="btn btn-primary mt-2" id="print_button">Print</button>
+    <?php include_once("../layout/scripts.php") ?>
+    <script src="../../libs/scripts/master-page/print-id.js"></script>

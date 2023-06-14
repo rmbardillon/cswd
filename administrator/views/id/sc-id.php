@@ -28,20 +28,20 @@
                     <div id="information">
                         <div class="row">
                             <div class="col">
-                                <p style="font-size: 10px;">Name:<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                                <p style="font-size: 10px;">Name:<strong style="margin-left: 10px;font-size: 10px;" id="citizenName"></strong></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p style="font-size: 10px;">Address:<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                                <p style="font-size: 10px;">Address:<strong style="margin-left: 10px;font-size: 10px;"id="address"></strong></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p style="font-size: 10px;">Date Of Birth:<strong style="margin-left: 10px;font-size: 10px;"></strong></p>
+                                <p style="font-size: 10px;">Date Of Birth:<strong style="margin-left: 10px;font-size: 10px;" id="birthday"></strong></p>
                             </div>
                             <div class="col col-3">
-                                <p style="font-size: 10px;">Gender:<strong style="margin-left: 5px;font-size: 10px;"></strong></p>
+                                <p style="font-size: 10px;">Gender:<strong style="margin-left: 5px;font-size: 10px;" id="gender"></strong></p>
                             </div>
                         </div>
                     </div>
@@ -56,12 +56,12 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <p style="font-size: 10px;">ID&nbsp;Card No.:&nbsp;<strong style="font-size: 10px;color: var(--bs-red);text-decoration: underline;"></strong></p>
+                            <p style="font-size: 10px;">ID&nbsp;Card No.:&nbsp;<strong style="font-size: 10px;color: var(--bs-red);text-decoration: underline;" id="citizenIDNumber"></strong></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <p style="font-size: 10px;">Date Issued: <strong style="text-decoration: underline;"></strong></p>
+                            <p style="font-size: 10px;">Date Issued: <strong style="text-decoration: underline;" id="dateIssued"></strong></p>
                         </div>
                     </div>
                 </div>
@@ -108,10 +108,6 @@
             </div>
         </div>
     </div>
-    <button class="btn btn-primary" id="print_button">Print</button>
-    <script src="../../../libs/plugins/jquery/jquery-3.6.1.min.js"></script>
-    <script src="assets/js/function.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    <button class="btn btn-primary mt-2" id="print_button">Print</button>
+    <?php include_once("../layout/scripts.php") ?>
+    <script src="../../libs/scripts/master-page/print-id.js"></script>
