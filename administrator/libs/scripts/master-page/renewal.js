@@ -7,54 +7,37 @@ $(document).ready(function () {
     adminType == "Main Administrator" ||
     adminType == "Super Administrator"
   ) {
-    Application.loadPendingPWD(adminBarangay);
-    Application.loadApprovedPWD(adminBarangay);
-    Application.loadRejectedPWD(adminBarangay);
+    Renewal.loadPendingPWD(adminBarangay);
+    Renewal.loadApprovedPWD(adminBarangay);
+    Renewal.loadRejectedPWD(adminBarangay);
     $(".spTable").hide();
-    $(".scTable").hide();
   }
   if (
     adminType == "Solo Parent Administrator" ||
     adminType == "Main Administrator" ||
     adminType == "Super Administrator"
   ) {
-    Application.loadPendingSoloParent(adminBarangay);
-    Application.loadApprovedSoloParent(adminBarangay);
-    Application.loadRejectedSoloParent(adminBarangay);
-    $(".pwdTable").hide();
-    $(".scTable").hide();
-  }
-  if (
-    adminType == "Senior Citizen Administrator" ||
-    adminType == "Main Administrator" ||
-    adminType == "Super Administrator"
-  ) {
-    Application.loadPendingSeniorCitizen(adminBarangay);
-    Application.loadApprovedSeniorCitizen(adminBarangay);
-    Application.loadRejectedSeniorCitizen(adminBarangay);
-    $(".spTable").hide();
+    Renewal.loadPendingSoloParent(adminBarangay);
+    Renewal.loadApprovedSoloParent(adminBarangay);
+    Renewal.loadRejectedSoloParent(adminBarangay);
     $(".pwdTable").hide();
   }
   if (adminType == "Main Administrator" || adminType == "Super Administrator") {
-    Application.loadPendingPWD(adminBarangay);
-    Application.loadApprovedPWD(adminBarangay);
-    Application.loadRejectedPWD(adminBarangay);
-    Application.loadPendingSoloParent(adminBarangay);
-    Application.loadApprovedSoloParent(adminBarangay);
-    Application.loadRejectedSoloParent(adminBarangay);
-    Application.loadPendingSeniorCitizen(adminBarangay);
-    Application.loadApprovedSeniorCitizen(adminBarangay);
-    Application.loadRejectedSeniorCitizen(adminBarangay);
+    Renewal.loadPendingPWD(adminBarangay);
+    Renewal.loadApprovedPWD(adminBarangay);
+    Renewal.loadRejectedPWD(adminBarangay);
+    Renewal.loadPendingSoloParent(adminBarangay);
+    Renewal.loadApprovedSoloParent(adminBarangay);
+    Renewal.loadRejectedSoloParent(adminBarangay);
     $(".pwdTable").show();
     $(".spTable").show();
-    $(".scTable").show();
   }
 });
 
-const Application = (() => {
-  const thisApplication = {};
+const Renewal = (() => {
+  const thisRenewal = {};
 
-  thisApplication.loadPendingPWD = (adminBarangay) => {
+  thisRenewal.loadPendingPWD = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -79,7 +62,7 @@ const Application = (() => {
       },
     });
   };
-  thisApplication.loadApprovedPWD = (adminBarangay) => {
+  thisRenewal.loadApprovedPWD = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -104,7 +87,7 @@ const Application = (() => {
       },
     });
   };
-  thisApplication.loadRejectedPWD = (adminBarangay) => {
+  thisRenewal.loadRejectedPWD = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -130,7 +113,7 @@ const Application = (() => {
     });
   };
 
-  thisApplication.loadPendingSoloParent = (adminBarangay) => {
+  thisRenewal.loadPendingSoloParent = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -155,7 +138,7 @@ const Application = (() => {
       },
     });
   };
-  thisApplication.loadApprovedSoloParent = (adminBarangay) => {
+  thisRenewal.loadApprovedSoloParent = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -180,7 +163,7 @@ const Application = (() => {
       },
     });
   };
-  thisApplication.loadRejectedSoloParent = (adminBarangay) => {
+  thisRenewal.loadRejectedSoloParent = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -206,7 +189,7 @@ const Application = (() => {
     });
   };
 
-  thisApplication.loadPendingSeniorCitizen = (adminBarangay) => {
+  thisRenewal.loadPendingSeniorCitizen = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -231,7 +214,7 @@ const Application = (() => {
       },
     });
   };
-  thisApplication.loadApprovedSeniorCitizen = (adminBarangay) => {
+  thisRenewal.loadApprovedSeniorCitizen = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -256,7 +239,7 @@ const Application = (() => {
       },
     });
   };
-  thisApplication.loadRejectedSeniorCitizen = (adminBarangay) => {
+  thisRenewal.loadRejectedSeniorCitizen = (adminBarangay) => {
     $.ajax({
       url: APPLICATION_CONTROLLER + "?action=getApplications",
       type: "POST",
@@ -282,7 +265,7 @@ const Application = (() => {
     });
   };
 
-  thisApplication.clickView = (personId, status) => {
+  thisRenewal.clickView = (personId, status) => {
     $.ajax({
       type: "POST",
       url: APPLICATION_CONTROLLER + "?action=getApplicantData",
@@ -297,7 +280,8 @@ const Application = (() => {
             "pwd-application-form.php?personId=" +
               personId +
               "&status=" +
-              status,
+              status +
+              "&applicationType=Renewal",
             "_blank"
           );
         } else if (data[0]["APPLICANT_TYPE"] == "Solo Parent") {
@@ -305,7 +289,8 @@ const Application = (() => {
             "sp-application-form.php?personId=" +
               personId +
               "&status=" +
-              status,
+              status +
+              "&applicationType=Renewal",
             "_blank"
           );
         } else if (data[0]["APPLICANT_TYPE"] == "Senior Citizen") {
@@ -313,7 +298,8 @@ const Application = (() => {
             "sc-application-form.php?personId=" +
               personId +
               "&status=" +
-              status,
+              status + 
+              "&applicationType=Renewal",
             "_blank"
           );
         }
@@ -323,5 +309,5 @@ const Application = (() => {
       },
     });
   };
-  return thisApplication;
+  return thisRenewal;
 })();

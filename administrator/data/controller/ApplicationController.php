@@ -11,6 +11,12 @@
         $applicantType = $_POST['applicantType'];
         $barangay = $_POST['barangay'];
         $status = $_POST['status'];
+
+        if($applicationType == "New Application") {
+            $controller = "Application";
+        } else {
+            $controller = "Renewal";
+        }
         $result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status);
 
         if($status == "Pending")
@@ -32,7 +38,7 @@
             $tableRow .= "<td class='$text'>" . $data['STATUS'] . "</td>";
             $tableRow .= '<td class="col-actions">';
             $tableRow .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-            $tableRow .= '<button type="button" id="view" onclick="Application.clickView(`'. $data['PERSON_ID'] .'`, `'. $status .'`)" class="btn btn-success btn-sm"><i class="bi bi-eye"></i> View </button>';
+            $tableRow .= '<button type="button" id="view" onclick="'.$controller.'.clickView(`'. $data['PERSON_ID'] .'`, `'. $status .'`)" class="btn btn-success btn-sm"><i class="bi bi-eye"></i> View </button>';
             $tableRow .= '</div>';
             $tableRow .= '</td>';
             $tableRow .= "</tr>";

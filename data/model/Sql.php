@@ -251,11 +251,14 @@
 
         public function checkIdNumber($idNumber)
         {
-            $sql = "SELECT *
+            $sql = "SELECT *, DATEDIFF(citizen_identification_card.EXPIRATION_DATE, CURDATE()) AS DAYS_BEFORE_EXPIRATION
                     FROM citizen_identification_card
                     JOIN person ON citizen_identification_card.PERSON_ID = person.PERSON_ID
                     JOIN application ON citizen_identification_card.PERSON_ID = application.PERSON_ID
-                    WHERE citizen_identification_card.ID_NUMBER = ?";
+                    WHERE (citizen_identification_card.EXPIRATION_DATE BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)
+                        OR citizen_identification_card.EXPIRATION_DATE <= CURDATE())
+                    AND citizen_identification_card.ID_NUMBER = ?
+                    AND citizen_identification_card.EXPIRATION_DATE != '0000-00-00';";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("s", $idNumber);

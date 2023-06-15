@@ -9,7 +9,7 @@
 <?php include_once("../layout/navbar.php") ?>
     <div class="container">
         <div class="pwdTable">
-            <h1>PWD Applications</h1>
+            <h1>PWD Rejected Applications</h1>
             <table class="table table-bordered table-responsive">
                 <thead>
                     <th class="col col-1">No.</th>
@@ -24,7 +24,7 @@
             </table>
         </div>
         <div class="spTable">
-            <h1>Solo Parent Applications</h1>
+            <h1>Solo Parent Rejected Applications</h1>
             <table class="table table-bordered table-responsive">
                 <thead>
                     <th class="col col-1">No.</th>
@@ -39,7 +39,7 @@
             </table>
         </div>
         <div class="scTable">
-            <h1>Senior Citizen Applications</h1>
+            <h1>Senior Citizen Rejected Applications</h1>
             <table class="table table-bordered table-responsive">
                 <thead>
                     <th class="col col-1">No.</th>
