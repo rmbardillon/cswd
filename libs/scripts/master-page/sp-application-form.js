@@ -215,8 +215,85 @@ const SP = (() => {
         });
     };
 
-    thisSP.submitRenewal = () => {
-      alert("submit renewal");
+    thisSP.submitRenewal = (id) => {
+        var soloParentClassification = [];
+        $('[name="soloParentClassification"]:checked').each(function () {
+          soloParentClassification.push($(this).val());
+        });
+        console.log(soloParentClassification);
+        var childFirstName = [];
+        $('[name="childFirstName"]').each(function () {
+          childFirstName.push($(this).val());
+        });
+        var childLastName = [];
+        $('[name="childLastName"]').each(function () {
+          childLastName.push($(this).val());
+        });
+        var soloParentChildDOB = [];
+        $('[name="soloParentChildDOB"]').each(function () {
+          soloParentChildDOB.push($(this).val());
+        });
+        var maritalStatus = [];
+        $('[name="maritalStatus"]').each(function () {
+          maritalStatus.push($(this).val());
+        });
+        var childEducationalAttainment = [];
+        $('[name="childEducationalAttainment"]').each(function () {
+          childEducationalAttainment.push($(this).val());
+        });
+        var childIncome = [];
+        $('[name="childIncome"]').each(function () {
+          childIncome.push($(this).val());
+        });
+        var formData = $("#spForm").serializeArray();
+        var spForm = {};
+        console.log(formData);
+        $.each(formData, function (index, value) {
+          if (value.name === "soloParentClassification") {
+            spForm[value.name] = soloParentClassification;
+          } else if (value.name === "childFirstName") {
+            spForm[value.name] = childFirstName;
+          } else if (value.name === "childLastName") {
+            spForm[value.name] = childLastName;
+          } else if (value.name === "soloParentChildDOB") {
+            spForm[value.name] = soloParentChildDOB;
+          } else if (value.name === "maritalStatus") {
+            spForm[value.name] = maritalStatus;
+          } else if (value.name === "childEducationalAttainment") {
+            spForm[value.name] = childEducationalAttainment;
+          } else if (value.name === "childIncome") {
+            spForm[value.name] = childIncome;
+          } else {
+            spForm[value.name] = value.value;
+          }
+        });
+
+        $.ajax({
+          type: "POST",
+          url: SP_CONTROLLER + "?action=spRenew",
+          data: {
+            spForm: spForm,
+            uuid: id,
+          },
+          dataType: "json",
+          success: function (data) {
+            swal
+              .fire({
+                title: "Success!",
+                text: "Click Ok to proceed to appointment.",
+                icon: "success",
+                confirmButtonText: "Ok",
+              })
+              .then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = "appointment.php?personId=" + data;
+                }
+              });
+          },
+          error: function (data) {
+            console.log(data);
+          },
+        });
     };
 
     thisSP.approve = (id) => {
@@ -471,8 +548,7 @@ $(document).ready(function () {
                   $("select").prop("disabled", false);
 
                   // Make all checkboxes and radio buttons disabled
-                  $(
-                    "input[type='checkbox'], input[type='radio'], textarea").prop("disabled", false);
+                  $("input[type='checkbox'], input[type='radio'], textarea").prop("disabled", false);
                   $("#surname").prop("readonly", true);
                   $("#firstName").prop("readonly", true);
                   $("#middlename").prop("readonly", true);
@@ -480,12 +556,12 @@ $(document).ready(function () {
                   $("#soloParentDOB").prop("readonly", true);
                   $("#placeOfBirth").prop("readonly", true);
                   $("#gender").prop("disabled", true);
-                  $("input[name='childLastName']").prop("readonly", true);
-                  $("input[name='childFirstName']").prop("readonly", true);
-                  $("input[name='soloParentChildDOB']").prop("readonly", true);
-                  $("select[name='maritalStatus']").prop("disabled", true);
-                  $("input[name='childEducationalAttainment']").prop("readonly",true);
-                  $("input[name='childIncome']").prop("readonly", true);
+                //   $("input[name='childLastName']").prop("readonly", true);
+                //   $("input[name='childFirstName']").prop("readonly", true);
+                //   $("input[name='soloParentChildDOB']").prop("readonly", true);
+                //   $("select[name='maritalStatus']").prop("disabled", true);
+                //   $("input[name='childEducationalAttainment']").prop("readonly",true);
+                //   $("input[name='childIncome']").prop("readonly", true);
                   $(document).ready(function () {
                     if ($("input[name='soloParentClassification']:checked").length > 0) {
                       $("input[name='soloParentClassification']").removeAttr("required");
@@ -495,7 +571,7 @@ $(document).ready(function () {
                   });
                   $("#spCitizenNext").show();
                   $("#spSubmitForm").hide();
-                  var button = `<button type="button" class="btn btn-success" id="spRenewal" onclick="SP.submitRenewal();">Submit Renewal</button>`;
+                  var button = `<button type="button" class="btn btn-success" id="spRenewal" onclick="SP.submitRenewal('${data[0]['PERSON_ID']}');">Submit Renewal</button>`;
                   $("#submitFormButton").append(button);
                 }
                 $("#button-div").append(buttons);

@@ -21,7 +21,8 @@
     else if($action == "pwdRenew")
     {
         $pwdForm = $_POST['pwdForm'];
-        $result = $Pwd->pwdRenew($pwdForm);
+        $uuid = $_POST['uuid'];
+        $result = $Pwd->pwdRenew($pwdForm, $uuid);
 
         echo json_encode($result);
     }

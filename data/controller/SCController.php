@@ -17,6 +17,15 @@
         echo json_encode($result);
     }
 
+    else if($action == "scRenew")
+    {
+        $scForm = $_POST['scForm'];
+        $uuid = $_POST['uuid'];
+        $result = $Sc->scRenew($scForm, $uuid);
+
+        echo json_encode($result);
+    }
+
     else if ($action == "approveApplicationFileUpload") {
         $personId = $_POST['personId'];
 

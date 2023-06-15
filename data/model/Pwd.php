@@ -159,10 +159,9 @@
             return $uuid;
         }
 
-        public function pwdRenew($pwdForm)
+        public function pwdRenew($pwdForm, $uuid)
         {
             $Sql = new Sql($this->connection);
-            $uuid = $_POST['uuid'];
             $application = [
                 'uuid' => $uuid,
                 'applicantType' => 'PWD',

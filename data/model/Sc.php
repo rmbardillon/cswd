@@ -112,10 +112,9 @@
             return $uuid;
         }
 
-        public function scRenew($scForm)
+        public function scRenew($scForm, $uuid)
         {
             $Sql = new Sql($this->connection);
-            $uuid = $_POST['uuid'];
             $application = [
                 'uuid' => $uuid,
                 'applicantType' => 'Senior Citizen',
@@ -144,31 +143,15 @@
                 'pension' => isset($scForm['whatPension']) ? $scForm['whatPension'] : null,
                 'pensionAmount' => isset($scForm['howMuchPension']) ? $scForm['howMuchPension'] : null,
             ];
-            $spouseUUID = $Sql->generateUUID();
-            $spouse = [
-                'uuid' => $spouseUUID,
-                'firstName' => $scForm['spouseFirstName'],
-                'middleName' => $scForm['spouseMiddleName'],
-                'lastName' => $scForm['spouseLastName'],
-                'suffix' => isset($scForm['spouseSuffix']) ? $scForm['spouseSuffix'] : null,
-            ];
-            $spouseRelative = [
-                'uuid' => $uuid,
-                'relativeUUID' => $spouseUUID,
-                'relationship' => 'Spouse',
-                'birthday' => $scForm['spouseDOB'],
-            ];
             try {
                 // Begin transaction
                 $this->connection->begin_transaction();
-                $Sql->updatePerson($person);
                 $Sql->updateApplication($application);
                 $Sql->updateAddress($address);
                 $Sql->updateContactDetails($contactDetails);
                 $Sql->updatePersonalInformation($personalInformation);
                 $Sql->updateEmploymentDetails($employmentDetails);
-                $Sql->updatePerson($spouse);
-                $Sql->updateRelatives($spouseRelative);
+                $Sql->deleteSoloParentRelative($uuid);
                 if(isset($scForm['childFirstName'])) {
                     foreach ($scForm['childFirstName'] as $key => $value) {
                         $childUUID = $Sql->generateUUID();
@@ -177,13 +160,13 @@
                             'firstName' => $scForm['childFirstName'][$key],
                             'lastName' => $scForm['childLastName'][$key],
                         ];
-                        $Sql->updatePerson($child);
+                        $Sql->insertPerson($child);
                         $childAddress = [
                             'uuid' => $childUUID,
                             'address' => $scForm['childAddress'][$key],
                             'barangay' => $scForm['childBarangay'][$key],
                         ];
-                        $Sql->updateAddress($childAddress);
+                        $Sql->insertAddress($childAddress);
                         $relative = [
                             'uuid' => $uuid,
                             'relativeUUID' => $childUUID,
@@ -191,7 +174,7 @@
                             'birthday' => $scForm['srCitizenChildDOB'][$key],
                             'contactNumber' => $scForm['childTelephone'][$key],
                         ];
-                        $Sql->updateRelatives($relative);
+                        $Sql->insertRelatives($relative);
                     }
                 }
 

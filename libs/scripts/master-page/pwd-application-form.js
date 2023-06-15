@@ -498,7 +498,6 @@ $(document).ready(function() {
                 });
 
                 var TYPE_OF_DISABILITY = data[0]["TYPE_OF_DISABILITY"];
-
                 $('input[type="checkbox"][name="typeOfDisability"]').each(
                     function () {
                     var checkboxValue = $(this).val();
@@ -509,22 +508,24 @@ $(document).ready(function() {
                 );
 
                 var CONGENITAL_INBORN = data[0]["CONGENITAL_INBORN"];
-
-                $('input[type="checkbox"][name="inborn"]').each(function () {
-                    var checkboxValue = $(this).val();
-                    if (CONGENITAL_INBORN.includes(checkboxValue)) {
-                    $(this).prop("checked", true);
-                    }
-                });
+                if(CONGENITAL_INBORN !== null) {
+                    $('input[type="checkbox"][name="inborn"]').each(function () {
+                        var checkboxValue = $(this).val();
+                        if (CONGENITAL_INBORN.includes(checkboxValue)) {
+                            $(this).prop("checked", true);
+                        }
+                    });
+                }
 
                 var ACQUIRED = data[0]["ACQUIRED"];
-
-                $('input[type="checkbox"][name="acquired"]').each(function () {
-                    var checkboxValue = $(this).val();
-                    if (ACQUIRED.includes(checkboxValue)) {
-                    $(this).prop("checked", true);
-                    }
-                });
+                if (ACQUIRED !== null) {
+                    $('input[type="checkbox"][name="acquired"]').each(function () {
+                        var checkboxValue = $(this).val();
+                        if (ACQUIRED.includes(checkboxValue)) {
+                        $(this).prop("checked", true);
+                        }
+                    });
+                }
 
 
                 $("#employmentStatus").trigger("change");
@@ -600,6 +601,7 @@ $(document).ready(function() {
                               $("input[name='typeOfDisability']").prop("required",true);
                               $("#medicalCondition").prop("required", true);
                             } else {
+                                $("#medicalCondition").prop("required", false);
                               $("input[name='typeOfDisability']").prop("required",false);
                             }
                         }

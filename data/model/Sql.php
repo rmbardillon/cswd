@@ -287,21 +287,6 @@
             $stmt->close();
         }
 
-        public function updatePerson($request)
-        {
-            $uuid = $request['uuid'];
-            $firstName = isset($request['firstName']) ? $request['firstName'] : null;
-            $middleName = isset($request['middleName']) ? $request['middleName'] : null;
-            $lastName = isset($request['lastName']) ? $request['lastName'] : null;
-            $suffix = isset($request['suffix']) ? $request['suffix'] : null;
-
-            $sql = "UPDATE person SET FIRST_NAME=?, MIDDLE_NAME=?, LAST_NAME=?, SUFFIX=? WHERE PERSON_ID=?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssss", $firstName, $middleName, $lastName, $suffix, $uuid);
-            $stmt->execute();
-            $stmt->close();
-        }
-
         public function updateAddress($request)
         {
             $uuid = $request['uuid'];
@@ -405,6 +390,20 @@
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("sssss", $relationship, $birthday, $contactNumber, $income, $uuid);
             $stmt->execute();
+            $stmt->close();
+        }
+
+        public function deleteSoloParentRelative($personId)
+        {
+            $sql = "DELETE FROM relatives WHERE PERSON_ID = ? AND RELATIONSHIP_TYPE != 'Spouse'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $personId);
+            $stmt->execute();
+
+            // $sql = "DELETE FROM person WHERE PERSON_ID = ?";
+            // $stmt = $this->conn->prepare($sql);
+            // $stmt->bind_param("s", $personId);
+            // $stmt->execute();
             $stmt->close();
         }
 

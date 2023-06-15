@@ -368,8 +368,7 @@ const SC = (() => {
         },
         dataType: "json",
         success: function (data) {
-          swal
-            .fire({
+          swal.fire({
               title: "Success!",
               text: "Click Ok to proceed to appointment.",
               icon: "success",
@@ -542,7 +541,6 @@ $(document).ready(function () {
             },
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 $("#firstName").val(data[0]["FIRST_NAME"]);
                 $("#surname").val(data[0]["LAST_NAME"]);
                 $("#middlename").val(data[0]["MIDDLE_NAME"]);
@@ -566,40 +564,65 @@ $(document).ready(function () {
                 $("#howMuchPension").val(data[0]["PENSION_AMOUNT"]);
                 $("#srCitizenDOB").trigger("change");
 
-                $("#spouseLastName").val(
-                    data.relativeData[0]["RELATIVE_LAST_NAME"]
-                );
-                $("#spouseFirstName").val(
-                    data.relativeData[0]["RELATIVE_FIRST_NAME"]
-                );
-                $("#spouseMiddleName").val(
-                    data.relativeData[0]["RELATIVE_MIDDLE_NAME"]
-                );
-                $("#spouseDOB").val(data.relativeData[0]["GUARDIAN_BIRTHDAY"]);
+                if (data.relativeData[0]["RELATIONSHIP_TYPE"] == "Spouse") {
+                    $("#spouseLastName").val(
+                        data.relativeData[0]["RELATIVE_LAST_NAME"]
+                    );
+                    $("#spouseFirstName").val(
+                        data.relativeData[0]["RELATIVE_FIRST_NAME"]
+                    );
+                    $("#spouseMiddleName").val(
+                        data.relativeData[0]["RELATIVE_MIDDLE_NAME"]
+                    );
+                    $("#spouseDOB").val(data.relativeData[0]["GUARDIAN_BIRTHDAY"]);
 
-                var relatives = data.relativeData;
-                // Get the length of data.relativeData
-                var relativeDataLength = relatives.length;
-                $("#totalHousemate").val(relativeDataLength - 1);
-                $("#numberOfChildren").val(relativeDataLength - 1);
-                $("#numberOfChildren").trigger("change");
+                    var relatives = data.relativeData;
+                    // Get the length of data.relativeData
+                    var relativeDataLength = relatives.length;
+                    $("#totalHousemate").val(relativeDataLength - 1);
+                    $("#numberOfChildren").val(relativeDataLength - 1);
+                    $("#numberOfChildren").trigger("change");
 
-                var firstNameInput = $("[name='childFirstName']");
-                var lastNameInput = $("[name='childLastName']");
-                var DOBInput = $("[name='srCitizenChildDOB']");
-                var telephoneInput = $("[name='childTelephone']");
-                var barangayInput = $("[name='childBarangay']");
-                var addressInput = $("[name='childAddress']");
+                    var firstNameInput = $("[name='childFirstName']");
+                    var lastNameInput = $("[name='childLastName']");
+                    var DOBInput = $("[name='srCitizenChildDOB']");
+                    var telephoneInput = $("[name='childTelephone']");
+                    var barangayInput = $("[name='childBarangay']");
+                    var addressInput = $("[name='childAddress']");
 
                     for (var i = 0; i < relativeDataLength - 1; i++) {
                         firstNameInput[i].value = relatives[i + 1]["RELATIVE_FIRST_NAME"];
                         lastNameInput[i].value = relatives[i + 1]["RELATIVE_LAST_NAME"];
                         DOBInput[i].value = relatives[i + 1]["GUARDIAN_BIRTHDAY"];
                         telephoneInput[i].value =
-                          relatives[i + 1]["GUARDIAN_CONTACT_NUMBER"];
+                        relatives[i + 1]["GUARDIAN_CONTACT_NUMBER"];
                         barangayInput[i].value = relatives[i + 1]["BARANGAY"];
                         addressInput[i].value = relatives[i + 1]["ADDRESS"];
                     }
+                } else {
+                    var relatives = data.relativeData;
+                    // Get the length of data.relativeData
+                    var relativeDataLength = relatives.length;
+                    $("#totalHousemate").val(relativeDataLength);
+                    $("#numberOfChildren").val(relativeDataLength);
+                    $("#numberOfChildren").trigger("change");
+
+                    var firstNameInput = $("[name='childFirstName']");
+                    var lastNameInput = $("[name='childLastName']");
+                    var DOBInput = $("[name='srCitizenChildDOB']");
+                    var telephoneInput = $("[name='childTelephone']");
+                    var barangayInput = $("[name='childBarangay']");
+                    var addressInput = $("[name='childAddress']");
+
+                    for (var i = 0; i < relativeDataLength; i++) {
+                      firstNameInput[i].value = relatives[i]["RELATIVE_FIRST_NAME"];
+                      lastNameInput[i].value = relatives[i]["RELATIVE_LAST_NAME"];
+                      DOBInput[i].value = relatives[i]["GUARDIAN_BIRTHDAY"];
+                      telephoneInput[i].value = relatives[i]["GUARDIAN_CONTACT_NUMBER"];
+                      barangayInput[i].value = relatives[i]["BARANGAY"];
+                      addressInput[i].value = relatives[i]["ADDRESS"];
+                    }
+                }
                 // Make all textbox, select, checkbox, and radio buttons readonly except for the next button
                 // Make all textboxes readonly
                 $("input").prop("readonly", true);
@@ -648,8 +671,70 @@ $(document).ready(function () {
                   $("#gender").prop("disabled", true);
                   $("#placeOfBirth").prop("readonly", true);
                   $("#childBarangay").prop("disabled", true);
+                  $("#spouseLastName").prop("readonly", true);
+                  $("#spouseMiddleName").prop("readonly", true);
+                  $("#spouseFirstName").prop("readonly", true);
+                  $("#spouseSuffix").prop("readonly", true);
+                  $("#spouseDOB").prop("readonly", true);
+
                   $(document).ready(function () {
-                    
+                    if ($("#hasPension").val() == "Meron") {
+                      $("#whatPension").prop("required", true);
+                      $("#whatPension").removeAttr("disabled");
+                      $(".whatPension").addClass("required");
+                      $("#howMuchPension").prop("required", true);
+                      $("#howMuchPension").removeAttr("disabled");
+                      $(".howMuchPension").addClass("required");
+                    } else {
+                      $("#whatPension").prop("required", false);
+                      $("#whatPension").attr("disabled", "disabled");
+                      $("#whatPension").val("");
+                      $(".whatPension").removeClass("required");
+                      $("#howMuchPension").prop("required", false);
+                      $("#howMuchPension").attr("disabled", "disabled");
+                      $("#howMuchPension").val("");
+                      $(".howMuchPension").removeClass("required");
+                    }
+
+                    var numRelatives = $("#numberOfChildren").val();
+                    if (numRelatives > 0) {
+                      $("#childLastName").prop("required", true);
+                      $("#childFirstName").prop("required", true);
+                      $("#srCitizenChildDOB").prop("required", true);
+                      $("#childBarangay").prop("required", true);
+                      $("#childAddress").prop("required", true);
+                      $("#childLastName").removeAttr("disabled");
+                      $("#childFirstName").removeAttr("disabled");
+                      $("#childMiddlename").removeAttr("disabled");
+                      $("#childSuffix").removeAttr("disabled");
+                      $("#childTelephone").removeAttr("disabled");
+                      $("#srCitizenChildDOB").removeAttr("disabled");
+                      $("#childBarangay").removeAttr("disabled");
+                      $("#childAddress").removeAttr("disabled");
+                    } else {
+                      $("#childLastName").prop("disabled", true);
+                      $("#childFirstName").prop("disabled", true);
+                      $("#childMiddlename").prop("disabled", true);
+                      $("#childSuffix").prop("disabled", true);
+                      $("#childTelephone").prop("disabled", true);
+                      $("#srCitizenChildDOB").prop("disabled", true);
+                      $("#childBarangay").prop("disabled", true);
+                      $("#childAddress").prop("disabled", true);
+                      $("#childLastName").prop("required", false);
+                      $("#childFirstName").prop("required", false);
+                      $("#srCitizenChildDOB").prop("required", false);
+                      $("#childBarangay").prop("required", false);
+                      $("#childAddress").prop("required", false);
+                      $("#childLastName").val("");
+                      $("#childFirstName").val("");
+                      $("#childMiddlename").val("");
+                      $("#childSuffix").val("");
+                      $("#childTelephone").val("");
+                      $("#srCitizenChildDOB").val("");
+                      $("#childBarangay").val("");
+                      $("#childAddress").val("");
+                    }
+
                   });
                   $("#srCitizenNext").show();
                   $("#scSubmitForm").hide();
