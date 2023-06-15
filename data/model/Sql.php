@@ -254,6 +254,7 @@
             $sql = "SELECT *
                     FROM citizen_identification_card
                     JOIN person ON citizen_identification_card.PERSON_ID = person.PERSON_ID
+                    JOIN application ON citizen_identification_card.PERSON_ID = application.PERSON_ID
                     WHERE citizen_identification_card.ID_NUMBER = ?";
 
             $stmt = $this->conn->prepare($sql);

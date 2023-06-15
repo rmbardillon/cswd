@@ -314,6 +314,10 @@ const SC = (() => {
         });
     };
 
+    thisSC.submitRenewal = () => {
+      alert("submit renewal");
+    };
+
     thisSC.approve = (id) => {
       personId = id;
       $("#uploadFilesModal").modal("show");
@@ -554,6 +558,31 @@ $(document).ready(function () {
                                     <div class="col-md-6">
                                     <button class="btn btn-secondary w-100" type="button" name="viewPicture" id="viewPicture" onclick="SC.viewDocument('${data[0]["PERSON_ID"]}', 'Photo');">View Picture</button></div>
                                     </div>`;
+                } else if (status == "renewal") {
+                  // Make all textboxes readonly
+                  $("input").prop("readonly", false);
+
+                  // Make all selects readonly
+                  $("select").prop("disabled", false);
+
+                  // Make all checkboxes and radio buttons disabled
+                  $("input[type='checkbox'], input[type='radio']").prop(
+                    "disabled",
+                    false
+                  );
+                  $("#surname").prop("readonly", true);
+                  $("#firstName").prop("readonly", true);
+                  $("#middlename").prop("readonly", true);
+                  $("#suffix").prop("disabled", true);
+                  $("#pwdDOB").prop("readonly", true);
+                  $("#gender").prop("disabled", true);
+                  $(document).ready(function () {
+                    
+                  });
+                  $("#srCitizenNext").show();
+                  $("#scSubmitForm").hide();
+                  var button = `<button type="button" class="btn btn-success" id="scRenewal" onclick="SC.submitRenewal();">Submit Renewal</button>`;
+                  $("#submitFormButton").append(button);
                 }
                 $("#button-div").append(buttons);
             },

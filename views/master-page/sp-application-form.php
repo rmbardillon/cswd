@@ -11,9 +11,9 @@
                 <div class="modal-body">
                     <div id="userInfo" class="userInfo"></div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" id="submitFormButton">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Back</button>
-                    <button type="button" class="btn btn-success" onclick="SP.submitForm();">Submit Registration</button>
+                    <button type="button" class="btn btn-success" id="spSubmitForm" onclick="SP.submitForm();">Submit Registration</button>
                 </div>
             </div>
         </div>

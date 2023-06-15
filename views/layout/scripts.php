@@ -39,6 +39,7 @@
     </div>
 </footer>
 <script src="../../config/sysname.js"></script>
+<script src="../../administrator/libs/scripts/vars.js"></script>
 <script src="../../libs/scripts/vars.js"></script>
 <script src="../../libs/plugins/jquery/jquery-3.6.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

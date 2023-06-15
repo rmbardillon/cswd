@@ -11,9 +11,9 @@
                 <div class="modal-body">
                     <div id="userInfo" class="userInfo"></div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" id="submitFormButton">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Back</button>
-                    <button type="button" class="btn btn-success" onclick="PWD.submitForm();">Submit Registration</button>
+                    <button type="button" class="btn btn-success" id="pwdSubmitForm" onclick="PWD.submitForm();">Submit Registration</button>
                 </div>
             </div>
         </div>
@@ -357,7 +357,7 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col"><button class="btn btn-primary w-100" type="submit" name="pwdNext" id="pwdNext">Next</button></div>
+                <div class="col" id="button-div"><button class="btn btn-primary w-100" type="submit" name="pwdNext" id="pwdNext">Next</button></div>
             </div>
         </form>
     </div>

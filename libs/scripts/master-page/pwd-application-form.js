@@ -102,7 +102,6 @@ $('input[name="acquired"]').click(function() {
 $('input[name="statusOfDisability"]').click(function() {
     $("input[name='statusOfDisability']").removeAttr("required");
 });
-
 $("#pwdNext").click(function(event) {
     var typeOfDisability = [];
     $('[name="typeOfDisability"]:checked').each(function() {
@@ -221,6 +220,10 @@ const PWD = (() => {
                 console.log(data);
             }
         });
+    };
+
+    thisPWD.submitRenewal = () => {
+    alert("submit renewal");
     };
 
     thisPWD.approve = (id) => {
@@ -506,7 +509,72 @@ $(document).ready(function() {
                                     <div class="col-md-6">
                                     <button class="btn btn-secondary w-100" type="button" name="viewPicture" id="viewPicture" onclick="PWD.viewDocument('${data[0]["PERSON_ID"]}', 'Photo');">View Picture</button></div>
                                     </div>`;
-                                }
+                } else if (status == "renewal") {
+                  // Make all textboxes readonly
+                  $("input").prop("readonly", false);
+
+                  // Make all selects readonly
+                  $("select").prop("disabled", false);
+
+                  // Make all checkboxes and radio buttons disabled
+                  $("input[type='checkbox'], input[type='radio']").prop(
+                    "disabled",
+                    false
+                  );
+                  $("#surname").prop("readonly", true);
+                  $("#firstName").prop("readonly", true);
+                  $("#middlename").prop("readonly", true);
+                  $("#suffix").prop("disabled", true);
+                  $("#pwdDOB").prop("readonly", true);
+                  $("#gender").prop("disabled", true);
+                  if (data[0]["BLOOD_TYPE"] == "Unknown") {
+                      $("#bloodType").prop("disabled", false);
+                    }
+                    $("#fatherSurname").prop("readonly", true);
+                    $("#fatherFirstName").prop("readonly", true);
+                    $("#fatherMiddlename").prop("readonly", true);
+                    $("#fatherSuffix").prop("disabled", true);
+                    $("#motherSurname").prop("readonly", true);
+                    $("#motherFirstName").prop("readonly", true);
+                    $("#motherMiddlename").prop("readonly", true);
+                    $("#motherSuffix").prop("disabled", true);
+                    $(document).ready(function () {
+                        if ($("input[name='typeOfDisability']:checked").length > 0) {
+                          $("input[name='typeOfDisability']").removeAttr("required");
+                          $("#medicalCondition").removeAttr("required");
+                        } else {
+                            if ($("#medicalCondition").val().trim() == "") {
+                              $("input[name='typeOfDisability']").prop("required",true);
+                              $("#medicalCondition").prop("required", true);
+                            } else {
+                              $("input[name='typeOfDisability']").prop("required",false);
+                            }
+                        }
+                        if ($("input[name='inborn']:checked").length > 0) {
+                          $("input[name='inborn']").removeAttr("required");
+                          $("#congenital").prop("checked", true);
+                          $("input[name='acquired']").prop("disabled", true);
+                        } else {
+                          $("input[name='inborn']").prop("required", true);
+                          $("#congenital").prop("checked", false);
+                          $("input[name='acquired']").prop("disabled", false);
+                        }
+                        if ($("input[name='acquired']:checked").length > 0) {
+                          $("input[name='acquired']").removeAttr("required");
+                          $("#acquired").prop("checked", true);
+                          $("input[name='inborn']").prop("disabled", true);
+                        } else {
+                          $("input[name='acquired']").prop("required", true);
+                          $("#acquired").prop("checked", false);
+                          $("input[name='inborn']").prop("disabled", false);
+                        }
+                    });
+                  $("#pwdNext").show();
+                  $("#pwdSubmitForm").hide();
+                  var button = `<button type="button" class="btn btn-success" id="pwdRenewal" onclick="PWD.submitRenewal();">Submit Renewal</button>`;
+                  $("#submitFormButton").append(button);
+                }
+                
                 $("#button-div").append(buttons);
 
             },

@@ -215,6 +215,10 @@ const SP = (() => {
         });
     };
 
+    thisSP.submitRenewal = () => {
+      alert("submit renewal");
+    };
+
     thisSP.approve = (id) => {
       personId = id;
       $("#uploadFilesModal").modal("show");
@@ -459,6 +463,40 @@ $(document).ready(function () {
                                     <div class="col-md-6">
                                     <button class="btn btn-secondary w-100" type="button" name="viewPicture" id="viewPicture" onclick="SP.viewDocument('${data[0]["PERSON_ID"]}', 'Photo');">View Picture</button></div>
                                     </div>`;
+                } else if (status == "renewal") {
+                  // Make all textboxes readonly
+                  $("input").prop("readonly", false);
+
+                  // Make all selects readonly
+                  $("select").prop("disabled", false);
+
+                  // Make all checkboxes and radio buttons disabled
+                  $(
+                    "input[type='checkbox'], input[type='radio'], textarea").prop("disabled", false);
+                  $("#surname").prop("readonly", true);
+                  $("#firstName").prop("readonly", true);
+                  $("#middlename").prop("readonly", true);
+                  $("#suffix").prop("disabled", true);
+                  $("#soloParentDOB").prop("readonly", true);
+                  $("#placeOfBirth").prop("readonly", true);
+                  $("#gender").prop("disabled", true);
+                  $("input[name='childLastName']").prop("readonly", true);
+                  $("input[name='childFirstName']").prop("readonly", true);
+                  $("input[name='soloParentChildDOB']").prop("readonly", true);
+                  $("select[name='maritalStatus']").prop("disabled", true);
+                  $("input[name='childEducationalAttainment']").prop("readonly",true);
+                  $("input[name='childIncome']").prop("readonly", true);
+                  $(document).ready(function () {
+                    if ($("input[name='soloParentClassification']:checked").length > 0) {
+                      $("input[name='soloParentClassification']").removeAttr("required");
+                    } else {
+                      $("input[name='soloParentClassification']").prop("required",true);
+                    }
+                  });
+                  $("#spCitizenNext").show();
+                  $("#spSubmitForm").hide();
+                  var button = `<button type="button" class="btn btn-success" id="spRenewal" onclick="SP.submitRenewal();">Submit Renewal</button>`;
+                  $("#submitFormButton").append(button);
                 }
                 $("#button-div").append(buttons);
             },
