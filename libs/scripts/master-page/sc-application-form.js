@@ -574,8 +574,11 @@ $(document).ready(function () {
                   $("#firstName").prop("readonly", true);
                   $("#middlename").prop("readonly", true);
                   $("#suffix").prop("disabled", true);
-                  $("#pwdDOB").prop("readonly", true);
+                  $("#srCitizenDOB").prop("readonly", true);
+                  $("#age").prop("readonly", true);
                   $("#gender").prop("disabled", true);
+                  $("#placeOfBirth").prop("readonly", true);
+                  $("#childBarangay").prop("disabled", true);
                   $(document).ready(function () {
                     
                   });

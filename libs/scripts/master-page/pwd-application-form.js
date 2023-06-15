@@ -222,8 +222,61 @@ const PWD = (() => {
         });
     };
 
-    thisPWD.submitRenewal = () => {
-    alert("submit renewal");
+    thisPWD.submitRenewal = (id) => {
+        var typeOfDisability = [];
+        $('[name="typeOfDisability"]:checked').each(function () {
+          typeOfDisability.push($(this).val());
+        });
+        var inborn = [];
+        $('[name="inborn"]:checked').each(function () {
+          inborn.push($(this).val());
+        });
+        var acquired = [];
+        $('[name="acquired"]:checked').each(function () {
+          acquired.push($(this).val());
+        });
+
+        var formData = $("#pwdForm").serializeArray();
+        var pwdForm = {};
+
+        $.each(formData, function (index, value) {
+          if (value.name === "typeOfDisability") {
+            pwdForm[value.name] = typeOfDisability;
+          } else if (value.name === "inborn") {
+            pwdForm[value.name] = inborn;
+          } else if (value.name === "acquired") {
+            pwdForm[value.name] = acquired;
+          } else {
+            pwdForm[value.name] = value.value;
+          }
+        });
+
+        $.ajax({
+          type: "POST",
+          url: PWD_CONTROLLER + "?action=pwdRenew",
+          data: {
+            pwdForm: pwdForm,
+            uuid: id,
+          },
+          dataType: "json",
+          success: function (data) {
+            swal
+              .fire({
+                title: "Success!",
+                text: "Click Ok to proceed to appointment.",
+                icon: "success",
+                confirmButtonText: "Ok",
+              })
+              .then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = "appointment.php?personId=" + data;
+                }
+              });
+          },
+          error: function (data) {
+            console.log(data);
+          },
+        });
     };
 
     thisPWD.approve = (id) => {
@@ -571,7 +624,7 @@ $(document).ready(function() {
                     });
                   $("#pwdNext").show();
                   $("#pwdSubmitForm").hide();
-                  var button = `<button type="button" class="btn btn-success" id="pwdRenewal" onclick="PWD.submitRenewal();">Submit Renewal</button>`;
+                  var button = `<button type="button" class="btn btn-success" id="pwdRenewal" onclick="PWD.submitRenewal('${data['PERSON_ID']}');">Submit Renewal</button>`;
                   $("#submitFormButton").append(button);
                 }
                 

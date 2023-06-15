@@ -18,7 +18,15 @@
         echo json_encode($result);
     }
 
-    if($action == "checkEmail")
+    else if($action == "pwdRenew")
+    {
+        $pwdForm = $_POST['pwdForm'];
+        $result = $Pwd->pwdRenew($pwdForm);
+
+        echo json_encode($result);
+    }
+
+    else if($action == "checkEmail")
     {
         $email = $_POST['email'];
         $result = $Pwd->checkEmail($email);

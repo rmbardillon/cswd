@@ -159,6 +159,113 @@
             return $uuid;
         }
 
+        public function pwdRenew($pwdForm)
+        {
+            $Sql = new Sql($this->connection);
+            $uuid = $_POST['uuid'];
+            $application = [
+                'uuid' => $uuid,
+                'applicantType' => 'PWD',
+                'applicationType' => 'Renewal',
+            ];
+            $address = [
+                'uuid' => $uuid,
+                'address' => $pwdForm['address'],
+                'barangay' => $pwdForm['barangay'],
+            ];
+            $contactDetails = [
+                'uuid' => $uuid,
+                'landline' => $pwdForm['landline'],
+                'mobileNumber' => $pwdForm['mobileNumber'],
+                'email' => $pwdForm['emailAddress'],
+            ];
+            $personalInformation = [
+                'uuid' => $uuid,
+                'birthday' => $pwdForm['pwdDOB'],
+                'gender' => $pwdForm['gender'],
+                'educationalAttainment' => $pwdForm['educationalAttainment'],
+                'bloodType' => $pwdForm['bloodType'],
+                'religion' => $pwdForm['religion'],
+                'maritalStatus' => $pwdForm['maritalStatus'],
+            ];
+            $employmentDetails = [
+                'uuid' => $uuid,
+                'employmentStatus' => $pwdForm['employmentStatus'],
+                'categoryOfEmployment' => isset($pwdForm['categoryOfEmployment']) ? $pwdForm['categoryOfEmployment'] : null,
+                'natureOfEmployment' => isset($pwdForm['natureOfEmployment']) ? $pwdForm['natureOfEmployment'] : null,
+                'occupation' => isset($pwdForm['occupation']) ? $pwdForm['occupation'] : null,
+                'otherOccupation' => $pwdForm['otherOccupation'],
+                'income' => isset($pwdForm['income']) ? $pwdForm['income'] : null,
+                'SSSNo' => $pwdForm['SSSNo'],
+                'GSISNo' => $pwdForm['GSISNo'],
+                'PSNNo' => $pwdForm['PSNNo'],
+                'isPhilhealthMember' => $pwdForm['isPhilhealthMember'],
+                'philhealthNumber' => $pwdForm['philhealthNumber'],
+                'isActiveVoter' => $pwdForm['isActiveVoter'],
+                'is4PS' => $pwdForm['is4PS'],
+            ];
+            $organization = [
+                'uuid' => $uuid,
+                'organization' => $pwdForm['organization'],
+                'organizationContactPerson' => $pwdForm['organizationContactPerson'],
+                'organizationOfficeAddress' => $pwdForm['organizationOfficeAddress'],
+                'organizationTelephoneNumber' => $pwdForm['organizationTelephoneNumber'],
+            ];
+            if($pwdForm['accomplishedBy'] == "Guardian") {
+                $accomplisherName = $pwdForm['guardianFirstName'] . " " . $pwdForm['guardianSurname'];
+            } else if($pwdForm['accomplishedBy'] == "Representative") {
+                $accomplisherName = $pwdForm['accomplisherName'];
+            } else {
+                $accomplisherName = $pwdForm['firstName'] . " " . $pwdForm['surname'];
+            }
+            $pwdData = [
+                'uuid' => $uuid,
+                'physicianName' => $pwdForm['physicianName'],
+                'physicianLicence' => $pwdForm['physicianLicence'],
+                'typeOfDisability' => $pwdForm['typeOfDisability'],
+                'medicalCondition' => $pwdForm['medicalCondition'],
+                'inborn' => isset($pwdForm['inborn']) ? $pwdForm['inborn'] : null,
+                'acquired' => isset($pwdForm['acquired']) ? $pwdForm['acquired'] : null,
+                'statusOfDisabiity' => $pwdForm['statusOfDisabiity'],
+                'accomplishedBy' => $pwdForm['accomplishedBy'],
+                'accomplisherName' => $accomplisherName,
+            ];
+            $guardian = [
+                'uuid' => $uuid,
+                'firstName' => $pwdForm['guardianFirstName'],
+                'middleName' => $pwdForm['guardianMiddlename'],
+                'lastName' => $pwdForm['guardianSurname'],
+                'suffix' => isset($pwdForm['guardianSuffix']) ? $pwdForm['guardianSuffix'] : null,
+            ];
+            $guardianRelative = [
+                'uuid' => $uuid,
+                'relationship' => $pwdForm['guardianRelationship'],
+                'contactNumber' => $pwdForm['guardianContactNumber'],
+            ];
+
+            try {
+                // Begin transaction
+                $this->connection->begin_transaction();
+                $Sql->updateApplication($application);
+                $Sql->updateAddress($address);
+                $Sql->updateContactDetails($contactDetails);
+                $Sql->updatePersonalInformation($personalInformation);
+                $Sql->updateEmploymentDetails($employmentDetails);
+                $Sql->updateOrganization($organization);
+                $Sql->updatePWDData($pwdData);
+                $Sql->updatePerson($guardian);
+                $Sql->updateRelatives($guardianRelative);
+
+                $this->connection->commit();
+            } catch (Exception $e) {
+                // Rollback the transaction in case of any errors
+                $this->connection->rollback();
+                $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+                return $errorMessage;
+            }
+            return $uuid;
+        }
+
         public function checkEmail($email)
         {
             $sql = "SELECT * FROM contact_details WHERE EMAIL = ?;";

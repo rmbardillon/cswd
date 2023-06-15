@@ -4,7 +4,7 @@
             <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column">
                 <h3 class="fs-6 text-white">Services</h3>
                 <ul class="list-unstyled">
-                    <li><a class="link-light" href="../master-page/id-application.php">ID Application</a></li>
+                    <li><a class="link-light id-application">ID Application</a></li>
                     <li><a class="link-light" href="../master-page/renewal.php">Renewal</a></li>
                 </ul>
             </div>
