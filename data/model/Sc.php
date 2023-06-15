@@ -111,5 +111,98 @@
             }
             return $uuid;
         }
+
+        public function scRenew($scForm)
+        {
+            $Sql = new Sql($this->connection);
+            $uuid = $_POST['uuid'];
+            $application = [
+                'uuid' => $uuid,
+                'applicantType' => 'Senior Citizen',
+                'applicationType' => 'Renewal',
+                'applicationStatus' => 'Pending',
+            ];
+            $address = [
+                'uuid' => $uuid,
+                'address' => $scForm['address'],
+                'barangay' => $scForm['barangay'],
+            ];
+            $contactDetails = [
+                'uuid' => $uuid,
+                'mobileNumber' => $scForm['telephone'],
+                'email' => $scForm['email'],
+            ];
+            $personalInformation = [
+                'uuid' => $uuid,
+                'maritalStatus' => $scForm['maritalStatus'],
+                'religion' => $scForm['religion'],
+            ];
+            $employmentDetails = [
+                'uuid' => $uuid,
+                'occupation' => isset($scForm['job']) ? $scForm['job'] : null,
+                'hasPension' => isset($scForm['hasPension']) ? $scForm['hasPension'] : null,
+                'pension' => isset($scForm['whatPension']) ? $scForm['whatPension'] : null,
+                'pensionAmount' => isset($scForm['howMuchPension']) ? $scForm['howMuchPension'] : null,
+            ];
+            $spouseUUID = $Sql->generateUUID();
+            $spouse = [
+                'uuid' => $spouseUUID,
+                'firstName' => $scForm['spouseFirstName'],
+                'middleName' => $scForm['spouseMiddleName'],
+                'lastName' => $scForm['spouseLastName'],
+                'suffix' => isset($scForm['spouseSuffix']) ? $scForm['spouseSuffix'] : null,
+            ];
+            $spouseRelative = [
+                'uuid' => $uuid,
+                'relativeUUID' => $spouseUUID,
+                'relationship' => 'Spouse',
+                'birthday' => $scForm['spouseDOB'],
+            ];
+            try {
+                // Begin transaction
+                $this->connection->begin_transaction();
+                $Sql->updatePerson($person);
+                $Sql->updateApplication($application);
+                $Sql->updateAddress($address);
+                $Sql->updateContactDetails($contactDetails);
+                $Sql->updatePersonalInformation($personalInformation);
+                $Sql->updateEmploymentDetails($employmentDetails);
+                $Sql->updatePerson($spouse);
+                $Sql->updateRelatives($spouseRelative);
+                if(isset($scForm['childFirstName'])) {
+                    foreach ($scForm['childFirstName'] as $key => $value) {
+                        $childUUID = $Sql->generateUUID();
+                        $child = [
+                            'uuid' => $childUUID,
+                            'firstName' => $scForm['childFirstName'][$key],
+                            'lastName' => $scForm['childLastName'][$key],
+                        ];
+                        $Sql->updatePerson($child);
+                        $childAddress = [
+                            'uuid' => $childUUID,
+                            'address' => $scForm['childAddress'][$key],
+                            'barangay' => $scForm['childBarangay'][$key],
+                        ];
+                        $Sql->updateAddress($childAddress);
+                        $relative = [
+                            'uuid' => $uuid,
+                            'relativeUUID' => $childUUID,
+                            'relationship' => 'Child',
+                            'birthday' => $scForm['srCitizenChildDOB'][$key],
+                            'contactNumber' => $scForm['childTelephone'][$key],
+                        ];
+                        $Sql->updateRelatives($relative);
+                    }
+                }
+
+                $this->connection->commit();
+            } catch (Exception $e) {
+                // Rollback the transaction in case of any errors
+                $this->connection->rollback();
+                $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+                return $errorMessage;
+            }
+            return $uuid;
+        }
     }
 ?>

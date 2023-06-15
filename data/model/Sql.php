@@ -277,11 +277,12 @@
         {
             $uuid = $request['uuid'];
             $applicationType = $request['applicationType'];
+            $applicationStatus = $request['applicationStatus'];
             $applicantType = $request['applicantType'];
 
-            $sql = "UPDATE application SET APPLICATION_TYPE=?, APPLICANT_TYPE=? WHERE PERSON_ID=?";
+            $sql = "UPDATE application SET APPLICATION_TYPE=?, APPLICANT_TYPE=?, APPLICATION_STATUS=? WHERE PERSON_ID=?";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sss", $applicationType, $applicantType, $uuid);
+            $stmt->bind_param("ssss", $applicationType, $applicantType, $applicationStatus, $uuid);
             $stmt->execute();
             $stmt->close();
         }
@@ -372,7 +373,7 @@
 
             $sql = "UPDATE employment_details SET EMPLOYMENT_STATUS=?, CATEGORY_OF_EMPLOYMENT=?, NATURE_OF_EMPLOYMENT=?, COMPANY=?, JOB=?, OTHER_JOB=?, INCOME=?, HAS_PENSION=?, PENSION=?, PENSION_AMOUNT=?, SSS_NUMBER=?, GSIS_NUMBER=?, PSN_NUMBER=?, IS_PHILHEALTH_MEMBER=?, PHILHEALTH_NUMBER=?, IS_ACTIVE_VOTER=?, IS_4PS_MEMBER=?, TOTAL_FAMILY_INCOME=? WHERE PERSON_ID=?";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ssssssssssssssssss", $employmentStatus, $categoryOfEmployment, $natureOfEmployment, $company, $occupation, $otherOccupation, $income, $hasPension, $pension, $pensionAmount, $SSSNo, $GSISNo, $PSNNo, $isPhilhealthMember, $philhealthNumber, $isActiveVoter, $is4PS, $totalFamilyIncome, $uuid);
+            $stmt->bind_param("sssssssssssssssssss", $employmentStatus, $categoryOfEmployment, $natureOfEmployment, $company, $occupation, $otherOccupation, $income, $hasPension, $pension, $pensionAmount, $SSSNo, $GSISNo, $PSNNo, $isPhilhealthMember, $philhealthNumber, $isActiveVoter, $is4PS, $totalFamilyIncome, $uuid);
             $stmt->execute();
             $stmt->close();
         }
@@ -400,7 +401,7 @@
             $contactNumber = isset($request['contactNumber']) ? $request['contactNumber'] : null;
             $income = isset($request['income']) ? $request['income'] : null;
 
-            $sql = "UPDATE relatives RELATIONSHIP_TYPE=?, BIRTHDAY=?, GUARDIAN_CONTACT_NUMBER=?, INCOME=? WHERE PERSON_ID=?";
+            $sql = "UPDATE relatives SET RELATIONSHIP_TYPE=?, BIRTHDAY=?, GUARDIAN_CONTACT_NUMBER=?, INCOME=? WHERE PERSON_ID=?";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("sssss", $relationship, $birthday, $contactNumber, $income, $uuid);
             $stmt->execute();

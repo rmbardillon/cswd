@@ -624,7 +624,7 @@ $(document).ready(function() {
                     });
                   $("#pwdNext").show();
                   $("#pwdSubmitForm").hide();
-                  var button = `<button type="button" class="btn btn-success" id="pwdRenewal" onclick="PWD.submitRenewal('${data['PERSON_ID']}');">Submit Renewal</button>`;
+                  var button = `<button type="button" class="btn btn-success" id="pwdRenewal" onclick="PWD.submitRenewal('${data[0]['PERSON_ID']}');">Submit Renewal</button>`;
                   $("#submitFormButton").append(button);
                 }
                 

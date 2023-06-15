@@ -314,8 +314,77 @@ const SC = (() => {
         });
     };
 
-    thisSC.submitRenewal = () => {
-      alert("submit renewal");
+    thisSC.submitRenewal = (id) => {
+      var childFirstName = [];
+      $('[name="childFirstName"]').each(function () {
+        childFirstName.push($(this).val());
+      });
+      var childLastName = [];
+      $('[name="childLastName"]').each(function () {
+        childLastName.push($(this).val());
+      });
+      var srCitizenChildDOB = [];
+      $('[name="srCitizenChildDOB"]').each(function () {
+        srCitizenChildDOB.push($(this).val());
+      });
+      var childTelephone = [];
+      $('[name="childTelephone"]').each(function () {
+        childTelephone.push($(this).val());
+      });
+      var childBarangay = [];
+      $('[name="childBarangay"]').each(function () {
+        childBarangay.push($(this).val());
+      });
+      var childAddress = [];
+      $('[name="childAddress"]').each(function () {
+        childAddress.push($(this).val());
+      });
+      var formData = $("#scForm").serializeArray();
+      var scForm = {};
+      $.each(formData, function (index, value) {
+        if (value.name === "childFirstName") {
+          scForm[value.name] = childFirstName;
+        } else if (value.name === "childLastName") {
+          scForm[value.name] = childLastName;
+        } else if (value.name === "srCitizenChildDOB") {
+          scForm[value.name] = srCitizenChildDOB;
+        } else if (value.name === "childTelephone") {
+          scForm[value.name] = childTelephone;
+        } else if (value.name === "childBarangay") {
+          scForm[value.name] = childBarangay;
+        } else if (value.name === "childAddress") {
+          scForm[value.name] = childAddress;
+        } else {
+          scForm[value.name] = value.value;
+        }
+      });
+
+      $.ajax({
+        type: "POST",
+        url: SC_CONTROLLER + "?action=scRenew",
+        data: {
+          scForm: scForm,
+          uuid: id
+        },
+        dataType: "json",
+        success: function (data) {
+          swal
+            .fire({
+              title: "Success!",
+              text: "Click Ok to proceed to appointment.",
+              icon: "success",
+              confirmButtonText: "Ok",
+            })
+            .then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "appointment.php?personId=" + data;
+              }
+            });
+        },
+        error: function (data) {
+          console.log(data);
+        },
+      });
     };
 
     thisSC.approve = (id) => {
@@ -584,7 +653,7 @@ $(document).ready(function () {
                   });
                   $("#srCitizenNext").show();
                   $("#scSubmitForm").hide();
-                  var button = `<button type="button" class="btn btn-success" id="scRenewal" onclick="SC.submitRenewal();">Submit Renewal</button>`;
+                  var button = `<button type="button" class="btn btn-success" id="scRenewal" onclick="SC.submitRenewal('${data[0]['PERSON_ID']}');">Submit Renewal</button>`;
                   $("#submitFormButton").append(button);
                 }
                 $("#button-div").append(buttons);

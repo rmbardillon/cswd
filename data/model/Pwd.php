@@ -167,6 +167,7 @@
                 'uuid' => $uuid,
                 'applicantType' => 'PWD',
                 'applicationType' => 'Renewal',
+                'applicationStatus' => 'Pending',
             ];
             $address = [
                 'uuid' => $uuid,
@@ -182,7 +183,6 @@
             $personalInformation = [
                 'uuid' => $uuid,
                 'birthday' => $pwdForm['pwdDOB'],
-                'gender' => $pwdForm['gender'],
                 'educationalAttainment' => $pwdForm['educationalAttainment'],
                 'bloodType' => $pwdForm['bloodType'],
                 'religion' => $pwdForm['religion'],
