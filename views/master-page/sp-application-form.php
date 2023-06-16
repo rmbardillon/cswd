@@ -95,8 +95,8 @@
             <div class="row">
                 <div class="col"><label class="form-label required" for="monthlyIncome">MONTHLY INCOME</label><input class="form-control numbers" type="text" id="monthlyIncome" name="monthlyIncome" required=""></div>
                 <div class="col"><label class="form-label howMuchPension required" for="totalFamilyIncome">TOTAL FAMILY INCOME</label><input class="form-control numbers" type="text" id="totalFamilyIncome" name="totalFamilyIncome" required=""></div>
-                <div class="col"><label class="form-label" for="telephone">TELEPHONE/CELLPHONE NUMBER</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####"></div>
-                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com"></div>
+                <div class="col"><label class="form-label" for="telephone">TELEPHONE/CELLPHONE NUMBER</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####" required></div>
+                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com" required></div>
             </div>
             <div class="row">
                 <div class="col-md-12">
