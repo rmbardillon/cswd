@@ -229,8 +229,9 @@
                 'accomplishedBy' => $pwdForm['accomplishedBy'],
                 'accomplisherName' => $accomplisherName,
             ];
+            $guardianUUID = $Sql->generateUUID();
             $guardian = [
-                'uuid' => $uuid,
+                'uuid' => $guardianUUID,
                 'firstName' => $pwdForm['guardianFirstName'],
                 'middleName' => $pwdForm['guardianMiddlename'],
                 'lastName' => $pwdForm['guardianSurname'],
@@ -238,6 +239,7 @@
             ];
             $guardianRelative = [
                 'uuid' => $uuid,
+                'relativeUUID' => $guardianUUID,
                 'relationship' => $pwdForm['guardianRelationship'],
                 'contactNumber' => $pwdForm['guardianContactNumber'],
             ];
@@ -252,8 +254,9 @@
                 $Sql->updateEmploymentDetails($employmentDetails);
                 $Sql->updateOrganization($organization);
                 $Sql->updatePWDData($pwdData);
-                $Sql->updatePerson($guardian);
-                $Sql->updateRelatives($guardianRelative);
+                $Sql->deletePWDRelative($uuid);
+                $Sql->insertPerson($guardian);
+                $Sql->insertRelatives($guardianRelative);
 
                 $this->connection->commit();
             } catch (Exception $e) {

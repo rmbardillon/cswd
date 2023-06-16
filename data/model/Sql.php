@@ -410,6 +410,15 @@
             $stmt->close();
         }
 
+        public function deletePWDRelative($personId)
+        {
+            $sql = "DELETE FROM relatives WHERE PERSON_ID = ? AND RELATIONSHIP_TYPE != 'Father' AND RELATIONSHIP_TYPE != 'Mother';";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $personId);
+            $stmt->execute();
+            $stmt->close();
+        }
+
         public function updatePWDData($request)
         {
             $uuid = $request['uuid'];
