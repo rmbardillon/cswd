@@ -44,7 +44,7 @@ class PDF extends FPDF
 $barangay = $_GET['barangay'];
 $applicantType = $_GET['applicantType'];
 $applicationType = "New Application";
-$status = "Pending";
+$status = "Approved";
 
 $result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status);
 

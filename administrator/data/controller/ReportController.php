@@ -10,7 +10,7 @@
         $barangay = $_POST['barangay'];
         $applicantType = $_POST['applicantType'];
         $applicationType = "New Application";
-        $status = "Pending";
+        $status = "Approved";
 
         $request = [
             'barangay' => $barangay,

@@ -489,7 +489,7 @@
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
+                        WHERE APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
                         ORDER BY BARANGAY, FULL_NAME;";
             }
             else if($barangay == "All") {
@@ -498,7 +498,7 @@
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
+                        WHERE APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
                         ORDER BY BARANGAY, FULL_NAME;";
             }
             $result = $this->conn->query($sql);
