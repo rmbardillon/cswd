@@ -536,6 +536,8 @@ $(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);
     const personId = urlParams.get("personId");
     const status = urlParams.get("status");
+    const applicationType = urlParams.get("applicationType");
+    
     if(personId != null) {
         $.ajax({
             type: "POST",
