@@ -165,7 +165,7 @@ $(document).ready(function () {
                         if (response) {
                             swal.fire(
                                 'Booked!',
-                                'Your appointment has been booked.',
+                                'Your appointment has been booked. Please check your email for the confirmation.',
                                 'success'
                             ).then((result) => {
                                 window.location.href = "index.php";
