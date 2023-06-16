@@ -18,7 +18,9 @@
             $email = $request['email'];
             $message = $request['message'];
 
-            $Function->contactUs($name, $email, $message);
+            $result = $Function->contactUs($name, $email, $message);
+
+            return $result;
         }
 
     }

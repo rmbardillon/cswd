@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2023 at 01:35 PM
+-- Generation Time: Jun 16, 2023 at 08:39 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -932,36 +932,36 @@ CREATE TABLE `pwd_data` (
 --
 
 INSERT INTO `pwd_data` (`PWD_DATA_ID`, `PERSON_ID`, `PHYSICIAN_NAME`, `PHYSICIAN_LICENSE_NUMBER`, `TYPE_OF_DISABILITY`, `MEDICAL_CONDITION`, `CAUSE_OF_DISABILITY`, `CONGENITAL_INBORN`, `ACQUIRED`, `STATUS_OF_DISABILITY`, `ACCOMPLISHED_BY`, `ACCOMPLISHER_NAME`) VALUES
-('890fe2130b7011ee', 'd9fe583718de4946', 'Ricky Harper', '5529725330', 'Speech & Language Impairment', '', 'INBORN', 'Cerebral Palsy', 'Cerebral Palsy', 'Temporary', 'Applicant', ''),
-('89158fb90b7011ee', 'b8c3bd73afe54da4', 'Barbara Wheeler', '4195832144', 'Cancer (RA11215)', '', 'INBORN', 'Cerebral Palsy', 'Cerebral Palsy', 'Temporary', 'Applicant', ''),
-('8919c8540b7011ee', '868a840404be48a7', 'Leslie Harvey', '7757745036', 'Intellectual Disability', '', 'INBORN', 'Cerebral Palsy', 'Injury', 'Permanent', 'Applicant', ''),
-('891dde170b7011ee', '55ce9b1e6d414117', 'Justin Owens', '6379932489', 'Deaf/Hard of Hearing', '', 'INBORN', 'Down Syndrome', 'Cerebral Palsy', 'Permanent', 'Applicant', ''),
-('89210c6a0b7011ee', '04f6ca9e8162452d', 'Jocelyn Villa DDS', '6938436385', 'Physical Disability (Orthopedic)', '', 'INBORN', 'Down Syndrome', 'Chronic Illness', 'Temporary', 'Applicant', ''),
-('89242f2e0b7011ee', '3d0100eb50ec4803', 'Paul Martin', '748106297', 'Visual Disability', '', 'ACQUIRED', 'Autism', 'Chronic Illness', 'Temporary', 'Applicant', ''),
-('892741a00b7011ee', '4bd9032f089543ab', 'Katie Bell', '5669265128', 'Rare Disease (RA10747)', '', 'ACQUIRED', 'Down Syndrome', 'Cerebral Palsy', 'Permanent', 'Applicant', ''),
-('892a3d250b7011ee', 'c3f89c4737184cfd', 'Brian Watson', '7430366864', 'Physical Disability (Orthopedic)', '', 'ACQUIRED', 'ADHD', 'Injury', 'Permanent', 'Applicant', ''),
-('892d4cb20b7011ee', 'df8653ff92324149', 'Kevin Wright', '4815497927', 'Cancer (RA11215)', '', 'ACQUIRED', 'Cerebral Palsy', 'Cerebral Palsy', 'Permanent', 'Applicant', ''),
-('893030d50b7011ee', '50c670cc63014f4b', 'Michael Martin', '1978229417', 'Rare Disease (RA10747)', '', 'INBORN', 'Cerebral Palsy', 'Cerebral Palsy', 'Permanent', 'Applicant', ''),
-('8932fada0b7011ee', 'cfc4c5d00659414a', 'Jeremy Perry', '5464008502', 'Intellectual Disability', '', 'ACQUIRED', 'Down Syndrome', 'Chronic Illness', 'Temporary', 'Applicant', ''),
-('8935e65a0b7011ee', '3490aa2fc6c0480e', 'Angela Brown', '8229665727', 'Mental Disability', '', 'INBORN', 'ADHD', 'Injury', 'Permanent', 'Applicant', ''),
-('8938c1f50b7011ee', '961228c1960f4d81', 'Anne Johnson', '2595503200', 'Cancer (RA11215)', '', 'ACQUIRED', 'Cerebral Palsy', 'Cerebral Palsy', 'Temporary', 'Applicant', ''),
-('893b88350b7011ee', '9517f3d1a07b4f83', 'Anita Stewart', '2511052503', 'Deaf/Hard of Hearing', '', 'ACQUIRED', 'Autism', 'Chronic Illness', 'Permanent', 'Applicant', ''),
-('893e64740b7011ee', '13cfe3b3ae2c41cb', 'Daniel Wells', '2900525554', 'Psychosocial Disability', '', 'ACQUIRED', 'Autism', 'Injury', 'Permanent', 'Applicant', ''),
-('8941347c0b7011ee', 'a2cc0570fdcb4be1', 'Craig Logan', '1787518385', 'Learning Disability', '', 'INBORN', 'Autism', 'Chronic Illness', 'Temporary', 'Applicant', ''),
-('8943fc3d0b7011ee', '56bcba23f8024a28', 'Kevin Martinez Jr.', '2020418829', 'Learning Disability', '', 'ACQUIRED', 'Cerebral Palsy', 'Injury', 'Temporary', 'Applicant', ''),
-('8946d67d0b7011ee', 'b4f3561f63b34ab6', 'Michael Evans', '6826382666', 'Physical Disability (Orthopedic)', '', 'ACQUIRED', 'Down Syndrome', 'Cerebral Palsy', 'Temporary', 'Applicant', ''),
-('89499bdd0b7011ee', 'e1e140a31edb410e', 'Brandy Mckay', '4728358697', 'Visual Disability', '', 'INBORN', 'Cerebral Palsy', 'Cerebral Palsy', 'Permanent', 'Applicant', ''),
-('894c66620b7011ee', '1829686212ee418c', 'James Yoder', '307741794', 'Physical Disability (Orthopedic)', '', 'INBORN', 'Cerebral Palsy', 'Cerebral Palsy', 'Permanent', 'Applicant', ''),
-('894f3ef30b7011ee', '2d9435437a5e499f', 'William Lucero', '2052600324', 'Deaf/Hard of Hearing', '', 'ACQUIRED', 'ADHD', 'Chronic Illness', 'Permanent', 'Applicant', ''),
-('895202f00b7011ee', 'c90abe1dde624c3e', 'Tamara Rice', '1717565408', 'Psychosocial Disability', '', 'ACQUIRED', 'Cerebral Palsy', 'Injury', 'Temporary', 'Applicant', ''),
-('8954dc4c0b7011ee', 'ed3866a0777042e2', 'Taylor Lawrence', '4046146848', 'Intellectual Disability', '', 'ACQUIRED', 'Down Syndrome', 'Chronic Illness', 'Temporary', 'Applicant', ''),
-('8957c4ae0b7011ee', 'fa5ab88fb2424f80', 'Edwin Phillips', '8815839529', 'Cancer (RA11215)', '', 'INBORN', 'ADHD', 'Chronic Illness', 'Permanent', 'Applicant', ''),
-('895a89700b7011ee', '0839d26a2bcb4737', 'Ashley Welch', '9747108846', 'Deaf/Hard of Hearing', '', 'INBORN', 'Down Syndrome', 'Chronic Illness', 'Permanent', 'Applicant', ''),
-('895d62080b7011ee', 'bbb7696ceb4c4e1d', 'Susan Henry', '5050466066', 'Cancer (RA11215)', '', 'ACQUIRED', 'ADHD', 'Injury', 'Permanent', 'Applicant', ''),
-('89602abe0b7011ee', '037f65e8b4e2417e', 'Stephanie Wright', '2052407292', 'Speech & Language Impairment', '', 'INBORN', 'Down Syndrome', 'Injury', 'Temporary', 'Applicant', ''),
-('896307b60b7011ee', '9e7b529864114cfc', 'Susan Curry', '5876753544', 'Cancer (RA11215)', '', 'INBORN', 'Autism', 'Cerebral Palsy', 'Permanent', 'Applicant', ''),
-('8965d3da0b7011ee', 'ddd34109e5674766', 'Debra Clements', '9505098791', 'Intellectual Disability', '', 'INBORN', 'ADHD', 'Cerebral Palsy', 'Temporary', 'Applicant', ''),
-('896893320b7011ee', '69345e7eb068430a', 'David Gonzalez', '4290197477', 'Deaf/Hard of Hearing', '', 'INBORN', 'ADHD', 'Cerebral Palsy', 'Temporary', 'Applicant', '');
+('890fe2130b7011ee', 'd9fe583718de4946', 'Ricky Harper', '5529725330', 'Speech & Language Impairment', '', 'INBORN', 'Cerebral Palsy', NULL, 'Temporary', 'Applicant', ''),
+('89158fb90b7011ee', 'b8c3bd73afe54da4', 'Barbara Wheeler', '4195832144', 'Cancer (RA11215)', '', 'INBORN', 'Cerebral Palsy', NULL, 'Temporary', 'Applicant', ''),
+('8919c8540b7011ee', '868a840404be48a7', 'Leslie Harvey', '7757745036', 'Intellectual Disability', '', 'INBORN', 'Cerebral Palsy', NULL, 'Permanent', 'Applicant', ''),
+('891dde170b7011ee', '55ce9b1e6d414117', 'Justin Owens', '6379932489', 'Deaf/Hard of Hearing', '', 'INBORN', 'Down Syndrome', NULL, 'Permanent', 'Applicant', ''),
+('89210c6a0b7011ee', '04f6ca9e8162452d', 'Jocelyn Villa DDS', '6938436385', 'Physical Disability (Orthopedic)', '', 'INBORN', 'Down Syndrome', NULL, 'Temporary', 'Applicant', ''),
+('89242f2e0b7011ee', '3d0100eb50ec4803', 'Paul Martin', '748106297', 'Visual Disability', '', 'ACQUIRED', 'Autism', NULL, 'Temporary', 'Applicant', ''),
+('892741a00b7011ee', '4bd9032f089543ab', 'Katie Bell', '5669265128', 'Rare Disease (RA10747)', '', 'ACQUIRED', 'Down Syndrome', NULL, 'Permanent', 'Applicant', ''),
+('892a3d250b7011ee', 'c3f89c4737184cfd', 'Brian Watson', '7430366864', 'Physical Disability (Orthopedic)', '', 'ACQUIRED', 'ADHD', NULL, 'Permanent', 'Applicant', ''),
+('892d4cb20b7011ee', 'df8653ff92324149', 'Kevin Wright', '4815497927', 'Cancer (RA11215)', '', 'ACQUIRED', 'Cerebral Palsy', NULL, 'Permanent', 'Applicant', ''),
+('893030d50b7011ee', '50c670cc63014f4b', 'Michael Martin', '1978229417', 'Rare Disease (RA10747)', '', 'INBORN', 'Cerebral Palsy', NULL, 'Permanent', 'Applicant', ''),
+('8932fada0b7011ee', 'cfc4c5d00659414a', 'Jeremy Perry', '5464008502', 'Intellectual Disability', '', 'ACQUIRED', 'Down Syndrome', NULL, 'Temporary', 'Applicant', ''),
+('8935e65a0b7011ee', '3490aa2fc6c0480e', 'Angela Brown', '8229665727', 'Mental Disability', '', 'INBORN', 'ADHD', NULL, 'Permanent', 'Applicant', ''),
+('8938c1f50b7011ee', '961228c1960f4d81', 'Anne Johnson', '2595503200', 'Cancer (RA11215)', '', 'ACQUIRED', 'Cerebral Palsy', NULL, 'Temporary', 'Applicant', ''),
+('893b88350b7011ee', '9517f3d1a07b4f83', 'Anita Stewart', '2511052503', 'Deaf/Hard of Hearing', '', 'ACQUIRED', 'Autism', NULL, 'Permanent', 'Applicant', ''),
+('893e64740b7011ee', '13cfe3b3ae2c41cb', 'Daniel Wells', '2900525554', 'Psychosocial Disability', '', 'ACQUIRED', 'Autism', NULL, 'Permanent', 'Applicant', ''),
+('8941347c0b7011ee', 'a2cc0570fdcb4be1', 'Craig Logan', '1787518385', 'Learning Disability', '', 'INBORN', 'Autism', NULL, 'Temporary', 'Applicant', ''),
+('8943fc3d0b7011ee', '56bcba23f8024a28', 'Kevin Martinez Jr.', '2020418829', 'Learning Disability', '', 'ACQUIRED', 'Cerebral Palsy', NULL, 'Temporary', 'Applicant', ''),
+('8946d67d0b7011ee', 'b4f3561f63b34ab6', 'Michael Evans', '6826382666', 'Physical Disability (Orthopedic)', '', 'ACQUIRED', 'Down Syndrome', NULL, 'Temporary', 'Applicant', ''),
+('89499bdd0b7011ee', 'e1e140a31edb410e', 'Brandy Mckay', '4728358697', 'Visual Disability', '', 'INBORN', 'Cerebral Palsy', NULL, 'Permanent', 'Applicant', ''),
+('894c66620b7011ee', '1829686212ee418c', 'James Yoder', '307741794', 'Physical Disability (Orthopedic)', '', 'INBORN', 'Cerebral Palsy', NULL, 'Permanent', 'Applicant', ''),
+('894f3ef30b7011ee', '2d9435437a5e499f', 'William Lucero', '2052600324', 'Deaf/Hard of Hearing', '', 'ACQUIRED', 'ADHD', NULL, 'Permanent', 'Applicant', ''),
+('895202f00b7011ee', 'c90abe1dde624c3e', 'Tamara Rice', '1717565408', 'Psychosocial Disability', '', 'ACQUIRED', 'Cerebral Palsy', NULL, 'Temporary', 'Applicant', ''),
+('8954dc4c0b7011ee', 'ed3866a0777042e2', 'Taylor Lawrence', '4046146848', 'Intellectual Disability', '', 'ACQUIRED', 'Down Syndrome', NULL, 'Temporary', 'Applicant', ''),
+('8957c4ae0b7011ee', 'fa5ab88fb2424f80', 'Edwin Phillips', '8815839529', 'Cancer (RA11215)', '', 'INBORN', 'ADHD', NULL, 'Permanent', 'Applicant', ''),
+('895a89700b7011ee', '0839d26a2bcb4737', 'Ashley Welch', '9747108846', 'Deaf/Hard of Hearing', '', 'INBORN', 'Down Syndrome', NULL, 'Permanent', 'Applicant', ''),
+('895d62080b7011ee', 'bbb7696ceb4c4e1d', 'Susan Henry', '5050466066', 'Cancer (RA11215)', '', 'ACQUIRED', 'ADHD', NULL, 'Permanent', 'Applicant', ''),
+('89602abe0b7011ee', '037f65e8b4e2417e', 'Stephanie Wright', '2052407292', 'Speech & Language Impairment', '', 'INBORN', 'Down Syndrome', NULL, 'Temporary', 'Applicant', ''),
+('896307b60b7011ee', '9e7b529864114cfc', 'Susan Curry', '5876753544', 'Cancer (RA11215)', '', 'INBORN', 'Autism', NULL, 'Permanent', 'Applicant', ''),
+('8965d3da0b7011ee', 'ddd34109e5674766', 'Debra Clements', '9505098791', 'Intellectual Disability', '', 'INBORN', 'ADHD', NULL, 'Temporary', 'Applicant', ''),
+('896893320b7011ee', '69345e7eb068430a', 'David Gonzalez', '4290197477', 'Deaf/Hard of Hearing', '', 'INBORN', 'ADHD', NULL, 'Temporary', 'Applicant', '');
 
 -- --------------------------------------------------------
 

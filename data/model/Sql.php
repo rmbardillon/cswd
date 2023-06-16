@@ -468,24 +468,36 @@
             $filePath = $request['filePath'];
             $encryptionKey = $request['encryptionKey'];
 
-            $sql = "UPDATE uploaded_documents SET DOCUMENT_NAME=?, DOCUMENT_TYPE=?, FILE_PATH=?, ENCRYPTION_KEY=? WHERE PERSON_ID=?";
+            $sql = "UPDATE uploaded_documents SET DOCUMENT_TYPE=?, ENCRYPTION_KEY=? WHERE PERSON_ID=? AND DOCUMENT_NAME=?";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssss", $documentName, $documentType, $filePath, $encryptionKey, $personId);
+            $stmt->bind_param("ssss", $documentType, $encryptionKey, $personId, $documentName);
             $stmt->execute();
             $stmt->close();
         }
 
-        public function updateCitizenIdentificationCard($request)
+        public function updateCitizenID($request)
         {
             $personId = $request['personId'];
-            $idNumber = $request['idNumber'];
-            $status = $request['status'];
+            $applicantType = $request['applicantType'];
 
-            $sql = "UPDATE citizen_identification_card SET ID_NUMBER=?, STATUS=? WHERE PERSON_ID=?";
+            if($applicantType == "PWD") {
+                $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE(), EXPIRATION_DATE = DATE_ADD(CURDATE(), INTERVAL 5 YEAR), STATUS = 1 WHERE PERSON_ID = ?";
+            } else if ($applicantType == "Solo Parent") {
+                $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE(), EXPIRATION_DATE = DATE_ADD(CURDATE(), INTERVAL 1 YEAR), STATUS = 1 WHERE PERSON_ID = ?";
+            } else if ($applicantType == "Senior Citizen") {
+                $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE(), STATUS = 1 WHERE PERSON_ID = ?";
+            }
+
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sss", $idNumber, $status, $personId);
+            $stmt->bind_param('s', $personId);
             $stmt->execute();
-            $stmt->close();
+            $result = $stmt->get_result();
+
+            if ($result === false) {
+                return false;
+            }
+
+            return $result;
         }
 
     }

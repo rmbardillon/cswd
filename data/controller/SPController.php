@@ -28,6 +28,7 @@
 
     else if ($action == "approveApplicationFileUpload") {
         $personId = $_POST['personId'];
+        $applicationType = $_POST['applicationType'];
 
         $barangayCertificate = $_FILES['barangayCertificate']['tmp_name'];
         $barangayCertificateExtension = pathinfo($_FILES['barangayCertificate']['name'], PATHINFO_EXTENSION);
@@ -77,24 +78,45 @@
         $citizenIDRequest = [
             'personId' => $personId,
             'idNumber' => date("Y") . "-"  . $Functions->generateSoloParentID()[0],
-            'status' => "Pending"
+            'status' => 0,
         ];
-        try {
-            // Begin transaction
-            $conn->begin_transaction();
-            $Sql->insertUploadedDocuments($barangayCertificateRequest);
-            $Sql->insertUploadedDocuments($validIDRequest);
-            $Sql->insertUploadedDocuments($photoRequest);
-            $Sql->insertCitizenIdentificationCard($citizenIDRequest);
-            $Sql->updateApplicationStatus($personId, "Approved");
-            $conn->commit();
-        } catch (Exception $e) {
-            // Rollback the transaction in case of any errors
-            $this->connection->rollback();
-            $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
-            echo $errorMessage;
+        if($applicationType == "Renewal") {
+            $citizenIDRequest = [
+                'personId' => $personId,
+                'applicantType' => "Solo Parent",
+            ];
+            try {
+                // Begin transaction
+                $conn->begin_transaction();
+                $Sql->updateUploadedDocuments($barangayCertificateRequest);
+                $Sql->updateUploadedDocuments($validIDRequest);
+                $Sql->updateUploadedDocuments($photoRequest);
+                $Sql->updateCitizenID($citizenIDRequest);
+                $Sql->updateApplicationStatus($personId, "Approved");
+                $conn->commit();
+            } catch (Exception $e) {
+                // Rollback the transaction in case of any errors
+                $this->connection->rollback();
+                $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+                echo $errorMessage;
+            }
+        } else {
+            try {
+                // Begin transaction
+                $conn->begin_transaction();
+                $Sql->insertUploadedDocuments($barangayCertificateRequest);
+                $Sql->insertUploadedDocuments($validIDRequest);
+                $Sql->insertUploadedDocuments($photoRequest);
+                $Sql->insertCitizenIdentificationCard($citizenIDRequest);
+                $Sql->updateApplicationStatus($personId, "Approved");
+                $conn->commit();
+            } catch (Exception $e) {
+                // Rollback the transaction in case of any errors
+                $this->connection->rollback();
+                $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+                echo $errorMessage;
+            }
         }
-
         echo json_encode("File upload successful");
     }
     

@@ -37,6 +37,7 @@
 
     else if ($action == "approveApplicationFileUpload") {
         $personId = $_POST['personId'];
+        $applicationType = $_POST['applicationType'];
 
         $medicalCertificate = $_FILES['medicalCertificate']['tmp_name'];
         $medicalCertificateExtension = pathinfo($_FILES['medicalCertificate']['name'], PATHINFO_EXTENSION);
@@ -97,23 +98,47 @@
         $citizenIDRequest = [
             'personId' => $personId,
             'idNumber' => "043428023-" . $Functions->generatePWDID()[0],
-            'status' => "Pending"
+            'status' => 0,
         ];
-        try {
-            // Begin transaction
-            $conn->begin_transaction();
-            $Sql->insertUploadedDocuments($medicalCertificateRequest);
-            $Sql->insertUploadedDocuments($barangayCertificateRequest);
-            $Sql->insertUploadedDocuments($validIDRequest);
-            $Sql->insertUploadedDocuments($photoRequest);
-            $Sql->updateApplicationStatus($personId, "Approved");
-            $Sql->insertCitizenIdentificationCard($citizenIDRequest);
-            $conn->commit();
-        } catch (Exception $e) {
-            // Rollback the transaction in case of any errors
-            $this->connection->rollback();
-            $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
-            echo $errorMessage;
+
+        if($applicationType == "Renewal") {
+            $citizenIDRequest = [
+                'personId' => $personId,
+                'applicantType' => "PWD",
+            ];
+            try {
+                // Begin transaction
+                $conn->begin_transaction();
+                $Sql->updateUploadedDocuments($medicalCertificateRequest);
+                $Sql->updateUploadedDocuments($barangayCertificateRequest);
+                $Sql->updateUploadedDocuments($validIDRequest);
+                $Sql->updateUploadedDocuments($photoRequest);
+                $Sql->updateApplicationStatus($personId, "Approved");
+                $Sql->updateCitizenID($citizenIDRequest);
+                $conn->commit();
+            } catch (Exception $e) {
+                // Rollback the transaction in case of any errors
+                $this->connection->rollback();
+                $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+                echo $errorMessage;
+            }
+        } else {
+            try {
+                // Begin transaction
+                $conn->begin_transaction();
+                $Sql->insertUploadedDocuments($medicalCertificateRequest);
+                $Sql->insertUploadedDocuments($barangayCertificateRequest);
+                $Sql->insertUploadedDocuments($validIDRequest);
+                $Sql->insertUploadedDocuments($photoRequest);
+                $Sql->updateApplicationStatus($personId, "Approved");
+                $Sql->insertCitizenIdentificationCard($citizenIDRequest);
+                $conn->commit();
+            } catch (Exception $e) {
+                // Rollback the transaction in case of any errors
+                $this->connection->rollback();
+                $errorMessage =  "Error: " . $e->getMessage() . "\n" . $e;
+                echo $errorMessage;
+            }
         }
 
         echo json_encode("File upload successful");

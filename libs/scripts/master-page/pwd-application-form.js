@@ -167,6 +167,7 @@ function populateModal(userData) {
 const PWD = (() => {
     const thisPWD = {};
     let personId = "";
+    let applicationType = "";
 
     thisPWD.submitForm = () => {
         var typeOfDisability = [];
@@ -279,10 +280,10 @@ const PWD = (() => {
         });
     };
 
-    thisPWD.approve = (id) => {
+    thisPWD.approve = (id, type) => {
         personId = id;
+        applicationType = type;
         $("#uploadFilesModal").modal("show");
-        
     };
 
     thisPWD.approveApplication = () => {
@@ -291,6 +292,7 @@ const PWD = (() => {
 
       // Add personId to the formData
       formData.append("personId", personId);
+      formData.append("applicationType", applicationType);
 
       $.ajax({
         type: "POST",
@@ -422,6 +424,7 @@ $(document).ready(function() {
     const urlParams = new URLSearchParams(window.location.search);
     const personId = urlParams.get('personId');
     const status = urlParams.get('status');
+    const applicationType = urlParams.get('applicationType');
 
     if(personId != null) {
         $.ajax({
@@ -549,7 +552,7 @@ $(document).ready(function() {
                 $("#pwdNext").hide();
 
                 if(status == "Pending") {
-                    var buttons = `<button class="btn btn-success w-100 mb-3" type="button" name="approve" onclick="PWD.approve('${data[0]["PERSON_ID"]}');">Approve</button>
+                    var buttons = `<button class="btn btn-success w-100 mb-3" type="button" name="approve" onclick="PWD.approve('${data[0]["PERSON_ID"]}', '${applicationType}');">Approve</button>
                     <button class="btn btn-danger w-100" type="button" name="reject" onclick="PWD.reject('${data[0]["PERSON_ID"]}');">Reject</button>`;
                 } else if (status == "Approved") {
                     var buttons = `<div = class="row mb-2">

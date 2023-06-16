@@ -9,7 +9,8 @@
             $this->connection = $connection;
         }
 
-        public function email($senderName, $subject, $senderEmail, $receiverName, $receiverEmail, $message, $attachment = null) {
+        public function email($senderName, $subject, $senderEmail, $receiverName, $receiverEmail, $message, $attachment = null) 
+        {
             require '../../libs/plugins/phpmailer/src/Exception.php';
             require '../../libs/plugins/phpmailer/src/PHPMailer.php';
             require '../../libs/plugins/phpmailer/src/SMTP.php';
@@ -61,13 +62,14 @@
             $mail->Body = 'Name: ' . $name . '<br>From Email: ' . $email . '<br>Message: ' . $message;
             $mail->isHTML(true);
             if ($mail->send()) {
-                echo 'Email sent successfully.';
+                return 'Email sent successfully.';
             } else {
-                echo 'Failed to send email. Error: ' . $mail->ErrorInfo;
+                return 'Failed to send email. Error: ' . $mail->ErrorInfo;
             }
         }
 
-        public function generateEncryptionKey($length = 32) {
+        public function generateEncryptionKey($length = 32) 
+        {
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_';
             $charactersLength = strlen($characters);
             $key = '';
