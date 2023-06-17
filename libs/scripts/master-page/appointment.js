@@ -154,37 +154,43 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: APPOINTMENT_CONTROLLER + "?action=bookAppointment", 
-                    method: 'POST',
-                    data: {
-                        personId: personId,
-                        date: appointmentDate
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        if (response) {
-                            swal.fire(
-                                'Booked!',
-                                'Your appointment has been booked. Please check your email for the confirmation.',
-                                'success'
-                            ).then((result) => {
-                                window.location.href = "index.php";
-                            });
-                        } else {
-                            swal.fire(
-                                'Error!',
-                                'Your appointment could not be booked.',
-                                'error'
-                            );
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        swal.fire(
-                            'Error!',
-                            'Your appointment could not be booked.',
-                            'error'
-                        );
+                  url: APPOINTMENT_CONTROLLER + "?action=bookAppointment",
+                  method: "POST",
+                  data: {
+                    personId: personId,
+                    date: appointmentDate,
+                  },
+                  dataType: "json",
+                  beforeSend: function () {
+                    $.blockUI({ message: loading }); // Display loading animation
+                  },
+                  success: function (response) {
+                    $.unblockUI(); // Remove loading animation
+                    if (response) {
+                      swal
+                        .fire(
+                          "Booked!",
+                          "Your appointment has been booked. Please check your email for the confirmation.",
+                          "success"
+                        )
+                        .then((result) => {
+                          window.location.href = "index.php";
+                        });
+                    } else {
+                      swal.fire(
+                        "Error!",
+                        "Your appointment could not be booked.",
+                        "error"
+                      );
                     }
+                  },
+                  error: function (xhr, status, error) {
+                    swal.fire(
+                      "Error!",
+                      "Your appointment could not be booked.",
+                      "error"
+                    );
+                  },
                 });
             }
         })

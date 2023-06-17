@@ -481,7 +481,7 @@
             return $result;
         }
 
-        public function getApplicants($applicationType, $applicantType, $barangay, $status)
+        public function getApplicants($applicationType, $applicantType, $barangay, $status, $isReport = false)
         {
             if($barangay != "All") {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
@@ -489,10 +489,19 @@
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
+                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
                         ORDER BY BARANGAY, FULL_NAME;";
             }
             else if($barangay == "All") {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
+                        ORDER BY BARANGAY, FULL_NAME;";
+            }
+            if($isReport) {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
                         FROM person
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID

@@ -19,7 +19,7 @@
             'status' => $status
         ];
 
-        $result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status);
+        $result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status, true);
 
         echo json_encode($result);
     }

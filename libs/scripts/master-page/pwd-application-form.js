@@ -310,7 +310,11 @@ const PWD = (() => {
                 confirmButtonText: "Ok"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "approved-application.php";
+                    if (applicationType == "Renewal") {
+                      window.location.href = "approved-renewal.php";
+                    } else {
+                      window.location.href = "approved-application.php";
+                    }
                 }
             });
           }
@@ -321,7 +325,7 @@ const PWD = (() => {
       });
     };
 
-    thisPWD.reject = (id) => {
+    thisPWD.reject = (id, type) => {
         personId = id;
         swal.fire({
             title: "Are you sure?",
@@ -349,8 +353,13 @@ const PWD = (() => {
                             })
                             .then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href =
-                                    "rejected-application.php";
+                                    if (type == "Renewal") {
+                                      window.location.href =
+                                        "rejected-renewal.php";
+                                    } else {
+                                      window.location.href =
+                                        "rejected-application.php";
+                                    }
                                 }
                             });
                         }
@@ -553,7 +562,7 @@ $(document).ready(function() {
 
                 if(status == "Pending") {
                     var buttons = `<button class="btn btn-success w-100 mb-3" type="button" name="approve" onclick="PWD.approve('${data[0]["PERSON_ID"]}', '${applicationType}');">Approve</button>
-                    <button class="btn btn-danger w-100" type="button" name="reject" onclick="PWD.reject('${data[0]["PERSON_ID"]}');">Reject</button>`;
+                    <button class="btn btn-danger w-100" type="button" name="reject" onclick="PWD.reject('${data[0]["PERSON_ID"]}', '${applicationType}');");">Reject</button>`;
                 } else if (status == "Approved") {
                     var buttons = `<div = class="row mb-2">
                                     <div class="col-md-6">

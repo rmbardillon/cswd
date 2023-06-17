@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link rel="stylesheet" href="../../../libs/plugins/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../../../libs/plugins/bootstrap/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../libs/plugins/datatables/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="../../libs/css/styles.css">
     <link rel="stylesheet" href="../../../libs/css/styles.css">
 </head>

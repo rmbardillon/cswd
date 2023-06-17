@@ -420,7 +420,11 @@ const SC = (() => {
               })
               .then((result) => {
                 if (result.isConfirmed) {
-                  window.location.href = "approved-application.php";
+                  if (applicationType == "Renewal") {
+                    window.location.href = "approved-renewal.php";
+                  } else {
+                    window.location.href = "approved-application.php";
+                  }
                 }
               });
           }
@@ -431,7 +435,7 @@ const SC = (() => {
       });
     };
 
-    thisSC.reject = (id) => {
+    thisSC.reject = (id, type) => {
       personId = id;
       swal
         .fire({
@@ -462,7 +466,11 @@ const SC = (() => {
                     })
                     .then((result) => {
                       if (result.isConfirmed) {
-                        window.location.href = "rejected-application.php";
+                        if (type == "Renewal") {
+                          window.location.href = "rejected-renewal.php";
+                        } else {
+                          window.location.href = "rejected-application.php";
+                        }
                       }
                     });
                 }
@@ -645,7 +653,7 @@ $(document).ready(function () {
                 $("#srCitizenNext").hide();
                 if (status == "Pending") {
                   var buttons = `<button class="btn btn-success w-100 mb-3" type="button" name="approve" onclick="SC.approve('${data[0]["PERSON_ID"]}', '${applicationType}');">Approve</button>
-                    <button class="btn btn-danger w-100" type="button" name="reject" onclick="SC.reject('${data[0]["PERSON_ID"]}');">Reject</button>`;
+                    <button class="btn btn-danger w-100" type="button" name="reject" onclick="SC.reject('${data[0]["PERSON_ID"]}', '${applicationType}');");">Reject</button>`;
                 } else if (status == "Approved") {
                   var buttons = `<div = class="row mb-2">
                                     <div class="col">

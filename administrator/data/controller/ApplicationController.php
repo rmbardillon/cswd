@@ -32,6 +32,7 @@
         {
             $tableRow .= "<tr>";
             $tableRow .= "<td>" . $counter. "</td>";
+            $tableRow .= "<td>" . $data['APPLICATION_ID'] . "</td>";
             $tableRow .= "<td>" . $data['FULL_NAME'] . "</td>";
             $tableRow .= "<td>" . $data['BARANGAY'] . "</td>";
             $tableRow .= "<td>" . $data['FORMATTED_APPLICATION_DATE'] . "</td>";

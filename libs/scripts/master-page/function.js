@@ -86,31 +86,35 @@ $(document).ready(function () {
         var message = $("#message").val();
 
         $.ajax({
-            type: "POST",
-            url: CONTACT_CONTROLLER + "?action=sendEmail",
-            data: {
-                name: name,
-                email: email,
-                message: message
-            },
-            dataType: "json",
-            success: function (data) {
-                swal.fire({
-                    title: "Success!",
-                    text: "Your message has been sent.",
-                    type: "success",
-                    confirmButtonText: "OK"
-                });
-            },
-            error: function (data) {
-                swal.fire({
-                    title: "Error!",
-                    text: "Your message could not be sent.",
-                    type: "error",
-                    confirmButtonText: "OK"
-                });
-            }
-        })
+          type: "POST",
+          url: CONTACT_CONTROLLER + "?action=sendEmail",
+          data: {
+            name: name,
+            email: email,
+            message: message,
+          },
+          dataType: "json",
+          beforeSend: function () {
+            $.blockUI({ message: loading }); // Display loading animation
+          },
+          success: function (data) {
+            $.unblockUI(); // Remove loading animation
+            swal.fire({
+              title: "Success!",
+              text: "Your message has been sent.",
+              type: "success",
+              confirmButtonText: "OK",
+            });
+          },
+          error: function (data) {
+            swal.fire({
+              title: "Error!",
+              text: "Your message could not be sent.",
+              type: "error",
+              confirmButtonText: "OK",
+            });
+          },
+        });
         console.log(name, email, message);
     });
 });

@@ -46,7 +46,7 @@ $applicantType = $_GET['applicantType'];
 $applicationType = "New Application";
 $status = "Approved";
 
-$result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status);
+$result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status, true);
 
 // Instanciation of inherited class
 $pdf = new PDF('P', 'mm', "Legal");

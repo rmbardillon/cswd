@@ -11,12 +11,13 @@
             <h1>PWD Approved Renewal</h1>
             <table class="table table-bordered table-responsive">
                 <thead>
-                    <th class="col col-1">No.</th>
-                    <th class="col col-3">Applicant Name</th>
-                    <th class="col col-3">Barangay</th>
-                    <th class="col col-2">Registration Date</th>
-                    <th class="col col-1">Status</th>
-                    <th class="col col-2">Action</th>
+                    <th>No.</th>
+                    <th>Application Number</th>
+                    <th>Applicant Name</th>
+                    <th>Barangay</th>
+                    <th>Registration Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </thead>
                 <tbody id="tbody_pwd_approved_applications">
                 </tbody>
@@ -26,12 +27,13 @@
             <h1>Solo Parent Approved Renewal</h1>
             <table class="table table-bordered table-responsive">
                 <thead>
-                    <th class="col col-1">No.</th>
-                    <th class="col col-3">Applicant Name</th>
-                    <th class="col col-3">Barangay</th>
-                    <th class="col col-2">Registration Date</th>
-                    <th class="col col-1">Status</th>
-                    <th class="col col-2">Action</th>
+                    <th>No.</th>
+                    <th>Application Number</th>
+                    <th>Applicant Name</th>
+                    <th>Barangay</th>
+                    <th>Registration Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </thead>
                 <tbody id="tbody_sp_approved_applications">
                 </tbody>
