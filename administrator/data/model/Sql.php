@@ -488,6 +488,7 @@
                         FROM person
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        LEFT JOIN appointment ON person.PERSON_ID = appointment.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
                         WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
                         ORDER BY BARANGAY, FULL_NAME;";
@@ -497,6 +498,7 @@
                         FROM person
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        LEFT JOIN appointment ON person.PERSON_ID = appointment.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
                         WHERE APPLICATION_TYPE = '$applicationType' AND APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
                         ORDER BY BARANGAY, FULL_NAME;";
@@ -506,6 +508,7 @@
                         FROM person
                         JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
                         JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        LEFT JOIN appointment ON person.PERSON_ID = appointment.PERSON_ID
                         JOIN address ON person.PERSON_ID = address.PERSON_ID
                         WHERE APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
                         ORDER BY BARANGAY, FULL_NAME;";
