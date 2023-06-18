@@ -11,7 +11,7 @@ $(document).ready(() => {
       $("#selectApplicantType").html(applicantTypeOptions);
     } else if (administratorRole == "Senior Citizen Administrator") {
       var applicantTypeOptions = `<option value="" selected disabled>Please Select</option>
-                    <option value="Senior Citizen">Senior Citizen Citizen</option>`;
+                    <option value="Senior Citizen">Senior Citizen</option>`;
       $("#selectApplicantType").html(applicantTypeOptions);
     }
 
