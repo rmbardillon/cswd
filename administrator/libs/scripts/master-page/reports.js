@@ -1,4 +1,39 @@
 $(document).ready(function () {
+    console.log(administratorRole);
+    console.log(administratorBarangay);
+    if (administratorRole == "PWD Administrator") {
+        var reportOptions = `<option value="" selected disabled>Please Select</option>
+                    <option value="1">List of PWD Citizens</option>
+                    <option value="4">List of Birthday Celebrant</option>`;
+        $("#selectReport").html(reportOptions);
+        var applicantTypeOptions = `<option value="" selected disabled>Please Select</option>
+                    <option value="PWD">PWD Citizen</option>`;
+        $("#selectApplicantType").html(applicantTypeOptions);
+    } else if (administratorRole == "Solo Parent Administrator") {
+        var reportOptions = `<option value="" selected disabled>Please Select</option>
+        <option value="2">List of Solo Parent Citizens</option>
+        <option value="4">List of Birthday Celebrant</option>`;
+        $("#selectReport").html(reportOptions);
+        var applicantTypeOptions = `<option value="" selected disabled>Please Select</option>
+                    <option value="Solo Parent">Solo Parent Citizen</option>`;
+        $("#selectApplicantType").html(applicantTypeOptions);
+    } else if (administratorRole == "Senior Citizen Administrator") {
+        var reportOptions = `<option value="" selected disabled>Please Select</option>
+        <option value="3">List of Senior Citizen Citizens</option>
+        <option value="4">List of Birthday Celebrant</option>`;
+        $("#selectReport").html(reportOptions);
+        var applicantTypeOptions = `<option value="" selected disabled>Please Select</option>
+                    <option value="Senior Citizen">Senior Citizen Citizen</option>`;
+        $("#selectApplicantType").html(applicantTypeOptions);
+    }
+
+    if(administratorBarangay != "All") {
+        var barangayOptions = `<option value="${administratorBarangay}">${administratorBarangay}</option>`;
+        $("#barangay").html(barangayOptions);
+    }
+
+
+
     $("#selectReport").change(function () {
         if ($(this).val() == "4") {
           $("#dateRow").show();

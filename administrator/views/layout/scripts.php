@@ -25,6 +25,9 @@
 <!-- Add these script tags in the head or body section of your HTML file -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
 <script>
+    var administratorRole = "<?php echo $_SESSION['user']['ROLE']; ?>";
+    var administratorBarangay = "<?php echo $_SESSION['user']['BARANGAY']; ?>";
+    var administratorFullName = "<?php echo $_SESSION['user']['FULL_NAME']; ?>";
     const Logout = () => {
         swal.fire({
             title: 'Are you sure?',
