@@ -53,6 +53,7 @@ $(document).ready(function () {
     });
 
     $("#btn-forgot-password").click(function() {
+        $("#modal").modal("hide");
         var email = $("#email").val();
 
         if (email == "") {
@@ -73,7 +74,11 @@ $(document).ready(function () {
             password: generatePassword(),
           },
           dataType: "json",
+          beforeSend: function () {
+            $.blockUI({ message: loading }); // Display loading animation
+          },
           success: function (response) {
+            $.unblockUI(); // Remove loading animation
             if (response["message"] == "Success") {
               swal.fire({
                 title: "Success",

@@ -72,6 +72,7 @@
     <script src="../../libs/scripts/master-page/login.js"></script>
     <script src="../../../libs/scripts/master-page/function.js"></script>
     <script src="../../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
     <script>
         $(document).ready(function() {
             $(".toggle-password").click(function() {
