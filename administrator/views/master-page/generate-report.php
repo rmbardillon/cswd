@@ -20,14 +20,6 @@
         </div>
         <div class="row mt-3" id="dateRow" style="display: none;">
             <div class="col">
-                <label for="fromDate" class="form-label">From</label>
-                <input type="date" class="form-control" id="fromDate">
-            </div>
-            <div class="col">
-                <label for="toDate" class="form-label">To</label>
-                <input type="date" class="form-control" id="toDate">
-            </div>
-            <div class="col">
                 <label for="selectMonth" class="form-label">Month</label>
                 <select class="form-select" id="selectMonth">
                     <option value="" selected disabled>Please Select</option>
@@ -44,6 +36,14 @@
                     <option value="11">November</option>
                     <option value="12">Decemeber</option>
                 </select>
+            </div>
+            <div class="col">
+                <label for="fromDate" class="form-label">From</label>
+                <input type="date" class="form-control" id="fromDate">
+            </div>
+            <div class="col">
+                <label for="toDate" class="form-label">To</label>
+                <input type="date" class="form-control" id="toDate">
             </div>
         </div>
         <div class="row mt-3" id="applicantTypeRow" style="display: none;">
