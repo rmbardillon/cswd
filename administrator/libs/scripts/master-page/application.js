@@ -284,6 +284,7 @@ const Application = (() => {
                   window.open(
                     "pwd-application-form.php?personId=" +
                       personId +
+                      "&page=application" +
                       "&status=" +
                       status,
                     "_blank"
@@ -292,6 +293,7 @@ const Application = (() => {
                   window.open(
                     "sp-application-form.php?personId=" +
                       personId +
+                      "&page=application" +
                       "&status=" +
                       status,
                     "_blank"
@@ -300,6 +302,7 @@ const Application = (() => {
                   window.open(
                     "sc-application-form.php?personId=" +
                       personId +
+                      "&page=application" +
                       "&status=" +
                       status,
                     "_blank"

@@ -77,7 +77,7 @@ const Admin = (() => {
             if (data) {
                 swal.fire({
                 title: "Error!",
-                text: "There is already an administrator for this barangay.",
+                text: "There is already an administrator for this barangay or the email is already taken.",
                 icon: "error",
                 confirmButtonText: "Ok",
                 });

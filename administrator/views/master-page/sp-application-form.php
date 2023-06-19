@@ -1,4 +1,7 @@
-<?php include_once('../layout/header.php'); $page = "id-application"; ?>
+<?php include_once('../layout/header.php'); ?>
+<?php
+    $page = $_GET['page'];
+?>
 <?php include_once('../layout/navbar.php'); ?>
 <!-- Modal -->
 <div class="modal fade" id="confirmFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

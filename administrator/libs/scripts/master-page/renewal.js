@@ -279,6 +279,7 @@ const Renewal = (() => {
           window.open(
             "pwd-application-form.php?personId=" +
               personId +
+              "&page=renewal" +
               "&status=" +
               status +
               "&applicationType=Renewal",
@@ -288,6 +289,7 @@ const Renewal = (() => {
           window.open(
             "sp-application-form.php?personId=" +
               personId +
+              "&page=renewal" +
               "&status=" +
               status +
               "&applicationType=Renewal",
@@ -297,6 +299,7 @@ const Renewal = (() => {
           window.open(
             "sc-application-form.php?personId=" +
               personId +
+              "&page=renewal" +
               "&status=" +
               status + 
               "&applicationType=Renewal",
