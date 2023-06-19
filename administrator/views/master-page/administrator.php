@@ -21,12 +21,13 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="col-1">#</th>
-                                <th class="col-4">Name</th>
-                                <th class="col-2">Barangay</th>
-                                <th class="col-1">Email</th>
-                                <th class="col-1">Status</th>
-                                <th class="col-3 no-sort">Actions</th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Barangay</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_administrators">

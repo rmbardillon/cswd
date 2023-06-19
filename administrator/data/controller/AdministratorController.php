@@ -22,6 +22,7 @@
             $tableRow .= "<tr>";
             $tableRow .= "<td>" . $counter. "</td>";
             $tableRow .= "<td>" . $data['FIRST_NAME'] . " " . $data['LAST_NAME']. "</td>";
+            $tableRow .= "<td>" . $data['ROLE'] . "</td>";
             $tableRow .= "<td>" . $data['BARANGAY'] . "</td>";
             $tableRow .= "<td>" . $data['EMAIL'] . "</td>";
             $tableRow .= "<td>" . $is_locked . "</td>";

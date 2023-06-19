@@ -13,7 +13,7 @@
 
         public function getAdmins()
         {
-            $sql = "SELECT * FROM user_authentication WHERE ROLE <> 'Super Administrator';";
+            $sql = "SELECT * FROM user_authentication;";
             $result = $this->connection->query($sql);
 
             if ($result === false) {
@@ -27,7 +27,7 @@
 
         public function getAdminById($user_id)
         {
-            $sql = "SELECT * FROM user_authentication WHERE ROLE <> 'Super Administrator' AND USER_AUTHENTICATION_ID = '$user_id';";
+            $sql = "SELECT * FROM user_authentication WHERE USER_AUTHENTICATION_ID = '$user_id';";
             $result = $this->connection->query($sql);
 
             if ($result === false) {
