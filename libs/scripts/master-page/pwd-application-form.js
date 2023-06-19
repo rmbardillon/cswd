@@ -290,6 +290,16 @@ const PWD = (() => {
       var form = $("#uploadForm")[0];
       var formData = new FormData(form);
 
+        if (formData.get("medicalCertificate")['name'] == "" || formData.get("barangayCertificate")['name'] == "" || formData.get("validID")['name'] == "" || formData.get("photo")['name'] == "") {
+            swal.fire({
+                title: "Error!",
+                text: "Please upload all the required files.",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+            return;
+        }
+
       // Add personId to the formData
       formData.append("personId", personId);
       formData.append("applicationType", applicationType);

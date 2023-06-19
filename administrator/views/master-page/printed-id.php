@@ -11,7 +11,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Print ID</h5>
+                        <h5 class="modal-title" id="myModalLabel">View ID</h5>
                         <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
@@ -19,7 +19,6 @@
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success w-100" onclick="PrintID.print();">Print Id</button>
                     </div>
                 </div>
             </div>
@@ -32,10 +31,10 @@
                         <th class="col-1">No.</th>
                         <th class="col-5">Full Name</th>
                         <th class="col-3">Barangay</th>
-                        <th class="col-3">Print</th>
+                        <th class="col-3">View</th>
                     </tr>
                 </thead>
-                <tbody id="printPWDIdList">
+                <tbody id="approvedPWDIdList">
                 </tbody>
             </table>        
         </div>
@@ -47,10 +46,10 @@
                         <th class="col-1">No.</th>
                         <th class="col-5">Full Name</th>
                         <th class="col-3">Barangay</th>
-                        <th class="col-3">Print</th>
+                        <th class="col-3">View</th>
                     </tr>
                 </thead>
-                <tbody id="printSPIdList">
+                <tbody id="approvedSPIdList">
                 </tbody>
             </table>
         </div>
@@ -62,10 +61,10 @@
                         <th class="col-1">No.</th>
                         <th class="col-5">Full Name</th>
                         <th class="col-3">Barangay</th>
-                        <th class="col-3">Print</th>
+                        <th class="col-3">View</th>
                     </tr>
                 </thead>
-                <tbody id="printSCIdList">
+                <tbody id="approvedSCIdList">
                 </tbody>
             </table>
         </div>

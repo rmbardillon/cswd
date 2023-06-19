@@ -63,8 +63,17 @@
                             <li><a class="dropdown-item" href="rejected-renewal.php">Rejected</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle <?php if($page == 'print-id') echo('active'); ?>" id="print-id" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-download"></i><span>Print Id</span>
+                        </a>
+                        <ul class="dropdown-menu bg-transparent" aria-labelledby="print-id">
+                            <li><a class="dropdown-item" href="print-id.php">Pending</a></li>
+                            <li><a class="dropdown-item" href="printed-id.php">Approved</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link <?php if($page == 'events') echo('active'); ?>" id="events" href="events.php"><i class="fas fa-calendar"></i><span>Events</span></a></li>
-                    <li class="nav-item"><a class="nav-link <?php if($page == 'print-id') echo('active'); ?>" id="print-id" href="print-id.php"><i class="fas fa-download"></i><span>Print Id</span></a></li>
+                    <!-- <li class="nav-item"><a class="nav-link <?php if($page == 'print-id') echo('active'); ?>" id="print-id" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-download"></i><span>Print Id</span></a></li> -->
                     <li class="nav-item"><a class="nav-link <?php if($page == 'generate-report') echo('active'); ?>" id="generate-report" href="generate-report.php"><i class="fas fa-folder"></i><span>Generate Report</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>

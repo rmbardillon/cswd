@@ -673,22 +673,85 @@
             return $result;
         }
 
-        public function getApplicantPrintId($applicationType)
+        public function getApplicantPrintId($request)
         {
-            $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
-                    FROM person
-                    JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
-                    JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
-                    JOIN application ON person.PERSON_ID = application.PERSON_ID
-                    JOIN address ON person.PERSON_ID = address.PERSON_ID
-                    LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
-                    WHERE APPLICANT_TYPE = ? 
-                    AND APPLICATION_STATUS = 'Approved'
-                    AND citizen_identification_card.DATE_ISSUED IS NULL
-                    ORDER BY BARANGAY, FULL_NAME;";
+            $applicantType = $request['applicantType'];
+            $barangay = $request['barangay'];
+
+            if($barangay == "All") {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
+                        WHERE APPLICANT_TYPE = ? 
+                        AND APPLICATION_STATUS = 'Approved'
+                        AND citizen_identification_card.DATE_ISSUED IS NULL
+                        ORDER BY BARANGAY, FULL_NAME;";
+            } else {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
+                        WHERE APPLICANT_TYPE = ? 
+                        AND BARANGAY = '$barangay'
+                        AND APPLICATION_STATUS = 'Approved'
+                        AND citizen_identification_card.DATE_ISSUED IS NULL
+                        ORDER BY BARANGAY, FULL_NAME;";
+            }
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param('s', $applicationType);
+            $stmt->bind_param('s', $applicantType);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result === false) {
+                return false;
+            }
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getApplicantApprovedId($request)
+        {
+            $applicantType = $request['applicantType'];
+            $barangay = $request['barangay'];
+
+            if($barangay == "All") {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
+                        WHERE APPLICANT_TYPE = ? 
+                        AND APPLICATION_STATUS = 'Approved'
+                        AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        ORDER BY BARANGAY, FULL_NAME;";
+            } else {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
+                        WHERE APPLICANT_TYPE = ? 
+                        AND BARANGAY = '$barangay'
+                        AND APPLICATION_STATUS = 'Approved'
+                        AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        ORDER BY BARANGAY, FULL_NAME;";
+            }
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $applicantType);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -705,7 +768,7 @@
             $personId = $request['personId'];
             $applicantType = $request['applicantType'];
 
-            if($applicantType == "PWD") {
+            if ($applicantType == "PWD") {
                 $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE(), EXPIRATION_DATE = DATE_ADD(CURDATE(), INTERVAL 5 YEAR), STATUS = 1 WHERE PERSON_ID = ?";
             } else if ($applicantType == "Solo Parent") {
                 $sql = "UPDATE citizen_identification_card SET DATE_ISSUED = CURDATE(), EXPIRATION_DATE = DATE_ADD(CURDATE(), INTERVAL 1 YEAR), STATUS = 1 WHERE PERSON_ID = ?";
@@ -716,14 +779,14 @@
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param('s', $personId);
             $stmt->execute();
-            $result = $stmt->get_result();
 
-            if ($result === false) {
-                return false;
+            if ($stmt->affected_rows > 0) {
+                return true; // Update was successful
+            } else {
+                return false; // Update did not affect any rows
             }
-
-            return $result;
         }
+
 
     }
 ?>
