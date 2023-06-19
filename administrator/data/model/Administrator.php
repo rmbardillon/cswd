@@ -336,10 +336,11 @@
             $firstName = $request['firstName'];
             $lastName = $request['lastName'];
             $email = $request['email'];
+            $profilePicture = $request['profilePicture'];
 
-            $sql = "UPDATE user_authentication SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? WHERE USER_AUTHENTICATION_ID=?";
+            $sql = "UPDATE user_authentication SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PROFILE=? WHERE USER_AUTHENTICATION_ID=?";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bind_param("ssss", $firstName, $lastName, $email, $administratorId);
+            $stmt->bind_param("sssss", $firstName, $lastName, $email, $profilePicture, $administratorId);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {

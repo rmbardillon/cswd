@@ -45,6 +45,7 @@ const Profile = (() => {
                 $("#email").val(response[0]['EMAIL']);
                 $("#role").val(response[0]['ROLE']);
                 $("#status").val(status);
+                $("#profilePicturePreview").attr("src", response[0]['PROFILE']);
             },
             error: function (response) {
                 console.log(response);
@@ -53,32 +54,43 @@ const Profile = (() => {
     }
 
     thisProfile.updateProfile = () => {
-        $.ajax({
-            type: "POST",
-            url: ADMINISTRATOR_CONTROLLER + "?action=updateProfile",
-            data: {
-                administratorId: thisProfile.administratorId,
-                firstName: $("#firstName").val(),
-                lastName: $("#lastName").val(),
-                email: $("#email").val(),
-            },
-            dataType: "json",
-            success: function (response) {
-                swal.fire({
-                    title: "Success!",
-                    text: "Profile updated successfully!",
-                    icon: "success",
-                    confirmButtonText: "Ok",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.reload();
-                    }
-                })
-            },
-            error: function (response) {
-                console.log(response);
-            }
-        })
+      // Get the profile picture file from the input field
+      const profilePicture = $("#profilePictureInput")[0].files[0];
+
+      // Create a FormData object and append the profile picture file
+      const formData = new FormData();
+      formData.append("profilePicture", profilePicture);
+
+      // Append the other form fields to the FormData object
+      formData.append("administratorId", thisProfile.administratorId);
+      formData.append("firstName", $("#firstName").val());
+      formData.append("lastName", $("#lastName").val());
+      formData.append("email", $("#email").val());
+
+      $.ajax({
+        type: "POST",
+        url: ADMINISTRATOR_CONTROLLER + "?action=updateProfile",
+        data: formData,
+        dataType: "json",
+        contentType: false, // Important: Prevent jQuery from automatically setting the content type
+        processData: false, // Important: Prevent jQuery from automatically processing the data
+        success: function (response) {
+          swal.fire({
+              title: "Success!",
+              text: "Profile updated successfully!",
+              icon: "success",
+              confirmButtonText: "Ok",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            });
+        },
+        error: function (response) {
+          console.log(response);
+        },
+      });
     };
+
     return thisProfile;
 })();

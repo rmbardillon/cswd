@@ -150,11 +150,28 @@
         $lastName = $_POST['lastName'];
         $email = $_POST['email'];
 
+        // Handle profile picture upload
+        $profilePicture = $_FILES['profilePicture'];
+        $profilePicturePath = "../../libs/images/profile_picture/"; // Set the appropriate path
+
+        // Check if a profile picture was uploaded
+        if (isset($profilePicture) && $profilePicture['error'] === UPLOAD_ERR_OK) {
+            $tempFilePath = $profilePicture['tmp_name'];
+            $name = $profilePicture['name'];
+            $fileExtension = pathinfo($name, PATHINFO_EXTENSION);
+            $profilePictureName = $administratorId . "_dp." . $fileExtension;
+            $profilePictureDestination = $profilePicturePath . $profilePictureName;
+
+            // Move the uploaded profile picture to the destination directory
+            move_uploaded_file($tempFilePath, $profilePictureDestination);
+        }
+
         $request = [
             'administratorId' => $administratorId,
             'firstName' => $firstName,
             'lastName' => $lastName,
-            'email' => $email
+            'email' => $email,
+            'profilePicture' => $profilePictureDestination
         ];
 
         $result = $Administrator->updateProfile($request);
