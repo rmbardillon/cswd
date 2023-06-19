@@ -16,6 +16,7 @@
                 <option value="2">List of Solo Parent Citizens</option>
                 <option value="3">List of Senior Citizen Citizens</option>
                 <option value="4">List of Birthday Celebrant</option>
+                <option value="5">List of Printed ID</option>
             </select>
         </div>
         <div class="row mt-3" id="dateRow" style="display: none;">

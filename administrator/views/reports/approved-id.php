@@ -43,10 +43,14 @@ class PDF extends FPDF
 
 $barangay = $_GET['barangay'];
 $applicantType = $_GET['applicantType'];
-$applicationType = "New Application";
-$status = "Approved";
 
-$result = $Sql->getApplicants($applicationType, $applicantType, $barangay, $status, true);
+$request = [
+    'barangay' => $barangay,
+    'applicantType' => $applicantType,
+];
+
+$result = $Sql->getPrintedId($request);
+
 if($barangay == "All")
 {
     $barangay = "All Barangay";
@@ -59,7 +63,7 @@ $pdf->AddPage();
 // Set font
 $pdf->SetFont('Arial','B',12);
 // Row 1
-$pdf->Cell(0,6,$applicantType.' list from '.$barangay,0,1,'C');
+$pdf->Cell(0,6,'Approved '. $applicantType.' ID from '.$barangay,0,1,'C');
 
 // Line break
 $pdf->Ln(1);
@@ -70,7 +74,7 @@ $pdf->SetFont('Arial','B',7);
 $pdf->Cell(13,10,'No.',1,0,'C');
 $pdf->Cell(60,10,'Name',1,0,'C');
 $pdf->Cell(60,10,'Barangay',1,0,'C');
-$pdf->Cell(57,10,'Birthday',1,1,'C');
+$pdf->Cell(57,10,'ID Number',1,1,'C');
 
 // for($i = 1; $i <= 27; $i++)
 // {
@@ -91,7 +95,7 @@ foreach ($result as $key => $value) {
     $pdf->Cell(13,$height,$key + 1,1,0,'C');
     $pdf->Cell(60,$height,$value['FULL_NAME'],1,0,'C');
     $pdf->Cell(60,$height,$value['BARANGAY'],1,0,'C');
-    $pdf->Cell(57,$height,$value['FORMATTED_DATE'],1,1,'C');
+    $pdf->Cell(57,$height,$value['ID_NUMBER'],1,1,'C');
 }
 
 // Line break

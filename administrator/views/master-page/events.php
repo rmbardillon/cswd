@@ -48,7 +48,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <div class="row" id="applicantTypeRow">
+                            <div class="row" id="eventTitleRow">
+                                <label class="form-label required" for="eventTitle">Event Title</label>
+                                <input type="text" class="form-control" id="eventTitle" placeholder="Event Title" autofocus>
+                            </div>
+                            <div class="row mt-3" id="applicantTypeRow">
                                 <label for="selectApplicantType" class="form-label">Event For?</label>
                                 <select class="form-select" id="selectApplicantType">
                                     <option value="" selected disabled>Please Select</option>
@@ -110,6 +114,7 @@
                         <thead>
                             <tr>
                                 <th class="col-1">No.</th>
+                                <th class="col-2">Event Title</th>
                                 <th class="col-2">Event For</th>
                                 <th class="col-2">Barangay</th>
                                 <th class="col-2">Event Date</th>

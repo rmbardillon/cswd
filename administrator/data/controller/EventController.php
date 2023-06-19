@@ -11,12 +11,14 @@
     
     if($action == "createEvent")
     {
+        $eventTitle = $_POST['eventTitle'];
         $selectApplicantType = $_POST['selectApplicantType'];
         $barangay = $_POST['barangay'];
         $message = $_POST['message'];
         $eventDate = $_POST['eventDate'];
 
         $request = [
+            "eventTitle" => $eventTitle,
             "selectApplicantType" => $selectApplicantType,
             "barangay" => $barangay,
             "message" => $message,
@@ -31,7 +33,11 @@
 
     else if($action == "loadEvents")
     {
-        $result = $Sql->getEvents();
+        $request = [
+            "barangay" => $_POST['barangay'],
+            "event_for" => $_POST['event_for'],
+        ];
+        $result = $Sql->getEvents($request);
 
         $tableRow = "";
         $counter = 1;
@@ -48,6 +54,7 @@
             
             $tableRow .= "<tr>";
             $tableRow .= "<td>" . $counter. "</td>";
+            $tableRow .= "<td>" . $data['EVENT_TITLE'] . "</td>";
             $tableRow .= "<td>" . $data['EVENT_FOR'] . "</td>";
             $tableRow .= "<td>" . $data['EVENT_BARANGAY'] . "</td>";
             $tableRow .= "<td>" . $data['EVENT_DATE'] . "</td>";
@@ -99,14 +106,19 @@
 
     else if($action == "sendEmailToParticipants")
     {
-        $barangay = $_POST['barangay'];
-        $event_for = $_POST['event_for'];
-        $event_date = $_POST['event_date'];
+        $event_title = $_POST['data'][0]['EVENT_TITLE'];
+        $event_for = $_POST['data'][0]['EVENT_FOR'];
+        $barangay = $_POST['data'][0]['EVENT_BARANGAY'];
+        $message = $_POST['data'][0]['MESSAGE'];
+        $event_date = $_POST['data'][0]['EVENT_DATE'];
         $status = $_POST['status'];
         $result = $Sql->getEventParticipants($event_for, $barangay, $status);
         $senderName = "CSWDO Santa Rosa";
         $subject = "Event Invitation";
         $senderEmail = "populationmanagementsystem@gmail.com";
+        if($barangay == "All") {
+            $barangay = "City Hall";
+        }
         
 
         foreach($result as $data)
@@ -176,8 +188,9 @@
                             <p>You are invited to attend our upcoming event. Please find the details below:</p>
     
                             <div class="event-details">
-                                <p><strong>Event Name:</strong>'.$event_for.'</p>
+                                <p><strong>Event Name:</strong>'.$event_title.'</p>
                                 <p><strong>Date:</strong>'.date("F d, Y", strtotime($event_date)).'</p>
+                                <p><strong>Event About:</strong>'.$message.'</p>
                                 <p><strong>Location:</strong>'.$barangay.'</p>
                             </div>
                             

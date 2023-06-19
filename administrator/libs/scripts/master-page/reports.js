@@ -38,6 +38,8 @@ $(document).ready(function () {
         if ($(this).val() == "4") {
           $("#dateRow").show();
           $("#applicantTypeRow").show();
+        } else if ($(this).val() == "5") {
+            $("#applicantTypeRow").show();
         } else {
             $("#dateRow").hide();
             $("#applicantTypeRow").hide();
@@ -164,6 +166,44 @@ const Report = (() => {
                         fromDate +
                         "&toDate=" +
                         toDate,
+                    "_blank"
+                  );
+                }
+              },
+              error: function () {
+                swal.fire({
+                  title: "Error!",
+                  text: "Something went wrong",
+                  icon: "error",
+                  confirmButtonText: "OK",
+                });
+              },
+            });
+
+            return false;
+        } else if(selectReport == "5") {
+            $.ajax({
+              url: REPORT_CONTROLLER + "?action=getPrintedId",
+              type: "POST",
+              data: {
+                barangay: barangay,
+                applicantType: selectApplicantType,
+              },
+              success: function (data) {
+                console.log(data);
+                if (data == "[]") {
+                  swal.fire({
+                    title: "Error!",
+                    text: "No data found",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                  });
+                } else {
+                  window.open(
+                    "../reports/approved-id.php?barangay=" +
+                      barangay +
+                      "&applicantType=" +
+                      selectApplicantType,
                     "_blank"
                   );
                 }

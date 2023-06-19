@@ -28,6 +28,7 @@
     var administratorRole = "<?php echo $_SESSION['user']['ROLE']; ?>";
     var administratorBarangay = "<?php echo $_SESSION['user']['BARANGAY']; ?>";
     var administratorFullName = "<?php echo $_SESSION['user']['FULL_NAME']; ?>";
+    var today = new Date().toISOString().split("T")[0];
     const Logout = () => {
         swal.fire({
             title: 'Are you sure?',

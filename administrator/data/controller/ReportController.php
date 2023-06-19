@@ -42,5 +42,20 @@
 
         echo json_encode($result);
     }
+
+    else if($action == "getPrintedId")
+    {
+        $barangay = $_POST['barangay'];
+        $applicantType = $_POST['applicantType'];
+
+        $request = [
+            'barangay' => $barangay,
+            'applicantType' => $applicantType,
+        ];
+
+        $result = $Sql->getPrintedId($request);
+
+        echo json_encode($result);
+    }
     
 ?>

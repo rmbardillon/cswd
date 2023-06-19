@@ -210,21 +210,42 @@
 
         public function insertEvent($request)
         {
+            $eventTitle = $request['eventTitle'];
             $selectApplicantType = $request['selectApplicantType'];
             $barangay = $request['barangay'];
             $message = $request['message'];
             $eventDate = $request['eventDate'];
 
-            $sql = "INSERT INTO events(EVENT_FOR, EVENT_BARANGAY, MESSAGE, EVENT_DATE) VALUES (?,?,?,?)";
+            $sql = "INSERT INTO events(EVENT_TITLE, EVENT_FOR, EVENT_BARANGAY, MESSAGE, EVENT_DATE) VALUES (?,?,?,?,?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ssss", $selectApplicantType, $barangay, $message, $eventDate);
+            $stmt->bind_param("sssss", $eventTitle, $selectApplicantType, $barangay, $message, $eventDate);
             $stmt->execute();
             $stmt->close();
         }
 
-        public function getEvents()
+        public function getEvents($request)
         {
-            $sql = "SELECT * FROM events ORDER BY EVENT_DATE DESC;";
+            $barangay = $request['barangay'];
+            $event_for = $request['event_for'];
+
+            if($event_for == "Main Administrator") {
+                $sql = "SELECT * FROM events ORDER BY EVENT_DATE DESC;";
+            } else if($event_for == "PWD Administrator") {
+                $sql = "SELECT * FROM events 
+                WHERE EVENT_BARANGAY = '$barangay'
+                AND EVENT_FOR = 'PWD'
+                ORDER BY EVENT_DATE DESC;";
+            } else if($event_for == "Solo Parent Administrator") {
+                $sql = "SELECT * FROM events 
+                WHERE EVENT_BARANGAY = '$barangay'
+                AND EVENT_FOR = 'Solo Parent'
+                ORDER BY EVENT_DATE DESC;";
+            } else if($event_for == "Senior Citizen Administrator") {
+                $sql = "SELECT * FROM events 
+                WHERE EVENT_BARANGAY = '$barangay'
+                AND EVENT_FOR = 'Senior Citizen'
+                ORDER BY EVENT_DATE DESC;";
+            }
             $result = $this->conn->query($sql);
 
             if ($result === false) {
@@ -318,7 +339,7 @@
             $sql = "SELECT COUNT(*) AS COUNT, BARANGAY
                     FROM application
                     JOIN address ON application.PERSON_ID = address.PERSON_ID
-                    WHERE APPLICANT_TYPE = 'Senior Citizen'
+                    WHERE APPLICANT_TYPE = 'Senior Citizen' AND APPLICATION_STATUS = 'Approved'
                     GROUP BY BARANGAY;";
             $result = $this->conn->query($sql);
 
@@ -336,7 +357,7 @@
             $sql = "SELECT COUNT(*) AS COUNT, BARANGAY
                     FROM application
                     JOIN address ON application.PERSON_ID = address.PERSON_ID
-                    WHERE APPLICANT_TYPE = 'Solo Parent'
+                    WHERE APPLICANT_TYPE = 'Solo Parent' AND APPLICATION_STATUS = 'Approved'
                     GROUP BY BARANGAY;";
             $result = $this->conn->query($sql);
 
@@ -354,7 +375,7 @@
             $sql = "SELECT COUNT(*) AS COUNT, BARANGAY
                     FROM application
                     JOIN address ON application.PERSON_ID = address.PERSON_ID
-                    WHERE APPLICANT_TYPE = 'PWD'
+                    WHERE APPLICANT_TYPE = 'PWD' AND APPLICATION_STATUS = 'Approved'
                     GROUP BY BARANGAY;";
             $result = $this->conn->query($sql);
 
@@ -369,7 +390,7 @@
 
         public function getTotalCount()
         {
-            $sql = "SELECT COUNT(*), APPLICANT_TYPE FROM application GROUP BY APPLICANT_TYPE;";
+            $sql = "SELECT COUNT(*), APPLICANT_TYPE FROM application WHERE APPLICATION_STATUS = 'Approved' GROUP BY APPLICANT_TYPE;";
             $result = $this->conn->query($sql);
 
             if ($result === false) {
@@ -388,7 +409,7 @@
             $sql = "SELECT COUNT(*), APPLICANT_TYPE, DATE_FORMAT(APPLICATION_DATE, '%M') AS APPLICATION_MONTH
                     FROM application
                     JOIN address ON application.PERSON_ID = address.PERSON_ID
-                    WHERE BARANGAY = '$barangay' AND APPLICANT_TYPE = '$administratorType'
+                    WHERE BARANGAY = '$barangay' AND APPLICANT_TYPE = '$administratorType' AND APPLICATION_STATUS = 'Approved'
                     GROUP BY APPLICATION_MONTH
                     ORDER BY APPLICATION_MONTH DESC;";
             $result = $this->conn->query($sql);
@@ -472,6 +493,49 @@
                         ORDER BY FORMATTED_DATE;";
             }
             $result = $this->conn->query($sql);
+
+            if ($result === false) {
+                return false;
+            }
+            $result = $result->fetch_all(MYSQLI_ASSOC);
+
+            return $result;
+        }
+
+        public function getPrintedId($request)
+        {
+            $barangay = $request['barangay'];
+            $applicantType = $request['applicantType'];
+            if($barangay == "All") {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
+                        WHERE APPLICANT_TYPE = ? 
+                        AND APPLICATION_STATUS = 'Approved'
+                        AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        ORDER BY BARANGAY, FULL_NAME;";
+            } else {
+                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
+                        FROM person
+                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                        JOIN contact_details ON person.PERSON_ID = contact_details.PERSON_ID
+                        JOIN application ON person.PERSON_ID = application.PERSON_ID
+                        JOIN address ON person.PERSON_ID = address.PERSON_ID
+                        LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
+                        WHERE APPLICANT_TYPE = ? 
+                        AND BARANGAY = '$barangay'
+                        AND APPLICATION_STATUS = 'Approved'
+                        AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        ORDER BY BARANGAY, FULL_NAME;";
+            }
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $applicantType);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             if ($result === false) {
                 return false;

@@ -55,7 +55,10 @@ $request = [
 
 
 $result = $Sql->getCitizenPerBirthday($request);
-
+if($barangay == "All")
+{
+    $barangay = "All Barangay";
+}
 // Instanciation of inherited class
 $pdf = new PDF('P', 'mm', "Legal");
 $pdf->AliasNbPages();

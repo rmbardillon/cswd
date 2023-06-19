@@ -2,16 +2,13 @@ $(document).ready(() => {
     console.log(administratorRole);
     console.log(administratorBarangay);
     if (administratorRole == "PWD Administrator") {
-      var applicantTypeOptions = `<option value="" selected disabled>Please Select</option>
-                    <option value="PWD">PWD Citizen</option>`;
+      var applicantTypeOptions = `<option value="PWD">PWD Citizen</option>`;
       $("#selectApplicantType").html(applicantTypeOptions);
     } else if (administratorRole == "Solo Parent Administrator") {
-      var applicantTypeOptions = `<option value="" selected disabled>Please Select</option>
-                    <option value="Solo Parent">Solo Parent Citizen</option>`;
+      var applicantTypeOptions = `<option value="Solo Parent">Solo Parent Citizen</option>`;
       $("#selectApplicantType").html(applicantTypeOptions);
     } else if (administratorRole == "Senior Citizen Administrator") {
-      var applicantTypeOptions = `<option value="" selected disabled>Please Select</option>
-                    <option value="Senior Citizen">Senior Citizen</option>`;
+      var applicantTypeOptions = `<option value="Senior Citizen">Senior Citizen</option>`;
       $("#selectApplicantType").html(applicantTypeOptions);
     }
 
@@ -24,6 +21,7 @@ $(document).ready(() => {
     $("#createEvent").click(function () {
         $("#createEventModal").modal("show");
     });
+    $("#eventDate").attr("min", today);
 });
 
 const Events = (() => {
@@ -32,15 +30,27 @@ const Events = (() => {
     var eventId = "";
 
     thisEvents.createEvent = () => {
+        var eventTitle = $("#eventTitle").val();
         var selectApplicantType = $("#selectApplicantType").val();
         var barangay = $("#barangay").val();
         var message = $("#message").val();
         var eventDate = $("#eventDate").val();
 
+        if(eventTitle == "" || selectApplicantType == null || barangay == null || message == "" || eventDate == "") {
+            swal.fire({
+                title: "Error!",
+                text: "Please fill up all fields!",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+            return;
+        }
+
         $.ajax({
             type: "POST",
             url: EVENT_CONTROLLER + "?action=createEvent",
             data: {
+                eventTitle: eventTitle,
                 selectApplicantType: selectApplicantType,
                 barangay: barangay,
                 message: message,
@@ -67,6 +77,10 @@ const Events = (() => {
         $.ajax({
             type: "POST",
             url: EVENT_CONTROLLER + "?action=loadEvents",
+            data: {
+                barangay: administratorBarangay,
+                event_for: administratorRole
+            },
             dataType: "json",
             success: function (data) {
                 $(".table").DataTable().destroy();
@@ -146,9 +160,7 @@ const Events = (() => {
               url: EVENT_CONTROLLER + "?action=sendEmailToParticipants",
               data: {
                 id: eventId,
-                barangay: data[0]["EVENT_BARANGAY"],
-                event_for: data[0]["EVENT_FOR"],
-                event_date: data[0]["EVENT_DATE"],
+                data: data,
                 status: "Approved",
               },
               dataType: "json",
