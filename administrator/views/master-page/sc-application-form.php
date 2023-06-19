@@ -1,6 +1,9 @@
 <?php include_once('../layout/header.php'); ?>
 <?php
+if(isset($_GET['page']))
     $page = $_GET['page'];
+else
+    $page = "id-application";
 ?>
 <?php include_once('../layout/navbar.php'); ?>
 <!-- Modal -->
