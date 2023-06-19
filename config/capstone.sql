@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2023 at 01:26 PM
+-- Generation Time: Jun 20, 2023 at 12:40 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -275,6 +275,7 @@ CREATE TABLE `user_authentication` (
   `EMAIL` varchar(64) NOT NULL,
   `PASSWORD` varchar(64) NOT NULL,
   `ROLE` varchar(32) NOT NULL,
+  `PROFILE` varchar(64) DEFAULT NULL,
   `IS_LOCKED` int(8) NOT NULL DEFAULT 0,
   `ACCOUNT_STATUS` int(8) NOT NULL DEFAULT 1,
   `LOGIN_ATTEMPTS` int(8) NOT NULL DEFAULT 0,
@@ -285,9 +286,9 @@ CREATE TABLE `user_authentication` (
 -- Dumping data for table `user_authentication`
 --
 
-INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
-('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', 0, 1, 0, '2023-06-07'),
-('d80455a8010311ee', 'JOHN', 'DOE', 'All', 'yegiy78063@rockdian.com', '$2y$10$w6sWLKDaaajV9u.vi585uu.LzbQnRnTF58SlkxuUsiLIdMma6IV36', 'Main Administrator', 0, 1, 0, '2023-06-02');
+INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `PROFILE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
+('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', NULL, 0, 1, 0, '2023-06-07'),
+('d80455a8010311ee', 'ROMEO JR ', 'MONTEALEGRE', 'All', 'yegiy78063@rockdian.com', '$2y$10$w6sWLKDaaajV9u.vi585uu.LzbQnRnTF58SlkxuUsiLIdMma6IV36', 'Main Administrator', '../../libs/images/profile_picture/d80455a8010311ee_dp.jpg', 0, 1, 0, '2023-06-02');
 
 --
 -- Indexes for dumped tables

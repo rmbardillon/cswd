@@ -45,7 +45,9 @@ const Profile = (() => {
                 $("#email").val(response[0]['EMAIL']);
                 $("#role").val(response[0]['ROLE']);
                 $("#status").val(status);
-                $("#profilePicturePreview").attr("src", response[0]['PROFILE']);
+                if(response[0]['PROFILE'] != null){
+                    $("#profilePicturePreview").attr("src", response[0]['PROFILE']);
+                }
             },
             error: function (response) {
                 console.log(response);

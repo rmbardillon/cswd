@@ -30,7 +30,10 @@
     var administratorBarangay = "<?php echo $_SESSION['user']['BARANGAY']; ?>";
     var administratorFullName = "<?php echo $_SESSION['user']['FULL_NAME']; ?>";
     var adminProfile = "<?php echo $_SESSION['user']['PROFILE']; ?>";
-    $(".img-profile").attr("src", adminProfile);
+    console.log(adminProfile)
+    if(adminProfile != "") {
+        $(".img-profile").attr("src", adminProfile);
+    }
     var today = new Date().toISOString().split("T")[0];
     const Logout = () => {
         swal.fire({
