@@ -752,7 +752,7 @@
                         LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
                         WHERE APPLICANT_TYPE = ? 
                         AND APPLICATION_STATUS = 'Approved'
-                        AND citizen_identification_card.DATE_ISSUED IS NULL
+                        AND citizen_identification_card.STATUS = 0
                         ORDER BY BARANGAY, FULL_NAME;";
             } else {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
@@ -765,7 +765,7 @@
                         WHERE APPLICANT_TYPE = ? 
                         AND BARANGAY = '$barangay'
                         AND APPLICATION_STATUS = 'Approved'
-                        AND citizen_identification_card.DATE_ISSUED IS NULL
+                        AND citizen_identification_card.STATUS = 0
                         ORDER BY BARANGAY, FULL_NAME;";
             }
 
@@ -797,7 +797,7 @@
                         LEFT JOIN citizen_identification_card ON person.PERSON_ID = citizen_identification_card.PERSON_ID
                         WHERE APPLICANT_TYPE = ? 
                         AND APPLICATION_STATUS = 'Approved'
-                        AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        AND citizen_identification_card.STATUS = 1
                         ORDER BY BARANGAY, FULL_NAME;";
             } else {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
@@ -810,7 +810,7 @@
                         WHERE APPLICANT_TYPE = ? 
                         AND BARANGAY = '$barangay'
                         AND APPLICATION_STATUS = 'Approved'
-                        AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        AND citizen_identification_card.STATUS = 1
                         ORDER BY BARANGAY, FULL_NAME;";
             }
 

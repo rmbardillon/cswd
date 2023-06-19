@@ -500,5 +500,13 @@
             return $result;
         }
 
+        public function updateCitizenIDStatus($id)
+        {
+            $sql = "UPDATE citizen_identification_card SET STATUS = 0 WHERE PERSON_ID = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('s', $id);
+            $stmt->execute();
+        }
+
     }
 ?>

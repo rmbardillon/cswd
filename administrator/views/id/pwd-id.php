@@ -43,7 +43,7 @@
         <div id="information">
             <div class="row">
                 <div class="col border">
-                    <p style="font-size: 10px;">TYPE OF DISABILITY<strong style="margin-left: 10px;font-size: 10px;" id="typeOfDisability"></strong></p>
+                    <p class="text-truncate" style="font-size: 10px;">TYPE OF DISABILITY<strong style="margin-left: 10px;font-size: 10px;" id="typeOfDisability"></strong></p>
                 </div>
             </div>
             <div class="row" style="font-size: 15px;">

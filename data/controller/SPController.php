@@ -91,7 +91,6 @@
                 $Sql->updateUploadedDocuments($barangayCertificateRequest);
                 $Sql->updateUploadedDocuments($validIDRequest);
                 $Sql->updateUploadedDocuments($photoRequest);
-                $Sql->updateCitizenID($citizenIDRequest);
                 $Sql->updateApplicationStatus($personId, "Approved");
                 $conn->commit();
             } catch (Exception $e) {

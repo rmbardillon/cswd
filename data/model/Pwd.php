@@ -257,7 +257,7 @@
                 $Sql->deletePWDRelative($uuid);
                 $Sql->insertPerson($guardian);
                 $Sql->insertRelatives($guardianRelative);
-
+                $Sql->updateCitizenIDStatus($uuid);
                 $this->connection->commit();
             } catch (Exception $e) {
                 // Rollback the transaction in case of any errors

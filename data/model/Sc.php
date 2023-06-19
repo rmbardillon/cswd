@@ -152,6 +152,7 @@
                 $Sql->updatePersonalInformation($personalInformation);
                 $Sql->updateEmploymentDetails($employmentDetails);
                 $Sql->deleteSoloParentRelative($uuid);
+                $Sql->updateCitizenIDStatus($uuid);
                 if(isset($scForm['childFirstName'])) {
                     foreach ($scForm['childFirstName'] as $key => $value) {
                         $childUUID = $Sql->generateUUID();

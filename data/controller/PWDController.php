@@ -114,7 +114,6 @@
                 $Sql->updateUploadedDocuments($validIDRequest);
                 $Sql->updateUploadedDocuments($photoRequest);
                 $Sql->updateApplicationStatus($personId, "Approved");
-                $Sql->updateCitizenID($citizenIDRequest);
                 $conn->commit();
             } catch (Exception $e) {
                 // Rollback the transaction in case of any errors
