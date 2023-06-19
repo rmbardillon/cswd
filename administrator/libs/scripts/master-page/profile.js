@@ -1,18 +1,84 @@
 $(document).ready(function () {
-  // Add event listener to the file input
-  $("#profilePictureInput").change(function (event) {
-    // Get the uploaded file
-    const file = event.target.files[0];
+    Profile.loadAdministratorProfile(administratorId);
+    // Add event listener to the file input
+    $("#profilePictureInput").change(function (event) {
+        // Get the uploaded file
+        const file = event.target.files[0];
 
-    // Create a file reader object
-    const reader = new FileReader();
+        // Create a file reader object
+        const reader = new FileReader();
 
-    // Set the image source once the file is loaded
-    reader.onload = function (e) {
-      $("#profilePicturePreview").attr("src", e.target.result);
+        // Set the image source once the file is loaded
+        reader.onload = function (e) {
+        $("#profilePicturePreview").attr("src", e.target.result);
+        };
+
+        // Read the file as a data URL
+        reader.readAsDataURL(file);
+    });
+
+
+});
+
+const Profile = (() => {
+    const thisProfile = {
+        administratorId: "",
     };
 
-    // Read the file as a data URL
-    reader.readAsDataURL(file);
-  });
-});
+    thisProfile.loadAdministratorProfile = (administratorId) => {
+        thisProfile.administratorId = administratorId;
+        $.ajax({
+            type: "POST",
+            url: ADMINISTRATOR_CONTROLLER + "?action=getAdminById",
+            data: {
+                administratorId: administratorId,
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response[0]["ACCOUNT_STATUS"] == 1)
+                    var status = "Active";
+                else
+                    var status = "Inactive";
+                $("#firstName").val(response[0]["FIRST_NAME"]);
+                $("#lastName").val(response[0]['LAST_NAME']);
+                $("#barangay").val(response[0]['BARANGAY']);
+                $("#email").val(response[0]['EMAIL']);
+                $("#role").val(response[0]['ROLE']);
+                $("#status").val(status);
+            },
+            error: function (response) {
+                console.log(response);
+            },
+        });
+    }
+
+    thisProfile.updateProfile = () => {
+        $.ajax({
+            type: "POST",
+            url: ADMINISTRATOR_CONTROLLER + "?action=updateProfile",
+            data: {
+                administratorId: thisProfile.administratorId,
+                firstName: $("#firstName").val(),
+                lastName: $("#lastName").val(),
+                email: $("#email").val(),
+            },
+            dataType: "json",
+            success: function (response) {
+                swal.fire({
+                    title: "Success!",
+                    text: "Profile updated successfully!",
+                    icon: "success",
+                    confirmButtonText: "Ok",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                })
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        })
+    };
+    return thisProfile;
+})();

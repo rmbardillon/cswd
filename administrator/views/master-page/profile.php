@@ -23,35 +23,30 @@
             </div>
             <div class="mb-3">
               <label class="form-label">First Name:</label>
-              <input type="text" class="form-control" value="John" readonly>
+              <input type="text" class="form-control" id="firstName" value="John">
             </div>
             <div class="mb-3">
               <label class="form-label">Last Name:</label>
-              <input type="text" class="form-control" value="Doe" readonly>
+              <input type="text" class="form-control" id="lastName" value="Doe">
             </div>
             <div class="mb-3">
               <label class="form-label">Barangay:</label>
-              <input type="text" class="form-control" value="Sample Barangay" readonly>
+              <input type="text" class="form-control" id="barangay" value="Sample Barangay" readonly>
             </div>
             <div class="mb-3">
               <label class="form-label">Email:</label>
-              <input type="email" class="form-control" value="johndoe@example.com" readonly>
+              <input type="email" class="form-control" id="email" value="johndoe@example.com">
             </div>
             <div class="mb-3">
               <label class="form-label">Role:</label>
-              <input type="text" class="form-control" value="User" readonly>
+              <input type="text" class="form-control" id="role" value="User" readonly>
             </div>
             <div class="mb-3">
               <label class="form-label">Account Status:</label>
-              <input type="text" class="form-control" value="Active" readonly>
+              <input type="text" class="form-control" id="status" value="Active" readonly>
             </div>
             <div class="mb-3">
-              <label class="form-label">Login Attempts:</label>
-              <input type="number" class="form-control" value="0" readonly>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Date:</label>
-              <input type="text" class="form-control" value="2023-06-13" readonly>
+                <button class="btn btn-primary w-100" onclick="Profile.updateProfile();">Update</button>
             </div>
           </div>
         </div>

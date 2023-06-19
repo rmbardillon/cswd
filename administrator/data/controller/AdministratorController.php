@@ -42,6 +42,15 @@
         echo json_encode($tableRow);
     }
 
+    else if($action == "getAdminById")
+    {
+        $administratorId = $_POST['administratorId'];
+
+        $result = $Administrator->getAdminById($administratorId);
+
+        echo json_encode($result);
+    }
+
     else if($action == "saveAdmin")
     {
         $firstName = $_POST['firstName'];
@@ -131,6 +140,25 @@
         ];
 
         $result = $Administrator->update_password($request);
+        echo json_encode($result);
+    }
+
+    else if($action == "updateProfile")
+    {
+        $administratorId = $_POST['administratorId'];
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $email = $_POST['email'];
+
+        $request = [
+            'administratorId' => $administratorId,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email
+        ];
+
+        $result = $Administrator->updateProfile($request);
+
         echo json_encode($result);
     }
     

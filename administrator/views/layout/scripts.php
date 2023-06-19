@@ -25,6 +25,7 @@
 <!-- Add these script tags in the head or body section of your HTML file -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
 <script>
+    var administratorId = "<?php echo $_SESSION['user']['USER_AUTHENTICATION_ID']; ?>";
     var administratorRole = "<?php echo $_SESSION['user']['ROLE']; ?>";
     var administratorBarangay = "<?php echo $_SESSION['user']['BARANGAY']; ?>";
     var administratorFullName = "<?php echo $_SESSION['user']['FULL_NAME']; ?>";

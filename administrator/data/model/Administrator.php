@@ -27,7 +27,7 @@
 
         public function getAdminById($user_id)
         {
-            $sql = "SELECT * FROM user_authentication WHERE USER_AUTHENTICATION_ID = '$user_id';";
+            $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME FROM user_authentication WHERE USER_AUTHENTICATION_ID = '$user_id';";
             $result = $this->connection->query($sql);
 
             if ($result === false) {
@@ -330,6 +330,25 @@
             }
         }
 
+        public function updateProfile($request)
+        {
+            $administratorId = $request['administratorId'];
+            $firstName = $request['firstName'];
+            $lastName = $request['lastName'];
+            $email = $request['email'];
 
+            $sql = "UPDATE user_authentication SET FIRST_NAME=?, LAST_NAME=?, EMAIL=? WHERE USER_AUTHENTICATION_ID=?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param("ssss", $firstName, $lastName, $email, $administratorId);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                $row = $this->getAdminById($administratorId);
+                $_SESSION['user'] = $row[0];
+                return true; // Update was successful
+            } else {
+                return false; // Update did not affect any rows
+            }
+        }
     }
 ?>
