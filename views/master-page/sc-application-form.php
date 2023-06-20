@@ -26,9 +26,9 @@
                 <div class="col col-lg-3 col-md-3 col-sm-3 form-inline-group"><label class="form-label IDNumber" for="IDNumber">NUMERO&nbsp;NG ID</label><input class="form-control numbers" type="text" id="IDNumber" disabled="" name="IDNumber" placeholder="######"></div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" for="surname">APELYIDO</label><input class="form-control" type="text" id="surname" name="surname" required=""></div>
-                <div class="col"><label class="form-label required" for="firstName">PANGALAN</label><input class="form-control" type="text" id="firstName" name="firstName" required=""></div>
-                <div class="col"><label class="form-label" for="middlename">PANGGITNANG&nbsp;APELYIDO</label><input class="form-control" type="text" id="middlename" name="middlename"></div>
+                <div class="col"><label class="form-label required" for="surname">APELYIDO</label><input class="form-control" type="text" id="surname" name="surname" required="" maxlength="64"></div>
+                <div class="col"><label class="form-label required" for="firstName">PANGALAN</label><input class="form-control" type="text" id="firstName" name="firstName" required="" maxlength="64"></div>
+                <div class="col"><label class="form-label" for="middlename">PANGGITNANG&nbsp;APELYIDO</label><input class="form-control" type="text" id="middlename" name="middlename" maxlength="64"></div>
                 <div class="col">
                     <label class="form-label" for="suffix">SUFFIX</label>
                     <select id="suffix" class="form-select" name="suffix">
@@ -73,7 +73,7 @@
                         <option value="Tagapo">Tagapo</option>
                     </select>
                 </div>
-                <div class="col"><label class="form-label required" for="address">TIRAHAN</label><input class="form-control" type="text" id="address" name="address" required=""></div>
+                <div class="col"><label class="form-label required" for="address">TIRAHAN</label><input class="form-control" type="text" id="address" name="address" required="" maxlength="128"></div>
             </div>
             <div class="row">
                 <div class="col">
@@ -99,13 +99,13 @@
             </div>
             <div class="row">
                 <div class="col col-4"><label class="form-label required" for="srCitizenDOB">PETSA NG KAPANGANAKAN</label><input class="form-control" id="srCitizenDOB" type="date" name="srCitizenDOB" required="" min="1900-01-01"></div>
-                <div class="col"><label class="form-label required" for="placeOfBirth">LUGAR NG KAPANGANAKAN</label><input class="form-control" type="text" id="placeOfBirth" name="placeOfBirth" required=""></div>
+                <div class="col"><label class="form-label required" for="placeOfBirth">LUGAR NG KAPANGANAKAN</label><input class="form-control" type="text" id="placeOfBirth" name="placeOfBirth" required="" maxlength="128"></div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com" required></div>
+                <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com" required maxlength="64"></div>
                 <div class="col"><label class="form-label" for="telephone">TELEPONO</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####" required></div>
-                <div class="col"><label class="form-label" for="religion">RELIHIYON</label><input class="form-control" type="text" id="religion" name="religion"></div>
-                <div class="col"><label class="form-label required" id="job-1" for="job">HANAPBUHAY</label><input class="form-control" type="text" id="job" name="job" required=""></div>
+                <div class="col"><label class="form-label" for="religion">RELIHIYON</label><input class="form-control" type="text" id="religion" name="religion" maxlength="64"></div>
+                <div class="col"><label class="form-label required" id="job-1" for="job">HANAPBUHAY</label><input class="form-control" type="text" id="job" name="job" required="" maxlength="64"></div>
             </div>
             <div class="row">
                 <div class="col">
@@ -116,13 +116,13 @@
                         <option value="Wala">Wala</option>
                     </select>
                 </div>
-                <div class="col"><label class="form-label whatPension" for="whatPension">SAAN</label><input class="form-control" type="text" id="whatPension" name="whatPension" disabled=""></div>
-                <div class="col"><label class="form-label howMuchPension" for="howMuchPension">MAGKANO</label><input class="form-control numbers" type="text" id="howMuchPension" name="howMuchPension" disabled=""></div>
+                <div class="col"><label class="form-label whatPension" for="whatPension">SAAN</label><input class="form-control" type="text" id="whatPension" name="whatPension" disabled="" maxlength="64"></div>
+                <div class="col"><label class="form-label howMuchPension" for="howMuchPension">MAGKANO</label><input class="form-control numbers" type="text" id="howMuchPension" name="howMuchPension" disabled="" maxlength="6"></div>
             </div>
             <div class="row">
                 <div class="col">
                     <label class="form-label" for="spouseLastName">PANGALAN NG ASAWA</label>
-                    <div class="input-group"><input class="form-control w-25" type="text" id="spouseLastName" name="spouseLastName" placeholder="APELYIDO NG ASAWA"><input class="form-control w-25" type="text" id="spouseFirstName" name="spouseFirstName" placeholder="PANGALAN NG ASAWA"><input class="form-control w-25" type="text" id="spouseMiddleName" name="spouseMiddleName" placeholder="PANGGITNANG APELYIDO"><input class="form-control w-25" type="text" id="spouseSuffix" name="spouseSuffix" placeholder="SUFFIX"></div>
+                    <div class="input-group"><input class="form-control w-25" type="text" id="spouseLastName" name="spouseLastName" placeholder="APELYIDO NG ASAWA" maxlength="64"><input class="form-control w-25" type="text" id="spouseFirstName" name="spouseFirstName" placeholder="PANGALAN NG ASAWA" maxlength="64"><input class="form-control w-25" type="text" id="spouseMiddleName" name="spouseMiddleName" placeholder="PANGGITNANG APELYIDO" maxlength="64"><input class="form-control w-25" type="text" id="spouseSuffix" name="spouseSuffix" placeholder="SUFFIX" maxlength="8"></div>
                 </div>
                 <div class="col col-4"><label class="form-label" for="spouseDOB">PETSA NG KAPANGANAKAN NG ASAWA</label><input class="form-control" id="spouseDOB" type="date" name="spouseDOB"></div>
             </div>
@@ -137,20 +137,22 @@
                     </div>
                     <div class="col">
                         <input
-                            class="form-control childFirstName name"
+                            class="form-control childFirstName"
                             type="text"
                             id="childFirstName"
                             name="childFirstName"
                             placeholder="PANGALAN NG ANAK"
+                            maxlength="64"
                             />
                     </div>
                     <div class="col">
                         <input
-                            class="form-control childLastName name"
+                            class="form-control childLastName"
                             type="text"
                             id="childLastName"
                             name="childLastName"
                             placeholder="APELYIDO NG ANAK"
+                            maxlength="64"
                             />
                     </div>
                 </div>
@@ -216,13 +218,14 @@
                             type="text"
                             id="childAddress"
                             name="childAddress"
+                            maxlength="128"
                             />
                     </div>
                 </div>
             </div>
             <div id="relativesContainer"></div>
             <div class="row mt-5">
-                <div class="col"><button class="btn btn-primary w-100" type="submit" name="srCitizenNext" id="srCitizenNext">Next</button></div>
+                <div class="col" id="button-div"><button class="btn btn-primary w-100" type="submit" name="srCitizenNext" id="srCitizenNext">Next</button></div>
             </div>
         </form>
     </div>

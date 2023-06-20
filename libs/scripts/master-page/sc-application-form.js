@@ -141,18 +141,6 @@ $(document).ready(function() {
             newDiv.find('input[type="text"],input[type="date"],input[type="tel"],select').val('');
             // add the new div to the container
             $('#relativesContainer').append(newDiv);
-            $('.childLastName').on('keyup blur',function(){ 
-                var node = $(this);
-                node.val(node.val().replace(/[^A-Za-z]/g,'') ); }
-            );
-            $('.childFirstName').on('keyup blur',function(){ 
-                var node = $(this);
-                node.val(node.val().replace(/[^A-Za-z]/g,'') ); }
-            );
-            $('.childMiddlename').on('keyup blur',function(){ 
-                var node = $(this);
-                node.val(node.val().replace(/[^A-Za-z]/g,'') ); }
-            );
         }
     });
 });

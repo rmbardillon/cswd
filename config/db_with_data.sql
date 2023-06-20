@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2023 at 12:39 AM
+-- Generation Time: Jun 20, 2023 at 02:32 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,6 +39,10 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
+('46b6d2280f6411ee', '649198993f283831', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
+('46b6f2dd0f6411ee', '649198993f8fc779', 'OAK ST. RP SUBD. BRGY TAGAPO', 'Tagapo'),
+('46b7056f0f6411ee', '649198993fa91787', 'OAK ST. RP SUBD. BRGY TAGAPO', 'Tagapo'),
+('8377b8de0f6211ee', '649195a42ebe9731', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
 ('890e3ebb0b7011ee', 'd9fe583718de4946', '9247 Ian Haven\r\nErinchester, VA 87235', 'Caingin'),
 ('891360ce0b7011ee', 'b8c3bd73afe54da4', '234 Michael Oval Apt. 683\r\nJasonchester, PA 40690', 'Kanluran (Poblacion Uno)'),
 ('89187fa80b7011ee', '868a840404be48a7', 'USNS Walker\r\nFPO AA 04239', 'Caingin'),
@@ -128,7 +132,9 @@ INSERT INTO `address` (`ADDRESS_ID`, `PERSON_ID`, `ADDRESS`, `BARANGAY`) VALUES
 ('89d6fc3a0b7011ee', 'a0caa1631ca14481', '2923 Hill Ports\r\nAngelamouth, PR 20989', 'Caingin'),
 ('89d853a30b7011ee', 'bd384b7ceb344931', '073 Marshall Underpass Suite 699\r\nWest Christinemouth, NJ 97669', 'Labas'),
 ('89d99f860b7011ee', '4c7b1cbb88ba4d03', '566 Joshua Ways Apt. 085\r\nHardinshire, AK 96500', 'Macabling'),
-('89dadfa30b7011ee', 'f75bf1c2a9e249b6', '07902 Carroll Villages\r\nPort William, SD 53264', 'Balibago');
+('89dadfa30b7011ee', 'f75bf1c2a9e249b6', '07902 Carroll Villages\r\nPort William, SD 53264', 'Balibago'),
+('953bab390f6411ee', '6491991cf213a831', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo'),
+('f8784dc50f6211ee', '64919668779db084', 'BLOCK 7 LOT 2 OAK STREET ROSE POINTE SUBDIVISION', 'Tagapo');
 
 -- --------------------------------------------------------
 
@@ -150,6 +156,8 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `APPLICANT_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
+('46b6cc6e0f6411ee', '649198993f283831', 'New Application', 'Senior Citizen', '2023-06-20 20:16:25', 'Pending'),
+('8377b2010f6211ee', '649195a42ebe9731', 'New Application', 'PWD', '2023-06-20 20:03:48', 'Pending'),
 ('890eace30b7011ee', 'd9fe583718de4946', 'New Application', 'PWD', '2023-06-15 19:34:05', 'Pending'),
 ('8913a78e0b7011ee', 'b8c3bd73afe54da4', 'New Application', 'PWD', '2023-06-15 19:34:05', 'Pending'),
 ('8918c5200b7011ee', '868a840404be48a7', 'New Application', 'PWD', '2023-06-15 19:34:05', 'Pending'),
@@ -239,7 +247,9 @@ INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `A
 ('89d731c00b7011ee', 'a0caa1631ca14481', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89d889a00b7011ee', 'bd384b7ceb344931', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89d9d53e0b7011ee', '4c7b1cbb88ba4d03', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
-('89db14670b7011ee', 'f75bf1c2a9e249b6', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending');
+('89db14670b7011ee', 'f75bf1c2a9e249b6', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
+('953ba52d0f6411ee', '6491991cf213a831', 'New Application', 'Solo Parent', '2023-06-20 20:18:36', 'Pending'),
+('f87847f60f6211ee', '64919668779db084', 'New Application', 'PWD', '2023-06-20 20:07:04', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -252,6 +262,15 @@ CREATE TABLE `appointment` (
   `PERSON_ID` varchar(16) NOT NULL,
   `DATE` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`APPOINTMENT_ID`, `PERSON_ID`, `DATE`) VALUES
+('649195aa844b4709', '649195a42ebe9731', '2023-06-21 08:00:00'),
+('6491989da5da9943', '649198993f283831', '2023-06-21 13:00:00'),
+('64919920c8c3c747', '6491991cf213a831', '2023-06-21 13:00:00');
 
 -- --------------------------------------------------------
 
@@ -287,6 +306,8 @@ CREATE TABLE `contact_details` (
 --
 
 INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER`, `TELEPHONE_NUMBER`, `EMAIL`) VALUES
+('46b6d6950f6411ee', '649198993f283831', '09091072865', NULL, 'asuncionmontealegre@gmail.com'),
+('8377bf050f6211ee', '649195a42ebe9731', '09760657071', '', 'romsky.bardillon@gmail.com'),
 ('890efa9f0b7011ee', 'd9fe583718de4946', '4081430422', '', 'ruben14@example.com'),
 ('8913e7220b7011ee', 'b8c3bd73afe54da4', '+1-770-396-9948x', '', 'samuel82@example.net'),
 ('891905600b7011ee', '868a840404be48a7', '457-639-1913x326', '', 'natasha56@example.com'),
@@ -376,7 +397,9 @@ INSERT INTO `contact_details` (`CONTACT_DETAILS_ID`, `PERSON_ID`, `MOBILE_NUMBER
 ('89d7690e0b7011ee', 'a0caa1631ca14481', '(760)123-6021x48', '', 'millerjohn@example.net'),
 ('89d8c2060b7011ee', 'bd384b7ceb344931', '(477)118-1853', '', 'chelsea92@example.com'),
 ('89da0cd70b7011ee', '4c7b1cbb88ba4d03', '(775)533-0046x52', '', 'brandonsanchez@example.net'),
-('89db4c510b7011ee', 'f75bf1c2a9e249b6', '(736)569-2581', '', 'usmith@example.com');
+('89db4c510b7011ee', 'f75bf1c2a9e249b6', '(736)569-2581', '', 'usmith@example.com'),
+('953bafd90f6411ee', '6491991cf213a831', '09760657071', NULL, 'mila.bardillon@gmail.com'),
+('f878538f0f6211ee', '64919668779db084', '09760657071', '', 'bardillon.romsky@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -412,6 +435,8 @@ CREATE TABLE `employment_details` (
 --
 
 INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYMENT_STATUS`, `CATEGORY_OF_EMPLOYMENT`, `NATURE_OF_EMPLOYMENT`, `COMPANY`, `JOB`, `OTHER_JOB`, `INCOME`, `HAS_PENSION`, `PENSION`, `PENSION_AMOUNT`, `SSS_NUMBER`, `GSIS_NUMBER`, `PSN_NUMBER`, `IS_PHILHEALTH_MEMBER`, `PHILHEALTH_NUMBER`, `IS_ACTIVE_VOTER`, `IS_4PS_MEMBER`, `TOTAL_FAMILY_INCOME`) VALUES
+('46b6e24c0f6411ee', '649198993f283831', NULL, NULL, NULL, NULL, 'NONE', NULL, NULL, 'Meron', 'SSS', '5000.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('8377c9670f6211ee', '649195a42ebe9731', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL),
 ('890f93ce0b7011ee', 'd9fe583718de4946', 'Unemployed', 'Government', 'Permanent/Regular', '', 'Plant & Machine Operators & Assemblers', '', '41,000-100,000', NULL, '', NULL, '', '', '', 'No', '', 'No', 'Yes', '0.00'),
 ('8914d37a0b7011ee', 'b8c3bd73afe54da4', 'Unemployed', 'Government', 'Emergency', '', 'Plant & Machine Operators & Assemblers', '', '41,000-100,000', NULL, '', NULL, '', '', '', 'No', '', 'Yes', 'No', '0.00'),
 ('8919892b0b7011ee', '868a840404be48a7', 'Employed', 'Government', 'Permanent/Regular', '', 'Plant & Machine Operators & Assemblers', '', '10,000-20,000', NULL, '', NULL, '', '', '', 'No', '', 'Yes', 'No', '0.00'),
@@ -501,7 +526,9 @@ INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYM
 ('89d7e8390b7011ee', 'a0caa1631ca14481', '', '', '', '', 'Others', '', '', NULL, '', NULL, '', '', '', '', '', '', '', '0.00'),
 ('89d9338a0b7011ee', 'bd384b7ceb344931', '', '', '', '', 'Managers', '', '', NULL, '', NULL, '', '', '', '', '', '', '', '0.00'),
 ('89da73660b7011ee', '4c7b1cbb88ba4d03', '', '', '', '', 'Elementary Occupations', '', '', NULL, '', NULL, '', '', '', '', '', '', '', '0.00'),
-('89dbbc2b0b7011ee', 'f75bf1c2a9e249b6', '', '', '', '', 'Managers', '', '', NULL, '', NULL, '', '', '', '', '', '', '', '0.00');
+('89dbbc2b0b7011ee', 'f75bf1c2a9e249b6', '', '', '', '', 'Managers', '', '', NULL, '', NULL, '', '', '', '', '', '', '', '0.00'),
+('953bb9100f6411ee', '6491991cf213a831', NULL, NULL, NULL, 'NONE', 'NONE', NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10000.00'),
+('f8785d790f6211ee', '64919668779db084', 'Student', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, '', '', '', 'No', '', 'Yes', 'No', NULL);
 
 -- --------------------------------------------------------
 
@@ -531,6 +558,14 @@ CREATE TABLE `organization` (
   `ORGANIZATION_OFFICE_ADDRESS` varchar(64) NOT NULL,
   `ORGANIZATION_CONTACT_NUMBER` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `organization`
+--
+
+INSERT INTO `organization` (`ORGANIZATION_ID`, `PERSON_ID`, `ORGANIZATION`, `ORGANIZATION_CONTACT_PERSON`, `ORGANIZATION_OFFICE_ADDRESS`, `ORGANIZATION_CONTACT_NUMBER`) VALUES
+('8377cdd40f6211ee', '649195a42ebe9731', '', '', '', ''),
+('f87861bf0f6211ee', '64919668779db084', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -637,6 +672,20 @@ INSERT INTO `person` (`PERSON_ID`, `FIRST_NAME`, `MIDDLE_NAME`, `LAST_NAME`, `SU
 ('5fa7a2e0e06e437e', 'Anthony', '', 'Cooper', ''),
 ('630e9542da3c4751', 'Tammy', '', 'Miller', ''),
 ('63415b5d7a214eca', 'Caitlin', '', 'Rice', ''),
+('649195a42ebe9731', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
+('649195a42ebf7769', 'ROMEO SR', 'UY', 'BARDILLON', NULL),
+('649195a42ebf9966', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
+('649195a42ebfa867', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON', ''),
+('64919668779db084', 'ROMEO JR', 'MONTEALEGRE', 'BARDILLON', NULL),
+('64919668779e6976', 'ROMEO SR', 'UY', 'BARDILLON', 'Sr.'),
+('64919668779e8914', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', ''),
+('64919668779e9858', 'DON KENNETH', 'MONTEALEGRE', 'BARDILLON ', ''),
+('649198993f283831', 'ASUNCION', 'SABANDAL', 'MONTEALEGRE', NULL),
+('649198993f29a869', 'VERGILIO', 'SAPODIQUIA', 'MONTEALEGRE', ''),
+('649198993f8fc779', 'MILA ROSA', NULL, 'MONTEALEGRE', NULL),
+('649198993fa91787', 'LANI', NULL, 'PEÑARANDA', NULL),
+('6491991cf213a831', 'MILA ROSA', 'SABANDAL', 'MONTEALEGRE', NULL),
+('6491991cf2748999', 'ROMEO JR', NULL, 'BARDILLON', NULL),
 ('652d50d41cd14584', 'Mark', '', 'Berry', ''),
 ('659a329853214ee7', 'William', '', 'Oconnor', ''),
 ('67026c9ead904980', 'Rebekah', '', 'Michael', ''),
@@ -785,6 +834,8 @@ CREATE TABLE `personal_information` (
 --
 
 INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIRTHDAY`, `BIRTH_PLACE`, `GENDER`, `EDUCATIONAL_ATTAINMENT`, `BLOOD_TYPE`, `RELIGION`, `MARITAL_STATUS`) VALUES
+('46b6dc830f6411ee', '649198993f283831', '1942-01-12', 'AKLAN', 'Female', NULL, NULL, 'CATHOLIC', 'Widowed'),
+('8377c4890f6211ee', '649195a42ebe9731', '2001-07-30', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single'),
 ('890f45fa0b7011ee', 'd9fe583718de4946', '1981-08-28', '', 'Female', 'None', 'B+', 'Protestant', 'Single'),
 ('89148f250b7011ee', 'b8c3bd73afe54da4', '1924-05-30', '', 'Female', 'Senior High School', 'O-', 'Born Again', 'Widowed'),
 ('891943780b7011ee', '868a840404be48a7', '1911-06-21', '', 'Male', 'Junior High School', 'O+', 'Other', 'Married'),
@@ -904,7 +955,10 @@ INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIR
 ('89d7a59b0b7011ee', 'a0caa1631ca14481', '1961-04-25', 'Lake John', 'Male', '', '', 'Jehovahs Witness', 'Married'),
 ('89d8fcf00b7011ee', 'bd384b7ceb344931', '1960-07-25', 'Jimenezville', 'Female', '', '', 'Iglesia ni Cristo', 'Divorced'),
 ('89da45f30b7011ee', '4c7b1cbb88ba4d03', '1960-09-27', 'Sandersland', 'Male', '', '', 'Jehovahs Witness', 'Married'),
-('89db86480b7011ee', 'f75bf1c2a9e249b6', '1960-08-07', 'Ricemouth', 'Female', '', '', 'Iglesia ni Cristo', 'Single');
+('89db86480b7011ee', 'f75bf1c2a9e249b6', '1960-08-07', 'Ricemouth', 'Female', '', '', 'Iglesia ni Cristo', 'Single'),
+('953bb42a0f6411ee', '6491991cf213a831', '1965-07-20', 'MABITAC, LAGUNA', 'Female', 'College', NULL, NULL, NULL),
+('953bc5710f6411ee', '6491991cf2748999', NULL, NULL, NULL, 'College', NULL, NULL, 'Single'),
+('f878585a0f6211ee', '64919668779db084', '2001-07-30', NULL, 'Male', 'College', 'Unknown', 'CATHOLIC', 'Single');
 
 -- --------------------------------------------------------
 
@@ -932,6 +986,7 @@ CREATE TABLE `pwd_data` (
 --
 
 INSERT INTO `pwd_data` (`PWD_DATA_ID`, `PERSON_ID`, `PHYSICIAN_NAME`, `PHYSICIAN_LICENSE_NUMBER`, `TYPE_OF_DISABILITY`, `MEDICAL_CONDITION`, `CAUSE_OF_DISABILITY`, `CONGENITAL_INBORN`, `ACQUIRED`, `STATUS_OF_DISABILITY`, `ACCOMPLISHED_BY`, `ACCOMPLISHER_NAME`) VALUES
+('8377d22b0f6211ee', '649195a42ebe9731', 'LEBRON JAMES', 'MD8299-8854', 'Mental Disability,Physical Disability (Orthopedic)', '', 'INBORN', '', 'Chronic Illness,Injury', 'Temporary', 'Representative', 'KOBE BRYANT'),
 ('890fe2130b7011ee', 'd9fe583718de4946', 'Ricky Harper', '5529725330', 'Speech & Language Impairment', '', 'INBORN', 'Cerebral Palsy', NULL, 'Temporary', 'Applicant', ''),
 ('89158fb90b7011ee', 'b8c3bd73afe54da4', 'Barbara Wheeler', '4195832144', 'Cancer (RA11215)', '', 'INBORN', 'Cerebral Palsy', NULL, 'Temporary', 'Applicant', ''),
 ('8919c8540b7011ee', '868a840404be48a7', 'Leslie Harvey', '7757745036', 'Intellectual Disability', '', 'INBORN', 'Cerebral Palsy', NULL, 'Permanent', 'Applicant', ''),
@@ -961,7 +1016,8 @@ INSERT INTO `pwd_data` (`PWD_DATA_ID`, `PERSON_ID`, `PHYSICIAN_NAME`, `PHYSICIAN
 ('89602abe0b7011ee', '037f65e8b4e2417e', 'Stephanie Wright', '2052407292', 'Speech & Language Impairment', '', 'INBORN', 'Down Syndrome', NULL, 'Temporary', 'Applicant', ''),
 ('896307b60b7011ee', '9e7b529864114cfc', 'Susan Curry', '5876753544', 'Cancer (RA11215)', '', 'INBORN', 'Autism', NULL, 'Permanent', 'Applicant', ''),
 ('8965d3da0b7011ee', 'ddd34109e5674766', 'Debra Clements', '9505098791', 'Intellectual Disability', '', 'INBORN', 'ADHD', NULL, 'Temporary', 'Applicant', ''),
-('896893320b7011ee', '69345e7eb068430a', 'David Gonzalez', '4290197477', 'Deaf/Hard of Hearing', '', 'INBORN', 'ADHD', NULL, 'Temporary', 'Applicant', '');
+('896893320b7011ee', '69345e7eb068430a', 'David Gonzalez', '4290197477', 'Deaf/Hard of Hearing', '', 'INBORN', 'ADHD', NULL, 'Temporary', 'Applicant', ''),
+('f878670d0f6211ee', '64919668779db084', 'LEBRON JAMES', '6826382666', 'Learning Disability,Physical Disability (Orthopedic),Psychosocial Disability', '', 'INBORN', 'ADHD,Cerebral Palsy,Down Syndrome', '', 'Permanent', 'Applicant', 'ROMEO JR BARDILLON');
 
 -- --------------------------------------------------------
 
@@ -984,6 +1040,12 @@ CREATE TABLE `relatives` (
 --
 
 INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELATIONSHIP_TYPE`, `BIRTHDAY`, `GUARDIAN_CONTACT_NUMBER`, `INCOME`) VALUES
+('46b6ea9c0f6411ee', '649198993f283831', '649198993f29a869', 'Spouse', '1942-08-07', NULL, NULL),
+('46b6f96c0f6411ee', '649198993f283831', '649198993f8fc779', 'Child', '1965-07-20', '09550171148', NULL),
+('46b70b070f6411ee', '649198993f283831', '649198993fa91787', 'Child', '1963-12-30', '09760657071', NULL),
+('8377da260f6211ee', '649195a42ebe9731', '649195a42ebf7769', 'Father', NULL, NULL, NULL),
+('8377e1ca0f6211ee', '649195a42ebe9731', '649195a42ebf9966', 'Mother', NULL, NULL, NULL),
+('8377e8d30f6211ee', '649195a42ebe9731', '649195a42ebfa867', 'BROTHER', NULL, '09091072865', NULL),
 ('891073ba0b7011ee', 'd9fe583718de4946', '91cb688d4e85476f', 'Father', '0000-00-00', '', '0.00'),
 ('8911a8ec0b7011ee', 'd9fe583718de4946', 'fc86da6661594376', 'Mother', '0000-00-00', '', '0.00'),
 ('8912d2bd0b7011ee', 'd9fe583718de4946', '0e7285ae254745a5', 'Uncle', '0000-00-00', '001-325-3718x583', '0.00'),
@@ -1103,7 +1165,11 @@ INSERT INTO `relatives` (`RELATIVE_ID`, `PERSON_ID`, `RELATIVE_PERSON_ID`, `RELA
 ('89adb31f0b7011ee', '5b4a5c6c4fb44b6a', '1c738e093f4b4686', 'Son/Daugther', '0000-00-00', '', '50000.00'),
 ('89aff2a80b7011ee', '0cd6dc47b6f246a5', '4139f3357ea54013', 'Son/Daugther', '0000-00-00', '', '50000.00'),
 ('89b211190b7011ee', 'aafa0870274b4ad3', '2983ed56fedf462d', 'Son/Daugther', '0000-00-00', '', '20000.00'),
-('89b447070b7011ee', 'ad18433f173e43eb', '9d327226f8914d3c', 'Son/Daugther', '0000-00-00', '', '30000.00');
+('89b447070b7011ee', 'ad18433f173e43eb', '9d327226f8914d3c', 'Son/Daugther', '0000-00-00', '', '30000.00'),
+('953bc9640f6411ee', '6491991cf213a831', '6491991cf2748999', 'Child', '2001-07-30', NULL, '0.00'),
+('f878703b0f6211ee', '64919668779db084', '64919668779e6976', 'Father', NULL, NULL, NULL),
+('f8790c080f6211ee', '64919668779db084', '64919668779e8914', 'Mother', NULL, NULL, NULL),
+('f87914140f6211ee', '64919668779db084', '64919668779e9858', 'BROTHER', NULL, '09091072865', NULL);
 
 -- --------------------------------------------------------
 
@@ -1167,7 +1233,8 @@ INSERT INTO `solo_parent_data` (`SOLO_PARENT_DATA_ID`, `PERSON_ID`, `CLASSIFICAT
 ('89ad451f0b7011ee', '5b4a5c6c4fb44b6a', 'Pregnant Women', '', ''),
 ('89af7fe00b7011ee', '0cd6dc47b6f246a5', 'Foster Parent of DSWD', '', ''),
 ('89b1a2630b7011ee', 'aafa0870274b4ad3', 'Death of Spouse', '', ''),
-('89b3d6ba0b7011ee', 'ad18433f173e43eb', 'Physical and Mental Incapacity', '', '');
+('89b3d6ba0b7011ee', 'ad18433f173e43eb', 'Physical and Mental Incapacity', '', ''),
+('953bbd2c0f6411ee', '6491991cf213a831', 'Death of Spouse', 'LONGTEXT', 'LONGTEXT');
 
 -- --------------------------------------------------------
 
@@ -1212,7 +1279,7 @@ CREATE TABLE `user_authentication` (
 
 INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `PROFILE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
 ('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', NULL, 0, 1, 0, '2023-06-07'),
-('d80455a8010311ee', 'ROMEO JR ', 'MONTEALEGRE', 'All', 'yegiy78063@rockdian.com', '$2y$10$w6sWLKDaaajV9u.vi585uu.LzbQnRnTF58SlkxuUsiLIdMma6IV36', 'Main Administrator', '../../libs/images/profile_picture/d80455a8010311ee_dp.jpg', 0, 1, 0, '2023-06-02');
+('d80455a8010311ee', 'ROMEO JR ', 'MONTEALEGRE', 'All', 'yegiy78063@rockdian.com', '$2y$10$w6sWLKDaaajV9u.vi585uu.LzbQnRnTF58SlkxuUsiLIdMma6IV36', 'Main Administrator', NULL, 0, 1, 0, '2023-06-02');
 
 --
 -- Indexes for dumped tables

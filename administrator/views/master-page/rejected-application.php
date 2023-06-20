@@ -13,7 +13,7 @@
             <table class="table table-bordered table-responsive">
                 <thead>
                     <th>No.</th>
-                    <th>Application Number</th>
+                    <th>Appointment Number</th>
                     <th>Applicant Name</th>
                     <th>Barangay</th>
                     <th>Registration Date</th>
@@ -29,7 +29,7 @@
             <table class="table table-bordered table-responsive">
                 <thead>
                     <th>No.</th>
-                    <th>Application Number</th>
+                    <th>Appointment Number</th>
                     <th>Applicant Name</th>
                     <th>Barangay</th>
                     <th>Registration Date</th>
@@ -45,7 +45,7 @@
             <table class="table table-bordered table-responsive">
                 <thead>
                     <th>No.</th>
-                    <th>Application Number</th>
+                    <th>Appointment Number</th>
                     <th>Applicant Name</th>
                     <th>Barangay</th>
                     <th>Registration Date</th>

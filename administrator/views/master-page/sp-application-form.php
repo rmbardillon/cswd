@@ -65,9 +65,9 @@ else
     <form id="spForm" method="post" novalidate="">
         <h5 class="text-center">APPLICATION&nbsp;FORM FOR SOLO PARENT</h5>
         <div class="row">
-            <div class="col"><label class="form-label required" for="surname">SURNAME</label><input class="form-control" type="text" id="surname" name="surname" required=""></div>
-            <div class="col"><label class="form-label required" for="firstName">FIRST NAME</label><input class="form-control" type="text" id="firstName" name="firstName" required=""></div>
-            <div class="col"><label class="form-label" for="middlename">MIDDLE NAME</label><input class="form-control" type="text" id="middlename" name="middlename"></div>
+            <div class="col"><label class="form-label required" for="surname">SURNAME</label><input class="form-control" type="text" id="surname" name="surname" required="" maxlength="64"></div>
+            <div class="col"><label class="form-label required" for="firstName">FIRST NAME</label><input class="form-control" type="text" id="firstName" name="firstName" required="" maxlength="64"></div>
+            <div class="col"><label class="form-label" for="middlename">MIDDLE NAME</label><input class="form-control" type="text" id="middlename" name="middlename" maxlength="64"></div>
             <div class="col">
                 <label class="form-label" for="suffix">SUFFIX</label>
                 <select id="suffix" class="form-select" name="suffix">
@@ -90,7 +90,7 @@ else
         <div class="row">
             <div class="col col-3"><label class="form-label required" for="soloParentDOB">DATE OF BIRTH</label><input class="form-control" id="soloParentDOB" type="date" name="soloParentDOB" required="" min="1900-01-01"></div>
             <div class="col col-3"><label class="form-label" for="age">AGE</label><input class="form-control" type="text" id="age" disabled="" name="age"></div>
-            <div class="col"><label class="form-label required" for="placeOfBirth">PLACE OF BIRTH</label><input class="form-control" type="text" id="placeOfBirth" name="placeOfBirth" required=""></div>
+            <div class="col"><label class="form-label required" for="placeOfBirth">PLACE OF BIRTH</label><input class="form-control" type="text" id="placeOfBirth" name="placeOfBirth" required="" maxlength="128"></div>
         </div>
         <div class="row">
             <div class="col col-2">
@@ -125,20 +125,32 @@ else
                     <option value="Tagapo">Tagapo</option>
                 </select>
             </div>
-            <div class="col"><label class="form-label required" for="address">ADDRESS</label><input class="form-control" type="text" id="address" name="address" required=""></div>
+            <div class="col"><label class="form-label required" for="address">ADDRESS</label><input class="form-control" type="text" id="address" name="address" required="" maxlength="128"></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label required" for="educationalAttainment">HIGHEST EDUCATIONAL ATTAINMENT</label><input class="form-control" type="text" id="educationalAttainment" name="educationalAttainment" required=""></div>
+            <div class="col"><label class="form-label required" for="educationalAttainment">HIGHEST EDUCATIONAL ATTAINMENT</label>
+                <select id="educationalAttainment" class="form-select" name="educationalAttainment" required>
+                    <option disabled selected value="">Please Select</option>
+                    <option value="None">None</option>
+                    <option value="Kindergarten">Kindergarten</option>
+                    <option value="Elementary Education">Elementary Education</option>
+                    <option value="Junior High School">Junior High School</option>
+                    <option value="Senior High School">Senior High School</option>
+                    <option value="College">College</option>
+                    <option value="Vocational">Vocational</option>
+                    <option value="Post Graduate Program">Post Graduate Program</option>
+                </select>
+            </div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label required" for="job">OCCUPATION</label><input class="form-control" type="text" id="job" name="job" required=""></div>
-            <div class="col"><label class="form-label required" for="company">COMPANY/AGENCY</label><input class="form-control" type="text" id="company" name="company" required=""></div>
+            <div class="col"><label class="form-label required" id="job-1" for="job">OCCUPATION</label><input class="form-control" type="text" id="job" name="job" required="" maxlength="64"></div>
+            <div class="col"><label class="form-label required" for="company">COMPANY/AGENCY</label><input class="form-control" type="text" id="company" name="company" required="" maxlength="128"></div>
         </div>
         <div class="row">
-            <div class="col"><label class="form-label required" for="monthlyIncome">MONTHLY INCOME</label><input class="form-control numbers" type="text" id="monthlyIncome" name="monthlyIncome" required=""></div>
-            <div class="col"><label class="form-label howMuchPension required" for="totalFamilyIncome">TOTAL FAMILY INCOME</label><input class="form-control numbers" type="text" id="totalFamilyIncome" name="totalFamilyIncome" required=""></div>
-            <div class="col"><label class="form-label" for="telephone">TELEPHONE/CELLPHONE NUMBER</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####"></div>
-            <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com"></div>
+            <div class="col"><label class="form-label required" for="monthlyIncome">MONTHLY INCOME</label><input class="form-control numbers" type="text" id="monthlyIncome" name="monthlyIncome" required="" maxlength="7"></div>
+            <div class="col"><label class="form-label howMuchPension required" for="totalFamilyIncome">TOTAL FAMILY INCOME</label><input class="form-control numbers" type="text" id="totalFamilyIncome" name="totalFamilyIncome" required="" maxlength="8"></div>
+            <div class="col"><label class="form-label" for="telephone">TELEPHONE/CELLPHONE NUMBER</label><input class="form-control numbers telephone" type="tel" id="telephone" name="telephone" placeholder="09##-###-####" required></div>
+            <div class="col"><label class="form-label" for="email">EMAIL ADDRESS</label><input class="form-control email" type="email" id="email" name="email" placeholder="email@email.com" required maxlength="64"></div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -150,26 +162,8 @@ else
                 <div class="col col-2 d-flex align-items-center">
                     <h6 class="text-nowrap text-start">NAME</h6>
                 </div>
-                <div class="col"><input class="form-control" type="text" id="childFirstName" name="childFirstName" placeholder="FIRST NAME" required></div>
-                <div class="col"><input class="form-control" type="text" id="childLastName" name="childLastName" placeholder="SURNAME" required></div>
-                <!-- <div class="col"><input class="form-control" type="text" id="childMiddleName" name="childMiddleName" placeholder="MIDDLE NAME"></div>
-                <div class="col">
-                    <select id="childSuffix" class="form-select" name="childSuffix">
-                        <option disabled selected value="">Suffix</option>
-                        <option value="">N/A</option>
-                        <option value="Jr.">Jr.</option>
-                        <option value="Sr.">Sr.</option>
-                        <option value="II">II</option>
-                        <option value="III">III</option>
-                        <option value="IV">IV</option>
-                        <option value="V">V</option>
-                        <option value="VI">VI</option>
-                        <option value="VII">VII</option>
-                        <option value="VIII">VIII</option>
-                        <option value="IX">IX</option>
-                        <option value="X">X</option>
-                    </select>
-                </div> -->
+                <div class="col"><input class="form-control" type="text" id="childFirstName" name="childFirstName" placeholder="FIRST NAME" required maxlength="64"></div>
+                <div class="col"><input class="form-control" type="text" id="childLastName" name="childLastName" placeholder="SURNAME" required maxlength="64"></div>
             </div>
             <div class="row">
                 <div class="col col-2 d-flex align-items-center">
@@ -194,11 +188,23 @@ else
                 <div class="col col-3 d-flex align-items-center">
                     <h6 class="text-start">EDUCATIONAL&nbsp;ATTAINMENT</h6>
                 </div>
-                <div class="col"><input class="form-control" type="text" id="childEducationalAttainment" name="childEducationalAttainment" required></div>
+                <div class="col">
+                    <select id="childEducationalAttainment" class="form-select" name="childEducationalAttainment" required>
+                        <option disabled selected value="">Please Select</option>
+                        <option value="None">None</option>
+                        <option value="Kindergarten">Kindergarten</option>
+                        <option value="Elementary Education">Elementary Education</option>
+                        <option value="Junior High School">Junior High School</option>
+                        <option value="Senior High School">Senior High School</option>
+                        <option value="College">College</option>
+                        <option value="Vocational">Vocational</option>
+                        <option value="Post Graduate Program">Post Graduate Program</option>
+                    </select>
+                </div>
                 <div class="col col-3 d-flex align-items-center">
                     <h6 class="text-start">MONTHLY INCOME</h6>
                 </div>
-                <div class="col"><input class="form-control numbers" type="text" id="childIncome" name="childIncome" required></div>
+                <div class="col"><input class="form-control numbers" type="text" id="childIncome" name="childIncome" required maxlength="7"></div>
             </div>
             <div class="row">
                 <div class="col col-2"><button class="btn btn-danger delete-button w-100" type="button" onclick="soloParentRemoveRelative(this);">Delete</button></div>
@@ -244,7 +250,7 @@ else
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col"><textarea class="form-control" id="soloParentNeeds" name="soloParentNeeds" required=""></textarea></div>
+                    <div class="col"><textarea class="form-control" id="soloParentNeeds" name="soloParentNeeds" required="" maxlength="128"></textarea></div>
                 </div>
             </div>
         </div>
@@ -256,7 +262,7 @@ else
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col"><textarea class="form-control" id="soloParentFamilyResources" name="soloParentFamilyResources" required=""></textarea></div>
+                    <div class="col"><textarea class="form-control" id="soloParentFamilyResources" name="soloParentFamilyResources" required="" maxlength="128"></textarea></div>
                 </div>
             </div>
         </div>

@@ -22,9 +22,9 @@
         <h1>PWD Application</h1>
         <form id="pwdForm" method="post" novalidate="">
             <div class="row">
-                <div class="col"><label class="form-label required" for="surname">SURNAME</label><input class="form-control" type="text" id="surname" name="surname" required=""></div>
-                <div class="col"><label class="form-label required" for="firstName">FIRST NAME</label><input class="form-control" type="text" id="firstName" name="firstName" required=""></div>
-                <div class="col"><label class="form-label" for="middlename">MIDDLE NAME</label><input class="form-control" type="text" id="middlename" name="middlename"></div>
+                <div class="col"><label class="form-label required" for="surname">SURNAME</label><input class="form-control" type="text" id="surname" name="surname" required="" maxlength="64"></div>
+                <div class="col"><label class="form-label required" for="firstName">FIRST NAME</label><input class="form-control" type="text" id="firstName" name="firstName" required="" maxlength="64"></div>
+                <div class="col"><label class="form-label" for="middlename">MIDDLE NAME</label><input class="form-control" type="text" id="middlename" name="middlename" maxlength="64"></div>
                 <div class="col">
                     <label class="form-label" for="suffix">SUFFIX</label>
                     <select id="suffix" class="form-select" name="suffix">
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" for="address">ADDRESS</label><input class="form-control" type="text" id="address" name="address" required=""></div>
+                <div class="col"><label class="form-label required" for="address">ADDRESS</label><input class="form-control" type="text" id="address" name="address" required="" maxlength="128"></div>
                 <div class="col col-3">
                     <label class="form-label required" for="barangay">BARANGAY</label>
                     <select id="barangay" class="form-select" name="barangay" required>
@@ -74,7 +74,7 @@
             <div class="row">
                 <div class="col col-4"><label class="form-label" for="landline">LANDLINE</label><input class="form-control numbers telephone" type="text" id="landline" name="landline"></div>
                 <div class="col col-4"><label class="form-label required numbers" for="mobileNumber">MOBILE NUMBER</label><input class="form-control numbers telephone" type="text" id="mobileNumber" name="mobileNumber" required=""></div>
-                <div class="col col-4"><label class="form-label required" for="emailAddress">EMAIL ADDRESS</label><input class="form-control email" type="email" id="emailAddress" name="emailAddress" required=""></div>
+                <div class="col col-4"><label class="form-label required" for="emailAddress">EMAIL ADDRESS</label><input class="form-control email" type="email" id="emailAddress" name="emailAddress" required="" maxlength="64"></div>
             </div>
             <div class="row">
                 <div class="col col-3"><label class="form-label required" for="pwdDOB">DATE OF BIRTH</label><input class="form-control" id="pwdDOB" type="date" name="pwdDOB" required="" min="1900-01-01"></div>
@@ -86,7 +86,7 @@
                         <option value="Female">Female</option>
                     </select>
                 </div>
-                <div class="col"><label class="form-label required" for="religion">Religion</label><input class="form-control" type="text" id="religion" name="religion" required=""></div>
+                <div class="col"><label class="form-label required" for="religion">Religion</label><input class="form-control" type="text" id="religion" name="religion" required="" maxlength="64"></div>
                 <div class="col">
                     <label class="form-label required" for="maritalStatus">CIVIL STATUS</label>
                     <select id="maritalStatus" class="form-select" name="maritalStatus" required>
@@ -208,15 +208,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label" for="organization">ORGANIZATION AFFILIATED</label><input class="form-control" type="text" id="organization" name="organization"></div>
-                <div class="col"><label class="form-label" for="organizationContactPerson">CONTACT PERSON</label><input class="form-control" type="text" id="organizationContactPerson" name="organizationContactPerson"></div>
-                <div class="col"><label class="form-label" for="organizationOfficeAddress">OFFICE ADDRESS</label><input class="form-control" type="text" id="organizationOfficeAddress" name="organizationOfficeAddress"></div>
+                <div class="col"><label class="form-label" for="organization">ORGANIZATION AFFILIATED</label><input class="form-control" type="text" id="organization" name="organization"  maxlength="64"></div>
+                <div class="col"><label class="form-label" for="organizationContactPerson">CONTACT PERSON</label><input class="form-control" type="text" id="organizationContactPerson" name="organizationContactPerson" maxlength="128"></div>
+                <div class="col"><label class="form-label" for="organizationOfficeAddress">OFFICE ADDRESS</label><input class="form-control" type="text" id="organizationOfficeAddress" name="organizationOfficeAddress" maxlength="128"></div>
                 <div class="col"><label class="form-label" for="organizationTelephoneNumber">TELEPHONE NUMBER</label><input class="form-control numbers telephone" type="text" id="organizationTelephoneNumber" name="organizationTelephoneNumber"></div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label" for="SSSNo">SSS NO.</label><input class="form-control numbers" type="text" id="SSSNo" name="SSSNo"></div>
-                <div class="col"><label class="form-label" for="GSISNo">GSIS NO.</label><input class="form-control numbers" type="text" id="GSISNo" name="GSISNo"></div>
-                <div class="col"><label class="form-label" for="PSNNo">PSN NO.</label><input class="form-control numbers" type="text" id="PSNNo" name="PSNNo"></div>
+                <div class="col"><label class="form-label" for="SSSNo">SSS NO.</label><input class="form-control numbers" type="text" id="SSSNo" name="SSSNo" maxlength="10"></div>
+                <div class="col"><label class="form-label" for="GSISNo">GSIS NO.</label><input class="form-control numbers" type="text" id="GSISNo" name="GSISNo" maxlength="11"></div>
+                <div class="col"><label class="form-label" for="PSNNo">PSN NO.</label><input class="form-control numbers" type="text" id="PSNNo" name="PSNNo" maxlength="16"></div>
                 <div class="col">
                     <label class="form-label required" for="isPhilhealthMember">PHILHEALTH MEMBER</label>
                     <select id="isPhilhealthMember" class="form-select" name="isPhilhealthMember" required>
@@ -225,13 +225,13 @@
                         <option value="PhilHealth Member-Dependent">PhilHealth Member-Dependent</option>
                         <option value="No">No</option>
                     </select>
-                    <input class="form-control numbers mt-1" type="text" id="philhealthNumber" name="philhealthNumber" style="display: none;" placeholder="PhilHealth Number">
+                    <input class="form-control numbers mt-1" type="text" id="philhealthNumber" name="philhealthNumber" style="display: none;" placeholder="PhilHealth Number" maxlength="16">
                 </div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" for="fatherSurname">FATHER'S&nbsp;SURNAME</label><input class="form-control" type="text" id="fatherSurname" name="fatherSurname" required=""></div>
-                <div class="col"><label class="form-label required" for="fatherFirstName">FATHER'S&nbsp;FIRST NAME</label><input class="form-control" type="text" id="fatherFirstName" name="fatherFirstName" required=""></div>
-                <div class="col"><label class="form-label" for="fatherMiddlename">FATHER'S MIDDLE NAME</label><input class="form-control" type="text" id="fatherMiddlename" name="fatherMiddlename"></div>
+                <div class="col"><label class="form-label required" for="fatherSurname">FATHER'S&nbsp;SURNAME</label><input class="form-control" type="text" id="fatherSurname" name="fatherSurname" required="" maxlength="128"></div>
+                <div class="col"><label class="form-label required" for="fatherFirstName">FATHER'S&nbsp;FIRST NAME</label><input class="form-control" type="text" id="fatherFirstName" name="fatherFirstName" required="" maxlength="128"></div>
+                <div class="col"><label class="form-label" for="fatherMiddlename">FATHER'S MIDDLE NAME</label><input class="form-control" type="text" id="fatherMiddlename" name="fatherMiddlename" maxlength="128"></div>
                 <div class="col">
                     <label class="form-label" for="fatherSuffix">FATHER'S SUFFIX</label>
                     <select id="fatherSuffix" class="form-select" name="fatherSuffix">
@@ -252,9 +252,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" for="motherSurname">MOTHER'S&nbsp;SURNAME</label><input class="form-control" type="text" id="motherSurname" name="motherSurname" required=""></div>
-                <div class="col"><label class="form-label required" for="motherFirstName">MOTHER'S FIRST NAME</label><input class="form-control" type="text" id="motherFirstName" name="motherFirstName" required=""></div>
-                <div class="col"><label class="form-label" for="motherMiddlename">MOTHER'S MIDDLE NAME</label><input class="form-control" type="text" id="motherMiddlename" name="motherMiddlename"></div>
+                <div class="col"><label class="form-label required" for="motherSurname">MOTHER'S&nbsp;SURNAME</label><input class="form-control" type="text" id="motherSurname" name="motherSurname" required="" maxlength="128"></div>
+                <div class="col"><label class="form-label required" for="motherFirstName">MOTHER'S FIRST NAME</label><input class="form-control" type="text" id="motherFirstName" name="motherFirstName" required="" maxlength="128"></div>
+                <div class="col"><label class="form-label" for="motherMiddlename">MOTHER'S MIDDLE NAME</label><input class="form-control" type="text" id="motherMiddlename" name="motherMiddlename" maxlength="128"></div>
                 <div class="col">
                     <label class="form-label" for="motherSuffix">MOTHER'S SUFFIX</label>
                     <select id="motherSuffix" class="form-select" name="motherSuffix">
@@ -275,9 +275,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" for="guardianSurname">GUARDIAN'S&nbsp;SURNAME</label><input class="form-control" type="text" id="guardianSurname" name="guardianSurname" required=""></div>
-                <div class="col"><label class="form-label required" for="guardianFirstName">GUARDIAN'S FIRST NAME</label><input class="form-control" type="text" id="guardianFirstName" name="guardianFirstName" required=""></div>
-                <div class="col"><label class="form-label" for="guardianMiddlename">GUARDIAN'S MIDDLE NAME</label><input class="form-control" type="text" id="guardianMiddlename" name="guardianMiddlename"></div>
+                <div class="col"><label class="form-label required" for="guardianSurname">GUARDIAN'S&nbsp;SURNAME</label><input class="form-control" type="text" id="guardianSurname" name="guardianSurname" required="" maxlength="128"></div>
+                <div class="col"><label class="form-label required" for="guardianFirstName">GUARDIAN'S FIRST NAME</label><input class="form-control" type="text" id="guardianFirstName" name="guardianFirstName" required="" maxlength="128"></div>
+                <div class="col"><label class="form-label" for="guardianMiddlename">GUARDIAN'S MIDDLE NAME</label><input class="form-control" type="text" id="guardianMiddlename" name="guardianMiddlename" maxlength="128"></div>
                 <div class="col">
                     <label class="form-label" for="guardianSuffix">GUARDIAN'S SUFFIX</label>
                     <select id="guardianSuffix" class="form-select" name="guardianSuffix">
@@ -298,7 +298,7 @@
                 </div>
             </div>
             <div class="row" id="guardian">
-                <div class="col"><label class="form-label required" for="guardianRelationship">RELATIONSHIP TO GUARDIAN</label><input class="form-control" type="text" id="guardianRelationship" name="guardianRelationship" required=""></div>
+                <div class="col"><label class="form-label required" for="guardianRelationship">RELATIONSHIP TO GUARDIAN</label><input class="form-control" type="text" id="guardianRelationship" name="guardianRelationship" required="" maxlength="32"></div>
                 <div class="col"><label class="form-label required" for="guardianContactNumber">GUARDIAN'S CONTACT NUMBER</label><input class="form-control numbers telephone" type="text" id="guardianContactNumber" name="guardianContactNumber" required=""></div>
             </div>
             <div class="row">
@@ -317,7 +317,7 @@
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="visualDisability" name="typeOfDisability" value="Visual Disability" required=""><label class="form-check-label" for="visualDisability">Visual Disability</label></div>
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="cancer" name="typeOfDisability" value="Cancer (RA11215)" required=""><label class="form-check-label" for="cancer">Cancer (RA11215)</label></div>
                     <div class="form-check"><input class="form-check-input" type="checkbox" id="rareDisease" name="typeOfDisability" value="Rare Disease (RA10747)" required=""><label class="form-check-label" for="rareDisease">Rare Disease (RA10747)</label></div>
-                    <label class="form-label">MEDICAL CONDITION/DIAGNOSIS</label><input class="form-control" type="text" id="medicalCondition" name="medicalCondition" required="">
+                    <label class="form-label">MEDICAL CONDITION/DIAGNOSIS</label><input class="form-control" type="text" id="medicalCondition" name="medicalCondition" required="" maxlength="64">
                 </div>
             </div>
             <div class="row">
@@ -343,8 +343,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col"><label class="form-label required" for="physicianName">NAME OF CERTIFYING PHYSICIAN</label><input class="form-control" type="text" id="physicianName" name="physicianName" required=""></div>
-                <div class="col"><label class="form-label required" for="physicianLicence">LICENSE NO.</label><input class="form-control" type="text" id="physicianLicence" name="physicianLicence" required=""></div>
+                <div class="col"><label class="form-label required" for="physicianName">NAME OF CERTIFYING PHYSICIAN</label><input class="form-control" type="text" id="physicianName" name="physicianName" required="" maxlength="128"></div>
+                <div class="col"><label class="form-label required" for="physicianLicence">LICENSE NO.</label><input class="form-control" type="text" id="physicianLicence" name="physicianLicence" required="" maxlength="32"></div>
                 <div class="col">
                     <label class="form-label required" for="guardianContactNumber">ACCOMPLISHED BY</label>
                     <select id="accomplishedBy" class="form-select" name="accomplishedBy" required>
@@ -353,7 +353,7 @@
                         <option value="Guardian">Guardian</option>
                         <option value="Representative">Representative</option>
                     </select>
-                    <input class="form-control mt-1" type="text" id="accomplisherName" name="accomplisherName" placeholder="Representive Name" style="display: none;">
+                    <input class="form-control mt-1" type="text" id="accomplisherName" name="accomplisherName" placeholder="Representive Name" style="display: none;" maxlength="128">
                 </div>
             </div>
             <div class="row mt-5">
