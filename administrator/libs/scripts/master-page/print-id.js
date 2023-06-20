@@ -364,7 +364,16 @@ const PrintID = (() => {
             },
             dataType: "json",
             success: function (data) {
-              window.location.href = "printed-id.php";
+                swal.fire({
+                    title: "Success!",
+                    text: "ID successfully printed",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if(result.isConfirmed) {
+                        window.location.href = "printed-id.php";
+                    }
+                });
             },
             error: function (error) {
                 console.log(error);

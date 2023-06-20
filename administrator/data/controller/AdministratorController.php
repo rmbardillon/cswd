@@ -26,9 +26,9 @@
             $tableRow .= "<td>" . $data['BARANGAY'] . "</td>";
             $tableRow .= "<td>" . $data['EMAIL'] . "</td>";
             $tableRow .= "<td>" . $is_locked . "</td>";
-            // $tableRow .= "<td><button class='btn btn-primary btn-sm' onclick='editAdmin(" . $data['USER_AUTHENTICATION_ID'] . ")'>Edit</button></td>";
             $tableRow .= '<td class="col-actions">';
             $tableRow .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
+            // $tableRow .= '<button type="button" id="reset" onclick="Admin.clickResetPassword(`'. $data['USER_AUTHENTICATION_ID'] .'`)" class="btn btn-warning btn-sm reset"><i class="bi bi-key"></i> Update </button>';
             $tableRow .= '<button type="button" id="reset" onclick="Admin.clickResetPassword(`'. $data['USER_AUTHENTICATION_ID'] .'`)" class="btn btn-info btn-sm reset"><i class="bi bi-key"></i> Reset Password </button>';
             if($_SESSION['user']['ROLE'] == "Super Administrator") {
                 $tableRow .= '<button type="button" id="delete" onclick="Admin.clickDelete(`'. $data['USER_AUTHENTICATION_ID'] .'`)" class="btn btn-danger btn-sm delete"> <i class="bi bi-trash"></i> Delete</button>';

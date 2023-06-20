@@ -517,6 +517,7 @@
                         WHERE APPLICANT_TYPE = ? 
                         AND APPLICATION_STATUS = 'Approved'
                         AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        AND citizen_identification_card.STATUS = 1
                         ORDER BY BARANGAY, FULL_NAME;";
             } else {
                 $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, person.PERSON_ID 
@@ -530,6 +531,7 @@
                         AND BARANGAY = '$barangay'
                         AND APPLICATION_STATUS = 'Approved'
                         AND citizen_identification_card.DATE_ISSUED IS NOT NULL
+                        AND citizen_identification_card.STATUS = 1
                         ORDER BY BARANGAY, FULL_NAME;";
             }
             $stmt = $this->conn->prepare($sql);
@@ -568,14 +570,26 @@
                         ORDER BY BARANGAY, FULL_NAME;";
             }
             if($isReport) {
-                $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
-                        FROM person
-                        JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
-                        JOIN application ON person.PERSON_ID = application.PERSON_ID
-                        LEFT JOIN appointment ON person.PERSON_ID = appointment.PERSON_ID
-                        JOIN address ON person.PERSON_ID = address.PERSON_ID
-                        WHERE APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
-                        ORDER BY BARANGAY, FULL_NAME;";
+                if($barangay != "All") {
+                    $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
+                            FROM person
+                            JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                            JOIN application ON person.PERSON_ID = application.PERSON_ID
+                            LEFT JOIN appointment ON person.PERSON_ID = appointment.PERSON_ID
+                            JOIN address ON person.PERSON_ID = address.PERSON_ID
+                            WHERE APPLICANT_TYPE = '$applicantType' AND BARANGAY = '$barangay' AND APPLICATION_STATUS = '$status'
+                            ORDER BY BARANGAY, FULL_NAME;";
+                }
+                else if($barangay == "All") {
+                    $sql = "SELECT *, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS FULL_NAME, DATE_FORMAT(personal_information.BIRTHDAY, '%M %d, %Y') AS FORMATTED_DATE, MONTHNAME(personal_information.BIRTHDAY) AS MONTH, application.APPLICATION_STATUS AS STATUS, DATE_FORMAT(application.APPLICATION_DATE, '%M %d, %Y') AS FORMATTED_APPLICATION_DATE, application.APPLICATION_ID AS APPLICATION_ID
+                            FROM person
+                            JOIN personal_information ON person.PERSON_ID = personal_information.PERSON_ID
+                            JOIN application ON person.PERSON_ID = application.PERSON_ID
+                            LEFT JOIN appointment ON person.PERSON_ID = appointment.PERSON_ID
+                            JOIN address ON person.PERSON_ID = address.PERSON_ID
+                            WHERE APPLICANT_TYPE = '$applicantType' AND APPLICATION_STATUS = '$status'
+                            ORDER BY BARANGAY, FULL_NAME;";
+                }
             }
             $result = $this->conn->query($sql);
 

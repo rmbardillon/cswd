@@ -1,6 +1,10 @@
 $(document).ready(function () {
     Admin.loadTableData();
 
+    $("#addAdmin").click(function () {
+        $("#addAdminModal").modal("show");
+    });
+
     $("#role").change(function () {
         if ($(this).val() == "Super Administrator" || $(this).val() == "Main Administrator") {
           $("#barangay").prop("disabled", true);
@@ -85,6 +89,7 @@ const Admin = (() => {
                 adminExists = true; // Set flag to indicate administrator check failed
             } else {
                 // Proceed with saving the admin if check passes
+                $("#addAdminModal").modal("hide");
                 saveAdmin();
             }
             },

@@ -158,7 +158,7 @@ const changePassword = (() => {
             confirmButtonText: "OK",
           }).then((result) => {
             if (result.isConfirmed) {
-              thisChangePassword.resetFields();
+              window.location.href = "dashboard.php";
             }
           });
         } else {
