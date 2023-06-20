@@ -30,7 +30,6 @@
     var administratorBarangay = "<?php echo $_SESSION['user']['BARANGAY']; ?>";
     var administratorFullName = "<?php echo $_SESSION['user']['FULL_NAME']; ?>";
     var adminProfile = "<?php echo $_SESSION['user']['PROFILE']; ?>";
-    console.log(adminProfile)
     if(adminProfile != "") {
         $(".img-profile").attr("src", adminProfile);
     }

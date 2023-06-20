@@ -154,6 +154,10 @@
         $profilePicture = $_FILES['profilePicture'];
         $profilePicturePath = "../../libs/images/profile_picture/"; // Set the appropriate path
 
+        if(!file_exists($profilePicturePath)) {
+            mkdir($profilePicturePath, 0777, true);
+        }
+
         // Check if a profile picture was uploaded
         if (isset($profilePicture) && $profilePicture['error'] === UPLOAD_ERR_OK) {
             $tempFilePath = $profilePicture['tmp_name'];
