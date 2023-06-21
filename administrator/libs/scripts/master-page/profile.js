@@ -25,6 +25,13 @@ const Profile = (() => {
         administratorId: "",
     };
 
+    var isFormChanged = false;
+
+    // Listen for changes on form inputs
+    $("form :input").change(function () {
+      isFormChanged = true;
+    });
+
     thisProfile.loadAdministratorProfile = (administratorId) => {
         thisProfile.administratorId = administratorId;
         $.ajax({
@@ -56,6 +63,16 @@ const Profile = (() => {
     }
 
     thisProfile.updateProfile = () => {
+
+        if(!isFormChanged){
+            swal.fire({
+                title: "Warning!",
+                text: "No changes made!",
+                icon: "warning",
+                confirmButtonText: "Ok",
+                });
+            return;
+        }
       // Get the profile picture file from the input field
       const profilePicture = $("#profilePictureInput")[0].files[0];
 

@@ -338,6 +338,10 @@
             $email = $request['email'];
             $profilePicture = $request['profilePicture'];
 
+            if($profilePicture == null) {
+                $profilePicture = $_SESSION['user']['PROFILE'];
+            }
+
             $sql = "UPDATE user_authentication SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, PROFILE=? WHERE USER_AUTHENTICATION_ID=?";
             $stmt = $this->connection->prepare($sql);
             $stmt->bind_param("sssss", $firstName, $lastName, $email, $profilePicture, $administratorId);

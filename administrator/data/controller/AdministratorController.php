@@ -151,8 +151,9 @@
         $email = $_POST['email'];
 
         // Handle profile picture upload
-        $profilePicture = $_FILES['profilePicture'];
+        $profilePicture = $_FILES['profilePicture'] ?? null;
         $profilePicturePath = "../../libs/images/profile_picture/"; // Set the appropriate path
+        $profilePictureDestination = null;
 
         if(!file_exists($profilePicturePath)) {
             mkdir($profilePicturePath, 0777, true);
