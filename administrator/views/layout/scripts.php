@@ -33,6 +33,18 @@
     if(adminProfile != "") {
         $(".img-profile").attr("src", adminProfile);
     }
+
+    if(administratorRole == "Senior Citizen Administrator") {
+        $("#renewal").hide();
+    }
+
+    if(administratorBarangay == "All") {
+        $("#navbar-barangay").text("Main Office");
+    } else {
+        $("#navbar-barangay").text(administratorBarangay);
+    }
+
+    $("#navbar-role").text(administratorRole);
     var today = new Date().toISOString().split("T")[0];
     const Logout = () => {
         swal.fire({

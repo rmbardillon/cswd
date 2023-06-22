@@ -66,9 +66,11 @@ $(document).ready(function () {
         dayRender: function(date, cell) {
             var formattedDate = date.format('YYYY-MM-DD');
             // Check if the date is in the past
-            if (date.isSameOrBefore(moment(), 'day')) {
-                return;
+            if (date.isBefore(moment().endOf("day").add(-1, "day"))) {
+              return;
             }
+
+
 
             // Check if the date is a holiday
             if (formattedDate in holidays) {

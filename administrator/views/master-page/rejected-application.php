@@ -2,9 +2,6 @@
     $page="application";
     $status="rejected";
     include_once("../layout/header.php");
-    if(!$_SESSION['user']) {
-        header("Location: index.php"); 
-    }
 ?>
 <?php include_once("../layout/navbar.php") ?>
     <div class="container">

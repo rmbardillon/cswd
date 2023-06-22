@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    if(!$_SESSION['user']) {
+        header("Location: index.php"); 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
