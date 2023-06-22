@@ -415,20 +415,23 @@ const PWD = (() => {
                     window.open("../" + response["filePath"]);
 
                     // Delete the file from local storage
-                    $.ajax({
-                      type: "POST",
-                      url: PWD_CONTROLLER + "?action=deleteFile",
-                      data: {
-                        filePath: response["filePath"],
-                      },
-                      dataType: "json",
-                      success: function (response) {
-                        console.log("File deleted successfully");
-                      },
-                      error: function (xhr, status, error) {
-                        console.error("Error deleting the file:", error);
-                      },
-                    });
+                    // Perform the file deletion after a short delay (e.g., 1 second)
+                    setTimeout(function () {
+                      $.ajax({
+                        type: "POST",
+                        url: PWD_CONTROLLER + "?action=deleteFile",
+                        data: {
+                          filePath: response["filePath"],
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                          console.log("File deleted successfully");
+                        },
+                        error: function (xhr, status, error) {
+                          console.error("Error deleting the file:", error);
+                        },
+                      });
+                    }, 10); // Adjust the delay as needed
                   },
                 });
             }
