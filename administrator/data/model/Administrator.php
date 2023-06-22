@@ -275,9 +275,20 @@
             $barangay = $this->connection->real_escape_string($request['barangay']);
             $email = $request['email'];
 
-            $sql = "SELECT * FROM user_authentication WHERE ROLE = ? AND BARANGAY = ? OR EMAIL = ?;";
+            $sql = "SELECT * FROM user_authentication WHERE ROLE = ? AND BARANGAY = ?";
             $statement = $this->connection->prepare($sql);
-            $statement->bind_param("sss", $role, $barangay, $email);
+            $statement->bind_param("ss", $role, $barangay);
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result->num_rows > 0;
+        }
+
+        public function checkEmail($email)
+        {
+            $sql = "SELECT * FROM user_authentication WHERE EMAIL = ?";
+            $statement = $this->connection->prepare($sql);
+            $statement->bind_param("s", $email);
             $statement->execute();
             $result = $statement->get_result();
 

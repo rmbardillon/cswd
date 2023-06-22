@@ -33,6 +33,11 @@ const Admin = (() => {
             <div class='circle centered'></div>
         </div>
         `;
+    var originalFirstName = "";
+    var originalLastName = "";
+    var originalEmail = "";
+    var originalRole = "";
+    var originalBarangay = "";
     var isFormChanged = false;
 
     // Listen for changes on form inputs
@@ -87,6 +92,11 @@ const Admin = (() => {
                 $("#barangay").prop("disabled", true);
             }
             $("#role").val(data[0]['ROLE']);
+            originalFirstName = data[0]['FIRST_NAME'];
+            originalLastName = data[0]['LAST_NAME'];
+            originalEmail = data[0]['EMAIL'];
+            originalRole = data[0]['ROLE'];
+            originalBarangay = data[0]['BARANGAY'];
             $("#addAdminModal").modal("show");
           },
           error: function (xhr, status, error) {
@@ -121,43 +131,58 @@ const Admin = (() => {
             type: "POST",
             url: ADMINISTRATOR_CONTROLLER + "?action=checkAdministrator",
             data: {
-            role: role,
-            barangay: barangay,
-            email: email,
+                role: role,
+                barangay: barangay,
+                email: email,
             },
             dataType: "json",
             success: function (data) {
             if (data) {
                 swal.fire({
                 title: "Error!",
-                text: "There is already an administrator for this barangay or the email is already taken.",
+                text: "There is already an administrator for this barangay",
                 icon: "error",
                 confirmButtonText: "Ok",
                 });
 
                 adminExists = true; // Set flag to indicate administrator check failed
             } else {
-                // Proceed with saving the admin if check passes
-                $("#addAdminModal").modal("hide");
-                saveAdmin();
+                $.ajax({
+                    type: "POST",
+                    url: ADMINISTRATOR_CONTROLLER + "?action=checkEmail",
+                    data: {
+                        email: email,
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            swal.fire({
+                                title: "Error!",
+                                text: "Email already exists",
+                                icon: "error",
+                                confirmButtonText: "Ok",
+                            });
+                        } else {
+                            // Proceed with saving the admin if check passes
+                            saveAdmin();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr);
+                    }
+                });
             }
             },
         });
 
         function saveAdmin() {
-            if (
-            firstName == "" ||
-            lastname == "" ||
-            email == "" ||
-            barangay == null ||
-            role == null
-            ) {
-            swal.fire({
-                title: "Error!",
-                text: "Please fill up all fields.",
-                icon: "error",
-                confirmButtonText: "Ok",
-            });
+            if (firstName == "" || lastname == "" || email == "" || barangay == null || role == null) {
+                swal.fire({
+                    title: "Error!",
+                    text: "Please fill up all fields.",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                });
             } else {
             console.log("saveAdmin");
             $.ajax({
@@ -227,7 +252,7 @@ const Admin = (() => {
             return;
         }
 
-        if(!isFormChanged) {
+        if(originalFirstName == firstName && originalLastName == lastname && originalEmail == email && originalRole == role && originalBarangay == barangay) {
             swal.fire({
                 title: "Warning!",
                 text: "No changes were made.",
@@ -238,68 +263,127 @@ const Admin = (() => {
             return;
         }
 
-        $.ajax({
-          type: "POST",
-          url: ADMINISTRATOR_CONTROLLER + "?action=checkAdministrator",
-          data: {
-            role: role,
-            barangay: barangay,
-            email: email,
-          },
-          dataType: "json",
-          success: function (data) {
-            if (data) {
-              swal.fire({
-                title: "Error!",
-                text: "There is already an administrator for this barangay or the email is already taken.",
-                icon: "error",
-                confirmButtonText: "Ok",
+        if(originalRole != role || originalBarangay != barangay) {
+            $.ajax({
+                type: "POST",
+                url: ADMINISTRATOR_CONTROLLER + "?action=checkAdministrator",
+                data: {
+                    role: role,
+                    barangay: barangay,
+                    email: email,
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        swal.fire({
+                            title: "Error!",
+                            text: "There is already an administrator for this barangay",
+                            icon: "error",
+                            confirmButtonText: "Ok",
+                        });
+                    } else {
+                        if(originalEmail != email) {
+                            $.ajax({
+                                type: "POST",
+                                url: ADMINISTRATOR_CONTROLLER + "?action=checkEmail",
+                                data: {
+                                    email: email,
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data) {
+                                        swal.fire({
+                                            title: "Error!",
+                                            text: "Email already exists",
+                                            icon: "error",
+                                            confirmButtonText: "Ok",
+                                        });
+                                    } else {
+                                        update();
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error(xhr);
+                                }
+                            });
+                        } else {
+                            update();
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr);
+                }
+            });
+        } else {
+            if (originalEmail != email) {
+              $.ajax({
+                type: "POST",
+                url: ADMINISTRATOR_CONTROLLER + "?action=checkEmail",
+                data: {
+                  email: email,
+                },
+                dataType: "json",
+                success: function (data) {
+                  if (data) {
+                    swal.fire({
+                      title: "Error!",
+                      text: "Email already exists",
+                      icon: "error",
+                      confirmButtonText: "Ok",
+                    });
+                  } else {
+                    update();
+                  }
+                },
+                error: function (xhr, status, error) {
+                  console.error(xhr);
+                },
               });
             } else {
-              // Proceed with saving the admin if check passes
-              $("#addAdminModal").modal("hide");
               update();
             }
-          },
-        });
+        }
+
         function update() {
             $.ajax({
-              type: "POST",
-              url: ADMINISTRATOR_CONTROLLER + "?action=updateAdmin",
-              data: {
+                type: "POST",
+                url: ADMINISTRATOR_CONTROLLER + "?action=updateAdmin",
+                data: {
                 administratorId: USER_ID,
                 firstName: firstName,
                 lastname: lastname,
                 email: email,
                 barangay: barangay,
                 role: role,
-              },
-              dataType: "json",
-              success: function (data) {
+                },
+                dataType: "json",
+                success: function (data) {
                 if (data) {
-                  swal
+                    swal
                     .fire({
-                      title: "Success!",
-                      text: "Admin has been updated.",
-                      icon: "success",
-                      confirmButtonText: "Ok",
+                        title: "Success!",
+                        text: "Admin has been updated.",
+                        icon: "success",
+                        confirmButtonText: "Ok",
                     })
                     .then((result) => {
-                      if (result.isConfirmed) {
+                        if (result.isConfirmed) {
                         window.location.href = "administrator.php";
-                      }
+                        }
                     });
                 } else {
-                  swal.fire({
+                    swal.fire({
                     title: "Warning!",
                     text: "No Changes Made.",
                     icon: "warning",
                     confirmButtonText: "Ok",
-                  });
+                    });
                 }
-              },
+                },
             });
         }
+
     };
 
     thisAdmin.clickResetPassword = (id) => {

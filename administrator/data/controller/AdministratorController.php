@@ -115,6 +115,15 @@
         echo json_encode($result);
     }
 
+    else if($action == "checkEmail")
+    {
+        $email = $_POST['email'];
+
+        $result = $Administrator->checkEmail($email);
+
+        echo json_encode($result);
+    }
+
     else if($action == 'checkOldPassword')
     {
         $username = $_POST['username'];
