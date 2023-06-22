@@ -355,5 +355,37 @@
                 return false; // Update did not affect any rows
             }
         }
+
+        public function checkIfMainAdmin($USER_ID)
+        {
+            $sql = "SELECT * FROM user_authentication WHERE ROLE = 'Super Administrator' AND USER_AUTHENTICATION_ID = ?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param("s", $USER_ID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            return $result->num_rows > 0;
+        }
+
+        public function updateAdmin($request)
+        {
+            $administratorId = $request['administratorId'];
+            $firstName = $request['firstName'];
+            $lastname = $request['lastname'];
+            $email = $request['email'];
+            $barangay = $request['barangay'];
+            $role = $request['role'];
+
+            $sql = "UPDATE user_authentication SET FIRST_NAME=?, LAST_NAME=?, EMAIL=?, BARANGAY=?, ROLE=? WHERE USER_AUTHENTICATION_ID=?";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param("ssssss", $firstName, $lastname, $email, $barangay, $role, $administratorId);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                return true; // Update was successful
+            } else {
+                return false; // Update did not affect any rows
+            }
+        }
     }
 ?>

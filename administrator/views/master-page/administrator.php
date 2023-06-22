@@ -22,7 +22,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container p-3">
-                            <form class="row g-3" novalidate>
+                            <form id="createAccountForm" class="row g-3" novalidate>
                                 <div class="col-md-12">
                                     <label for="firstName" class="form-label required">First Name</label>
                                     <input type="text" class="form-control" id="firstName" required>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between align-items-center">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="Admin.saveAdmin();">Register User</button>
+                        <button type="button" class="btn btn-primary" onclick="Admin.clickSaveAdmin();" id="btn-register">Register User</button>
                     </div>
                 </div>
             </div>

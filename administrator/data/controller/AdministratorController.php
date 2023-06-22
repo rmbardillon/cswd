@@ -28,7 +28,7 @@
             $tableRow .= "<td>" . $is_locked . "</td>";
             $tableRow .= '<td class="col-actions">';
             $tableRow .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-            // $tableRow .= '<button type="button" id="reset" onclick="Admin.clickResetPassword(`'. $data['USER_AUTHENTICATION_ID'] .'`)" class="btn btn-warning btn-sm reset"><i class="bi bi-key"></i> Update </button>';
+            $tableRow .= '<button type="button" id="reset" onclick="Admin.clickUpdate(`'. $data['USER_AUTHENTICATION_ID'] .'`)" class="btn btn-warning btn-sm reset"><i class="bi bi-key"></i> Update </button>';
             $tableRow .= '<button type="button" id="reset" onclick="Admin.clickResetPassword(`'. $data['USER_AUTHENTICATION_ID'] .'`)" class="btn btn-info btn-sm reset"><i class="bi bi-key"></i> Reset Password </button>';
             if($_SESSION['user']['ROLE'] == "Super Administrator") {
                 $tableRow .= '<button type="button" id="delete" onclick="Admin.clickDelete(`'. $data['USER_AUTHENTICATION_ID'] .'`)" class="btn btn-danger btn-sm delete"> <i class="bi bi-trash"></i> Delete</button>';
@@ -180,6 +180,38 @@
         ];
 
         $result = $Administrator->updateProfile($request);
+
+        echo json_encode($result);
+    }
+
+    else if ($action == "checkIfMainAdmin")
+    {
+        $USER_ID = $_POST['USER_ID'];
+
+        $result = $Administrator->checkIfMainAdmin($USER_ID);
+
+        echo json_encode($result);
+    }
+
+    else if($action == "updateAdmin")
+    {
+        $administratorId = $_POST['administratorId'];
+        $firstName = $_POST['firstName'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $barangay = $_POST['barangay'];
+        $role = $_POST['role'];
+
+        $request = [
+            'administratorId' => $administratorId,
+            'firstName' => $firstName,
+            'lastname' => $lastname,
+            'email' => $email,
+            'barangay' => $barangay,
+            'role' => $role
+        ];
+
+        $result = $Administrator->updateAdmin($request);
 
         echo json_encode($result);
     }

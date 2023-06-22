@@ -1,10 +1,6 @@
 $(document).ready(function () {
     Admin.loadTableData();
 
-    $("#addAdmin").click(function () {
-        $("#addAdminModal").modal("show");
-    });
-
     $("#role").change(function () {
         if ($(this).val() == "Super Administrator" || $(this).val() == "Main Administrator") {
           $("#barangay").prop("disabled", true);
@@ -18,6 +14,7 @@ $(document).ready(function () {
 const Admin = (() => {
     const thisAdmin = {};
     var USER_ID = "";
+    var isUpdate = false;
     var loading = `
         <div class='container-loading'>
             <svg class='diamond small' viewBox="0 0 30 30">
@@ -36,6 +33,19 @@ const Admin = (() => {
             <div class='circle centered'></div>
         </div>
         `;
+    var isFormChanged = false;
+
+    // Listen for changes on form inputs
+    $("#createAccountForm :input").change(function () {
+      isFormChanged = true;
+    });
+
+    $("#addAdmin").click(function () {
+      isUpdate = false;
+      $("#myModalLabel").html("Create Account");
+      $("#btn-register").html("Register User");
+      $("#addAdminModal").modal("show");
+    });
 
     thisAdmin.loadTableData = () => {
         $.ajax({
@@ -54,6 +64,45 @@ const Admin = (() => {
             }
         });
     };
+
+    thisAdmin.clickUpdate = (id) => {
+        USER_ID = id;
+        isUpdate = true;
+        $("#myModalLabel").html("Update Account");
+        $("#btn-register").html("Update User");
+        $.ajax({
+          type: "POST",
+          url: ADMINISTRATOR_CONTROLLER + "?action=getAdminById",
+          data: {
+            administratorId: id,
+          },
+          dataType: "json",
+          success: function (data) {
+            $("#firstName").val(data[0]['FIRST_NAME']);
+            $("#lastname").val(data[0]['LAST_NAME']);
+            $("#email").val(data[0]['EMAIL']);
+            if(data[0]['BARANGAY'] != "All") {
+                $("#barangay").val(data[0]['BARANGAY']);
+            } else {
+                $("#barangay").prop("disabled", true);
+            }
+            $("#role").val(data[0]['ROLE']);
+            $("#addAdminModal").modal("show");
+          },
+          error: function (xhr, status, error) {
+            console.error(xhr);
+          },
+        });
+    }
+
+    thisAdmin.clickSaveAdmin = () => {
+        if (isUpdate) {
+            thisAdmin.update();
+        } else {
+            thisAdmin.saveAdmin();
+        }
+    }
+
     thisAdmin.saveAdmin = () => {
         var firstName = $("#firstName").val();
         var lastname = $("#lastname").val();
@@ -155,6 +204,104 @@ const Admin = (() => {
         }
     };
 
+    thisAdmin.update = () => {
+        var firstName = $("#firstName").val();
+        var lastname = $("#lastname").val();
+        var email = $("#email").val();
+        var role = $("#role").val();
+
+        if (role == "Super Administrator" || role == "Main Administrator") {
+            var barangay = "All";
+        } else {
+            var barangay = $("#barangay").val();
+        }
+
+        if(firstName == "" || lastname == "" || email == "" || barangay == null || role == null) {
+            swal.fire({
+                title: "Error!",
+                text: "Please fill up all fields.",
+                icon: "error",
+                confirmButtonText: "Ok",
+            });
+
+            return;
+        }
+
+        if(!isFormChanged) {
+            swal.fire({
+                title: "Warning!",
+                text: "No changes were made.",
+                icon: "warning",
+                confirmButtonText: "Ok",
+            });
+
+            return;
+        }
+
+        $.ajax({
+          type: "POST",
+          url: ADMINISTRATOR_CONTROLLER + "?action=checkAdministrator",
+          data: {
+            role: role,
+            barangay: barangay,
+            email: email,
+          },
+          dataType: "json",
+          success: function (data) {
+            if (data) {
+              swal.fire({
+                title: "Error!",
+                text: "There is already an administrator for this barangay or the email is already taken.",
+                icon: "error",
+                confirmButtonText: "Ok",
+              });
+            } else {
+              // Proceed with saving the admin if check passes
+              $("#addAdminModal").modal("hide");
+              update();
+            }
+          },
+        });
+        function update() {
+            $.ajax({
+              type: "POST",
+              url: ADMINISTRATOR_CONTROLLER + "?action=updateAdmin",
+              data: {
+                administratorId: USER_ID,
+                firstName: firstName,
+                lastname: lastname,
+                email: email,
+                barangay: barangay,
+                role: role,
+              },
+              dataType: "json",
+              success: function (data) {
+                if (data) {
+                  swal
+                    .fire({
+                      title: "Success!",
+                      text: "Admin has been updated.",
+                      icon: "success",
+                      confirmButtonText: "Ok",
+                    })
+                    .then((result) => {
+                      if (result.isConfirmed) {
+                        window.location.href = "administrator.php";
+                      }
+                    });
+                } else {
+                  swal.fire({
+                    title: "Warning!",
+                    text: "No Changes Made.",
+                    icon: "warning",
+                    confirmButtonText: "Ok",
+                  });
+                }
+              },
+            });
+        }
+    };
+
     thisAdmin.clickResetPassword = (id) => {
         USER_ID = id;
         swal.fire({
@@ -206,16 +353,38 @@ const Admin = (() => {
 
     thisAdmin.clickDelete = (id) => {
         USER_ID = id;
-        swal.fire({
-            title: "Are you sure you want to delete this user?",
-            text: "This action cannot be undone.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                thisAdmin.deleteAdmin();
+        $.ajax({
+            type: "POST",
+            url: ADMINISTRATOR_CONTROLLER + "?action=checkIfMainAdmin",
+            data: {
+                USER_ID: USER_ID
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data) {
+                    swal.fire({
+                        title: "Error!",
+                        text: "Cannot delete Super Administrator.",
+                        icon: "error",
+                        confirmButtonText: "Ok",
+                    });
+                } else {
+                    swal.fire({
+                        title: "Are you sure you want to delete this user?",
+                        text: "This action cannot be undone.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "No, cancel it!",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                          thisAdmin.deleteAdmin();
+                        }
+                    });
+                }
+            },
+            error: function (data) {
+                console.log(data);
             }
         });
     };
