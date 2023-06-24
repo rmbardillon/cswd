@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2023 at 02:32 PM
+-- Generation Time: Jun 24, 2023 at 12:31 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -156,8 +156,8 @@ CREATE TABLE `application` (
 --
 
 INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `APPLICANT_TYPE`, `APPLICATION_DATE`, `APPLICATION_STATUS`) VALUES
-('46b6cc6e0f6411ee', '649198993f283831', 'New Application', 'Senior Citizen', '2023-06-20 20:16:25', 'Pending'),
-('8377b2010f6211ee', '649195a42ebe9731', 'New Application', 'PWD', '2023-06-20 20:03:48', 'Pending'),
+('46b6cc6e0f6411ee', '649198993f283831', 'New Application', 'Senior Citizen', '2023-06-20 20:16:25', 'Approved'),
+('8377b2010f6211ee', '649195a42ebe9731', 'New Application', 'PWD', '2023-06-20 20:03:48', 'Approved'),
 ('890eace30b7011ee', 'd9fe583718de4946', 'New Application', 'PWD', '2023-06-15 19:34:05', 'Pending'),
 ('8913a78e0b7011ee', 'b8c3bd73afe54da4', 'New Application', 'PWD', '2023-06-15 19:34:05', 'Pending'),
 ('8918c5200b7011ee', '868a840404be48a7', 'New Application', 'PWD', '2023-06-15 19:34:05', 'Pending'),
@@ -175,7 +175,7 @@ INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `A
 ('893d7ff80b7011ee', '13cfe3b3ae2c41cb', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
 ('894044960b7011ee', 'a2cc0570fdcb4be1', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
 ('894322110b7011ee', '56bcba23f8024a28', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
-('8945f4090b7011ee', 'b4f3561f63b34ab6', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
+('8945f4090b7011ee', 'b4f3561f63b34ab6', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Approved'),
 ('8948b81b0b7011ee', 'e1e140a31edb410e', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
 ('894b909c0b7011ee', '1829686212ee418c', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
 ('894e51780b7011ee', '2d9435437a5e499f', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
@@ -190,7 +190,7 @@ INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `A
 ('8967b2fc0b7011ee', '69345e7eb068430a', 'New Application', 'PWD', '2023-06-15 19:34:06', 'Pending'),
 ('896a89550b7011ee', '21820c9a156b467e', 'New Application', 'Solo Parent', '2023-06-15 19:34:06', 'Pending'),
 ('896caf7a0b7011ee', 'cc3e4750aaf2491a', 'New Application', 'Solo Parent', '2023-06-15 19:34:06', 'Pending'),
-('8973a54e0b7011ee', 'f3d95a623170467f', 'New Application', 'Solo Parent', '2023-06-15 19:34:06', 'Pending'),
+('8973a54e0b7011ee', 'f3d95a623170467f', 'New Application', 'Solo Parent', '2023-06-15 19:34:06', 'Approved'),
 ('897689420b7011ee', '09dcd1deb45e42c6', 'New Application', 'Solo Parent', '2023-06-15 19:34:06', 'Pending'),
 ('89796a3c0b7011ee', '1dc9c43740364852', 'New Application', 'Solo Parent', '2023-06-15 19:34:06', 'Pending'),
 ('897ba1060b7011ee', 'f2d1b670df704dc9', 'New Application', 'Solo Parent', '2023-06-15 19:34:06', 'Pending'),
@@ -232,7 +232,7 @@ INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `A
 ('89c38b950b7011ee', '878697dd861347ff', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89c4dee50b7011ee', '2ce2dbbeec264382', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89c636d80b7011ee', '9e3a4c0858e44487', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
-('89c781320b7011ee', 'dd49e4eeeb294a7e', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
+('89c781320b7011ee', 'dd49e4eeeb294a7e', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Approved'),
 ('89c8c74c0b7011ee', 'd3c52282eae34747', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89ca15c20b7011ee', 'd503692d0bfe467e', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89cb729f0b7011ee', '523d328750864305', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
@@ -248,7 +248,7 @@ INSERT INTO `application` (`APPLICATION_ID`, `PERSON_ID`, `APPLICATION_TYPE`, `A
 ('89d889a00b7011ee', 'bd384b7ceb344931', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89d9d53e0b7011ee', '4c7b1cbb88ba4d03', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
 ('89db14670b7011ee', 'f75bf1c2a9e249b6', 'New Application', 'Senior Citizen', '2023-06-15 19:34:07', 'Pending'),
-('953ba52d0f6411ee', '6491991cf213a831', 'New Application', 'Solo Parent', '2023-06-20 20:18:36', 'Pending'),
+('953ba52d0f6411ee', '6491991cf213a831', 'New Application', 'Solo Parent', '2023-06-20 20:18:36', 'Approved'),
 ('f87847f60f6211ee', '64919668779db084', 'New Application', 'PWD', '2023-06-20 20:07:04', 'Pending');
 
 -- --------------------------------------------------------
@@ -286,6 +286,18 @@ CREATE TABLE `citizen_identification_card` (
   `ID_NUMBER` varchar(32) NOT NULL,
   `STATUS` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `citizen_identification_card`
+--
+
+INSERT INTO `citizen_identification_card` (`CITIZEN_ID`, `PERSON_ID`, `DATE_ISSUED`, `EXPIRATION_DATE`, `ID_NUMBER`, `STATUS`) VALUES
+('1313e5330f6711ee', 'b4f3561f63b34ab6', '2023-06-20', '2028-06-20', '043428023-4590', 1),
+('8222d20b0f6711ee', 'f3d95a623170467f', '0000-00-00', '0000-00-00', '2023-74742', 0),
+('926b0b3f0f6711ee', 'dd49e4eeeb294a7e', '0000-00-00', '0000-00-00', 'SC-991803', 0),
+('e4d2d81b0f6611ee', '649195a42ebe9731', '2023-06-20', '2028-06-20', '043428023-1513', 1),
+('f49b1d830f6611ee', '6491991cf213a831', '0000-00-00', '0000-00-00', '2023-84163', 0),
+('ffc37f620f6611ee', '649198993f283831', '0000-00-00', '0000-00-00', 'SC-970467', 0);
 
 -- --------------------------------------------------------
 
@@ -538,6 +550,7 @@ INSERT INTO `employment_details` (`EMPLOYMENT_DETAILS_ID`, `PERSON_ID`, `EMPLOYM
 
 CREATE TABLE `events` (
   `EVENT_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `EVENT_TITLE` varchar(128) NOT NULL,
   `EVENT_FOR` varchar(32) NOT NULL,
   `EVENT_BARANGAY` varchar(32) NOT NULL,
   `MESSAGE` varchar(512) NOT NULL,
@@ -870,7 +883,7 @@ INSERT INTO `personal_information` (`PERSONAL_INFORMATION_ID`, `PERSON_ID`, `BIR
 ('896c12fa0b7011ee', '659a329853214ee7', '1950-12-08', '', '', 'Elementary Education', '', '', 'Separated'),
 ('896d227b0b7011ee', 'cc3e4750aaf2491a', '1966-04-12', 'North Jason', 'Male', 'Kindergarten', '', '', ''),
 ('896e44e00b7011ee', '870bd501dd4a4452', '2007-03-14', '', '', 'None', '', '', 'Single'),
-('897456ba0b7011ee', 'f3d95a623170467f', '1938-07-26', 'West Jordan', 'Male', 'Post Graduate', '', '', ''),
+('897456ba0b7011ee', 'f3d95a623170467f', '1900-07-31', 'West Jordan', 'Male', 'Post Graduate', '', '', ''),
 ('8975c9c40b7011ee', '5c4561726d364516', '2017-08-13', '', '', 'Elementary Education', '', '', 'Divorced'),
 ('8977171f0b7011ee', '09dcd1deb45e42c6', '1993-11-05', 'Chavezside', 'Male', 'Junior High School', '', '', ''),
 ('89789dac0b7011ee', 'f1d79c03a7f5400c', '1911-02-17', '', '', 'Post Graduate', '', '', 'Widowed'),
@@ -1252,6 +1265,32 @@ CREATE TABLE `uploaded_documents` (
   `UPLOAD_DATE` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `uploaded_documents`
+--
+
+INSERT INTO `uploaded_documents` (`UPLOADED_DOCUMENT_ID`, `PERSON_ID`, `DOCUMENT_NAME`, `DOCUMENT_TYPE`, `FILE_PATH`, `ENCRYPTION_KEY`, `UPLOAD_DATE`) VALUES
+('131321010f6711ee', 'b4f3561f63b34ab6', 'medicalCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/b4f3561f63b34ab6/medicalCertificate', 'QgeRvGH(6-2v%$F24N12Vz43uW4sC*)r', '2023-06-20 20:36:27'),
+('131332db0f6711ee', 'b4f3561f63b34ab6', 'barangayCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/b4f3561f63b34ab6/barangayCertificate', 'QgeRvGH(6-2v%$F24N12Vz43uW4sC*)r', '2023-06-20 20:36:27'),
+('1313d3b50f6711ee', 'b4f3561f63b34ab6', 'validID', 'pdf', '../../libs/uploaded_files/encrypted_files/b4f3561f63b34ab6/validID', 'QgeRvGH(6-2v%$F24N12Vz43uW4sC*)r', '2023-06-20 20:36:27'),
+('1313d98f0f6711ee', 'b4f3561f63b34ab6', 'photo', 'jpg', '../../libs/uploaded_files/encrypted_files/b4f3561f63b34ab6/photo', 'QgeRvGH(6-2v%$F24N12Vz43uW4sC*)r', '2023-06-20 20:36:27'),
+('8222b3e30f6711ee', 'f3d95a623170467f', 'barangayCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/f3d95a623170467f/barangayCertificate', 'XDjA9HA^$Yu4$gL6UwvaSBUrTop860KG', '2023-06-20 20:39:33'),
+('8222c7e60f6711ee', 'f3d95a623170467f', 'validID', 'jpg', '../../libs/uploaded_files/encrypted_files/f3d95a623170467f/validID', 'XDjA9HA^$Yu4$gL6UwvaSBUrTop860KG', '2023-06-20 20:39:33'),
+('8222cc8f0f6711ee', 'f3d95a623170467f', 'photo', 'jpg', '../../libs/uploaded_files/encrypted_files/f3d95a623170467f/photo', 'XDjA9HA^$Yu4$gL6UwvaSBUrTop860KG', '2023-06-20 20:39:33'),
+('926aea610f6711ee', 'dd49e4eeeb294a7e', 'barangayCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/dd49e4eeeb294a7e/barangayCertificate', 'Y#exBw3uZIiu8B$Pf*NDtWqn_p^)zbR9', '2023-06-20 20:40:00'),
+('926b00ab0f6711ee', 'dd49e4eeeb294a7e', 'validID', 'jpg', '../../libs/uploaded_files/encrypted_files/dd49e4eeeb294a7e/validID', 'Y#exBw3uZIiu8B$Pf*NDtWqn_p^)zbR9', '2023-06-20 20:40:00'),
+('926b06c30f6711ee', 'dd49e4eeeb294a7e', 'photo', 'jpg', '../../libs/uploaded_files/encrypted_files/dd49e4eeeb294a7e/photo', 'Y#exBw3uZIiu8B$Pf*NDtWqn_p^)zbR9', '2023-06-20 20:40:00'),
+('e4d205840f6611ee', '649195a42ebe9731', 'medicalCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/649195a42ebe9731/medicalCertificate', 'cv%8ab2AU%%5ZtPriXg$UHg^PD!J2c4B', '2023-06-20 20:35:09'),
+('e4d21a080f6611ee', '649195a42ebe9731', 'barangayCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/649195a42ebe9731/barangayCertificate', 'cv%8ab2AU%%5ZtPriXg$UHg^PD!J2c4B', '2023-06-20 20:35:09'),
+('e4d2206f0f6611ee', '649195a42ebe9731', 'validID', 'pdf', '../../libs/uploaded_files/encrypted_files/649195a42ebe9731/validID', 'cv%8ab2AU%%5ZtPriXg$UHg^PD!J2c4B', '2023-06-20 20:35:09'),
+('e4d22d010f6611ee', '649195a42ebe9731', 'photo', 'jpg', '../../libs/uploaded_files/encrypted_files/649195a42ebe9731/photo', 'cv%8ab2AU%%5ZtPriXg$UHg^PD!J2c4B', '2023-06-20 20:35:09'),
+('f49a6dc30f6611ee', '6491991cf213a831', 'barangayCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/6491991cf213a831/barangayCertificate', 'FVb8XJ^_u6Qhq8(c)$yj9-kiqBXnKMlD', '2023-06-20 20:35:35'),
+('f49a7eb80f6611ee', '6491991cf213a831', 'validID', 'jpg', '../../libs/uploaded_files/encrypted_files/6491991cf213a831/validID', 'FVb8XJ^_u6Qhq8(c)$yj9-kiqBXnKMlD', '2023-06-20 20:35:35'),
+('f49a83ce0f6611ee', '6491991cf213a831', 'photo', 'jpg', '../../libs/uploaded_files/encrypted_files/6491991cf213a831/photo', 'FVb8XJ^_u6Qhq8(c)$yj9-kiqBXnKMlD', '2023-06-20 20:35:35'),
+('ffc2d7000f6611ee', '649198993f283831', 'barangayCertificate', 'pdf', '../../libs/uploaded_files/encrypted_files/649198993f283831/barangayCertificate', 'kf_FD_JbowPrHS!gXc^Oy-jlA*1HmS$Q', '2023-06-20 20:35:54'),
+('ffc2e0b10f6611ee', '649198993f283831', 'validID', 'jpg', '../../libs/uploaded_files/encrypted_files/649198993f283831/validID', 'kf_FD_JbowPrHS!gXc^Oy-jlA*1HmS$Q', '2023-06-20 20:35:54'),
+('ffc37a570f6611ee', '649198993f283831', 'photo', 'jpg', '../../libs/uploaded_files/encrypted_files/649198993f283831/photo', 'kf_FD_JbowPrHS!gXc^Oy-jlA*1HmS$Q', '2023-06-20 20:35:54');
+
 -- --------------------------------------------------------
 
 --
@@ -1278,8 +1317,9 @@ CREATE TABLE `user_authentication` (
 --
 
 INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `PROFILE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
-('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', NULL, 0, 1, 0, '2023-06-07'),
-('d80455a8010311ee', 'ROMEO JR ', 'MONTEALEGRE', 'All', 'yegiy78063@rockdian.com', '$2y$10$w6sWLKDaaajV9u.vi585uu.LzbQnRnTF58SlkxuUsiLIdMma6IV36', 'Main Administrator', NULL, 0, 1, 0, '2023-06-02');
+('959d29200f6a11ee', 'JUDITH', 'JASIL', 'All', 'populationmanagementsystem@gmail.com', '$2y$10$y3Su8vhCwWDJ83ynqpcxCe40fpY15oaouvwr4zua6R5ygjomsrTm6', 'Super Administrator', NULL, 0, 1, 0, '2023-06-20'),
+('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'Tagapo', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Senior Citizen Administrator', '../../libs/images/profile_picture/d2ec055c052711ee_dp.jpg', 0, 1, 0, '2023-06-07'),
+('d80455a8010311ee', 'ROMEO JR ', 'MONTEALEGRE', 'All', 'yegiy78063@rockdian.com', '$2y$10$RpQMBZa0SqHuQ4pUUOPKAucnNmyYocwuSOiQ8s4Gu.ahF7nlBVGzu', 'Main Administrator', '../../libs/images/profile_picture/d80455a8010311ee_dp.jpg', 0, 1, 0, '2023-06-02');
 
 --
 -- Indexes for dumped tables

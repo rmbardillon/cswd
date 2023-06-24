@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2023 at 12:40 AM
+-- Generation Time: Jun 24, 2023 at 12:31 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -127,6 +127,7 @@ CREATE TABLE `employment_details` (
 
 CREATE TABLE `events` (
   `EVENT_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `EVENT_TITLE` varchar(128) NOT NULL,
   `EVENT_FOR` varchar(32) NOT NULL,
   `EVENT_BARANGAY` varchar(32) NOT NULL,
   `MESSAGE` varchar(512) NOT NULL,
@@ -287,8 +288,9 @@ CREATE TABLE `user_authentication` (
 --
 
 INSERT INTO `user_authentication` (`USER_AUTHENTICATION_ID`, `FIRST_NAME`, `LAST_NAME`, `BARANGAY`, `EMAIL`, `PASSWORD`, `ROLE`, `PROFILE`, `IS_LOCKED`, `ACCOUNT_STATUS`, `LOGIN_ATTEMPTS`, `DATE`) VALUES
-('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'All', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Super Administrator', NULL, 0, 1, 0, '2023-06-07'),
-('d80455a8010311ee', 'ROMEO JR ', 'MONTEALEGRE', 'All', 'yegiy78063@rockdian.com', '$2y$10$w6sWLKDaaajV9u.vi585uu.LzbQnRnTF58SlkxuUsiLIdMma6IV36', 'Main Administrator', '../../libs/images/profile_picture/d80455a8010311ee_dp.jpg', 0, 1, 0, '2023-06-02');
+('959d29200f6a11ee', 'JUDITH', 'JASIL', 'All', 'populationmanagementsystem@gmail.com', '$2y$10$y3Su8vhCwWDJ83ynqpcxCe40fpY15oaouvwr4zua6R5ygjomsrTm6', 'Super Administrator', NULL, 0, 1, 0, '2023-06-20'),
+('d2ec055c052711ee', 'ROMEO JR', 'BARDILLON', 'Tagapo', 'romsky.bardillon@gmail.com', '$2y$10$MSAheogD/F0WKpTqP2yy5OIqo15Px8zo2UCLgh7L6dAWdWLE/jjte', 'Senior Citizen Administrator', '../../libs/images/profile_picture/d2ec055c052711ee_dp.jpg', 0, 1, 0, '2023-06-07'),
+('d80455a8010311ee', 'ROMEO JR ', 'MONTEALEGRE', 'All', 'yegiy78063@rockdian.com', '$2y$10$RpQMBZa0SqHuQ4pUUOPKAucnNmyYocwuSOiQ8s4Gu.ahF7nlBVGzu', 'Main Administrator', '../../libs/images/profile_picture/d80455a8010311ee_dp.jpg', 0, 1, 0, '2023-06-02');
 
 --
 -- Indexes for dumped tables
