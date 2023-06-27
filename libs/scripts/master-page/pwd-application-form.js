@@ -574,8 +574,10 @@ $(document).ready(function() {
                 $("#pwdNext").hide();
 
                 if(status == "Pending") {
-                    var buttons = `<button class="btn btn-success w-100 mb-3" type="button" name="approve" onclick="PWD.approve('${data[0]["PERSON_ID"]}', '${applicationType}');">Approve</button>
-                    <button class="btn btn-danger w-100" type="button" name="reject" onclick="PWD.reject('${data[0]["PERSON_ID"]}', '${applicationType}');");">Reject</button>`;
+                    if(administratorRole == "Main Administrator") {
+                        var buttons = `<button class="btn btn-success w-100 mb-3" type="button" name="approve" onclick="PWD.approve('${data[0]["PERSON_ID"]}', '${applicationType}');">Approve</button>
+                        <button class="btn btn-danger w-100" type="button" name="reject" onclick="PWD.reject('${data[0]["PERSON_ID"]}', '${applicationType}');");">Reject</button>`;
+                    }
                 } else if (status == "Approved") {
                     var buttons = `<div = class="row mb-2">
                                     <div class="col-md-6">
