@@ -50,7 +50,7 @@
                                 <input type="text" class="form-control" id="eventTitle" placeholder="Event Title" autofocus>
                             </div>
                             <div class="row mt-3" id="applicantTypeRow">
-                                <label for="selectApplicantType" class="form-label">Event For?</label>
+                                <label for="selectApplicantType" class="form-label required">Event For?</label>
                                 <select class="form-select" id="selectApplicantType">
                                     <option value="" selected disabled>Please Select</option>
                                     <option value="All">All Citizens</option>
@@ -85,11 +85,11 @@
                                 </select>
                             </div>
                             <div class="row mt-3">
-                                <label for="message" class="form-label">Event Message</label>
+                                <label for="message" class="form-label required">Event Message</label>
                                 <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
                             </div>
                             <div class="row mt-3">
-                                <label for="eventDate" class="form-label">Event Date</label>
+                                <label for="eventDate" class="form-label required">Event Date</label>
                                 <input type="date" class="form-control" id="eventDate">
                             </div>
                         </div>

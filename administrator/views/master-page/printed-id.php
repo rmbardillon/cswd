@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="pwdIdTable d-none">
-            <h1>Printed PWD Id</h1>
+            <h1>Printed PWD ID</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -36,7 +36,7 @@
             </table>        
         </div>
         <div class="spIdTable d-none">
-            <h1>Printed Solo Parent Id</h1>
+            <h1>Printed Solo Parent ID</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -51,7 +51,7 @@
             </table>
         </div>
         <div class="scIdTable d-none">
-            <h1>Printed Senior Citizen Id</h1>
+            <h1>Printed Senior Citizen ID</h1>
             <table class="table">
                 <thead>
                     <tr>

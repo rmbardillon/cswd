@@ -6,19 +6,19 @@
     <div class="container">
         <h1>Generate Report</h1>
         <div class="row">
-            <label for="selectReport" class="form-label">Select Report</label>
+            <label for="selectReport" class="form-label required">Select Report</label>
             <select class="form-select" id="selectReport">
                 <option value="" selected disabled>Please Select</option>
-                <option value="1">List of PWD Citizens</option>
-                <option value="2">List of Solo Parent Citizens</option>
-                <option value="3">List of Senior Citizen Citizens</option>
-                <option value="4">List of Birthday Celebrant</option>
-                <option value="5">List of Printed ID</option>
+                <option value="1">PWD Citizens</option>
+                <option value="2">Solo Parent Citizens</option>
+                <option value="3">Senior Citizens</option>
+                <option value="4">Birthday Celebrant</option>
+                <option value="5">Printed ID</option>
             </select>
         </div>
         <div class="row mt-3" id="dateRow" style="display: none;">
             <div class="col">
-                <label for="selectMonth" class="form-label">Month</label>
+                <label for="selectMonth" class="form-label required">Month</label>
                 <select class="form-select" id="selectMonth">
                     <option value="" selected disabled>Please Select</option>
                     <option value="1">January</option>
@@ -36,16 +36,16 @@
                 </select>
             </div>
             <div class="col">
-                <label for="fromDate" class="form-label">From</label>
+                <label for="fromDate" class="form-label required">From</label>
                 <input type="date" class="form-control" id="fromDate">
             </div>
             <div class="col">
-                <label for="toDate" class="form-label">To</label>
+                <label for="toDate" class="form-label required">To</label>
                 <input type="date" class="form-control" id="toDate">
             </div>
         </div>
         <div class="row mt-3" id="applicantTypeRow" style="display: none;">
-            <label for="selectApplicantType" class="form-label">Select Applicant Type</label>
+            <label for="selectApplicantType" class="form-label required">Select Applicant Type</label>
             <select class="form-select" id="selectApplicantType">
                 <option value="" selected disabled>Please Select</option>
                 <option value="PWD">PWD Citizens</option>
