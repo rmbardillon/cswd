@@ -125,6 +125,7 @@
         {
             $receiverName = $data['FULL_NAME'];
             $receiverEmail = $data['EMAIL'];
+            $message = "";
             $message = '
                     <html>
                     <head>
